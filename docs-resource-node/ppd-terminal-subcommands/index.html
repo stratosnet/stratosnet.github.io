@@ -1,0 +1,2387 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="List and descriptions of all Stratos SDS resource node ppd terminal subcommands.">
+      
+      
+      
+        <link rel="canonical" href="https://docs.thestratos.org/docs-resource-node/ppd-terminal-subcommands/">
+      
+      
+        <link rel="prev" href="../setup-and-run-a-sds-resource-node/">
+      
+      
+        <link rel="next" href="../sds-rpc-for-file-operation/">
+      
+      <link rel="icon" href="../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+    
+    
+      
+        <title>SDS ppd terminal subcommands - Stratos Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="SDS ppd terminal subcommands - Stratos Documentation" >
+      
+        <meta  property="og:description"  content="List and descriptions of all Stratos SDS resource node ppd terminal subcommands." >
+      
+        <meta  property="og:image"  content="https://docs.thestratos.org/assets/images/social/docs-resource-node/ppd-terminal-subcommands.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="https://docs.thestratos.org/docs-resource-node/ppd-terminal-subcommands/" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="SDS ppd terminal subcommands - Stratos Documentation" >
+      
+        <meta  name="twitter:description"  content="List and descriptions of all Stratos SDS resource node ppd terminal subcommands." >
+      
+        <meta  name="twitter:image"  content="https://docs.thestratos.org/assets/images/social/docs-resource-node/ppd-terminal-subcommands.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#help" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Stratos Documentation" class="md-header__button md-logo" aria-label="Stratos Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Stratos Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SDS ppd terminal subcommands
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        About
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../docs-testnet/introduction/" class="md-tabs__link">
+        Testnet
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../docs-validator-node/setup-and-run-a-stratos-chain-full-node/" class="md-tabs__link">
+        Stratos Chain Node
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../setup-and-run-a-sds-resource-node/" class="md-tabs__link md-tabs__link--active">
+        Resource Node
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Stratos Documentation" class="md-nav__button md-logo" aria-label="Stratos Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Stratos Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+          About
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          About
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-about/about-stratos/" class="md-nav__link">
+        About Stratos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-about/stratos-token-metrics/" class="md-nav__link">
+        STOS Token Metrics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-about/stratos-token-economy/" class="md-nav__link">
+        STOS Token Economy
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Testnet
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Testnet
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-testnet/introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-testnet/tropos-5-changes/" class="md-nav__link">
+        Changes in Tropos-5
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-testnet/incentive-rewards-distribution/" class="md-nav__link">
+        Rewards Distribution
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-testnet/migrate-rewards/" class="md-nav__link">
+        Migrate Rewards
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Stratos Chain Node
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Stratos Chain Node
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+          HOWTOs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          HOWTOs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-validator-node/setup-and-run-a-stratos-chain-full-node/" class="md-nav__link">
+        Full-Chain Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-validator-node/how-to-become-a-validator/" class="md-nav__link">
+        Become a Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-validator-node/how-to-setup-rest-grpc-full-chain/" class="md-nav__link">
+        Full-Chain as REST/gRPC
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          Operating
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Operating
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-validator-node/stchaind-commands-part-1/" class="md-nav__link">
+        stchaind Commands Part 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-validator-node/stchaind-commands-part-2/" class="md-nav__link">
+        stchaind Commands Part 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-validator-node/stratos-chain-grpc-queries/" class="md-nav__link">
+        gRPC Queries
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-validator-node/stratos-chain-rest-apis/" class="md-nav__link">
+        REST APIs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          EVM
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          EVM
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/node-config/" class="md-nav__link">
+        Node config
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+          Network details
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Network details
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/network-details/network/" class="md-nav__link">
+        Network
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/network-details/gas-token/" class="md-nav__link">
+        STOS Gas token
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+          Deploying on Stratos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Deploying on Stratos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/deploy-smart-contracts/hardhat/" class="md-nav__link">
+        Using Hardhat
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/deploy-smart-contracts/truffle/" class="md-nav__link">
+        Using Truffle
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_4" id="__nav_3_3_4_label" tabindex="0">
+          Wallets
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Wallets
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/hello/" class="md-nav__link">
+        Hello MetaMask
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/configure-on-metamask/" class="md-nav__link">
+        Configure Stratos on MetaMask
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/multiple-accounts/" class="md-nav__link">
+        Multiple Accounts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/available-dapps/" class="md-nav__link">
+        Available dapps
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Resource Node
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Resource Node
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+          HOWTOs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          HOWTOs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup-and-run-a-sds-resource-node/" class="md-nav__link">
+        SDS Resource Node
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          Operating
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Operating
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          ppd Commands
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        ppd Commands
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    help
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rp-or-registerpeer" class="md-nav__link">
+    rp or registerpeer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activate" class="md-nav__link">
+    activate
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#startminingdeprecated" class="md-nav__link">
+    startmining(deprecated)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    status
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updatedeposit" class="md-nav__link">
+    updateDeposit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prepay" class="md-nav__link">
+    prepay
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getoz" class="md-nav__link">
+    getoz
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#put" class="md-nav__link">
+    put
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putstream" class="md-nav__link">
+    putstream
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-or-ls" class="md-nav__link">
+    list or ls
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-filename" class="md-nav__link">
+    list &lt;filename&gt;
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-page_id" class="md-nav__link">
+    list &lt;page_id&gt;
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    get
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    delete
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sharefile" class="md-nav__link">
+    sharefile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#allshare" class="md-nav__link">
+    allshare
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getsharefile" class="md-nav__link">
+    getsharefile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cancelshare" class="md-nav__link">
+    cancelshare
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitor" class="md-nav__link">
+    monitor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stopmonitor" class="md-nav__link">
+    stopmonitor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitortoken" class="md-nav__link">
+    monitortoken
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wallets" class="md-nav__link">
+    wallets
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ver" class="md-nav__link">
+    ver
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deactivate" class="md-nav__link">
+    deactivate
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#newwallet" class="md-nav__link">
+    newwallet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    config
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintenance-start" class="md-nav__link">
+    maintenance start
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintenance-stop" class="md-nav__link">
+    maintenance stop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downgradeinfo" class="md-nav__link">
+    downgradeinfo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performancemeasure" class="md-nav__link">
+    performancemeasure
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#withdraw" class="md-nav__link">
+    withdraw
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#send" class="md-nav__link">
+    send
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sds-rpc-for-file-operation/" class="md-nav__link">
+        SDS RPC
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          Examples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Examples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rpc-client/" class="md-nav__link">
+        RPC Client
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    help
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rp-or-registerpeer" class="md-nav__link">
+    rp or registerpeer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activate" class="md-nav__link">
+    activate
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#startminingdeprecated" class="md-nav__link">
+    startmining(deprecated)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    status
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updatedeposit" class="md-nav__link">
+    updateDeposit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prepay" class="md-nav__link">
+    prepay
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getoz" class="md-nav__link">
+    getoz
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#put" class="md-nav__link">
+    put
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putstream" class="md-nav__link">
+    putstream
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-or-ls" class="md-nav__link">
+    list or ls
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-filename" class="md-nav__link">
+    list &lt;filename&gt;
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-page_id" class="md-nav__link">
+    list &lt;page_id&gt;
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    get
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    delete
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sharefile" class="md-nav__link">
+    sharefile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#allshare" class="md-nav__link">
+    allshare
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getsharefile" class="md-nav__link">
+    getsharefile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cancelshare" class="md-nav__link">
+    cancelshare
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitor" class="md-nav__link">
+    monitor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stopmonitor" class="md-nav__link">
+    stopmonitor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitortoken" class="md-nav__link">
+    monitortoken
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wallets" class="md-nav__link">
+    wallets
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ver" class="md-nav__link">
+    ver
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deactivate" class="md-nav__link">
+    deactivate
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#newwallet" class="md-nav__link">
+    newwallet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    config
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintenance-start" class="md-nav__link">
+    maintenance start
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintenance-stop" class="md-nav__link">
+    maintenance stop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downgradeinfo" class="md-nav__link">
+    downgradeinfo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performancemeasure" class="md-nav__link">
+    performancemeasure
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#withdraw" class="md-nav__link">
+    withdraw
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#send" class="md-nav__link">
+    send
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>ppd Commands</h1>
+
+<p><code>ppd terminal</code> subcommands are used to operate PP(resource) node in <code>ppd terminal</code> command-line terminal</p>
+<h2 id="help"><code>help</code><a class="headerlink" href="#help" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Show all the <code>ppd terminal</code> sub-commands' description.</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p p-Indicator">&gt;</span><span class="err">help</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="l l-Scalar l-Scalar-Plain">help                                                           show all the commands</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="l l-Scalar l-Scalar-Plain">wallets                                                        acquire all wallet wallets address</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="l l-Scalar l-Scalar-Plain">newwallet                                                      create new wallet, input password in prompt</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="l l-Scalar l-Scalar-Plain">registerpeer                                                   register peer to index node</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="l l-Scalar l-Scalar-Plain">rp                                                             register peer to index node</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="l l-Scalar l-Scalar-Plain">activate &lt;amount&gt; &lt;fee&gt; optional&lt;gas&gt;                          send transaction to stchain to become an active PP node</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="l l-Scalar l-Scalar-Plain">updateDeposit &lt;depositDelta&gt; &lt;fee&gt; optional&lt;gas&gt;               send transaction to stchain to update active pp&#39;s deposit</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="l l-Scalar l-Scalar-Plain">deactivate &lt;fee&gt; optional&lt;gas&gt;                                 send transaction to stchain to stop being an active PP node</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="l l-Scalar l-Scalar-Plain">startmining                                                    start mining</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="l l-Scalar l-Scalar-Plain">prepay &lt;amount&gt; &lt;fee&gt; optional&lt;gas&gt;                            prepay stos to get ozone</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="l l-Scalar l-Scalar-Plain">put &lt;filepath&gt;                                                 upload file, need to consume ozone</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="l l-Scalar l-Scalar-Plain">putstream &lt;filepath&gt;                                           upload video file for streaming, need to consume ozone (alpha version, encode format config impossible)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="l l-Scalar l-Scalar-Plain">list &lt;filename&gt;                                                query uploaded file by self</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="l l-Scalar l-Scalar-Plain">list &lt;page id&gt;                                                 query all files owned by the wallet, paginated</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="l l-Scalar l-Scalar-Plain">delete &lt;filehash&gt;                                              delete file</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="l l-Scalar l-Scalar-Plain">get &lt;sdm://account/filehash&gt; &lt;saveAs&gt;                          download file, need to consume ozone</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">e.g</span><span class="err">: </span><span class="l l-Scalar l-Scalar-Plain">get sdm://st1jn9skjsnxv26mekd8eu8a8aquh34v0m4mwgahg/e2ba7fd2390aad9213f2c60854e2b7728c6217309fcc421de5aacc7d4019a4fe</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="l l-Scalar l-Scalar-Plain">sharefile &lt;filehash&gt; &lt;duration&gt; &lt;is_private&gt;                   share an uploaded file</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="l l-Scalar l-Scalar-Plain">allshare                                                       list all shared files</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="l l-Scalar l-Scalar-Plain">getsharefile &lt;sharelink&gt; &lt;password&gt;                            download a shared file, need to consume ozone</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="l l-Scalar l-Scalar-Plain">cancelshare &lt;shareID&gt;                                          cancel a shared file</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="l l-Scalar l-Scalar-Plain">ver                                                            version</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="l l-Scalar l-Scalar-Plain">monitor                                                        show monitor</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="l l-Scalar l-Scalar-Plain">stopmonitor                                                    stop monitor</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="l l-Scalar l-Scalar-Plain">monitortoken                                                   show token for pp monitor service</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="l l-Scalar l-Scalar-Plain">config  &lt;key&gt; &lt;value&gt;                                          set config key value</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="l l-Scalar l-Scalar-Plain">getoz &lt;walletAddress&gt; -&gt;password                               get current ozone balance</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="l l-Scalar l-Scalar-Plain">status                                                         get current resource node status</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="l l-Scalar l-Scalar-Plain">maintenance start &lt;duration&gt;                                   put the node in maintenance mode for the requested duration (in seconds)</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="l l-Scalar l-Scalar-Plain">maintenance stop                                               stop the current maintenance</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="l l-Scalar l-Scalar-Plain">downgradeinfo                                                  get information of last downgrade happened on this pp node</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="l l-Scalar l-Scalar-Plain">performancemeasure                                             turn on performance measurement log for 60 seconds</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="l l-Scalar l-Scalar-Plain">withdraw &lt;amount&gt; &lt;fee&gt; optional&lt;targetAddr&gt; optional&lt;gas&gt;     withdraw matured reward (from address is the configured node wallet)</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="l l-Scalar l-Scalar-Plain">send &lt;toAddress&gt; &lt;amount&gt; &lt;fee&gt; optional&lt;gas&gt;                  sending coins to another account (from address is the configured node wallet)</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="rp-or-registerpeer"><code>rp</code> or <code>registerpeer</code><a class="headerlink" href="#rp-or-registerpeer" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Register a Resource Node to an SP(meta) node.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt;rp
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>&gt;<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/11<span class="w"> </span><span class="m">19</span>:10:45<span class="w"> </span>register_new_pp.go:25:<span class="w"> </span>get<span class="w"> </span>RspRegisterNewPP
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/11<span class="w"> </span><span class="m">19</span>:10:45<span class="w"> </span>register_new_pp.go:31:<span class="w"> </span>get<span class="w"> </span>RspRegisterNewPP<span class="w"> </span>RES_SUCCESS<span class="w"> </span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/11<span class="w"> </span><span class="m">19</span>:10:45<span class="w"> </span>register_new_pp.go:40:<span class="w"> </span>registered<span class="w"> </span>as<span class="w"> </span>PP<span class="w"> </span>successfully,<span class="w"> </span>you<span class="w"> </span>can<span class="w"> </span>deposit<span class="w"> </span>by<span class="w"> </span><span class="sb">`</span>activate<span class="sb">`</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>After receiving the response <code>registered as PP successfully, you can deposit by activate</code>, you can execute the next <code>activate</code> command to activate your resource node.</p>
+<p><code>rp</code> or <code>registerpeer</code> command may raise an error because of its CPU chips which are not supported by SDS currently. For instance</p>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Run on Macs with an Arm-based M1 chip</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>&gt;rp
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="o">[</span>ERROR<span class="o">]</span><span class="m">2022</span>/04/15<span class="w"> </span><span class="m">11</span>:38:22<span class="w"> </span>service.go:185:<span class="w"> </span>RPC<span class="w"> </span>method<span class="w"> </span>sds_registerPP<span class="w"> </span>crashed:<span class="w"> </span>runtime<span class="w"> </span>error:<span class="w"> </span>index<span class="w"> </span>out<span class="w"> </span>of<span class="w"> </span>range<span class="w"> </span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>with<span class="w"> </span>length<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="activate"><code>activate</code><a class="headerlink" href="#activate" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Send transaction to Stratos chain to become an active Resource Node</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>activate<span class="w"> </span>&lt;amount&gt;<span class="w"> </span>&lt;fee&gt;<span class="w"> </span><span class="o">[</span>gas<span class="o">]</span><span class="w"> </span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>amount</code> is the amount of tokens you want to deposit. 1stos = 10^9gwei = 10^18wei.</p>
+<p><code>fee</code> is the amount of tokens to pay as a fee for the activation transaction. 10000wei would work. It will use default value if not provide.</p>
+<p><code>gas</code> is the amount of gas to pay for the transaction. 1000000 would be a safe number. It will use default value if not provide.</p>
+</div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&gt;activate<span class="w"> </span>2stos<span class="w"> </span><span class="m">0</span>.01stos<span class="w"> </span><span class="m">1000000</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">18</span>:49:39<span class="w"> </span>activate.go:66:<span class="w"> </span>get<span class="w"> </span>RspActivatePP<span class="w"> </span>RES_SUCCESS<span class="w"> </span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">18</span>:49:41<span class="w"> </span>activate.go:83:<span class="w"> </span>The<span class="w"> </span>activation<span class="w"> </span>transaction<span class="w"> </span>was<span class="w"> </span>broadcast
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="startminingdeprecated"><code>startmining</code>(deprecated)<a class="headerlink" href="#startminingdeprecated" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Resource node will start to receive tasks from meta nodes and thus gain mining rewards.
+From SDS v0.7.0, user does not need to use this command any more since resource node will start mining automatically when the status of a resource node is <code>Mining: ONLINE</code>.</p>
+<p>Example:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>startmining
+</code></pre></div></p>
+<p><br></p>
+<hr />
+<h2 id="status"><code>status</code><a class="headerlink" href="#status" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Query the current status of a resource node.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>status
+</code></pre></div>
+<p>Example:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&gt;status
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>&gt;<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">10</span>:57:01<span class="w"> </span>get_pp_status.go:80:<span class="w"> </span>***<span class="w"> </span>current<span class="w"> </span>node<span class="w"> </span>status<span class="w"> </span>***
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>Activation:<span class="w"> </span>Active<span class="w"> </span><span class="p">|</span><span class="w"> </span>Mining:<span class="w"> </span>ONLINE<span class="w"> </span><span class="p">|</span><span class="w"> </span>Initial<span class="w"> </span>tier:<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>Ongoing<span class="w"> </span>tier:<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>Weight<span class="w"> </span>score:<span class="w"> </span><span class="m">5000</span>
+</code></pre></div></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>Activation</code> indicates the activation state of a resource node, including <code>Active</code>, <code>Inactive</code> and <code>Unbonding</code>.</p>
+<p><code>Mining</code> indicates the mining state of a resource node, including <code>ONLINE</code>, <code>OFFLINE</code>, <code>SUSPEND</code> and <code>MAINTENANCE</code>.</p>
+<p>When a resource node becomes <code>Mining: SUSPEND</code> due to its poor performance, user may use <code>updateDeposit</code> command to update its state and re-start mining by increasing its deposit.</p>
+<p>Meta Node assigns a <code>Weight score</code> to Resource Node depending on its performance. The more <code>Weight score</code> a Resource Node has, the more priority it has to be assigned tasks.</p>
+</div>
+<p><br></p>
+<hr />
+<h2 id="updatedeposit"><code>updateDeposit</code><a class="headerlink" href="#updatedeposit" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Update deposit of an active resource node.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>updateDeposit<span class="w"> </span>&lt;depositDelta&gt;<span class="w"> </span>&lt;fee&gt;<span class="w"> </span><span class="o">[</span>gas<span class="o">]</span><span class="w"> </span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>depositDelta</code> is the absolute amount of difference between the original and the updated deposit. It should be a positive valid token, in the unit of <code>stos</code>/<code>gwei</code>/<code>wei</code>.</p>
+<p>When a resource node is suspended, use this command to update its state and re-start mining by increasing its deposit.</p>
+</div>
+<p>Example:</p>
+<p>The following command will increase 1stos to deposit, use 10000gwei for tx fees and 1000000 for tx gas.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&gt;updateDeposit<span class="w"> </span>1stos<span class="w"> </span>1000000gwei<span class="w"> </span><span class="m">1000000</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>Request<span class="w"> </span>Accepted
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When a resource node is <code>Mining: SUSPEND</code> due to poor performance(e.g., frequently offline, task uncompleted, unstable connection, unreachable node, etc.), use this command to update its state and re-start mining by increasing its deposit.</p>
+</div>
+<p><br></p>
+<hr />
+<h2 id="prepay"><code>prepay</code><a class="headerlink" href="#prepay" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Ozone is the unit of traffic used by SDS. Operations involving network traffic require ozone to be executed.
+User can always <code>prepay</code> stos to get Ozone any time before uploading/downloading files.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>prepay<span class="w"> </span>&lt;amount&gt;<span class="w"> </span>&lt;fee&gt;<span class="w"> </span><span class="o">[</span>gas<span class="o">]</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>amount</code> is the amount of tokens you want to spend to purchase ozone.</p>
+<p>The other two parameters are the same as above.</p>
+</div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>&gt;prepay<span class="w"> </span>1stos<span class="w"> </span>6000000gwei<span class="w"> </span><span class="m">6000000</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>&gt;<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">10</span>:59:07<span class="w"> </span>prepay.go:24:<span class="w"> </span>Sending<span class="w"> </span>prepay<span class="w"> </span>message<span class="w"> </span>to<span class="w"> </span>SP!<span class="w"> </span>st172v4u8ysfgaphjs8uyy0svvc6d6tzl6gp07kn4
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">10</span>:59:07<span class="w"> </span>prepay.go:37:<span class="w"> </span>get<span class="w"> </span>RspPrepay<span class="w"> </span>RES_SUCCESS<span class="w"> </span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">10</span>:59:09<span class="w"> </span>prepay.go:46:<span class="w"> </span>The<span class="w"> </span>prepay<span class="w"> </span>transaction<span class="w"> </span>was<span class="w"> </span>broadcast
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="getoz"><code>getoz</code><a class="headerlink" href="#getoz" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Query ozone balance of a node's wallet</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>getoz<span class="w"> </span>&lt;walletAddress&gt;
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>&gt;getoz<span class="w"> </span>st14d6vt45ws2fz9kgma5wlcfc283xr6pqgp3sklu
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>input<span class="w"> </span>password
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>password:<span class="w"> </span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>&gt;<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:01:27<span class="w"> </span>get_wallet_oz.go:42:<span class="w"> </span>get<span class="w"> </span>GetWalletOz<span class="w"> </span>RSP,<span class="w"> </span>the<span class="w"> </span>current<span class="w"> </span>ozone<span class="w"> </span>balance<span class="w"> </span>of<span class="w"> </span><span class="nv">st172v4u8ysfgaphjs8uyy0svvc6d6tzl6gp07kn4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1008215085885</span>,<span class="w"> </span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="put"><code>put</code><a class="headerlink" href="#put" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>upload a file. It will consume Ozone.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>put<span class="w"> </span>&lt;filepath&gt;
+</code></pre></div>
+<code>filepath</code> is the location of the file to upload, starting from your resource node folder. It is better to be an absolute path.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>&gt;put<span class="w"> </span>relayd/node1/relayd.toml
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:00:05<span class="w"> </span>requests.go:178:<span class="w"> </span>fileName~~~~~~~~~~~~~~~~~~~~~~~~<span class="w"> </span>relayd.toml
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:00:05<span class="w"> </span>requests.go:184:<span class="w"> </span>fileHash~~~~~~~~~~~~~~~~~~~~~~<span class="w"> </span>v05ahm51l6v6tm2vqc682b9sicom61fgkoqdl0pg
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>&gt;<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:00:07<span class="w"> </span>upload_slice.go:341:<span class="w"> </span>fileHash:<span class="w"> </span>v05ahm51l6v6tm2vqc682b9sicom61fgkoqdl0pg<span class="w">  </span>uploaded：100.00<span class="w"> </span>%
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:00:07<span class="w"> </span>print.go:20:<span class="w"> </span><span class="c1">####################################################################################################</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="putstream"><code>putstream</code><a class="headerlink" href="#putstream" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Upload a media file for streaming</p>
+<p>Streaming is the continuous transmission of audio or video files(media files) from a server to a client.
+In order to upload a streaming file, first you need to install a tool <code>ffmpeg</code> for transcoding multimedia files.</p>
+<p>In Linux Terminal:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ffmpeg
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># use ffmpeg -version to check its version</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>ffmpeg<span class="w"> </span>-version
+</code></pre></div>
+In MacOS Terminal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>brew<span class="w"> </span>update
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>brew<span class="w"> </span>install<span class="w"> </span>ffmpeg
+</code></pre></div>
+<p><br></p>
+<p>Then, use <code>putstream</code> command to upload a media file</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>putstream<span class="w"> </span>&lt;filepath&gt;
+</code></pre></div>
+<blockquote>
+<p><code>filepath</code> is the absolute path of the file to be uploaded, or a relative path starting from the root directory of the resource node.</p>
+</blockquote>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>putstream<span class="w"> </span>example_01.mp4
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="list-or-ls"><code>list</code> or <code>ls</code><a class="headerlink" href="#list-or-ls" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>List all uploaded files</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>ls
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="list-filename"><code>list &lt;filename&gt;</code><a class="headerlink" href="#list-filename" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Query a specific uploaded file by name</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>ls<span class="w"> </span>filename
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>&gt;ls<span class="w"> </span>relayd.toml
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>&gt;<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:01:58<span class="w"> </span>find_file.go:71:<span class="w"> </span>_______________________________
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:01:58<span class="w"> </span>find_file.go:76:<span class="w"> </span>File<span class="w"> </span>name:<span class="w"> </span>relayd.toml
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:01:58<span class="w"> </span>find_file.go:77:<span class="w"> </span>File<span class="w"> </span>hash:<span class="w"> </span>v05ahm51l6v6tm2vqc682b9sicom61fgkoqdl0pg
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:01:58<span class="w"> </span>find_file.go:79:<span class="w"> </span>CreateTime<span class="w"> </span>:<span class="w"> </span><span class="m">1673542807</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:01:58<span class="w"> </span>find_file.go:88:<span class="w"> </span><span class="o">===============================</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:01:58<span class="w"> </span>find_file.go:89:<span class="w"> </span>Total:<span class="w"> </span><span class="m">1</span><span class="w">  </span>Page:<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="list-page_id"><code>list &lt;page_id&gt;</code><a class="headerlink" href="#list-page_id" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Query all files owned, paginated by 20 items per page by default, starting with page 0.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>ls<span class="w"> </span>page_id
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>&gt;ls<span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>&gt;<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:03:07<span class="w"> </span>find_file.go:71:<span class="w"> </span>_______________________________
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:03:07<span class="w"> </span>find_file.go:76:<span class="w"> </span>File<span class="w"> </span>name:<span class="w"> </span>relayd.toml
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:03:07<span class="w"> </span>find_file.go:77:<span class="w"> </span>File<span class="w"> </span>hash:<span class="w"> </span>v05ahm51l6v6tm2vqc682b9sicom61fgkoqdl0pg
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:03:07<span class="w"> </span>find_file.go:79:<span class="w"> </span>CreateTime<span class="w"> </span>:<span class="w"> </span><span class="m">1673542807</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:03:07<span class="w"> </span>find_file.go:88:<span class="w"> </span><span class="o">===============================</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:03:07<span class="w"> </span>find_file.go:89:<span class="w"> </span>Total:<span class="w"> </span><span class="m">1</span><span class="w">  </span>Page:<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="get"><code>get</code><a class="headerlink" href="#get" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Download an uploaded file</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>get<span class="w"> </span>&lt;sdm://account/filehash&gt;<span class="w"> </span><span class="o">[</span>saveAs<span class="o">]</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Every file uploaded to SDS is attributed with a unique file hash.</p>
+<p>View the file hash for each of your files when you <code>list</code> your uploaded files.</p>
+<p>Use the optional parameter <code>saveAs</code> to rename the file.</p>
+<p>The downloaded files will be saved into the folder <code>download</code> by default under the root directory of your resource node, like</p>
+</div>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="l l-Scalar l-Scalar-Plain">.</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="l l-Scalar l-Scalar-Plain">├── accounts</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="l l-Scalar l-Scalar-Plain">│</span><span class="err">  </span><span class="l l-Scalar l-Scalar-Plain"> ├── st1la7aj36gk88puz3026t3mkqfeu4q8paj3rs4gk.json</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="l l-Scalar l-Scalar-Plain">│</span><span class="err">  </span><span class="l l-Scalar l-Scalar-Plain"> └── stsds1x5cse46ru8phd0435ncm04vh4mzj8ntp8rtpu4.json</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="l l-Scalar l-Scalar-Plain">├── configs</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="l l-Scalar l-Scalar-Plain">│</span><span class="err">  </span><span class="l l-Scalar l-Scalar-Plain"> └── config.toml</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="l l-Scalar l-Scalar-Plain">├── download</span><span class="w">                </span><span class="c1"># default downloading dir</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="l l-Scalar l-Scalar-Plain">│</span><span class="err">  </span><span class="l l-Scalar l-Scalar-Plain"> └── README.md</span><span class="w">       </span><span class="c1"># downloaded file</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="l l-Scalar l-Scalar-Plain">├── peers</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="l l-Scalar l-Scalar-Plain">│</span><span class="err">  </span><span class="l l-Scalar l-Scalar-Plain"> └── pp-list</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="l l-Scalar l-Scalar-Plain">└── tmp</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">└── logs</span>
+</code></pre></div>
+<blockquote>
+<p>The <code>download</code> folder is defined by <code>download_path</code> in the file <code>configs/config.toml</code> under the root directory of your resource node.</p>
+</blockquote>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>&gt;get<span class="w"> </span>sdm://st172v4u8ysfgaphjs8uyy0svvc6d6tzl6gp07kn4/v05ahm51l6v6tm2vqc682b9sicom61fgkoqdl0pg
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>&gt;<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:47:31<span class="w"> </span>query_file_info.go:253:<span class="w"> </span>get，RspFileStorageInfo
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:47:31<span class="w"> </span>download_slice.go:391:<span class="w"> </span>download<span class="w"> </span>starts:<span class="w"> </span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:47:31<span class="w"> </span>download_task.go:431:<span class="w"> </span>downloaded：100.00<span class="w"> </span>%<span class="w"> </span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:47:31<span class="w"> </span>print.go:20:<span class="w"> </span><span class="c1">####################################################################################################</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="delete"><code>delete</code><a class="headerlink" href="#delete" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Delete an uploaded file</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>delete<span class="w"> </span>&lt;filehash&gt;
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>&gt;delete<span class="w"> </span>v05ahm51l6v6tm2vqc682b9sicom61fgkoqdl0pg
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>&gt;<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:04:51<span class="w"> </span>delete_file.go:36:<span class="w"> </span>delete<span class="w"> </span>success
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="sharefile"><code>sharefile</code><a class="headerlink" href="#sharefile" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Share(public) an uploaded file</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>sharefile<span class="w"> </span>&lt;filehash&gt;<span class="w"> </span>&lt;duration&gt;<span class="w"> </span>&lt;is_private&gt;
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>duration</code> is time period(in seconds) when the file share expires. Put <code>0</code> for unlimited time.</p>
+<p><code>is_private</code> is whether the file share should be protected by a password. Put <code>0</code> for public file without password, and <code>1</code> for private file with a password.</p>
+<p>After this command has been executed successfully, SDS will provide a password to this shared file, like <code>m216</code>.Please keep this password for future use.</p>
+</div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>&gt;sharefile<span class="w"> </span>v05ahm51l6v6tm2vqc682b9sicom61fgkoqdl0pg<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>&gt;<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:53:04<span class="w"> </span>share.go:131:<span class="w"> </span>ShareId<span class="w"> </span>348f79a5a0963a56
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:53:04<span class="w"> </span>share.go:132:<span class="w"> </span>ShareLink<span class="w"> </span>hFu8ce_348f79a5a0963a56
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:53:04<span class="w"> </span>share.go:133:<span class="w"> </span>SharePassword<span class="w"> </span>m216
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="allshare"><code>allshare</code><a class="headerlink" href="#allshare" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>List All Shared Files.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>allshare
+</code></pre></div>
+<p>Example:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>&gt;allshare
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>&gt;<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:30:21<span class="w"> </span>share.go:75:<span class="w"> </span>_______________________________
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:30:21<span class="w"> </span>share.go:76:<span class="w"> </span>file_name:<span class="w"> </span>relayd.toml
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:30:21<span class="w"> </span>share.go:77:<span class="w"> </span>file_hash:<span class="w"> </span>v05ahm51l6v6tm2vqc682b9sicom61fgkoqdl0pg
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:30:21<span class="w"> </span>share.go:78:<span class="w"> </span>file_size:<span class="w"> </span><span class="m">676</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:30:21<span class="w"> </span>share.go:79:<span class="w"> </span>link_time:<span class="w"> </span><span class="m">1673544576</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:30:21<span class="w"> </span>share.go:80:<span class="w"> </span>link_time_exp:<span class="w"> </span><span class="m">1689096576</span>
+<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:30:21<span class="w"> </span>share.go:81:<span class="w"> </span>ShareId:<span class="w"> </span>e9546b33e3d63285
+<a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:30:21<span class="w"> </span>share.go:82:<span class="w"> </span>ShareLink:<span class="w"> </span>4RREV0_e9546b33e3d63285
+</code></pre></div></p>
+<p><br></p>
+<hr />
+<h2 id="getsharefile"><code>getsharefile</code><a class="headerlink" href="#getsharefile" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Download a shared file.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>getsharefile<span class="w"> </span>&lt;sharelink&gt;<span class="w"> </span><span class="o">[</span>password<span class="o">]</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Leave the <code>password</code> blank if it's a public shared file.</p>
+<p><code>sharelink</code> could be found when your use <code>allshare</code> to list all available shared files.</p>
+<p>The downloaded files will be saved into the folder <code>download</code> by default under the root directory of your resource node.</p>
+</div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>&gt;getsharefile<span class="w"> </span>4RREV0_e9546b33e3d63285
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>&gt;<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:31:38<span class="w"> </span>share.go:216:<span class="w"> </span>get<span class="w"> </span>RspGetShareFile<span class="w"> </span>RES_SUCCESS<span class="w"> </span>request<span class="w"> </span>success
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:31:38<span class="w"> </span>share.go:222:<span class="w"> </span>FileInfo:<span class="w"> </span><span class="o">[</span>file_size:676<span class="w">  </span>file_hash:<span class="s2">&quot;v05ahm51l6v6tm2vqc682b9sicom61fgkoqdl0pg&quot;</span><span class="w">  </span>file_name:<span class="s2">&quot;relayd.toml&quot;</span><span class="w">  </span>create_time:1673542807<span class="w">  </span>owner_wallet_address:<span class="s2">&quot;st172v4u8ysfgaphjs8uyy0svvc6d6tzl6gp07kn4&quot;</span><span class="w">  </span>share_link:<span class="s2">&quot;4RREV0_e9546b33e3d63285&quot;</span><span class="o">]</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:31:38<span class="w"> </span>query_file_info.go:253:<span class="w"> </span>get，RspFileStorageInfo
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:31:38<span class="w"> </span>download_slice.go:391:<span class="w"> </span>download<span class="w"> </span>starts:<span class="w"> </span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:31:39<span class="w"> </span>download_task.go:431:<span class="w"> </span>downloaded：100.00<span class="w"> </span>%<span class="w"> </span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a>
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:31:39<span class="w"> </span>print.go:20:<span class="w"> </span><span class="c1">####################################################################################################</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="cancelshare"><code>cancelshare</code><a class="headerlink" href="#cancelshare" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Cancel file share</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>cancelshare<span class="w"> </span>&lt;shareID&gt;
+</code></pre></div>
+<blockquote>
+<p><code>shareID</code> could be found when your use <code>allshare</code> to list all available shared files</p>
+</blockquote>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>&gt;cancelshare<span class="w"> </span>e9546b33e3d63285
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>&gt;<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:52:20<span class="w"> </span>share.go:172:<span class="w"> </span>cancel<span class="w"> </span>share<span class="w"> </span>success:<span class="w"> </span>e9546b33e3d63285
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="monitor"><code>monitor</code><a class="headerlink" href="#monitor" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>View resource utilization.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>monitor
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="c1"># show the resource utilization monitor</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>&gt;monitor
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:13:09<span class="w"> </span>sys.go:143:<span class="w"> </span>__________________________________________________________________________
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:13:09<span class="w"> </span>sys.go:144:<span class="w">         </span>Mem<span class="w">         </span>:<span class="w"> </span><span class="m">15967</span><span class="w"> </span>MB<span class="w">  </span>Free:<span class="w"> </span><span class="m">9497</span><span class="w"> </span>MB<span class="w"> </span>Used:6127<span class="w"> </span>Usage:38.372995%
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:13:09<span class="w"> </span>sys.go:149:<span class="w">         </span>CPU<span class="w">          </span>:<span class="w"> </span>Intel<span class="o">(</span>R<span class="o">)</span><span class="w"> </span>Core<span class="o">(</span>TM<span class="o">)</span><span class="w"> </span>i7-10510U<span class="w"> </span>CPU<span class="w"> </span>@<span class="w"> </span><span class="m">1</span>.80GHz<span class="w">   </span><span class="m">1</span><span class="w"> </span>cores<span class="w"> </span>
+<a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:13:09<span class="w"> </span>sys.go:149:<span class="w">         </span>CPU<span class="w">          </span>:<span class="w"> </span>Intel<span class="o">(</span>R<span class="o">)</span><span class="w"> </span>Core<span class="o">(</span>TM<span class="o">)</span><span class="w"> </span>i7-10510U<span class="w"> </span>CPU<span class="w"> </span>@<span class="w"> </span><span class="m">1</span>.80GHz<span class="w">   </span><span class="m">1</span><span class="w"> </span>cores<span class="w"> </span>
+<a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:13:09<span class="w"> </span>sys.go:149:<span class="w">         </span>CPU<span class="w">          </span>:<span class="w"> </span>Intel<span class="o">(</span>R<span class="o">)</span><span class="w"> </span>Core<span class="o">(</span>TM<span class="o">)</span><span class="w"> </span>i7-10510U<span class="w"> </span>CPU<span class="w"> </span>@<span class="w"> </span><span class="m">1</span>.80GHz<span class="w">   </span><span class="m">1</span><span class="w"> </span>cores<span class="w"> </span>
+<a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:13:09<span class="w"> </span>sys.go:149:<span class="w">         </span>CPU<span class="w">          </span>:<span class="w"> </span>Intel<span class="o">(</span>R<span class="o">)</span><span class="w"> </span>Core<span class="o">(</span>TM<span class="o">)</span><span class="w"> </span>i7-10510U<span class="w"> </span>CPU<span class="w"> </span>@<span class="w"> </span><span class="m">1</span>.80GHz<span class="w">   </span><span class="m">1</span><span class="w"> </span>cores<span class="w"> </span>
+<a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:13:09<span class="w"> </span>sys.go:158:<span class="w">         </span>CPU<span class="w"> </span>Used<span class="w">    </span>:<span class="w"> </span><span class="m">93</span>.367347%<span class="w"> </span>
+<a id="__codelineno-39-10" name="__codelineno-39-10" href="#__codelineno-39-10"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:13:09<span class="w"> </span>sys.go:161:<span class="w">         </span>HD<span class="w">          </span>:<span class="w"> </span><span class="m">343</span><span class="w"> </span>GB<span class="w">  </span>Free:<span class="w"> </span><span class="m">160</span><span class="w"> </span>GB<span class="w"> </span>Usage:51.431241%<span class="w"> </span>Path:/home/hong/stratos/sds-tropos5/sds/example/network/node1
+<a id="__codelineno-39-11" name="__codelineno-39-11" href="#__codelineno-39-11"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:13:09<span class="w"> </span>sys.go:201:<span class="w">         </span>Upload<span class="w">      </span>:<span class="w"> </span><span class="m">0</span>.000000<span class="w"> </span>MB/s<span class="w"> </span>
+<a id="__codelineno-39-12" name="__codelineno-39-12" href="#__codelineno-39-12"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:13:09<span class="w"> </span>sys.go:202:<span class="w">         </span>Download<span class="w">    </span>:<span class="w"> </span><span class="m">0</span>.000000<span class="w"> </span>MB/s<span class="w"> </span>
+<a id="__codelineno-39-13" name="__codelineno-39-13" href="#__codelineno-39-13"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:13:09<span class="w"> </span>sys.go:203:<span class="w"> </span>__________________________________________________________________________
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="stopmonitor"><code>stopmonitor</code><a class="headerlink" href="#stopmonitor" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Hide the resource utilization monitor</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>stopmonitor
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="monitortoken"><code>monitortoken</code><a class="headerlink" href="#monitortoken" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>show token for Resource Node monitor service.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>&gt;<span class="w"> </span>monitortoken
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>Monitor<span class="w"> </span>token<span class="w"> </span>is:<span class="w"> </span>dddd608cc1c0efaf6b87267088dbc4b099b0db0758f476e625763580991a086c
+</code></pre></div>
+The returned token can be used for logging in to resource node monitor.</p>
+<p><br></p>
+<hr />
+<h2 id="wallets"><code>wallets</code><a class="headerlink" href="#wallets" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>acquire all wallets' addresses</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>wallets
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>&gt;wallets
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:18:07<span class="w"> </span>account.go:109:<span class="w"> </span>st16v5pcrj9m6fgmwm7w0fn6dyxe8er3dk2nqqrhf
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:18:07<span class="w"> </span>account.go:109:<span class="w"> </span>st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="ver"><code>ver</code><a class="headerlink" href="#ver" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>show current SDS version</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>&gt;ver
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>version:<span class="w"> </span>v0.9.0
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="deactivate"><code>deactivate</code><a class="headerlink" href="#deactivate" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>send transaction to Stratos-chain to stop being an active resource node</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>deactivate<span class="w"> </span>&lt;fee&gt;<span class="w"> </span>&lt;gas&gt;
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>&gt;deactivate<span class="w"> </span>10000000gwei<span class="w"> </span><span class="m">1000000</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="newwallet"><code>newwallet</code><a class="headerlink" href="#newwallet" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>create a new wallet or recover an existing wallet, input password after prompt</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>newwallet<span class="w"> </span>&lt;wallet_name&gt;
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>&gt;newwallet<span class="w"> </span>mySecondWallet
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>Enter<span class="w"> </span>wallet<span class="w"> </span>nickname:<span class="w"> </span>mySecondWallet
+<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>Enter<span class="w"> </span>password:<span class="w"> </span>
+<a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>Enter<span class="w"> </span>password<span class="w"> </span>again:<span class="w"> </span>
+<a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a>input<span class="w"> </span>bip39<span class="w"> </span>mnemonic<span class="w"> </span><span class="o">(</span>leave<span class="w"> </span>blank<span class="w"> </span>to<span class="w"> </span>generate<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>one<span class="o">)</span>
+<a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a>input<span class="w"> </span>hd-path<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>account,<span class="w"> </span>default:<span class="w"> </span><span class="s2">&quot;m/44&#39;/606&#39;/0&#39;/0/0&quot;</span><span class="w"> </span>:<span class="w"> </span>
+<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a>save<span class="w"> </span>the<span class="w"> </span>mnemonic<span class="w"> </span>phase<span class="w"> </span>properly<span class="w"> </span><span class="k">for</span><span class="w"> </span>future<span class="w"> </span>recovery:<span class="w"> </span>
+<a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a><span class="o">=======================================================================</span><span class="w">  </span>
+<a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a>mother<span class="w"> </span>bracket<span class="w"> </span>treat<span class="w"> </span>warfare<span class="w"> </span>become<span class="w"> </span>win<span class="w"> </span>ivory<span class="w"> </span>harvest<span class="w"> </span>course<span class="w"> </span>reform<span class="w"> </span>theory<span class="w"> </span>issue<span class="w"> </span>group<span class="w"> </span>super<span class="w"> </span>alpha<span class="w"> </span>library<span class="w"> </span>despair<span class="w"> </span>sustain<span class="w"> </span>orient<span class="w"> </span>shrug<span class="w"> </span>lizard<span class="w"> </span>bulk<span class="w"> </span>mistake<span class="w"> </span><span class="nv">magnet</span>
+<a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a><span class="o">=======================================================================</span><span class="w"> </span>
+<a id="__codelineno-48-11" name="__codelineno-48-11" href="#__codelineno-48-11"></a>
+<a id="__codelineno-48-12" name="__codelineno-48-12" href="#__codelineno-48-12"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:17:00<span class="w"> </span>setup_wallet.go:61:<span class="w"> </span>Wallet<span class="w"> </span>st16v5pcrj9m6fgmwm7w0fn6dyxe8er3dk2nqqrhf<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>generated<span class="w"> </span>successfully
+<a id="__codelineno-48-13" name="__codelineno-48-13" href="#__codelineno-48-13"></a>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span>this<span class="w"> </span>wallet<span class="w"> </span>as<span class="w"> </span>your<span class="w"> </span>node<span class="w"> </span>wallet:<span class="w"> </span>Y<span class="o">(</span>es<span class="o">)</span>/N<span class="o">(</span>o<span class="o">)</span>:<span class="w"> </span>y
+<a id="__codelineno-48-14" name="__codelineno-48-14" href="#__codelineno-48-14"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">11</span>:17:03<span class="w"> </span>setting.go:291:<span class="w"> </span>finished<span class="w"> </span>changing<span class="w"> </span>configuration<span class="w"> </span>file<span class="w">  </span>wallet_address:<span class="w">  </span>st16v5pcrj9m6fgmwm7w0fn6dyxe8er3dk2nqqrhf
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="config"><code>config</code><a class="headerlink" href="#config" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Set config key value pairs in the file <code>configs/config.toml</code>, separated by one space(note: no quotes for string input).</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>config<span class="w"> </span>&lt;key&gt;<span class="w"> </span>&lt;value&gt;
+</code></pre></div>
+Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>config<span class="w"> </span>wallet_password<span class="w"> </span>stratos
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="maintenance-start"><code>maintenance start</code><a class="headerlink" href="#maintenance-start" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Claim a maintenance. Put the resource node in maintenance mode for the requested duration (in seconds).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>maintenance<span class="w"> </span>start<span class="w"> </span>&lt;duration&gt;<span class="w"> </span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li><code>maintenance start &lt;duration&gt;</code> command starts a maintenance activity and switches the node into <code>maintenance</code> mode for the requested duration (in seconds);</li>
+<li>While a Resource Node is in <code>maintenance</code> mode, it will be opt-out from any download/upload/backup tasks;</li>
+<li>While a Resource Node is in <code>maintenance</code> mode, it will NOT be slashed for its off-line;</li>
+<li>The maintenance allowance is maxed out after reach 1% up-time per year(around 87h). Then, any maintenance request will be rejected;</li>
+<li>The maintenance allowance will be tracked and be reset every calendar year for all nodes;</li>
+<li>When using the <code>maintenance stop</code> to stop the current maintenance, or the maintenance period is over, the node status reverts to <code>offline</code> and is ready to restart mining. It acts as usual to earn rewards or be slashed.</li>
+</ul>
+</div>
+<p>Example:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>&gt;maintenance<span class="w"> </span>start<span class="w"> </span><span class="m">600</span>
+<a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a>&gt;<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:57:21<span class="w"> </span>maintenance.go:19:<span class="w"> </span>Sending<span class="w"> </span>maintenance<span class="w"> </span>start<span class="w"> </span>request<span class="w"> </span>to<span class="w"> </span>SP!
+<a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a>
+<a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a>&gt;status
+<a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a>&gt;<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:58:19<span class="w"> </span>get_pp_status.go:80:<span class="w"> </span>***<span class="w"> </span>current<span class="w"> </span>node<span class="w"> </span>status<span class="w"> </span>***
+<a id="__codelineno-52-8" name="__codelineno-52-8" href="#__codelineno-52-8"></a>Activation:<span class="w"> </span>Active<span class="w"> </span><span class="p">|</span><span class="w"> </span>Mining:<span class="w"> </span>MAINTENANCE<span class="w"> </span><span class="p">|</span><span class="w"> </span>Initial<span class="w"> </span>tier:<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>Ongoing<span class="w"> </span>tier:<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>Weight<span class="w"> </span>score:<span class="w"> </span><span class="m">5020</span>
+</code></pre></div>
+Note: <code>Mining: MAINTENANCE</code> indicates that this node is in <code>maintenance</code> mode.</p>
+<p><br></p>
+<hr />
+<h2 id="maintenance-stop"><code>maintenance stop</code><a class="headerlink" href="#maintenance-stop" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>stop the current maintenance.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>&gt;maintenance<span class="w"> </span>stop
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a>&gt;<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:58:35<span class="w"> </span>maintenance.go:26:<span class="w"> </span>Sending<span class="w"> </span>maintenance<span class="w"> </span>stop<span class="w"> </span>request<span class="w"> </span>to<span class="w"> </span>SP!
+<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:58:38<span class="w"> </span>register_to_sp.go:104:<span class="w"> </span>start<span class="w"> </span>mining
+<a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a>
+<a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a>&gt;status
+<a id="__codelineno-53-7" name="__codelineno-53-7" href="#__codelineno-53-7"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-53-8" name="__codelineno-53-8" href="#__codelineno-53-8"></a>&gt;<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">12</span>:59:22<span class="w"> </span>get_pp_status.go:80:<span class="w"> </span>***<span class="w"> </span>current<span class="w"> </span>node<span class="w"> </span>status<span class="w"> </span>***
+<a id="__codelineno-53-9" name="__codelineno-53-9" href="#__codelineno-53-9"></a>Activation:<span class="w"> </span>Active<span class="w"> </span><span class="p">|</span><span class="w"> </span>Mining:<span class="w"> </span>ONLINE<span class="w"> </span><span class="p">|</span><span class="w"> </span>Initial<span class="w"> </span>tier:<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>Ongoing<span class="w"> </span>tier:<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>Weight<span class="w"> </span>score:<span class="w"> </span><span class="m">5020</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="downgradeinfo"><code>downgradeinfo</code><a class="headerlink" href="#downgradeinfo" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Get the information of last downgrade happened on this resource node.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>&gt;<span class="w"> </span>downgradeinfo
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>Request<span class="w"> </span>Accepted
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>&gt;<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/01/12<span class="w"> </span><span class="m">10</span>:43:12<span class="w"> </span>get_pp_downgrade_info.go:24:<span class="w"> </span>PP<span class="w"> </span>downgrade<span class="w"> </span>happened<span class="w"> </span>at:<span class="w"> </span><span class="m">111624</span><span class="w"> </span><span class="o">(</span>heights<span class="o">)</span><span class="w"> </span>ago,<span class="w"> </span>
+<a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>at<span class="w"> </span>SP<span class="w"> </span>node<span class="w"> </span>stsds15sya4n40da64z6n6hvk0p9f7sx72hqpjjnrf9y,<span class="w"> </span>score<span class="w"> </span>decreased<span class="w"> </span>by<span class="w"> </span><span class="m">9999</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="performancemeasure"><code>performancemeasure</code><a class="headerlink" href="#performancemeasure" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Turn on performance measurement log for 60 seconds.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>&gt;<span class="w"> </span>performancemeasure
+</code></pre></div>
+<br></p>
+<hr />
+<h2 id="withdraw"><code>withdraw</code><a class="headerlink" href="#withdraw" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Withdraw matured reward.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>&gt;<span class="w"> </span>withdraw<span class="w"> </span>st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l<span class="w"> </span>100wei<span class="w"> </span><span class="m">0</span>.01stos<span class="w"> </span><span class="m">6000000</span>
+<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>&gt;<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/07/10<span class="w"> </span><span class="m">11</span>:28:58<span class="w"> </span>withdraw.go:37:<span class="w"> </span>Withdraw<span class="w"> </span>transaction<span class="w"> </span>delivered.
+</code></pre></div>
+<br></p>
+<hr />
+<h2 id="send"><code>send</code><a class="headerlink" href="#send" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Sending coins to another account.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>&gt;<span class="w"> </span>send<span class="w"> </span>st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l<span class="w"> </span>100wei<span class="w"> </span><span class="m">0</span>.01stos<span class="w"> </span><span class="m">6000000</span>
+<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>&gt;<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="m">2023</span>/07/10<span class="w"> </span><span class="m">11</span>:32:43<span class="w"> </span>send.go:35:<span class="w"> </span>Send<span class="w"> </span>transaction<span class="w"> </span>delivered.
+</code></pre></div>
+<br></p>
+<hr />
+<p>You can exit the <code>ppd terminal</code> command-line terminal by typing <code>exit</code> and leave the <code>ppd start</code> terminal to run the resource node in background.</p>
+<p><br></p>
+<hr />
+<p><br></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <p> &copy; 2021-<script>document.write(new Date().getFullYear())</script> Stratos Network</p>
+    </div>
+  
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://thestratos.org" target="_blank" rel="noopener" title="thestratos.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M0 256c0-46.6 12.47-90.4 34.27-128.9L144.1 318.3C166 357.5 207.9 384 256 384c14.3 0 27.1-2.3 40.8-6.6l-76.3 132.2C95.9 492.3 0 385.3 0 256zm365.1 65.6c12.3-19.2 18.9-42.5 18.9-65.6 0-38.2-16.8-72.5-43.3-96h152.7c12 29.6 18.6 62.1 18.6 96 0 141.4-114.6 255.1-256 256l109.1-190.4zM477.8 128H256c-62.9 0-113.7 44.1-125.5 102.7L54.19 98.47C101 38.53 174 0 256 0c94.8 0 177.5 51.48 221.8 128zM168 256c0-48.6 39.4-88 88-88s88 39.4 88 88-39.4 88-88 88-88-39.4-88-88z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://t.me/StratosCommunity" target="_blank" rel="noopener" title="t.me" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M248 8C111.033 8 0 119.033 0 256s111.033 248 248 248 248-111.033 248-248S384.967 8 248 8Zm114.952 168.66c-3.732 39.215-19.881 134.378-28.1 178.3-3.476 18.584-10.322 24.816-16.948 25.425-14.4 1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25 5.342-39.5 3.652-3.793 67.107-61.51 68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608 69.142-14.845 10.194-26.894 9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7 18.45-13.7 108.446-47.248 144.628-62.3c68.872-28.647 83.183-33.623 92.511-33.789 2.052-.034 6.639.474 9.61 2.885a10.452 10.452 0 0 1 3.53 6.716 43.765 43.765 0 0 1 .417 9.769Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.com/invite/tpQGpC2nMh" target="_blank" rel="noopener" title="discord.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/Stratos_Network" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://stratos-network.medium.com/" target="_blank" rel="noopener" title="stratos-network.medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M180.5 74.262C80.813 74.262 0 155.633 0 256s80.819 181.738 180.5 181.738S361 356.373 361 256 280.191 74.262 180.5 74.262Zm288.25 10.646c-49.845 0-90.245 76.619-90.245 171.095s40.406 171.1 90.251 171.1 90.251-76.619 90.251-171.1H559c0-94.503-40.4-171.095-90.248-171.095Zm139.506 17.821c-17.526 0-31.735 68.628-31.735 153.274s14.2 153.274 31.735 153.274S640 340.631 640 256c0-84.649-14.215-153.271-31.742-153.271Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/stratosnet" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "search.suggest", "search.share", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../js/extra.js"></script>
+        
+      
+        
+          <script src="../../js/mathjax.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+    
+  </body>
+</html>

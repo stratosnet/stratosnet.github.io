@@ -1,0 +1,2769 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="This document describes how to setup and run a Stratos-chain full-node in testnet. It offers sample code, implementation tips and reference material.">
+      
+      
+      
+        <link rel="canonical" href="https://docs.thestratos.org/docs-validator-node/setup-and-run-a-stratos-chain-full-node/">
+      
+      
+        <link rel="prev" href="../../docs-testnet/migrate-rewards/">
+      
+      
+        <link rel="next" href="../how-to-become-a-validator/">
+      
+      <link rel="icon" href="../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+    
+    
+      
+        <title>Full-Chain Node - Stratos Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="Full-Chain Node - Stratos Documentation" >
+      
+        <meta  property="og:description"  content="This document describes how to setup and run a Stratos-chain full-node in testnet. It offers sample code, implementation tips and reference material." >
+      
+        <meta  property="og:image"  content="https://docs.thestratos.org/assets/images/social/docs-validator-node/setup-and-run-a-stratos-chain-full-node.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="https://docs.thestratos.org/docs-validator-node/setup-and-run-a-stratos-chain-full-node/" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="Full-Chain Node - Stratos Documentation" >
+      
+        <meta  name="twitter:description"  content="This document describes how to setup and run a Stratos-chain full-node in testnet. It offers sample code, implementation tips and reference material." >
+      
+        <meta  name="twitter:image"  content="https://docs.thestratos.org/assets/images/social/docs-validator-node/setup-and-run-a-stratos-chain-full-node.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Stratos Documentation" class="md-header__button md-logo" aria-label="Stratos Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Stratos Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Full-Chain Node
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        About
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../docs-testnet/introduction/" class="md-tabs__link">
+        Testnet
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        Stratos Chain Node
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../docs-resource-node/setup-and-run-a-sds-resource-node/" class="md-tabs__link">
+        Resource Node
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Stratos Documentation" class="md-nav__button md-logo" aria-label="Stratos Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Stratos Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+          About
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          About
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-about/about-stratos/" class="md-nav__link">
+        About Stratos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-about/stratos-token-metrics/" class="md-nav__link">
+        STOS Token Metrics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-about/stratos-token-economy/" class="md-nav__link">
+        STOS Token Economy
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Testnet
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Testnet
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-testnet/introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-testnet/tropos-5-changes/" class="md-nav__link">
+        Changes in Tropos-5
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-testnet/incentive-rewards-distribution/" class="md-nav__link">
+        Rewards Distribution
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-testnet/migrate-rewards/" class="md-nav__link">
+        Migrate Rewards
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Stratos Chain Node
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Stratos Chain Node
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+          HOWTOs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          HOWTOs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Full-Chain Node
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Full-Chain Node
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-environment" class="md-nav__link">
+    Setup Environment
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linux-users" class="md-nav__link">
+    Linux Users
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macos-users" class="md-nav__link">
+    MacOS Users
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-users" class="md-nav__link">
+    Windows Users
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-a-stratos-chain-full-node" class="md-nav__link">
+    Setup a Stratos-chain full-node
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup a Stratos-chain full-node">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-user-account" class="md-nav__link">
+    Create a user account
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-release-files" class="md-nav__link">
+    Get release files
+  </a>
+  
+    <nav class="md-nav" aria-label="Get release files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-compiled-executables" class="md-nav__link">
+    Pre-compiled executables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compile-the-source-code" class="md-nav__link">
+    Compile the source code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-genesis-and-config-file" class="md-nav__link">
+    Get genesis and config file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-structure" class="md-nav__link">
+    Directory structure
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-the-full-chain-node" class="md-nav__link">
+    Start the full-chain node
+  </a>
+  
+    <nav class="md-nav" aria-label="Start the full-chain node">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-foreground" class="md-nav__link">
+    In foreground
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#in-background" class="md-nav__link">
+    In background
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#as-service" class="md-nav__link">
+    As service
+  </a>
+  
+    <nav class="md-nav" aria-label="As service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#service-operations" class="md-nav__link">
+    Service operations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-node-status" class="md-nav__link">
+    Check node status
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-a-wallet" class="md-nav__link">
+    Setup a wallet
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup a wallet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-new-wallet" class="md-nav__link">
+    Create a new wallet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recover-an-existing-wallet" class="md-nav__link">
+    Recover an existing wallet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-your-wallet" class="md-nav__link">
+    Check your wallet
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faucet" class="md-nav__link">
+    Faucet
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-become-a-validator/" class="md-nav__link">
+        Become a Validator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-setup-rest-grpc-full-chain/" class="md-nav__link">
+        Full-Chain as REST/gRPC
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          Operating
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Operating
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stchaind-commands-part-1/" class="md-nav__link">
+        stchaind Commands Part 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stchaind-commands-part-2/" class="md-nav__link">
+        stchaind Commands Part 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stratos-chain-grpc-queries/" class="md-nav__link">
+        gRPC Queries
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stratos-chain-rest-apis/" class="md-nav__link">
+        REST APIs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          EVM
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          EVM
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/node-config/" class="md-nav__link">
+        Node config
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+          Network details
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Network details
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/network-details/network/" class="md-nav__link">
+        Network
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/network-details/gas-token/" class="md-nav__link">
+        STOS Gas token
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+          Deploying on Stratos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Deploying on Stratos
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/deploy-smart-contracts/hardhat/" class="md-nav__link">
+        Using Hardhat
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/deploy-smart-contracts/truffle/" class="md-nav__link">
+        Using Truffle
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_4" id="__nav_3_3_4_label" tabindex="0">
+          Wallets
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Wallets
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/hello/" class="md-nav__link">
+        Hello MetaMask
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/configure-on-metamask/" class="md-nav__link">
+        Configure Stratos on MetaMask
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/multiple-accounts/" class="md-nav__link">
+        Multiple Accounts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/available-dapps/" class="md-nav__link">
+        Available dapps
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Resource Node
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Resource Node
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+          HOWTOs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          HOWTOs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/setup-and-run-a-sds-resource-node/" class="md-nav__link">
+        SDS Resource Node
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          Operating
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Operating
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/ppd-terminal-subcommands/" class="md-nav__link">
+        ppd Commands
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/sds-rpc-for-file-operation/" class="md-nav__link">
+        SDS RPC
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          Examples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Examples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/rpc-client/" class="md-nav__link">
+        RPC Client
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-environment" class="md-nav__link">
+    Setup Environment
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linux-users" class="md-nav__link">
+    Linux Users
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macos-users" class="md-nav__link">
+    MacOS Users
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-users" class="md-nav__link">
+    Windows Users
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-a-stratos-chain-full-node" class="md-nav__link">
+    Setup a Stratos-chain full-node
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup a Stratos-chain full-node">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-user-account" class="md-nav__link">
+    Create a user account
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-release-files" class="md-nav__link">
+    Get release files
+  </a>
+  
+    <nav class="md-nav" aria-label="Get release files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-compiled-executables" class="md-nav__link">
+    Pre-compiled executables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compile-the-source-code" class="md-nav__link">
+    Compile the source code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-genesis-and-config-file" class="md-nav__link">
+    Get genesis and config file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-structure" class="md-nav__link">
+    Directory structure
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-the-full-chain-node" class="md-nav__link">
+    Start the full-chain node
+  </a>
+  
+    <nav class="md-nav" aria-label="Start the full-chain node">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-foreground" class="md-nav__link">
+    In foreground
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#in-background" class="md-nav__link">
+    In background
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#as-service" class="md-nav__link">
+    As service
+  </a>
+  
+    <nav class="md-nav" aria-label="As service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#service-operations" class="md-nav__link">
+    Service operations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-node-status" class="md-nav__link">
+    Check node status
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-a-wallet" class="md-nav__link">
+    Setup a wallet
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup a wallet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-new-wallet" class="md-nav__link">
+    Create a new wallet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recover-an-existing-wallet" class="md-nav__link">
+    Recover an existing wallet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-your-wallet" class="md-nav__link">
+    Check your wallet
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faucet" class="md-nav__link">
+    Faucet
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Full-Chain Node</h1>
+
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Stratos blockchain facilitates all decentralized ledger transactions and functionalities, providing settlement services and related financial payment services for network providers and network users in an efficient, fair and transparent manner.</p>
+<p>The Stratos-chain full-nodes are dedicated servers with sufficient computing power that participate in block generation cycle. It is necessary in order to be a validator.</p>
+<p>In practice, running a full-node only implies running a non-compromised and up-to-date version of the software with low network latency and without downtime. It is encouraged to run a full-node even if you do not plan to be a validator.</p>
+<p>The Stratos-chain validator is a full-node that participates in the Stratos Chain block generation cycle and also voting for the validity of a block proposed.</p>
+<p><br></p>
+<hr />
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Here are the required hardware/software to run a Stratos-chain full-node:</p>
+<p><b>Minimum Hardware Requirements</b></p>
+<ul>
+<li>CPU: &nbsp;&nbsp;&nbsp;          8 Cores, 2.5 GHz base frequency per core</li>
+<li>RAM: &nbsp;&nbsp;&nbsp;          32GB</li>
+<li>Storage: &nbsp;&nbsp;&nbsp;      2TB</li>
+<li>Min. stake: &nbsp;&nbsp;&nbsp;   1 STOS</li>
+</ul>
+<p><b>Software(tested version)</b></p>
+<ul>
+<li>Ubuntu 18.04+</li>
+<li>Go 1.18+ linux/amd64</li>
+</ul>
+<p><br></p>
+<hr />
+<h2 id="setup-environment">Setup Environment<a class="headerlink" href="#setup-environment" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>In order to run a Stratos-chain full-node, you may need to build <code>stratos-chain</code> source code yourself which requires <code>Go 1.18+</code>, <code>git</code>, <code>curl</code> and <code>make</code> installed.</p>
+<p>This process depends on your operating system.</p>
+<p><br></p>
+<h3 id="linux-users">Linux Users<a class="headerlink" href="#linux-users" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>The following example is based on Ubuntu 18.04+ 64-bit(Debian) and assumes you are using a terminal environment by default.</p>
+<p>Please run the equivalent commands if you are running other Linux distributions.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Update the system</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Install git, snap and make(you can also install them separately as your needs)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>build-essential<span class="w"> </span>curl<span class="w"> </span>snapd<span class="w"> </span>--yes
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># Install Go 1.18+ with Snap and export environment variables(You can also install Go 1.18+ in your way)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>sudo<span class="w"> </span>snap<span class="w"> </span>install<span class="w"> </span>go<span class="w"> </span>--classic
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export GOPATH=&quot;$HOME/go&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.profile
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export GOBIN=&quot;$GOPATH/bin&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.profile
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PATH=&quot;$GOBIN:$PATH&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.profile
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nb">source</span><span class="w"> </span>~/.profile
+</code></pre></div>
+<p><br></p>
+<h3 id="macos-users">MacOS Users<a class="headerlink" href="#macos-users" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>To install the required build tools, you can easily <a href="https://apps.apple.com/hk/app/xcode/id497799835?l=en&amp;mt=12">install Xcode from the Mac App Store</a>.</p>
+<p>The best practice to install Go is to use <a href="https://brew.sh/">Homebrew</a>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Install software using Homebrew</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>brew<span class="w"> </span>install<span class="w"> </span>go<span class="w"> </span>git<span class="w"> </span>curl
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Export environment variables</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export GOPATH=&quot;$HOME/go&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.profile
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export GOBIN=&quot;$GOPATH/bin&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.profile
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PATH=&quot;$GOBIN:$PATH&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.profile
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nb">source</span><span class="w"> </span>~/.profile
+</code></pre></div>
+<p><br></p>
+<h3 id="windows-users">Windows Users<a class="headerlink" href="#windows-users" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>It is possible to build and run the software on Windows. However, we did not test it on Windows completely.</p>
+<p>It may give you unexpected results, or it may require additional setup.</p>
+<p>An alternative option is to install a separate virtual Linux system using <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> or <a href="https://www.vmware.com/ca/products/workstation-player/workstation-player-evaluation.html">VMware Workstation</a>.</p>
+<p><br></p>
+<hr />
+<h2 id="setup-a-stratos-chain-full-node">Setup a Stratos-chain full-node<a class="headerlink" href="#setup-a-stratos-chain-full-node" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p><br></p>
+<h3 id="create-a-user-account">Create a user account<a class="headerlink" href="#create-a-user-account" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>To create a separated and more secure environment, it is recommended to create a separated user account <code>stratos</code> to run your node.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>adduser<span class="w"> </span>stratos<span class="w"> </span>--home<span class="w"> </span>/home/stratos
+</code></pre></div>
+<p>Once the user account <code>stratos</code> is created, switch and login the system using <code>stratos</code>. You will proceed with the following steps in context of that user.</p>
+<p><br></p>
+<h3 id="get-release-files">Get release files<a class="headerlink" href="#get-release-files" title="Permanent link">🔗&#xFE0E;</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>There are two ways to get the these binary executables:</p>
+<ul>
+<li>Download pre-compiled executabled (for Ubuntu 18.04+ x86_64).</li>
+<li>Download source code and compile it yourself.</li>
+</ul>
+<p>Please choose only one of them based on your operating system.</p>
+</div>
+<p><br></p>
+<h4 id="pre-compiled-executables">Pre-compiled executables<a class="headerlink" href="#pre-compiled-executables" title="Permanent link">🔗&#xFE0E;</a></h4>
+<p>The following binary <code>stchaind</code> has been built and ready to be downloaded directly.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Make sure we are inside the $HOME folder</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HOME</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>wget<span class="w"> </span>https://github.com/stratosnet/stratos-chain/releases/download/v0.9.0/stchaind
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>💡 This binary is built for Ubuntu 18.04+ amd64. if you have other Linux kernels, please follow the next step to build your own binary with source code. For ease of use, we recommend saving this binary in your <code>$HOME</code> folder. </p>
+<p>If you are not sure what is your <code>$HOME</code> folder, in terminal, use <code>echo $HOME</code> to check. In the following instruction, we assume you have entered the <code>$HOME</code> folder(use <code>cd $HOME</code>)</p>
+</div>
+<p><br></p>
+<ul>
+<li>Check the granularity</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Make sure we are inside the $HOME folder and check these two binary executables</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HOME</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Check granularity</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>md5sum<span class="w"> </span>stchain*
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1">## Expected output</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1">## 1843b162a7d2b1f4363938fc73d421e8  stchaind</span>
+</code></pre></div>
+<p><br></p>
+<ul>
+<li>Add execute permission to this binary</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Make sure the file can be executed</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>stchaind
+</code></pre></div>
+<p><br></p>
+<ul>
+<li>Add the binary to the search path</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PATH=&quot;$HOME:$PATH&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.profile
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">source</span><span class="w"> </span>~/.profile
+</code></pre></div>
+<p><br></p>
+<h4 id="compile-the-source-code">Compile the source code<a class="headerlink" href="#compile-the-source-code" title="Permanent link">🔗&#xFE0E;</a></h4>
+<p>Before the following steps, please make sure you have <code>Go 1.18+</code> installed <a href="https://golang.org/doc/install">link</a>.</p>
+<p><br></p>
+<ul>
+<li>Build the extracted source code</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/stratosnet/stratos-chain.git
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">cd</span><span class="w"> </span>stratos-chain
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>git<span class="w"> </span>checkout<span class="w"> </span>tags/v0.9.0
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>make<span class="w"> </span>build
+</code></pre></div>
+<p><br></p>
+<ul>
+<li>Installing the binary executable</li>
+</ul>
+<p>The binary can be installed to the default $GOPATH/bin folder by running:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>make<span class="w"> </span>install
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="get-genesis-and-config-file">Get genesis and config file<a class="headerlink" href="#get-genesis-and-config-file" title="Permanent link">🔗&#xFE0E;</a></h2>
+<ul>
+<li>Initialize your node</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Make sure we are inside the home directory</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HOME</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Create folders and initialize the node</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>stchaind<span class="w"> </span>init<span class="w"> </span><span class="s2">&quot;&lt;your_node_moniker&gt;&quot;</span><span class="w"> </span>--chain-id<span class="w"> </span>tropos-5
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># ignore the output since you need to download the genesis file </span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>💡 You can choose any <code>your_node_moniker</code> you prefer. It will be saved in the <code>config.toml</code> under the <code>.stchaind/config/</code> directory.</p>
+</div>
+<p><br></p>
+<ul>
+<li>Download the <code>genesis.json</code> and <code>config.toml</code> files</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>wget<span class="w"> </span>https://raw.githubusercontent.com/stratosnet/stratos-chain-testnet/main/genesis.json
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>wget<span class="w"> </span>https://raw.githubusercontent.com/stratosnet/stratos-chain-testnet/main/config.toml
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>💡 We strongly recommend using this downloaded <code>config.toml</code> for v0.9.0, instead of the ones for previous versions to avoid any mismatching. </p>
+<p>A sample of <code>config.toml</code> can be found below</p>
+</div>
+<p><br></p>
+<details>
+    <summary>Example of config.toml</summary>
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># This is a TOML config file.</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># For more information, see https://github.com/toml-lang/toml# NOTE: Any path below can be absolute (e.g. &quot;/var/myawesomeapp/data&quot;) or</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># relative to the home directory (e.g. &quot;data&quot;). The home directory is</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># &quot;$HOME/.tendermint&quot; by default, but could be changed via $TMHOME env variable</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># or --home cmd flag.#######################################################################</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c1">###                   Main Base Config Options                      ###</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1">#######################################################################</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="c1"># TCP or UNIX socket address of the ABCI application,</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># or the name of an ABCI application compiled in with the Tendermint binary</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="nv">proxy_app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp://127.0.0.1:26658&quot;</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="c1"># A custom human readable name for this node</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="nv">moniker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;node&quot;</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="c1"># If this node is many blocks behind the tip of the chain, FastSync</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="c1"># allows them to catchup quickly by downloading blocks in parallel</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="c1"># and verifying their commits</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="nv">fast_sync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="c1"># Database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="c1"># * goleveldb (github.com/syndtr/goleveldb - most popular implementation)</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="c1">#   - pure go</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="c1">#   - stable</span>
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="c1"># * cleveldb (uses levigo wrapper)</span>
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="c1">#   - fast</span>
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a><span class="c1">#   - requires gcc</span>
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a><span class="c1">#   - use cleveldb build tag (go build -tags cleveldb)</span>
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a><span class="c1"># * boltdb (uses etcd&#39;s fork of bolt - github.com/etcd-io/bbolt)</span>
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="c1">#   - EXPERIMENTAL</span>
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="c1">#   - may be faster is some use-cases (random reads - indexer)</span>
+<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a><span class="c1">#   - use boltdb build tag (go build -tags boltdb)</span>
+<a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a><span class="c1"># * rocksdb (uses github.com/tecbot/gorocksdb)</span>
+<a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a><span class="c1">#   - EXPERIMENTAL</span>
+<a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a><span class="c1">#   - requires gcc</span>
+<a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a><span class="c1">#   - use rocksdb build tag (go build -tags rocksdb)</span>
+<a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a><span class="c1"># * badgerdb (uses github.com/dgraph-io/badger)</span>
+<a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a><span class="c1">#   - EXPERIMENTAL</span>
+<a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a><span class="c1">#   - use badgerdb build tag (go build -tags badgerdb)</span>
+<a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a><span class="nv">db_backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;goleveldb&quot;</span>
+<a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>
+<a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a><span class="c1"># Database directory</span>
+<a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a><span class="nv">db_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;data&quot;</span>
+<a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a>
+<a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a><span class="c1"># Output level for logging, including package level options</span>
+<a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a><span class="nv">log_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;info&quot;</span>
+<a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a>
+<a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a><span class="c1"># Output format: &#39;plain&#39; (colored text) or &#39;json&#39;</span>
+<a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a><span class="nv">log_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;plain&quot;</span>
+<a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a>
+<a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a><span class="c1">##### additional base config options #####</span>
+<a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a>
+<a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a><span class="c1"># Path to the JSON file containing the initial validator set and other meta data</span>
+<a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a><span class="nv">genesis_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;config/genesis.json&quot;</span>
+<a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a>
+<a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a><span class="c1"># Path to the JSON file containing the private key to use as a validator in the consensus protocol</span>
+<a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a><span class="nv">priv_validator_key_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;config/priv_validator_key.json&quot;</span>
+<a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a>
+<a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a><span class="c1"># Path to the JSON file containing the last sign state of a validator</span>
+<a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a><span class="nv">priv_validator_state_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;data/priv_validator_state.json&quot;</span>
+<a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a>
+<a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a><span class="c1"># TCP or UNIX socket address for Tendermint to listen on for</span>
+<a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a><span class="c1"># connections from an external PrivValidator process</span>
+<a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a><span class="nv">priv_validator_laddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-65" name="__codelineno-11-65" href="#__codelineno-11-65"></a>
+<a id="__codelineno-11-66" name="__codelineno-11-66" href="#__codelineno-11-66"></a><span class="c1"># Path to the JSON file containing the private key to use for node authentication in the p2p protocol</span>
+<a id="__codelineno-11-67" name="__codelineno-11-67" href="#__codelineno-11-67"></a><span class="nv">node_key_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;config/node_key.json&quot;</span>
+<a id="__codelineno-11-68" name="__codelineno-11-68" href="#__codelineno-11-68"></a>
+<a id="__codelineno-11-69" name="__codelineno-11-69" href="#__codelineno-11-69"></a><span class="c1"># Mechanism to connect to the ABCI application: socket | grpc</span>
+<a id="__codelineno-11-70" name="__codelineno-11-70" href="#__codelineno-11-70"></a><span class="nv">abci</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;socket&quot;</span>
+<a id="__codelineno-11-71" name="__codelineno-11-71" href="#__codelineno-11-71"></a>
+<a id="__codelineno-11-72" name="__codelineno-11-72" href="#__codelineno-11-72"></a><span class="c1"># If true, query the ABCI app on connecting to a new peer</span>
+<a id="__codelineno-11-73" name="__codelineno-11-73" href="#__codelineno-11-73"></a><span class="c1"># so the app can decide if we should keep the connection or not</span>
+<a id="__codelineno-11-74" name="__codelineno-11-74" href="#__codelineno-11-74"></a><span class="nv">filter_peers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<a id="__codelineno-11-75" name="__codelineno-11-75" href="#__codelineno-11-75"></a>
+<a id="__codelineno-11-76" name="__codelineno-11-76" href="#__codelineno-11-76"></a>
+<a id="__codelineno-11-77" name="__codelineno-11-77" href="#__codelineno-11-77"></a><span class="c1">#######################################################################</span>
+<a id="__codelineno-11-78" name="__codelineno-11-78" href="#__codelineno-11-78"></a><span class="c1">###                 Advanced Configuration Options                  ###</span>
+<a id="__codelineno-11-79" name="__codelineno-11-79" href="#__codelineno-11-79"></a><span class="c1">#######################################################################</span>
+<a id="__codelineno-11-80" name="__codelineno-11-80" href="#__codelineno-11-80"></a>
+<a id="__codelineno-11-81" name="__codelineno-11-81" href="#__codelineno-11-81"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-82" name="__codelineno-11-82" href="#__codelineno-11-82"></a><span class="c1">###       RPC Server Configuration Options          ###</span>
+<a id="__codelineno-11-83" name="__codelineno-11-83" href="#__codelineno-11-83"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-84" name="__codelineno-11-84" href="#__codelineno-11-84"></a><span class="o">[</span>rpc<span class="o">]</span>
+<a id="__codelineno-11-85" name="__codelineno-11-85" href="#__codelineno-11-85"></a>
+<a id="__codelineno-11-86" name="__codelineno-11-86" href="#__codelineno-11-86"></a><span class="c1"># TCP or UNIX socket address for the RPC server to listen on</span>
+<a id="__codelineno-11-87" name="__codelineno-11-87" href="#__codelineno-11-87"></a><span class="nv">laddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp://127.0.0.1:26657&quot;</span>
+<a id="__codelineno-11-88" name="__codelineno-11-88" href="#__codelineno-11-88"></a>
+<a id="__codelineno-11-89" name="__codelineno-11-89" href="#__codelineno-11-89"></a><span class="c1"># A list of origins a cross-domain request can be executed from</span>
+<a id="__codelineno-11-90" name="__codelineno-11-90" href="#__codelineno-11-90"></a><span class="c1"># Default value &#39;[]&#39; disables cors support</span>
+<a id="__codelineno-11-91" name="__codelineno-11-91" href="#__codelineno-11-91"></a><span class="c1"># Use &#39;[&quot;*&quot;]&#39; to allow any origin</span>
+<a id="__codelineno-11-92" name="__codelineno-11-92" href="#__codelineno-11-92"></a><span class="nv">cors_allowed_origins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<a id="__codelineno-11-93" name="__codelineno-11-93" href="#__codelineno-11-93"></a>
+<a id="__codelineno-11-94" name="__codelineno-11-94" href="#__codelineno-11-94"></a><span class="c1"># A list of methods the client is allowed to use with cross-domain requests</span>
+<a id="__codelineno-11-95" name="__codelineno-11-95" href="#__codelineno-11-95"></a><span class="nv">cors_allowed_methods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;HEAD&quot;</span>,<span class="w"> </span><span class="s2">&quot;GET&quot;</span>,<span class="w"> </span><span class="s2">&quot;POST&quot;</span>,<span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-11-96" name="__codelineno-11-96" href="#__codelineno-11-96"></a>
+<a id="__codelineno-11-97" name="__codelineno-11-97" href="#__codelineno-11-97"></a><span class="c1"># A list of non simple headers the client is allowed to use with cross-domain requests</span>
+<a id="__codelineno-11-98" name="__codelineno-11-98" href="#__codelineno-11-98"></a><span class="nv">cors_allowed_headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;Origin&quot;</span>,<span class="w"> </span><span class="s2">&quot;Accept&quot;</span>,<span class="w"> </span><span class="s2">&quot;Content-Type&quot;</span>,<span class="w"> </span><span class="s2">&quot;X-Requested-With&quot;</span>,<span class="w"> </span><span class="s2">&quot;X-Server-Time&quot;</span>,<span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-11-99" name="__codelineno-11-99" href="#__codelineno-11-99"></a>
+<a id="__codelineno-11-100" name="__codelineno-11-100" href="#__codelineno-11-100"></a><span class="c1"># TCP or UNIX socket address for the gRPC server to listen on</span>
+<a id="__codelineno-11-101" name="__codelineno-11-101" href="#__codelineno-11-101"></a><span class="c1"># NOTE: This server only supports /broadcast_tx_commit</span>
+<a id="__codelineno-11-102" name="__codelineno-11-102" href="#__codelineno-11-102"></a><span class="nv">grpc_laddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-103" name="__codelineno-11-103" href="#__codelineno-11-103"></a>
+<a id="__codelineno-11-104" name="__codelineno-11-104" href="#__codelineno-11-104"></a><span class="c1"># Maximum number of simultaneous connections.</span>
+<a id="__codelineno-11-105" name="__codelineno-11-105" href="#__codelineno-11-105"></a><span class="c1"># Does not include RPC (HTTP&amp;WebSocket) connections. See max_open_connections</span>
+<a id="__codelineno-11-106" name="__codelineno-11-106" href="#__codelineno-11-106"></a><span class="c1"># If you want to accept a larger number than the default, make sure</span>
+<a id="__codelineno-11-107" name="__codelineno-11-107" href="#__codelineno-11-107"></a><span class="c1"># you increase your OS limits.</span>
+<a id="__codelineno-11-108" name="__codelineno-11-108" href="#__codelineno-11-108"></a><span class="c1"># 0 - unlimited.</span>
+<a id="__codelineno-11-109" name="__codelineno-11-109" href="#__codelineno-11-109"></a><span class="c1"># Should be &lt; {ulimit -Sn} - {MaxNumInboundPeers} - {MaxNumOutboundPeers} - {N of wal, db and other open files}</span>
+<a id="__codelineno-11-110" name="__codelineno-11-110" href="#__codelineno-11-110"></a><span class="c1"># 1024 - 40 - 10 - 50 = 924 = ~900</span>
+<a id="__codelineno-11-111" name="__codelineno-11-111" href="#__codelineno-11-111"></a><span class="nv">grpc_max_open_connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">900</span>
+<a id="__codelineno-11-112" name="__codelineno-11-112" href="#__codelineno-11-112"></a>
+<a id="__codelineno-11-113" name="__codelineno-11-113" href="#__codelineno-11-113"></a><span class="c1"># Activate unsafe RPC commands like /dial_seeds and /unsafe_flush_mempool</span>
+<a id="__codelineno-11-114" name="__codelineno-11-114" href="#__codelineno-11-114"></a><span class="nv">unsafe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<a id="__codelineno-11-115" name="__codelineno-11-115" href="#__codelineno-11-115"></a>
+<a id="__codelineno-11-116" name="__codelineno-11-116" href="#__codelineno-11-116"></a><span class="c1"># Maximum number of simultaneous connections (including WebSocket).</span>
+<a id="__codelineno-11-117" name="__codelineno-11-117" href="#__codelineno-11-117"></a><span class="c1"># Does not include gRPC connections. See grpc_max_open_connections</span>
+<a id="__codelineno-11-118" name="__codelineno-11-118" href="#__codelineno-11-118"></a><span class="c1"># If you want to accept a larger number than the default, make sure</span>
+<a id="__codelineno-11-119" name="__codelineno-11-119" href="#__codelineno-11-119"></a><span class="c1"># you increase your OS limits.</span>
+<a id="__codelineno-11-120" name="__codelineno-11-120" href="#__codelineno-11-120"></a><span class="c1"># 0 - unlimited.</span>
+<a id="__codelineno-11-121" name="__codelineno-11-121" href="#__codelineno-11-121"></a><span class="c1"># Should be &lt; {ulimit -Sn} - {MaxNumInboundPeers} - {MaxNumOutboundPeers} - {N of wal, db and other open files}</span>
+<a id="__codelineno-11-122" name="__codelineno-11-122" href="#__codelineno-11-122"></a><span class="c1"># 1024 - 40 - 10 - 50 = 924 = ~900</span>
+<a id="__codelineno-11-123" name="__codelineno-11-123" href="#__codelineno-11-123"></a><span class="nv">max_open_connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">900</span>
+<a id="__codelineno-11-124" name="__codelineno-11-124" href="#__codelineno-11-124"></a>
+<a id="__codelineno-11-125" name="__codelineno-11-125" href="#__codelineno-11-125"></a><span class="c1"># Maximum number of unique clientIDs that can /subscribe</span>
+<a id="__codelineno-11-126" name="__codelineno-11-126" href="#__codelineno-11-126"></a><span class="c1"># If you&#39;re using /broadcast_tx_commit, set to the estimated maximum number</span>
+<a id="__codelineno-11-127" name="__codelineno-11-127" href="#__codelineno-11-127"></a><span class="c1"># of broadcast_tx_commit calls per block.</span>
+<a id="__codelineno-11-128" name="__codelineno-11-128" href="#__codelineno-11-128"></a><span class="nv">max_subscription_clients</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span>
+<a id="__codelineno-11-129" name="__codelineno-11-129" href="#__codelineno-11-129"></a>
+<a id="__codelineno-11-130" name="__codelineno-11-130" href="#__codelineno-11-130"></a><span class="c1"># Maximum number of unique queries a given client can /subscribe to</span>
+<a id="__codelineno-11-131" name="__codelineno-11-131" href="#__codelineno-11-131"></a><span class="c1"># If you&#39;re using GRPC (or Local RPC client) and /broadcast_tx_commit, set to</span>
+<a id="__codelineno-11-132" name="__codelineno-11-132" href="#__codelineno-11-132"></a><span class="c1"># the estimated # maximum number of broadcast_tx_commit calls per block.</span>
+<a id="__codelineno-11-133" name="__codelineno-11-133" href="#__codelineno-11-133"></a><span class="nv">max_subscriptions_per_client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span>
+<a id="__codelineno-11-134" name="__codelineno-11-134" href="#__codelineno-11-134"></a>
+<a id="__codelineno-11-135" name="__codelineno-11-135" href="#__codelineno-11-135"></a><span class="c1"># Experimental parameter to specify the maximum number of events a node will</span>
+<a id="__codelineno-11-136" name="__codelineno-11-136" href="#__codelineno-11-136"></a><span class="c1"># buffer, per subscription, before returning an error and closing the</span>
+<a id="__codelineno-11-137" name="__codelineno-11-137" href="#__codelineno-11-137"></a><span class="c1"># subscription. Must be set to at least 100, but higher values will accommodate</span>
+<a id="__codelineno-11-138" name="__codelineno-11-138" href="#__codelineno-11-138"></a><span class="c1"># higher event throughput rates (and will use more memory).</span>
+<a id="__codelineno-11-139" name="__codelineno-11-139" href="#__codelineno-11-139"></a><span class="nv">experimental_subscription_buffer_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span>
+<a id="__codelineno-11-140" name="__codelineno-11-140" href="#__codelineno-11-140"></a>
+<a id="__codelineno-11-141" name="__codelineno-11-141" href="#__codelineno-11-141"></a><span class="c1"># Experimental parameter to specify the maximum number of RPC responses that</span>
+<a id="__codelineno-11-142" name="__codelineno-11-142" href="#__codelineno-11-142"></a><span class="c1"># can be buffered per WebSocket client. If clients cannot read from the</span>
+<a id="__codelineno-11-143" name="__codelineno-11-143" href="#__codelineno-11-143"></a><span class="c1"># WebSocket endpoint fast enough, they will be disconnected, so increasing this</span>
+<a id="__codelineno-11-144" name="__codelineno-11-144" href="#__codelineno-11-144"></a><span class="c1"># parameter may reduce the chances of them being disconnected (but will cause</span>
+<a id="__codelineno-11-145" name="__codelineno-11-145" href="#__codelineno-11-145"></a><span class="c1"># the node to use more memory).</span>
+<a id="__codelineno-11-146" name="__codelineno-11-146" href="#__codelineno-11-146"></a><span class="c1">#</span>
+<a id="__codelineno-11-147" name="__codelineno-11-147" href="#__codelineno-11-147"></a><span class="c1"># Must be at least the same as &quot;experimental_subscription_buffer_size&quot;,</span>
+<a id="__codelineno-11-148" name="__codelineno-11-148" href="#__codelineno-11-148"></a><span class="c1"># otherwise connections could be dropped unnecessarily. This value should</span>
+<a id="__codelineno-11-149" name="__codelineno-11-149" href="#__codelineno-11-149"></a><span class="c1"># ideally be somewhat higher than &quot;experimental_subscription_buffer_size&quot; to</span>
+<a id="__codelineno-11-150" name="__codelineno-11-150" href="#__codelineno-11-150"></a><span class="c1"># accommodate non-subscription-related RPC responses.</span>
+<a id="__codelineno-11-151" name="__codelineno-11-151" href="#__codelineno-11-151"></a><span class="nv">experimental_websocket_write_buffer_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span>
+<a id="__codelineno-11-152" name="__codelineno-11-152" href="#__codelineno-11-152"></a>
+<a id="__codelineno-11-153" name="__codelineno-11-153" href="#__codelineno-11-153"></a><span class="c1"># If a WebSocket client cannot read fast enough, at present we may</span>
+<a id="__codelineno-11-154" name="__codelineno-11-154" href="#__codelineno-11-154"></a><span class="c1"># silently drop events instead of generating an error or disconnecting the</span>
+<a id="__codelineno-11-155" name="__codelineno-11-155" href="#__codelineno-11-155"></a><span class="c1"># client.</span>
+<a id="__codelineno-11-156" name="__codelineno-11-156" href="#__codelineno-11-156"></a><span class="c1">#</span>
+<a id="__codelineno-11-157" name="__codelineno-11-157" href="#__codelineno-11-157"></a><span class="c1"># Enabling this experimental parameter will cause the WebSocket connection to</span>
+<a id="__codelineno-11-158" name="__codelineno-11-158" href="#__codelineno-11-158"></a><span class="c1"># be closed instead if it cannot read fast enough, allowing for greater</span>
+<a id="__codelineno-11-159" name="__codelineno-11-159" href="#__codelineno-11-159"></a><span class="c1"># predictability in subscription behaviour.</span>
+<a id="__codelineno-11-160" name="__codelineno-11-160" href="#__codelineno-11-160"></a><span class="nv">experimental_close_on_slow_client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<a id="__codelineno-11-161" name="__codelineno-11-161" href="#__codelineno-11-161"></a>
+<a id="__codelineno-11-162" name="__codelineno-11-162" href="#__codelineno-11-162"></a><span class="c1"># How long to wait for a tx to be committed during /broadcast_tx_commit.</span>
+<a id="__codelineno-11-163" name="__codelineno-11-163" href="#__codelineno-11-163"></a><span class="c1"># WARNING: Using a value larger than 10s will result in increasing the</span>
+<a id="__codelineno-11-164" name="__codelineno-11-164" href="#__codelineno-11-164"></a><span class="c1"># global HTTP write timeout, which applies to all connections and endpoints.</span>
+<a id="__codelineno-11-165" name="__codelineno-11-165" href="#__codelineno-11-165"></a><span class="c1"># See https://github.com/tendermint/tendermint/issues/3435</span>
+<a id="__codelineno-11-166" name="__codelineno-11-166" href="#__codelineno-11-166"></a><span class="nv">timeout_broadcast_tx_commit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10s&quot;</span>
+<a id="__codelineno-11-167" name="__codelineno-11-167" href="#__codelineno-11-167"></a>
+<a id="__codelineno-11-168" name="__codelineno-11-168" href="#__codelineno-11-168"></a><span class="c1"># Maximum size of request body, in bytes</span>
+<a id="__codelineno-11-169" name="__codelineno-11-169" href="#__codelineno-11-169"></a><span class="nv">max_body_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000000</span>
+<a id="__codelineno-11-170" name="__codelineno-11-170" href="#__codelineno-11-170"></a>
+<a id="__codelineno-11-171" name="__codelineno-11-171" href="#__codelineno-11-171"></a><span class="c1"># Maximum size of request header, in bytes</span>
+<a id="__codelineno-11-172" name="__codelineno-11-172" href="#__codelineno-11-172"></a><span class="nv">max_header_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1048576</span>
+<a id="__codelineno-11-173" name="__codelineno-11-173" href="#__codelineno-11-173"></a>
+<a id="__codelineno-11-174" name="__codelineno-11-174" href="#__codelineno-11-174"></a><span class="c1"># The path to a file containing certificate that is used to create the HTTPS server.</span>
+<a id="__codelineno-11-175" name="__codelineno-11-175" href="#__codelineno-11-175"></a><span class="c1"># Might be either absolute path or path related to Tendermint&#39;s config directory.</span>
+<a id="__codelineno-11-176" name="__codelineno-11-176" href="#__codelineno-11-176"></a><span class="c1"># If the certificate is signed by a certificate authority,</span>
+<a id="__codelineno-11-177" name="__codelineno-11-177" href="#__codelineno-11-177"></a><span class="c1"># the certFile should be the concatenation of the server&#39;s certificate, any intermediates,</span>
+<a id="__codelineno-11-178" name="__codelineno-11-178" href="#__codelineno-11-178"></a><span class="c1"># and the CA&#39;s certificate.</span>
+<a id="__codelineno-11-179" name="__codelineno-11-179" href="#__codelineno-11-179"></a><span class="c1"># NOTE: both tls_cert_file and tls_key_file must be present for Tendermint to create HTTPS server.</span>
+<a id="__codelineno-11-180" name="__codelineno-11-180" href="#__codelineno-11-180"></a><span class="c1"># Otherwise, HTTP server is run.</span>
+<a id="__codelineno-11-181" name="__codelineno-11-181" href="#__codelineno-11-181"></a><span class="nv">tls_cert_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-182" name="__codelineno-11-182" href="#__codelineno-11-182"></a>
+<a id="__codelineno-11-183" name="__codelineno-11-183" href="#__codelineno-11-183"></a><span class="c1"># The path to a file containing matching private key that is used to create the HTTPS server.</span>
+<a id="__codelineno-11-184" name="__codelineno-11-184" href="#__codelineno-11-184"></a><span class="c1"># Might be either absolute path or path related to Tendermint&#39;s config directory.</span>
+<a id="__codelineno-11-185" name="__codelineno-11-185" href="#__codelineno-11-185"></a><span class="c1"># NOTE: both tls-cert-file and tls-key-file must be present for Tendermint to create HTTPS server.</span>
+<a id="__codelineno-11-186" name="__codelineno-11-186" href="#__codelineno-11-186"></a><span class="c1"># Otherwise, HTTP server is run.</span>
+<a id="__codelineno-11-187" name="__codelineno-11-187" href="#__codelineno-11-187"></a><span class="nv">tls_key_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-188" name="__codelineno-11-188" href="#__codelineno-11-188"></a>
+<a id="__codelineno-11-189" name="__codelineno-11-189" href="#__codelineno-11-189"></a><span class="c1"># pprof listen address (https://golang.org/pkg/net/http/pprof)</span>
+<a id="__codelineno-11-190" name="__codelineno-11-190" href="#__codelineno-11-190"></a><span class="nv">pprof_laddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;localhost:6060&quot;</span>
+<a id="__codelineno-11-191" name="__codelineno-11-191" href="#__codelineno-11-191"></a>
+<a id="__codelineno-11-192" name="__codelineno-11-192" href="#__codelineno-11-192"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-193" name="__codelineno-11-193" href="#__codelineno-11-193"></a><span class="c1">###           P2P Configuration Options             ###</span>
+<a id="__codelineno-11-194" name="__codelineno-11-194" href="#__codelineno-11-194"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-195" name="__codelineno-11-195" href="#__codelineno-11-195"></a><span class="o">[</span>p2p<span class="o">]</span>
+<a id="__codelineno-11-196" name="__codelineno-11-196" href="#__codelineno-11-196"></a>
+<a id="__codelineno-11-197" name="__codelineno-11-197" href="#__codelineno-11-197"></a><span class="c1"># Address to listen for incoming connections</span>
+<a id="__codelineno-11-198" name="__codelineno-11-198" href="#__codelineno-11-198"></a><span class="nv">laddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp://0.0.0.0:26656&quot;</span>
+<a id="__codelineno-11-199" name="__codelineno-11-199" href="#__codelineno-11-199"></a>
+<a id="__codelineno-11-200" name="__codelineno-11-200" href="#__codelineno-11-200"></a><span class="c1"># Address to advertise to peers for them to dial</span>
+<a id="__codelineno-11-201" name="__codelineno-11-201" href="#__codelineno-11-201"></a><span class="c1"># If empty, will use the same port as the laddr,</span>
+<a id="__codelineno-11-202" name="__codelineno-11-202" href="#__codelineno-11-202"></a><span class="c1"># and will introspect on the listener or use UPnP</span>
+<a id="__codelineno-11-203" name="__codelineno-11-203" href="#__codelineno-11-203"></a><span class="c1"># to figure out the address. ip and port are required</span>
+<a id="__codelineno-11-204" name="__codelineno-11-204" href="#__codelineno-11-204"></a><span class="c1"># example: 159.89.10.97:26656</span>
+<a id="__codelineno-11-205" name="__codelineno-11-205" href="#__codelineno-11-205"></a><span class="nv">external_address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-206" name="__codelineno-11-206" href="#__codelineno-11-206"></a>
+<a id="__codelineno-11-207" name="__codelineno-11-207" href="#__codelineno-11-207"></a><span class="c1"># Comma separated list of seed nodes to connect to</span>
+<a id="__codelineno-11-208" name="__codelineno-11-208" href="#__codelineno-11-208"></a><span class="nv">seeds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-209" name="__codelineno-11-209" href="#__codelineno-11-209"></a>
+<a id="__codelineno-11-210" name="__codelineno-11-210" href="#__codelineno-11-210"></a><span class="c1"># Comma separated list of nodes to keep persistent connections to</span>
+<a id="__codelineno-11-211" name="__codelineno-11-211" href="#__codelineno-11-211"></a><span class="nv">persistent_peers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-212" name="__codelineno-11-212" href="#__codelineno-11-212"></a>
+<a id="__codelineno-11-213" name="__codelineno-11-213" href="#__codelineno-11-213"></a><span class="c1"># UPNP port forwarding</span>
+<a id="__codelineno-11-214" name="__codelineno-11-214" href="#__codelineno-11-214"></a><span class="nv">upnp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<a id="__codelineno-11-215" name="__codelineno-11-215" href="#__codelineno-11-215"></a>
+<a id="__codelineno-11-216" name="__codelineno-11-216" href="#__codelineno-11-216"></a><span class="c1"># Path to address book</span>
+<a id="__codelineno-11-217" name="__codelineno-11-217" href="#__codelineno-11-217"></a><span class="nv">addr_book_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;config/addrbook.json&quot;</span>
+<a id="__codelineno-11-218" name="__codelineno-11-218" href="#__codelineno-11-218"></a>
+<a id="__codelineno-11-219" name="__codelineno-11-219" href="#__codelineno-11-219"></a><span class="c1"># Set true for strict address routability rules</span>
+<a id="__codelineno-11-220" name="__codelineno-11-220" href="#__codelineno-11-220"></a><span class="c1"># Set false for private or local networks</span>
+<a id="__codelineno-11-221" name="__codelineno-11-221" href="#__codelineno-11-221"></a><span class="nv">addr_book_strict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-11-222" name="__codelineno-11-222" href="#__codelineno-11-222"></a>
+<a id="__codelineno-11-223" name="__codelineno-11-223" href="#__codelineno-11-223"></a><span class="c1"># Maximum number of inbound peers</span>
+<a id="__codelineno-11-224" name="__codelineno-11-224" href="#__codelineno-11-224"></a><span class="nv">max_num_inbound_peers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">40</span>
+<a id="__codelineno-11-225" name="__codelineno-11-225" href="#__codelineno-11-225"></a>
+<a id="__codelineno-11-226" name="__codelineno-11-226" href="#__codelineno-11-226"></a><span class="c1"># Maximum number of outbound peers to connect to, excluding persistent peers</span>
+<a id="__codelineno-11-227" name="__codelineno-11-227" href="#__codelineno-11-227"></a><span class="nv">max_num_outbound_peers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-11-228" name="__codelineno-11-228" href="#__codelineno-11-228"></a>
+<a id="__codelineno-11-229" name="__codelineno-11-229" href="#__codelineno-11-229"></a><span class="c1"># List of node IDs, to which a connection will be (re)established ignoring any existing limits</span>
+<a id="__codelineno-11-230" name="__codelineno-11-230" href="#__codelineno-11-230"></a><span class="nv">unconditional_peer_ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-231" name="__codelineno-11-231" href="#__codelineno-11-231"></a>
+<a id="__codelineno-11-232" name="__codelineno-11-232" href="#__codelineno-11-232"></a><span class="c1"># Maximum pause when redialing a persistent peer (if zero, exponential backoff is used)</span>
+<a id="__codelineno-11-233" name="__codelineno-11-233" href="#__codelineno-11-233"></a><span class="nv">persistent_peers_max_dial_period</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0s&quot;</span>
+<a id="__codelineno-11-234" name="__codelineno-11-234" href="#__codelineno-11-234"></a>
+<a id="__codelineno-11-235" name="__codelineno-11-235" href="#__codelineno-11-235"></a><span class="c1"># Time to wait before flushing messages out on the connection</span>
+<a id="__codelineno-11-236" name="__codelineno-11-236" href="#__codelineno-11-236"></a><span class="nv">flush_throttle_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;100ms&quot;</span>
+<a id="__codelineno-11-237" name="__codelineno-11-237" href="#__codelineno-11-237"></a>
+<a id="__codelineno-11-238" name="__codelineno-11-238" href="#__codelineno-11-238"></a><span class="c1"># Maximum size of a message packet payload, in bytes</span>
+<a id="__codelineno-11-239" name="__codelineno-11-239" href="#__codelineno-11-239"></a><span class="nv">max_packet_msg_payload_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1024</span>
+<a id="__codelineno-11-240" name="__codelineno-11-240" href="#__codelineno-11-240"></a>
+<a id="__codelineno-11-241" name="__codelineno-11-241" href="#__codelineno-11-241"></a><span class="c1"># Rate at which packets can be sent, in bytes/second</span>
+<a id="__codelineno-11-242" name="__codelineno-11-242" href="#__codelineno-11-242"></a><span class="nv">send_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5120000</span>
+<a id="__codelineno-11-243" name="__codelineno-11-243" href="#__codelineno-11-243"></a>
+<a id="__codelineno-11-244" name="__codelineno-11-244" href="#__codelineno-11-244"></a><span class="c1"># Rate at which packets can be received, in bytes/second</span>
+<a id="__codelineno-11-245" name="__codelineno-11-245" href="#__codelineno-11-245"></a><span class="nv">recv_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5120000</span>
+<a id="__codelineno-11-246" name="__codelineno-11-246" href="#__codelineno-11-246"></a>
+<a id="__codelineno-11-247" name="__codelineno-11-247" href="#__codelineno-11-247"></a><span class="c1"># Set true to enable the peer-exchange reactor</span>
+<a id="__codelineno-11-248" name="__codelineno-11-248" href="#__codelineno-11-248"></a><span class="nv">pex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-11-249" name="__codelineno-11-249" href="#__codelineno-11-249"></a>
+<a id="__codelineno-11-250" name="__codelineno-11-250" href="#__codelineno-11-250"></a><span class="c1"># Seed mode, in which node constantly crawls the network and looks for</span>
+<a id="__codelineno-11-251" name="__codelineno-11-251" href="#__codelineno-11-251"></a><span class="c1"># peers. If another node asks it for addresses, it responds and disconnects.</span>
+<a id="__codelineno-11-252" name="__codelineno-11-252" href="#__codelineno-11-252"></a><span class="c1">#</span>
+<a id="__codelineno-11-253" name="__codelineno-11-253" href="#__codelineno-11-253"></a><span class="c1"># Does not work if the peer-exchange reactor is disabled.</span>
+<a id="__codelineno-11-254" name="__codelineno-11-254" href="#__codelineno-11-254"></a><span class="nv">seed_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<a id="__codelineno-11-255" name="__codelineno-11-255" href="#__codelineno-11-255"></a>
+<a id="__codelineno-11-256" name="__codelineno-11-256" href="#__codelineno-11-256"></a><span class="c1"># Comma separated list of peer IDs to keep private (will not be gossiped to other peers)</span>
+<a id="__codelineno-11-257" name="__codelineno-11-257" href="#__codelineno-11-257"></a><span class="nv">private_peer_ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-258" name="__codelineno-11-258" href="#__codelineno-11-258"></a>
+<a id="__codelineno-11-259" name="__codelineno-11-259" href="#__codelineno-11-259"></a><span class="c1"># Toggle to disable guard against peers connecting from the same ip.</span>
+<a id="__codelineno-11-260" name="__codelineno-11-260" href="#__codelineno-11-260"></a><span class="nv">allow_duplicate_ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<a id="__codelineno-11-261" name="__codelineno-11-261" href="#__codelineno-11-261"></a>
+<a id="__codelineno-11-262" name="__codelineno-11-262" href="#__codelineno-11-262"></a><span class="c1"># Peer connection configuration.</span>
+<a id="__codelineno-11-263" name="__codelineno-11-263" href="#__codelineno-11-263"></a><span class="nv">handshake_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;20s&quot;</span>
+<a id="__codelineno-11-264" name="__codelineno-11-264" href="#__codelineno-11-264"></a><span class="nv">dial_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;3s&quot;</span>
+<a id="__codelineno-11-265" name="__codelineno-11-265" href="#__codelineno-11-265"></a>
+<a id="__codelineno-11-266" name="__codelineno-11-266" href="#__codelineno-11-266"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-267" name="__codelineno-11-267" href="#__codelineno-11-267"></a><span class="c1">###          Mempool Configuration Option          ###</span>
+<a id="__codelineno-11-268" name="__codelineno-11-268" href="#__codelineno-11-268"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-269" name="__codelineno-11-269" href="#__codelineno-11-269"></a><span class="o">[</span>mempool<span class="o">]</span>
+<a id="__codelineno-11-270" name="__codelineno-11-270" href="#__codelineno-11-270"></a>
+<a id="__codelineno-11-271" name="__codelineno-11-271" href="#__codelineno-11-271"></a><span class="nv">recheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-11-272" name="__codelineno-11-272" href="#__codelineno-11-272"></a><span class="nv">broadcast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-11-273" name="__codelineno-11-273" href="#__codelineno-11-273"></a><span class="nv">wal_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-274" name="__codelineno-11-274" href="#__codelineno-11-274"></a>
+<a id="__codelineno-11-275" name="__codelineno-11-275" href="#__codelineno-11-275"></a><span class="c1"># Maximum number of transactions in the mempool</span>
+<a id="__codelineno-11-276" name="__codelineno-11-276" href="#__codelineno-11-276"></a><span class="nv">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5000</span>
+<a id="__codelineno-11-277" name="__codelineno-11-277" href="#__codelineno-11-277"></a>
+<a id="__codelineno-11-278" name="__codelineno-11-278" href="#__codelineno-11-278"></a><span class="c1"># Limit the total size of all txs in the mempool.</span>
+<a id="__codelineno-11-279" name="__codelineno-11-279" href="#__codelineno-11-279"></a><span class="c1"># This only accounts for raw transactions (e.g. given 1MB transactions and</span>
+<a id="__codelineno-11-280" name="__codelineno-11-280" href="#__codelineno-11-280"></a><span class="c1"># max_txs_bytes=5MB, mempool will only accept 5 transactions).</span>
+<a id="__codelineno-11-281" name="__codelineno-11-281" href="#__codelineno-11-281"></a><span class="nv">max_txs_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1073741824</span>
+<a id="__codelineno-11-282" name="__codelineno-11-282" href="#__codelineno-11-282"></a>
+<a id="__codelineno-11-283" name="__codelineno-11-283" href="#__codelineno-11-283"></a><span class="c1"># Size of the cache (used to filter transactions we saw earlier) in transactions</span>
+<a id="__codelineno-11-284" name="__codelineno-11-284" href="#__codelineno-11-284"></a><span class="nv">cache_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10000</span>
+<a id="__codelineno-11-285" name="__codelineno-11-285" href="#__codelineno-11-285"></a>
+<a id="__codelineno-11-286" name="__codelineno-11-286" href="#__codelineno-11-286"></a><span class="c1"># Do not remove invalid transactions from the cache (default: false)</span>
+<a id="__codelineno-11-287" name="__codelineno-11-287" href="#__codelineno-11-287"></a><span class="c1"># Set to true if it&#39;s not possible for any invalid transaction to become valid</span>
+<a id="__codelineno-11-288" name="__codelineno-11-288" href="#__codelineno-11-288"></a><span class="c1"># again in the future.</span>
+<a id="__codelineno-11-289" name="__codelineno-11-289" href="#__codelineno-11-289"></a>keep-invalid-txs-in-cache<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<a id="__codelineno-11-290" name="__codelineno-11-290" href="#__codelineno-11-290"></a>
+<a id="__codelineno-11-291" name="__codelineno-11-291" href="#__codelineno-11-291"></a><span class="c1"># Maximum size of a single transaction.</span>
+<a id="__codelineno-11-292" name="__codelineno-11-292" href="#__codelineno-11-292"></a><span class="c1"># NOTE: the max size of a tx transmitted over the network is {max_tx_bytes}.</span>
+<a id="__codelineno-11-293" name="__codelineno-11-293" href="#__codelineno-11-293"></a><span class="nv">max_tx_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1048576</span>
+<a id="__codelineno-11-294" name="__codelineno-11-294" href="#__codelineno-11-294"></a>
+<a id="__codelineno-11-295" name="__codelineno-11-295" href="#__codelineno-11-295"></a><span class="c1"># Maximum size of a batch of transactions to send to a peer</span>
+<a id="__codelineno-11-296" name="__codelineno-11-296" href="#__codelineno-11-296"></a><span class="c1"># Including space needed by encoding (one varint per transaction).</span>
+<a id="__codelineno-11-297" name="__codelineno-11-297" href="#__codelineno-11-297"></a><span class="c1"># XXX: Unused due to https://github.com/tendermint/tendermint/issues/5796</span>
+<a id="__codelineno-11-298" name="__codelineno-11-298" href="#__codelineno-11-298"></a><span class="nv">max_batch_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-11-299" name="__codelineno-11-299" href="#__codelineno-11-299"></a>
+<a id="__codelineno-11-300" name="__codelineno-11-300" href="#__codelineno-11-300"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-301" name="__codelineno-11-301" href="#__codelineno-11-301"></a><span class="c1">###         State Sync Configuration Options        ###</span>
+<a id="__codelineno-11-302" name="__codelineno-11-302" href="#__codelineno-11-302"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-303" name="__codelineno-11-303" href="#__codelineno-11-303"></a><span class="o">[</span>statesync<span class="o">]</span>
+<a id="__codelineno-11-304" name="__codelineno-11-304" href="#__codelineno-11-304"></a><span class="c1"># State sync rapidly bootstraps a new node by discovering, fetching, and restoring a state machine</span>
+<a id="__codelineno-11-305" name="__codelineno-11-305" href="#__codelineno-11-305"></a><span class="c1"># snapshot from peers instead of fetching and replaying historical blocks. Requires some peers in</span>
+<a id="__codelineno-11-306" name="__codelineno-11-306" href="#__codelineno-11-306"></a><span class="c1"># the network to take and serve state machine snapshots. State sync is not attempted if the node</span>
+<a id="__codelineno-11-307" name="__codelineno-11-307" href="#__codelineno-11-307"></a><span class="c1"># has any local state (LastBlockHeight &gt; 0). The node will have a truncated block history,</span>
+<a id="__codelineno-11-308" name="__codelineno-11-308" href="#__codelineno-11-308"></a><span class="c1"># starting from the height of the snapshot.</span>
+<a id="__codelineno-11-309" name="__codelineno-11-309" href="#__codelineno-11-309"></a><span class="nb">enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<a id="__codelineno-11-310" name="__codelineno-11-310" href="#__codelineno-11-310"></a>
+<a id="__codelineno-11-311" name="__codelineno-11-311" href="#__codelineno-11-311"></a><span class="c1"># RPC servers (comma-separated) for light client verification of the synced state machine and</span>
+<a id="__codelineno-11-312" name="__codelineno-11-312" href="#__codelineno-11-312"></a><span class="c1"># retrieval of state data for node bootstrapping. Also needs a trusted height and corresponding</span>
+<a id="__codelineno-11-313" name="__codelineno-11-313" href="#__codelineno-11-313"></a><span class="c1"># header hash obtained from a trusted source, and a period during which validators can be trusted.</span>
+<a id="__codelineno-11-314" name="__codelineno-11-314" href="#__codelineno-11-314"></a><span class="c1">#</span>
+<a id="__codelineno-11-315" name="__codelineno-11-315" href="#__codelineno-11-315"></a><span class="c1"># For Cosmos SDK-based chains, trust_period should usually be about 2/3 of the unbonding time (~2</span>
+<a id="__codelineno-11-316" name="__codelineno-11-316" href="#__codelineno-11-316"></a><span class="c1"># weeks) during which they can be financially punished (slashed) for misbehavior.</span>
+<a id="__codelineno-11-317" name="__codelineno-11-317" href="#__codelineno-11-317"></a><span class="nv">rpc_servers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-318" name="__codelineno-11-318" href="#__codelineno-11-318"></a><span class="nv">trust_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-11-319" name="__codelineno-11-319" href="#__codelineno-11-319"></a><span class="nv">trust_hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-320" name="__codelineno-11-320" href="#__codelineno-11-320"></a><span class="nv">trust_period</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;168h0m0s&quot;</span>
+<a id="__codelineno-11-321" name="__codelineno-11-321" href="#__codelineno-11-321"></a>
+<a id="__codelineno-11-322" name="__codelineno-11-322" href="#__codelineno-11-322"></a><span class="c1"># Time to spend discovering snapshots before initiating a restore.</span>
+<a id="__codelineno-11-323" name="__codelineno-11-323" href="#__codelineno-11-323"></a><span class="nv">discovery_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;15s&quot;</span>
+<a id="__codelineno-11-324" name="__codelineno-11-324" href="#__codelineno-11-324"></a>
+<a id="__codelineno-11-325" name="__codelineno-11-325" href="#__codelineno-11-325"></a><span class="c1"># Temporary directory for state sync snapshot chunks, defaults to the OS tempdir (typically /tmp).</span>
+<a id="__codelineno-11-326" name="__codelineno-11-326" href="#__codelineno-11-326"></a><span class="c1"># Will create a new, randomly named directory within, and remove it when done.</span>
+<a id="__codelineno-11-327" name="__codelineno-11-327" href="#__codelineno-11-327"></a><span class="nv">temp_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-328" name="__codelineno-11-328" href="#__codelineno-11-328"></a>
+<a id="__codelineno-11-329" name="__codelineno-11-329" href="#__codelineno-11-329"></a><span class="c1"># The timeout duration before re-requesting a chunk, possibly from a different</span>
+<a id="__codelineno-11-330" name="__codelineno-11-330" href="#__codelineno-11-330"></a><span class="c1"># peer (default: 1 minute).</span>
+<a id="__codelineno-11-331" name="__codelineno-11-331" href="#__codelineno-11-331"></a><span class="nv">chunk_request_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10s&quot;</span>
+<a id="__codelineno-11-332" name="__codelineno-11-332" href="#__codelineno-11-332"></a>
+<a id="__codelineno-11-333" name="__codelineno-11-333" href="#__codelineno-11-333"></a><span class="c1"># The number of concurrent chunk fetchers to run (default: 1).</span>
+<a id="__codelineno-11-334" name="__codelineno-11-334" href="#__codelineno-11-334"></a><span class="nv">chunk_fetchers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;4&quot;</span>
+<a id="__codelineno-11-335" name="__codelineno-11-335" href="#__codelineno-11-335"></a>
+<a id="__codelineno-11-336" name="__codelineno-11-336" href="#__codelineno-11-336"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-337" name="__codelineno-11-337" href="#__codelineno-11-337"></a><span class="c1">###       Fast Sync Configuration Connections       ###</span>
+<a id="__codelineno-11-338" name="__codelineno-11-338" href="#__codelineno-11-338"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-339" name="__codelineno-11-339" href="#__codelineno-11-339"></a><span class="o">[</span>fastsync<span class="o">]</span>
+<a id="__codelineno-11-340" name="__codelineno-11-340" href="#__codelineno-11-340"></a>
+<a id="__codelineno-11-341" name="__codelineno-11-341" href="#__codelineno-11-341"></a><span class="c1"># Fast Sync version to use:</span>
+<a id="__codelineno-11-342" name="__codelineno-11-342" href="#__codelineno-11-342"></a><span class="c1">#   1) &quot;v0&quot; (default) - the legacy fast sync implementation</span>
+<a id="__codelineno-11-343" name="__codelineno-11-343" href="#__codelineno-11-343"></a><span class="c1">#   2) &quot;v1&quot; - refactor of v0 version for better testability</span>
+<a id="__codelineno-11-344" name="__codelineno-11-344" href="#__codelineno-11-344"></a><span class="c1">#   2) &quot;v2&quot; - complete redesign of v0, optimized for testability &amp; readability</span>
+<a id="__codelineno-11-345" name="__codelineno-11-345" href="#__codelineno-11-345"></a><span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;v0&quot;</span>
+<a id="__codelineno-11-346" name="__codelineno-11-346" href="#__codelineno-11-346"></a>
+<a id="__codelineno-11-347" name="__codelineno-11-347" href="#__codelineno-11-347"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-348" name="__codelineno-11-348" href="#__codelineno-11-348"></a><span class="c1">###         Consensus Configuration Options         ###</span>
+<a id="__codelineno-11-349" name="__codelineno-11-349" href="#__codelineno-11-349"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-350" name="__codelineno-11-350" href="#__codelineno-11-350"></a><span class="o">[</span>consensus<span class="o">]</span>
+<a id="__codelineno-11-351" name="__codelineno-11-351" href="#__codelineno-11-351"></a>
+<a id="__codelineno-11-352" name="__codelineno-11-352" href="#__codelineno-11-352"></a><span class="nv">wal_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;data/cs.wal/wal&quot;</span>
+<a id="__codelineno-11-353" name="__codelineno-11-353" href="#__codelineno-11-353"></a>
+<a id="__codelineno-11-354" name="__codelineno-11-354" href="#__codelineno-11-354"></a><span class="c1"># How long we wait for a proposal block before prevoting nil</span>
+<a id="__codelineno-11-355" name="__codelineno-11-355" href="#__codelineno-11-355"></a><span class="nv">timeout_propose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;3s&quot;</span>
+<a id="__codelineno-11-356" name="__codelineno-11-356" href="#__codelineno-11-356"></a><span class="c1"># How much timeout_propose increases with each round</span>
+<a id="__codelineno-11-357" name="__codelineno-11-357" href="#__codelineno-11-357"></a><span class="nv">timeout_propose_delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;500ms&quot;</span>
+<a id="__codelineno-11-358" name="__codelineno-11-358" href="#__codelineno-11-358"></a><span class="c1"># How long we wait after receiving +2/3 prevotes for “anything” (ie. not a single block or nil)</span>
+<a id="__codelineno-11-359" name="__codelineno-11-359" href="#__codelineno-11-359"></a><span class="nv">timeout_prevote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1s&quot;</span>
+<a id="__codelineno-11-360" name="__codelineno-11-360" href="#__codelineno-11-360"></a><span class="c1"># How much the timeout_prevote increases with each round</span>
+<a id="__codelineno-11-361" name="__codelineno-11-361" href="#__codelineno-11-361"></a><span class="nv">timeout_prevote_delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;500ms&quot;</span>
+<a id="__codelineno-11-362" name="__codelineno-11-362" href="#__codelineno-11-362"></a><span class="c1"># How long we wait after receiving +2/3 precommits for “anything” (ie. not a single block or nil)</span>
+<a id="__codelineno-11-363" name="__codelineno-11-363" href="#__codelineno-11-363"></a><span class="nv">timeout_precommit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1s&quot;</span>
+<a id="__codelineno-11-364" name="__codelineno-11-364" href="#__codelineno-11-364"></a><span class="c1"># How much the timeout_precommit increases with each round</span>
+<a id="__codelineno-11-365" name="__codelineno-11-365" href="#__codelineno-11-365"></a><span class="nv">timeout_precommit_delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;500ms&quot;</span>
+<a id="__codelineno-11-366" name="__codelineno-11-366" href="#__codelineno-11-366"></a><span class="c1"># How long we wait after committing a block, before starting on the new</span>
+<a id="__codelineno-11-367" name="__codelineno-11-367" href="#__codelineno-11-367"></a><span class="c1"># height (this gives us a chance to receive some more precommits, even</span>
+<a id="__codelineno-11-368" name="__codelineno-11-368" href="#__codelineno-11-368"></a><span class="c1"># though we already have +2/3).</span>
+<a id="__codelineno-11-369" name="__codelineno-11-369" href="#__codelineno-11-369"></a><span class="nv">timeout_commit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;5s&quot;</span>
+<a id="__codelineno-11-370" name="__codelineno-11-370" href="#__codelineno-11-370"></a>
+<a id="__codelineno-11-371" name="__codelineno-11-371" href="#__codelineno-11-371"></a><span class="c1"># How many blocks to look back to check existence of the node&#39;s consensus votes before joining consensus</span>
+<a id="__codelineno-11-372" name="__codelineno-11-372" href="#__codelineno-11-372"></a><span class="c1"># When non-zero, the node will panic upon restart</span>
+<a id="__codelineno-11-373" name="__codelineno-11-373" href="#__codelineno-11-373"></a><span class="c1"># if the same consensus key was used to sign {double_sign_check_height} last blocks.</span>
+<a id="__codelineno-11-374" name="__codelineno-11-374" href="#__codelineno-11-374"></a><span class="c1"># So, validators should stop the state machine, wait for some blocks, and then restart the state machine to avoid panic.</span>
+<a id="__codelineno-11-375" name="__codelineno-11-375" href="#__codelineno-11-375"></a><span class="nv">double_sign_check_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-11-376" name="__codelineno-11-376" href="#__codelineno-11-376"></a>
+<a id="__codelineno-11-377" name="__codelineno-11-377" href="#__codelineno-11-377"></a><span class="c1"># Make progress as soon as we have all the precommits (as if TimeoutCommit = 0)</span>
+<a id="__codelineno-11-378" name="__codelineno-11-378" href="#__codelineno-11-378"></a><span class="nv">skip_timeout_commit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<a id="__codelineno-11-379" name="__codelineno-11-379" href="#__codelineno-11-379"></a>
+<a id="__codelineno-11-380" name="__codelineno-11-380" href="#__codelineno-11-380"></a><span class="c1"># EmptyBlocks mode and possible interval between empty blocks</span>
+<a id="__codelineno-11-381" name="__codelineno-11-381" href="#__codelineno-11-381"></a><span class="nv">create_empty_blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-11-382" name="__codelineno-11-382" href="#__codelineno-11-382"></a><span class="nv">create_empty_blocks_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0s&quot;</span>
+<a id="__codelineno-11-383" name="__codelineno-11-383" href="#__codelineno-11-383"></a>
+<a id="__codelineno-11-384" name="__codelineno-11-384" href="#__codelineno-11-384"></a><span class="c1"># Reactor sleep duration parameters</span>
+<a id="__codelineno-11-385" name="__codelineno-11-385" href="#__codelineno-11-385"></a><span class="nv">peer_gossip_sleep_duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;100ms&quot;</span>
+<a id="__codelineno-11-386" name="__codelineno-11-386" href="#__codelineno-11-386"></a><span class="nv">peer_query_maj23_sleep_duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2s&quot;</span>
+<a id="__codelineno-11-387" name="__codelineno-11-387" href="#__codelineno-11-387"></a>
+<a id="__codelineno-11-388" name="__codelineno-11-388" href="#__codelineno-11-388"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-389" name="__codelineno-11-389" href="#__codelineno-11-389"></a><span class="c1">###   Transaction Indexer Configuration Options     ###</span>
+<a id="__codelineno-11-390" name="__codelineno-11-390" href="#__codelineno-11-390"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-391" name="__codelineno-11-391" href="#__codelineno-11-391"></a><span class="o">[</span>tx_index<span class="o">]</span>
+<a id="__codelineno-11-392" name="__codelineno-11-392" href="#__codelineno-11-392"></a>
+<a id="__codelineno-11-393" name="__codelineno-11-393" href="#__codelineno-11-393"></a><span class="c1"># What indexer to use for transactions</span>
+<a id="__codelineno-11-394" name="__codelineno-11-394" href="#__codelineno-11-394"></a><span class="c1">#</span>
+<a id="__codelineno-11-395" name="__codelineno-11-395" href="#__codelineno-11-395"></a><span class="c1"># The application will set which txs to index. In some cases a node operator will be able</span>
+<a id="__codelineno-11-396" name="__codelineno-11-396" href="#__codelineno-11-396"></a><span class="c1"># to decide which txs to index based on configuration set in the application.</span>
+<a id="__codelineno-11-397" name="__codelineno-11-397" href="#__codelineno-11-397"></a><span class="c1">#</span>
+<a id="__codelineno-11-398" name="__codelineno-11-398" href="#__codelineno-11-398"></a><span class="c1"># Options:</span>
+<a id="__codelineno-11-399" name="__codelineno-11-399" href="#__codelineno-11-399"></a><span class="c1">#   1) &quot;null&quot;</span>
+<a id="__codelineno-11-400" name="__codelineno-11-400" href="#__codelineno-11-400"></a><span class="c1">#   2) &quot;kv&quot; (default) - the simplest possible indexer, backed by key-value storage (defaults to levelDB; see DBBackend).</span>
+<a id="__codelineno-11-401" name="__codelineno-11-401" href="#__codelineno-11-401"></a><span class="c1">#       - When &quot;kv&quot; is chosen &quot;tx.height&quot; and &quot;tx.hash&quot; will always be indexed.</span>
+<a id="__codelineno-11-402" name="__codelineno-11-402" href="#__codelineno-11-402"></a><span class="nv">indexer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kv&quot;</span>
+<a id="__codelineno-11-403" name="__codelineno-11-403" href="#__codelineno-11-403"></a>
+<a id="__codelineno-11-404" name="__codelineno-11-404" href="#__codelineno-11-404"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-405" name="__codelineno-11-405" href="#__codelineno-11-405"></a><span class="c1">###       Instrumentation Configuration Options     ###</span>
+<a id="__codelineno-11-406" name="__codelineno-11-406" href="#__codelineno-11-406"></a><span class="c1">#######################################################</span>
+<a id="__codelineno-11-407" name="__codelineno-11-407" href="#__codelineno-11-407"></a><span class="o">[</span>instrumentation<span class="o">]</span>
+<a id="__codelineno-11-408" name="__codelineno-11-408" href="#__codelineno-11-408"></a>
+<a id="__codelineno-11-409" name="__codelineno-11-409" href="#__codelineno-11-409"></a><span class="c1"># When true, Prometheus metrics are served under /metrics on</span>
+<a id="__codelineno-11-410" name="__codelineno-11-410" href="#__codelineno-11-410"></a><span class="c1"># PrometheusListenAddr.</span>
+<a id="__codelineno-11-411" name="__codelineno-11-411" href="#__codelineno-11-411"></a><span class="c1"># Check out the documentation for the list of available metrics.</span>
+<a id="__codelineno-11-412" name="__codelineno-11-412" href="#__codelineno-11-412"></a><span class="nv">prometheus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<a id="__codelineno-11-413" name="__codelineno-11-413" href="#__codelineno-11-413"></a>
+<a id="__codelineno-11-414" name="__codelineno-11-414" href="#__codelineno-11-414"></a><span class="c1"># Address to listen for Prometheus collector(s) connections</span>
+<a id="__codelineno-11-415" name="__codelineno-11-415" href="#__codelineno-11-415"></a><span class="nv">prometheus_listen_addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;:26660&quot;</span>
+<a id="__codelineno-11-416" name="__codelineno-11-416" href="#__codelineno-11-416"></a>
+<a id="__codelineno-11-417" name="__codelineno-11-417" href="#__codelineno-11-417"></a><span class="c1"># Maximum number of simultaneous connections.</span>
+<a id="__codelineno-11-418" name="__codelineno-11-418" href="#__codelineno-11-418"></a><span class="c1"># If you want to accept a larger number than the default, make sure</span>
+<a id="__codelineno-11-419" name="__codelineno-11-419" href="#__codelineno-11-419"></a><span class="c1"># you increase your OS limits.</span>
+<a id="__codelineno-11-420" name="__codelineno-11-420" href="#__codelineno-11-420"></a><span class="c1"># 0 - unlimited.</span>
+<a id="__codelineno-11-421" name="__codelineno-11-421" href="#__codelineno-11-421"></a><span class="nv">max_open_connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+<a id="__codelineno-11-422" name="__codelineno-11-422" href="#__codelineno-11-422"></a>
+<a id="__codelineno-11-423" name="__codelineno-11-423" href="#__codelineno-11-423"></a><span class="c1"># Instrumentation namespace</span>
+<a id="__codelineno-11-424" name="__codelineno-11-424" href="#__codelineno-11-424"></a><span class="nv">namespace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tendermint&quot;</span>
+</code></pre></div>
+
+
+</details>
+
+<p><br></p>
+<ul>
+<li>Change <code>moniker</code> in the downloaded <code>config.toml</code> file</li>
+</ul>
+<p>Please change your node moniker by modifying the <code>config.toml</code> file. Open this file with an editor, search <code>moniker</code> (usually at Line #16) in the file to find the “moniker” field. </p>
+<p>Change it to any value you like. It’s your node name that will show on the network.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># A custom human readable name for this node</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nv">moniker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;your_node_moniker&gt;&quot;</span>
+</code></pre></div>
+<ul>
+<li>Move the downloaded <code>config.toml</code> and <code>genesis.json</code> files to <code>$HOME/.stchaind/config/</code> folder. Replace if you already have these files.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>mv<span class="w"> </span>config.toml<span class="w"> </span><span class="nv">$HOME</span>/.stchaind/config/
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>mv<span class="w"> </span>genesis.json<span class="w"> </span><span class="nv">$HOME</span>/.stchaind/config/
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="directory-structure">Directory structure<a class="headerlink" href="#directory-structure" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>After you finished the above steps, your <code>$HOME</code> folder should include the following directories and files.</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="l l-Scalar l-Scalar-Plain">.</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="l l-Scalar l-Scalar-Plain">├── ...</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="l l-Scalar l-Scalar-Plain">├── .stchaind</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="l l-Scalar l-Scalar-Plain">│   ├── config</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="l l-Scalar l-Scalar-Plain">│   │   ├── app.toml</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="l l-Scalar l-Scalar-Plain">│   │   ├── config.toml</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="l l-Scalar l-Scalar-Plain">│   │   ├── genesis.json</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="l l-Scalar l-Scalar-Plain">│   │   ├── node_key.json</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="l l-Scalar l-Scalar-Plain">│   │   └── priv_validator_key.json</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="l l-Scalar l-Scalar-Plain">│   ├── data</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="l l-Scalar l-Scalar-Plain">│   │    └── priv_validator_state.json</span><span class="w"> </span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="l l-Scalar l-Scalar-Plain">│   └── keyring-test</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="l l-Scalar l-Scalar-Plain">├── ...</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>💡 By default, directory <code>.stchaind</code> will be created in the <code>$HOME</code> folder. The <code>.stchaind</code> folder contains the node's configurations and data.</p>
+</div>
+<p><br></p>
+<hr />
+<h2 id="start-the-full-chain-node">Start the full-chain node<a class="headerlink" href="#start-the-full-chain-node" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>There are three ways to run your Stratos-chain full-node. </p>
+<p>Please choose ONE of them to start the node.</p>
+<p><br></p>
+<h3 id="in-foreground">In foreground<a class="headerlink" href="#in-foreground" title="Permanent link">🔗&#xFE0E;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Make sure we are inside the home directory</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HOME</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># run your node</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>stchaind<span class="w"> </span>start
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># Use `Ctrl+c` to stop the node.</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="in-background">In background<a class="headerlink" href="#in-background" title="Permanent link">🔗&#xFE0E;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Make sure we are inside the home directory</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HOME</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># run your node in backend</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>stchaind<span class="w"> </span>start<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>chain.log<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>
+</code></pre></div>
+<p>Use an editor to check your node log at <code>chain.log</code></p>
+<p>Use the following Linux Command to stop your node.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>pkill<span class="w"> </span>stchaind
+</code></pre></div>
+<p><br></p>
+<h3 id="as-service">As service<a class="headerlink" href="#as-service" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>All below steps require root privileges</p>
+<p><br></p>
+<ul>
+<li>Create the service file</li>
+</ul>
+<p>Create the <code>/lib/systemd/system/stratos.service</code> file with the following content</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="o">[</span>Unit<span class="o">]</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nv">Description</span><span class="o">=</span>Stratos<span class="w"> </span>Chain<span class="w"> </span>Node
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nv">After</span><span class="o">=</span>network-online.target
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="o">[</span>Service<span class="o">]</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="nv">User</span><span class="o">=</span>stratos
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="nv">ExecStart</span><span class="o">=</span>/home/stratos/stchaind<span class="w"> </span>start<span class="w"> </span>--home<span class="o">=</span>/home/stratos/.stchaind
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="nv">Restart</span><span class="o">=</span>on-failure
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="nv">RestartSec</span><span class="o">=</span><span class="m">3</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="nv">LimitNOFILE</span><span class="o">=</span><span class="m">8192</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="o">[</span>Install<span class="o">]</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>💡 In the [service] section:</p>
+<ul>
+<li><code>User</code> is your system login username</li>
+<li><code>ExecStart</code> designates the absolute path to the binary <code>stchaind</code></li>
+<li><code>--home</code> is the absolute path to your node folder.</li>
+<li>We used the default values for these variables. If you use a different username, group or folder to hold your node data instead of the default values, please modify these values according to your situations. Make sure the above values are correct.</li>
+</ul>
+</div>
+<p><br></p>
+<ul>
+<li>Start your service</li>
+</ul>
+<p>Once you have successfully created the service, you need to enable and start it by running</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>systemctl<span class="w"> </span>daemon-reload
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>stratos.service
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>systemctl<span class="w"> </span>start<span class="w"> </span>stratos.service
+</code></pre></div>
+<p><br></p>
+<h4 id="service-operations">Service operations<a class="headerlink" href="#service-operations" title="Permanent link">🔗&#xFE0E;</a></h4>
+<ul>
+<li>Check the service status</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>systemctl<span class="w"> </span>status<span class="w"> </span>stratos.service
+</code></pre></div>
+<ul>
+<li>Check service log</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>stratos.service<span class="w"> </span>-f<span class="w"> </span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="c1"># exit with ctrl+c</span>
+</code></pre></div>
+<ul>
+<li>Stop the service</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>systemctl<span class="w"> </span>stop<span class="w"> </span>stratos.service
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="check-node-status">Check node status<a class="headerlink" href="#check-node-status" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Once you start your full-node, it will connect to the peers and start syncing. You can check the status of the node by running the following command</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># Check the status of the node</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>stchaind<span class="w"> </span>status
+</code></pre></div>
+<p>The output will be similar to</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="err">s</span><span class="kc">t</span><span class="err">chai</span><span class="kc">n</span><span class="err">d</span><span class="w"> </span><span class="err">s</span><span class="kc">tatus</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="p">{</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="nt">&quot;NodeInfo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">        </span><span class="nt">&quot;protocol_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">            </span><span class="nt">&quot;p2p&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">            </span><span class="nt">&quot;block&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;11&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">            </span><span class="nt">&quot;app&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;16a0758d175cbf5c08d41dffa73eb5c0190869ed&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="w">        </span><span class="nt">&quot;listen_addr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tcp://0.0.0.0:26656&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="w">        </span><span class="nt">&quot;network&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test-chain&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.34.21&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a><span class="w">        </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;40202122233038606100&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a><span class="w">        </span><span class="nt">&quot;moniker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;node&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a><span class="w">        </span><span class="nt">&quot;other&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a><span class="w">            </span><span class="nt">&quot;tx_index&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a><span class="w">            </span><span class="nt">&quot;rpc_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tcp://127.0.0.1:26657&quot;</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a><span class="w">    </span><span class="nt">&quot;SyncInfo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a><span class="w">        </span><span class="nt">&quot;latest_block_hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;697A2DB243E5191C6D85285A2ADD4924526924969C6C70FE71827C9FE41D4373&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a><span class="w">        </span><span class="nt">&quot;latest_app_hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;E978F87BB23D351B853F5F0CF9FBBBA4464FF5D7CE3746BF3E2357F28CBCE041&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a><span class="w">        </span><span class="nt">&quot;latest_block_height&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;497&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-24" name="__codelineno-24-24" href="#__codelineno-24-24"></a><span class="w">        </span><span class="nt">&quot;latest_block_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2023-01-11T01:10:37.562405326Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-25" name="__codelineno-24-25" href="#__codelineno-24-25"></a><span class="w">        </span><span class="nt">&quot;earliest_block_hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;139676534FECFA507D56A06B03BD528E70ACA6D4DB6560219707011966613DE4&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-26" name="__codelineno-24-26" href="#__codelineno-24-26"></a><span class="w">        </span><span class="nt">&quot;earliest_app_hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-27" name="__codelineno-24-27" href="#__codelineno-24-27"></a><span class="w">        </span><span class="nt">&quot;earliest_block_height&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-28" name="__codelineno-24-28" href="#__codelineno-24-28"></a><span class="w">        </span><span class="nt">&quot;earliest_block_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2023-01-09T17:08:58.4890503Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-29" name="__codelineno-24-29" href="#__codelineno-24-29"></a><span class="w">        </span><span class="nt">&quot;catching_up&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-24-30" name="__codelineno-24-30" href="#__codelineno-24-30"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-24-31" name="__codelineno-24-31" href="#__codelineno-24-31"></a><span class="w">    </span><span class="nt">&quot;ValidatorInfo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-32" name="__codelineno-24-32" href="#__codelineno-24-32"></a><span class="w">        </span><span class="nt">&quot;Address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;18A7169C1B427D994133F7B3D4504E92789DB37C&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-33" name="__codelineno-24-33" href="#__codelineno-24-33"></a><span class="w">        </span><span class="nt">&quot;PubKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-34" name="__codelineno-24-34" href="#__codelineno-24-34"></a><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tendermint/PubKeyEd25519&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-35" name="__codelineno-24-35" href="#__codelineno-24-35"></a><span class="w">            </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;69gothWTE9FJBZ5gBjjSNhg8y/5SsI1hBaD81Dum7lo=&quot;</span>
+<a id="__codelineno-24-36" name="__codelineno-24-36" href="#__codelineno-24-36"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-24-37" name="__codelineno-24-37" href="#__codelineno-24-37"></a><span class="w">        </span><span class="nt">&quot;VotingPower&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;500000&quot;</span>
+<a id="__codelineno-24-38" name="__codelineno-24-38" href="#__codelineno-24-38"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-39" name="__codelineno-24-39" href="#__codelineno-24-39"></a><span class="p">}</span>
+</code></pre></div>
+<p>If the <code>catching_up</code> value is <code>false</code> in the <code>sync_info</code> section, it means that you are fully synced.</p>
+<p>If it is <code>true</code>, it means your node is still syncing.</p>
+<p><br></p>
+<hr />
+<h2 id="setup-a-wallet">Setup a wallet<a class="headerlink" href="#setup-a-wallet" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Once the node finishes catch-up, you are ready to operate your node for various transactions(tx) and queries.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>💡 By default, the following commands can be applied in the node folder(<code>$HOME</code>) directory.</p>
+</div>
+<p>In order to hold the tokens that you will later delegate to your validator node, or pay staking for your SDS resource node, first, you need to create a local wallet account.</p>
+<p><br></p>
+<h3 id="create-a-new-wallet">Create a new wallet<a class="headerlink" href="#create-a-new-wallet" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>To create a new wallet account, type the following command</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>stchaind<span class="w"> </span>keys<span class="w"> </span>add<span class="w"> </span>&lt;your<span class="w"> </span>wallet<span class="w"> </span>name&gt;<span class="w"> </span>--hd-path<span class="o">=</span><span class="s2">&quot;m/44&#39;/606&#39;/0&#39;/0/0&quot;</span><span class="w"> </span>--keyring-backend<span class="o">=</span>&lt;keyring<span class="err">&#39;</span>s<span class="w"> </span>backend&gt;
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>💡 In the testing phase, the <code>keyring's backend</code> is <code>test</code>, i.e., <code>--keyring-backend=test</code></p>
+<p>Please select a wallet name that you will easily remember. This name will be used all over the places inside other commands later.</p>
+</div>
+<p>After creating a new local wallet account, you will get its <code>address</code> and <code>pubkey</code>.</p>
+<p>In addition, you will have a secret recovery phrase(mnemonic phrase) which can be used to recover an existing wallet account and should be kept secret.</p>
+<p>Example:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="l l-Scalar l-Scalar-Plain">stchaind keys add myWallet --hd-path=&quot;m/44&#39;/606&#39;/0&#39;/0/0&quot; --keyring-backend=test</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="l l-Scalar l-Scalar-Plain">- name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myWallet</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">st1x2c6gy4vr8alsyzuqr2x8x8xxtvs97sk3jt6dp</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="nt">pubkey</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{&quot;@type&quot;:&quot;/stratos.crypto.v1.ethsecp256k1.PubKey&quot;,&quot;key&quot;:&quot;A7HCZTlHEarBPabkOgId5SlyQKdqEsbXJHit7y9LXRy+&quot;}&#39;</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="nt">mnemonic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="err">*</span><span class="nv">*Important</span><span class="err">**</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write this mnemonic phrase in a safe place.</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="l l-Scalar l-Scalar-Plain">It is the only way to recover your account if you ever forget your password.</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a>
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="l l-Scalar l-Scalar-Plain">venue chest pattern tool certain identify adult theme thing public foster promote pave topple thing uncle brisk suffer present popular envelope wrap holiday goddess</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="recover-an-existing-wallet">Recover an existing wallet<a class="headerlink" href="#recover-an-existing-wallet" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>If you already have a Stratos wallet account, you can recover it by typing the following command</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>stchaind<span class="w"> </span>keys<span class="w"> </span>add<span class="w"> </span>&lt;your<span class="w"> </span>wallet<span class="w"> </span>name&gt;<span class="w"> </span>--recover<span class="w"> </span>--hd-path<span class="o">=</span><span class="s2">&quot;m/44&#39;/606&#39;/0&#39;/0/0&quot;</span><span class="w"> </span>--keyring-backend<span class="o">=</span>&lt;keyring<span class="err">&#39;</span>s<span class="w"> </span>backend&gt;<span class="w"> </span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>💡 In the testing phase, <code>--keyring-backend=test</code></p>
+</div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>stchaind<span class="w"> </span>keys<span class="w"> </span>add<span class="w"> </span>myWallet1<span class="w"> </span>--recover<span class="w"> </span>--hd-path<span class="o">=</span><span class="s2">&quot;m/44&#39;/606&#39;/0&#39;/0/0&quot;</span><span class="w"> </span>--keyring-backend<span class="o">=</span><span class="nb">test</span><span class="w">  </span>
+</code></pre></div>
+<p><br></p>
+<p>After the above <code>keys add</code> command executed, a <code>keyring-test</code> folder will be created which contains your wallets' information with their addresses. </p>
+<p>The <code>keyring-test</code> folder looks like</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="l l-Scalar l-Scalar-Plain">.</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="l l-Scalar l-Scalar-Plain">├── 32b1a412ac19fbf8105c00d46398e632d902fa16.address</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="l l-Scalar l-Scalar-Plain">├── d0c57269c450f81234307a33bd148ac4f90549e5.address</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="l l-Scalar l-Scalar-Plain">├── myWallet1.info</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="l l-Scalar l-Scalar-Plain">└── myWallet.info</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="check-your-wallet">Check your wallet<a class="headerlink" href="#check-your-wallet" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>There are two ways to check your local wallets</p>
+<p><br></p>
+<ul>
+<li>Check all local wallet accounts</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>stchaind<span class="w"> </span>keys<span class="w"> </span>list<span class="w"> </span>--keyring-backend<span class="o">=</span>&lt;keyring<span class="err">&#39;</span>s<span class="w"> </span>backend&gt;<span class="w"> </span>
+</code></pre></div>
+<p>Example:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="l l-Scalar l-Scalar-Plain">stchaind keys list --keyring-backend=test</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">- name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user0</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">address</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">st16uzr20lx072gexwjuvg94hz3t8y73u4085s9sw</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">pubkey</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;{&quot;@type&quot;:&quot;/stratos.crypto.v1.ethsecp256k1.PubKey&quot;,&quot;key&quot;:&quot;A/wF15Wd3ogCXstE7S4Zf3DA4KXb0W7exQhP004PLTi3&quot;}&#39;</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="w">     </span><span class="nt">mnemonic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="w w-Error">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user1</span>
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">     </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">     </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">st1dz20dmhjkuc2tur3amgl8t45w807a640leh8p0</span>
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="w">     </span><span class="nt">pubkey</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{&quot;@type&quot;:&quot;/stratos.crypto.v1.ethsecp256k1.PubKey&quot;,&quot;key&quot;:&quot;AgnhB5EkHL8+jD0/zRDR11nIpfOirTRrjgCX6uibhmDW&quot;}&#39;</span>
+<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="w">     </span><span class="nt">mnemonic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user10</span>
+<a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a><span class="w">     </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a><span class="w">     </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">st1lkcrz3ktt2p7ppu9arglpqcn94pcdd9a9pmatf</span>
+<a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a><span class="w">     </span><span class="nt">pubkey</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{&quot;@type&quot;:&quot;/stratos.crypto.v1.ethsecp256k1.PubKey&quot;,&quot;key&quot;:&quot;A2sZ2Z9BU9oDELC06Gj8Lfc5UycxTaPux3sEIq8sIzSW&quot;}&#39;</span>
+<a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a><span class="w">     </span><span class="nt">mnemonic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a><span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user2</span>
+<a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a><span class="w">     </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a><span class="w">     </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">st16czjk2ym0prgvy4gl970t84vrp96s5kayfqmf2</span>
+<a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a><span class="w">     </span><span class="nt">pubkey</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{&quot;@type&quot;:&quot;/stratos.crypto.v1.ethsecp256k1.PubKey&quot;,&quot;key&quot;:&quot;AwfcJTOVWdx6ai61cy8VGJ1SdWHzwm2CCmr/+PwSpFeR&quot;}&#39;</span>
+<a id="__codelineno-31-21" name="__codelineno-31-21" href="#__codelineno-31-21"></a><span class="w">     </span><span class="nt">mnemonic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-31-22" name="__codelineno-31-22" href="#__codelineno-31-22"></a><span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user3</span>
+<a id="__codelineno-31-23" name="__codelineno-31-23" href="#__codelineno-31-23"></a><span class="w">     </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<a id="__codelineno-31-24" name="__codelineno-31-24" href="#__codelineno-31-24"></a><span class="w">     </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">st17patveqxcq42rguc7nayr2g3jtawpzvhfmmumt</span>
+<a id="__codelineno-31-25" name="__codelineno-31-25" href="#__codelineno-31-25"></a><span class="w">     </span><span class="nt">pubkey</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{&quot;@type&quot;:&quot;/stratos.crypto.v1.ethsecp256k1.PubKey&quot;,&quot;key&quot;:&quot;AtFxbuB4s+2SYzImGPIBwe0H0mKCXbIPu1T63OvbgE/3&quot;}&#39;</span>
+<a id="__codelineno-31-26" name="__codelineno-31-26" href="#__codelineno-31-26"></a><span class="w">     </span><span class="nt">mnemonic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+</code></pre></div>
+<p><br></p>
+<ul>
+<li>Check a specific local wallet account</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>stchaind<span class="w"> </span>keys<span class="w"> </span>show<span class="w"> </span>&lt;your<span class="w"> </span>wallet<span class="w"> </span>name&gt;<span class="w"> </span>--keyring-backend<span class="o">=</span>&lt;keyring<span class="err">&#39;</span>s<span class="w"> </span>backend&gt;<span class="w"> </span>
+</code></pre></div>
+<p>Example:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="l l-Scalar l-Scalar-Plain">stchaind keys show myWallet1 --keyring-backend=test</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">- name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myWallet1</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">address</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">st16rzhy6wy2rupydps0gem69y2cnus2j09n42ksx</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">pubkey</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;{&quot;@type&quot;:&quot;/stratos.crypto.v1.ethsecp256k1.PubKey&quot;,&quot;key&quot;:&quot;A13YKi3/7p9FsFPTfVgxEO0YK8bnDHmBPfA3ID+k37ET&quot;}&#39;</span>
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="w">     </span><span class="nt">mnemonic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="faucet">Faucet<a class="headerlink" href="#faucet" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Faucet will be available at <em>faucet-tropos.thestratos.org</em> to get test tokens into your wallet.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>curl<span class="w"> </span>--header<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span>--request<span class="w"> </span>POST<span class="w"> </span>--data<span class="w"> </span><span class="s1">&#39;{&quot;denom&quot;:&quot;stos&quot;,&quot;address&quot;:&quot;your wallet address&quot;} &#39;</span><span class="w"> </span>https://faucet-tropos.thestratos.org/credit
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Replace "your wallet address" with your st1xx wallet address</p>
+<p>💡1stos = 1,000,000,000gwei = 1,000,000,000,000,000,000wei</p>
+</div>
+<p><br></p>
+<ul>
+<li>Check wallet account balance</li>
+</ul>
+<p>You can query your account info using this command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>stchaind<span class="w"> </span>query<span class="w"> </span>account<span class="w"> </span>&lt;your<span class="w"> </span>wallet<span class="w"> </span>address&gt;
+</code></pre></div>
+<p>Example:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="l l-Scalar l-Scalar-Plain">stchaind query account st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="l l-Scalar l-Scalar-Plain">|</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="l l-Scalar l-Scalar-Plain">&#39;@type&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/cosmos.auth.v1beta1.BaseAccount</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="nt">account_number</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span>
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx</span>
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="nt">pub_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="nt">sequence</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0&quot;</span>
+</code></pre></div>
+<p><br></p>
+<p>You can query your wallet balances using this command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>stchaind<span class="w"> </span>query<span class="w"> </span>bank<span class="w"> </span>balances<span class="w"> </span>&lt;your<span class="w"> </span>wallet<span class="w"> </span>address&gt;
+</code></pre></div>
+<p>Example:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="l l-Scalar l-Scalar-Plain">stchaind query bank balances st1d3qtsjyypa639q9kf0wmuf2dn4a7zrnujw84q4</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="l l-Scalar l-Scalar-Plain">|</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="l l-Scalar l-Scalar-Plain">balances</span><span class="p p-Indicator">:</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">amount</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;200&quot;</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="w">  </span><span class="nt">denom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">utros</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">amount</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;9998000000000000000&quot;</span>
+<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="w">  </span><span class="nt">denom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wei</span>
+<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="nt">pagination</span><span class="p">:</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="nt">next_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="nt">total</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0</span>
+</code></pre></div>
+<p><br></p>
+<ul>
+<li>Try your first tx - <code>send</code></li>
+</ul>
+<p>This tx command will send an amount of tokens from one wallet address to another:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>stchaind<span class="w"> </span>tx<span class="w"> </span>bank<span class="w"> </span>send<span class="w"> </span>&lt;from<span class="w"> </span>address&gt;<span class="w"> </span>&lt;to<span class="w"> </span>address&gt;<span class="w"> </span>&lt;amount&gt;<span class="w"> </span>--keyring-backend<span class="o">=</span>&lt;keyring<span class="err">&#39;</span>s<span class="w"> </span>backend&gt;<span class="w"> </span>--chain-id<span class="o">=</span>&lt;current<span class="w"> </span>chain-id&gt;<span class="w"> </span>--gas<span class="o">=</span>auto<span class="w"> </span>--gas-prices<span class="o">=</span>1000000000wei
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>The current <code>chain-id</code> can be found on the <a href="https://explorer-tropos.thestratos.org/"><code>Stratos Explorer</code></a> right next to the search bar at the top of the page.</li>
+<li>In the testing phase, <code>--keyring-backend=test</code></li>
+<li>Make sure your <code>&lt;from address&gt;</code> has enough tokens</li>
+<li>Please wait for around 7 seconds for block generation after a transaction.</li>
+</ul>
+</div>
+<p>Example:</p>
+<p>Let us assume:</p>
+<ul>
+<li><code>from address</code>: st1dz20dmhjkuc2tur3amgl8t45w807a640leh8p0</li>
+<li><code>to address</code>: st123wun5lnwerdrt0mk2uxtusgawpfr228a0sseg</li>
+<li><code>amount</code>: 10stos</li>
+</ul>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="l l-Scalar l-Scalar-Plain">stchaind tx bank send st1dz20dmhjkuc2tur3amgl8t45w807a640leh8p0 st123wun5lnwerdrt0mk2uxtusgawpfr228a0sseg 10stos --chain-id=tropos-5  --keyring-backend=test --gas=100000 --gas-prices=1000000000wei -y</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="l l-Scalar l-Scalar-Plain">code</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="nt">codespace</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="nt">data</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="nt">events</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a><span class="nt">gas_used</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0&quot;</span>
+<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a><span class="nt">gas_wanted</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0&quot;</span>
+<a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a><span class="nt">height</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0&quot;</span>
+<a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a><span class="nt">info</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a><span class="nt">logs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a><span class="nt">raw_log</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;[]&#39;</span>
+<a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a><span class="nt">timestamp</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-40-13" name="__codelineno-40-13" href="#__codelineno-40-13"></a><span class="nt">tx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<a id="__codelineno-40-14" name="__codelineno-40-14" href="#__codelineno-40-14"></a><span class="nt">txhash</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BA96CF87646592487ABB9DDDE8FA86FE71441226281B04E15C5C66EDE415FBC6</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<p><br></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <p> &copy; 2021-<script>document.write(new Date().getFullYear())</script> Stratos Network</p>
+    </div>
+  
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://thestratos.org" target="_blank" rel="noopener" title="thestratos.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M0 256c0-46.6 12.47-90.4 34.27-128.9L144.1 318.3C166 357.5 207.9 384 256 384c14.3 0 27.1-2.3 40.8-6.6l-76.3 132.2C95.9 492.3 0 385.3 0 256zm365.1 65.6c12.3-19.2 18.9-42.5 18.9-65.6 0-38.2-16.8-72.5-43.3-96h152.7c12 29.6 18.6 62.1 18.6 96 0 141.4-114.6 255.1-256 256l109.1-190.4zM477.8 128H256c-62.9 0-113.7 44.1-125.5 102.7L54.19 98.47C101 38.53 174 0 256 0c94.8 0 177.5 51.48 221.8 128zM168 256c0-48.6 39.4-88 88-88s88 39.4 88 88-39.4 88-88 88-88-39.4-88-88z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://t.me/StratosCommunity" target="_blank" rel="noopener" title="t.me" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M248 8C111.033 8 0 119.033 0 256s111.033 248 248 248 248-111.033 248-248S384.967 8 248 8Zm114.952 168.66c-3.732 39.215-19.881 134.378-28.1 178.3-3.476 18.584-10.322 24.816-16.948 25.425-14.4 1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25 5.342-39.5 3.652-3.793 67.107-61.51 68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608 69.142-14.845 10.194-26.894 9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7 18.45-13.7 108.446-47.248 144.628-62.3c68.872-28.647 83.183-33.623 92.511-33.789 2.052-.034 6.639.474 9.61 2.885a10.452 10.452 0 0 1 3.53 6.716 43.765 43.765 0 0 1 .417 9.769Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.com/invite/tpQGpC2nMh" target="_blank" rel="noopener" title="discord.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/Stratos_Network" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://stratos-network.medium.com/" target="_blank" rel="noopener" title="stratos-network.medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M180.5 74.262C80.813 74.262 0 155.633 0 256s80.819 181.738 180.5 181.738S361 356.373 361 256 280.191 74.262 180.5 74.262Zm288.25 10.646c-49.845 0-90.245 76.619-90.245 171.095s40.406 171.1 90.251 171.1 90.251-76.619 90.251-171.1H559c0-94.503-40.4-171.095-90.248-171.095Zm139.506 17.821c-17.526 0-31.735 68.628-31.735 153.274s14.2 153.274 31.735 153.274S640 340.631 640 256c0-84.649-14.215-153.271-31.742-153.271Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/stratosnet" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "search.suggest", "search.share", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../js/extra.js"></script>
+        
+      
+        
+          <script src="../../js/mathjax.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+    
+  </body>
+</html>
