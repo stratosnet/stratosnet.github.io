@@ -13,16 +13,17 @@ Cosmos SDK gRPC definitions have been documented [here](https://crypto.org/docs/
 
 ### gRPC Gateway
 
-| Method Name              | Request Type                                                                    | Response Type                                                                                                                                                                                                                                                                                                               | Description                                                               |
-|--------------------------|---------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| ResourceNode             | QueryResourceNodeRequest <br>fields:{"network_addr":string}                     | QueryResourceNodeResponse <br>fields:{"node":ResourceNode}                                                                                                                                                                                                                                                                  | Get info of a registered resource node                                    |
-| MetaNode                 | QueryMetaNodeRequest <br>fields:{"network_addr":string}                         | QueryMetaNodeResponse <br>fields:{"node":MetaNode}                                                                                                                                                                                                                                                                          | Get info of a registered meta node                                        |
-| Params                   | QueryParamsRequest <br>fields:{}                                                | QueryParamsResponse <br>fields:{"params":Params}                                                                                                                                                                                                                                                                            | Get params of Register Module                                             |
-| DepositByNode            | QueryDepositByNodeRequest <br>fields:{"network_addr":string, query_type:uint32} | QueryDepositByNodeResponse <br>fields:{"deposit_info":DepositInfo }                                                                                                                                                                                                                                                         | Get deposit info of a specific node                                       |                                  
-| DepositByOwner           | QueryDepositByOwnerRequest <br>fields:{"owner_addr":string}                     | QueryDepositByOwnerResponse <br>fields:{"deposit_infos":[]DepositInfo, <br>"pagination": cosmos.base.query.v1beta1.PageResponse }                                                                                                                                                                                           | Get all deposit info of a specific owner                                  |
-| DepositTotal             | QueryDepositTotalRequest <br>fields:{}                                          | QueryDepositTotalResponse <br>fields:{"resource_nodes_total_deposit":cosmos.base.v1beta1.Coin, <br>"meta_nodes_total_deposit":cosmos.base.v1beta1.Coin, <br>"total_bonded_deposit":cosmos.base.v1beta1.Coin, <br>"total_unbonded_deposit":cosmos.base.v1beta1.Coin, <br>"total_unbonding_deposit":cosmos.base.v1beta1.Coin} | Query total deposit state of all registered resource nodes and meta nodes |
-| BondedResourceNodeCount  | QueryBondedResourceNodeCountRequest <br>fields:{}                               | QueryBondedResourceNodeCountResponse <br>fields:{"number": uint64}                                                                                                                                                                                                                                                          | Get params of Register Module                                             |
-| BondedMetaNodeCount      | QueryBondedMetaNodeCountRequest <br>fields:{}                                   | QueryBondedMetaNodeCountResponse <br>fields:{"number": uint64}                                                                                                                                                                                                                                                              | Get params of Register Module                                             |
+| Method Name             | Request Type                                                                    | Response Type                                                                                                                                                                                                                                                                                                               | Description                                                               |
+|-------------------------|---------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| ResourceNode            | QueryResourceNodeRequest <br>fields:{"network_addr":string}                     | QueryResourceNodeResponse <br>fields:{"node":ResourceNode}                                                                                                                                                                                                                                                                  | Get info of a registered resource node                                    |
+| MetaNode                | QueryMetaNodeRequest <br>fields:{"network_addr":string}                         | QueryMetaNodeResponse <br>fields:{"node":MetaNode}                                                                                                                                                                                                                                                                          | Get info of a registered meta node                                        |
+| Params                  | QueryParamsRequest <br>fields:{}                                                | QueryParamsResponse <br>fields:{"params":Params}                                                                                                                                                                                                                                                                            | Get params of Register Module                                             |
+| DepositByNode           | QueryDepositByNodeRequest <br>fields:{"network_addr":string, query_type:uint32} | QueryDepositByNodeResponse <br>fields:{"deposit_info":DepositInfo }                                                                                                                                                                                                                                                         | Get deposit info of a specific node                                       |                                  
+| DepositByOwner          | QueryDepositByOwnerRequest <br>fields:{"owner_addr":string}                     | QueryDepositByOwnerResponse <br>fields:{"deposit_infos":[]DepositInfo, <br>"pagination": cosmos.base.query.v1beta1.PageResponse }                                                                                                                                                                                           | Get all deposit info of a specific owner                                  |
+| DepositTotal            | QueryDepositTotalRequest <br>fields:{}                                          | QueryDepositTotalResponse <br>fields:{"resource_nodes_total_deposit":cosmos.base.v1beta1.Coin, <br>"meta_nodes_total_deposit":cosmos.base.v1beta1.Coin, <br>"total_bonded_deposit":cosmos.base.v1beta1.Coin, <br>"total_unbonded_deposit":cosmos.base.v1beta1.Coin, <br>"total_unbonding_deposit":cosmos.base.v1beta1.Coin} | Query total deposit state of all registered resource nodes and meta nodes |
+| BondedResourceNodeCount | QueryBondedResourceNodeCountRequest <br>fields:{}                               | QueryBondedResourceNodeCountResponse <br>fields:{"number": uint64}                                                                                                                                                                                                                                                          | Get params of Register Module                                             |
+| BondedMetaNodeCount     | QueryBondedMetaNodeCountRequest <br>fields:{}                                   | QueryBondedMetaNodeCountResponse <br>fields:{"number": uint64}                                                                                                                                                                                                                                                              | Get params of Register Module                                             |
+| RemainingOzoneLimit     | QueryRemainingOzoneLimitRequest <br>fields:{}                                   | QueryRemainingOzoneLimitResponse <br>fields:{"ozone_limit": string}                                                                                                                                                                                                                                                         |                                                                           |
 
 <br>
 
@@ -30,17 +31,19 @@ Cosmos SDK gRPC definitions have been documented [here](https://crypto.org/docs/
 
 ResourceNode:
 
-| Field           | Type                              | Label |
-|-----------------|-----------------------------------|-------|
-| network_address | string                            |       |
-| pubkey          | google.protobuf.Any               |       |
-| suspend         | bool                              |       |
-| status          | cosmos.staking.v1beta1.BondStatus |       |
-| tokens          | string                            |       |
-| owner_address   | string                            |       |
-| description     | Description                       |       |
-| creation_time   | google.protobuf.Timestamp         |       |
-| node_type       | uint32                            |       |
+| Field               | Type                              | Label |
+|---------------------|-----------------------------------|-------|
+| network_address     | string                            |       |
+| pubkey              | google.protobuf.Any               |       |
+| suspend             | bool                              |       |
+| status              | cosmos.staking.v1beta1.BondStatus |       |
+| tokens              | string                            |       |
+| owner_address       | string                            |       |
+| description         | Description                       |       |
+| creation_time       | google.protobuf.Timestamp         |       |
+| node_type           | uint32                            |       |
+| effective_tokens    | string                            |       |
+| beneficiary_address | string                            |       |
 
 <br>
 
@@ -48,16 +51,17 @@ ResourceNode:
 
 MetaNode:
 
-| Field           | Type                              | Label |
-|-----------------|-----------------------------------|-------|
-| network_address | string                            |       |
-| pubkey          | google.protobuf.Any               |       |
-| suspend         | bool                              |       |
-| status          | cosmos.staking.v1beta1.BondStatus |       |
-| tokens          | string                            |       |
-| owner_address   | string                            |       |
-| description     | Description                       |       |
-| creation_time   | google.protobuf.Timestamp         |       |
+| Field               | Type                              | Label |
+|---------------------|-----------------------------------|-------|
+| network_address     | string                            |       |
+| pubkey              | google.protobuf.Any               |       |
+| suspend             | bool                              |       |
+| status              | cosmos.staking.v1beta1.BondStatus |       |
+| tokens              | string                            |       |
+| owner_address       | string                            |       |
+| description         | Description                       |       |
+| creation_time       | google.protobuf.Timestamp         |       |
+| beneficiary_address | string                            |       |
 
 <br>
 
@@ -85,6 +89,9 @@ Params:
 | unbonding_threashold_time | google.protobuf.Duration |       |
 | unbonding_completion_time | google.protobuf.Duration |       |
 | max_entries               | uint32                   |       |
+| resource_node_reg_enabled | bool                     |       |
+| resource_node_min_deposit | cosmos.base.v1beta1.Coin |       |
+| voting_period             | google.protobuf.Duration |       |
 
 <br>
 
@@ -130,6 +137,7 @@ stratos.register.v1.Query.DepositByOwner
 stratos.register.v1.Query.DepositTotal
 stratos.register.v1.Query.BondedResourceNodeCount
 stratos.register.v1.Query.BondedMetaNodeCount
+stratos.register.v1.Query.RemainingOzoneLimit
 
 ```
 
@@ -142,28 +150,35 @@ Get info of a registered resource node
 Request:
 
 ```
-grpcurl -plaintext -d '{"network_addr":"stsds1xg2jzku8gptq6sjpjd9zus8qec7a39phcj8md9"}' 127.0.0.1:9090 stratos.register.v1.Query.ResourceNode
+grpcurl -plaintext -d '{"network_addr":"stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv"}' 127.0.0.1:9090 stratos.register.v1.Query.ResourceNode
 ```
 
 Response:
 
 ```json
 {
- "node": {
-  "networkAddress": "stsds1xg2jzku8gptq6sjpjd9zus8qec7a39phcj8md9",
-  "pubkey": {
-   "@type": "/cosmos.crypto.ed25519.PubKey",
-   "key": "JZhVcpSQU7rXzlaiqjpSW4u2n6lE/Q+xHG2GFaUkFkA="
-  },
-  "status": "BOND_STATUS_BONDED",
-  "tokens": "2000000000000000000",
-  "ownerAddress": "st1vvysda6ylqz2adauqg4djsz4rx6hv6mqv9fepp",
-  "description": {
-   "moniker": "stsds1xg2jzku8gptq6sjpjd9zus8qec7a39phcj8md9"
-  },
-  "creationTime": "2023-01-14T00:28:21.819038836Z",
-  "nodeType": 4
- }
+  "node": {
+    "network_address": "stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv",
+    "pubkey": {
+      "@type": "/cosmos.crypto.ed25519.PubKey",
+      "key": "2OAeLO0+KrBkSxuFKU1ofJqGb4RtA8GpD8XCZlMYw2A="
+    },
+    "suspend": true,
+    "status": "BOND_STATUS_BONDED",
+    "tokens": "1000000000000000000",
+    "owner_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+    "description": {
+      "moniker": "resource-node0",
+      "identity": "",
+      "website": "",
+      "security_contact": "",
+      "details": ""
+    },
+    "creation_time": "2024-03-08T19:18:51.591341919Z",
+    "node_type": 4,
+    "effective_tokens": "0",
+    "beneficiary_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+  }
 }
 ```
 
@@ -184,20 +199,26 @@ Response:
 
 ```json
 {
- "node": {
-  "networkAddress": "stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64",
-  "pubkey": {
-   "@type": "/cosmos.crypto.ed25519.PubKey",
-   "key": "ltODy8zL5IjJwCutlIexqlBb3GH0+aHZOrpT7f/aKnQ="
-  },
-  "status": "BOND_STATUS_BONDED",
-  "tokens": "100000000000000000000",
-  "ownerAddress": "st1a8ngk4tjvuxneyuvyuy9nvgehkpfa38hm8mp3x",
-  "description": {
-   "moniker": "snode://stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64@127.0.0.1:8888"
-  },
-  "creationTime": "0001-01-01T00:00:00Z"
- }
+  "node": {
+    "network_address": "stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64",
+    "pubkey": {
+      "@type": "/cosmos.crypto.ed25519.PubKey",
+      "key": "ltODy8zL5IjJwCutlIexqlBb3GH0+aHZOrpT7f/aKnQ="
+    },
+    "suspend": false,
+    "status": "BOND_STATUS_BONDED",
+    "tokens": "100000000000000000000",
+    "owner_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+    "description": {
+      "moniker": "snode://stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64@127.0.0.1:8888",
+      "identity": "",
+      "website": "",
+      "security_contact": "",
+      "details": ""
+    },
+    "creation_time": "0001-01-01T00:00:00Z",
+    "beneficiary_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+  }
 }
 ```
 
@@ -218,13 +239,18 @@ Response:
 
 ```json
 {
- "params": {
-  "bondDenom": "wei",
-  "unbondingThreasholdTime": "15552000s",
-  "unbondingCompletionTime": "1209600s",
-  "maxEntries": 16,
-  "resourceNodeRegEnabled": true
- }
+  "params": {
+    "bond_denom": "wei",
+    "unbonding_threashold_time": "15552000s",
+    "unbonding_completion_time": "1209600s",
+    "max_entries": 16,
+    "resource_node_reg_enabled": true,
+    "resource_node_min_deposit": {
+      "denom": "wei",
+      "amount": "1000000000000000000"
+    },
+    "voting_period": "604800s"
+  }
 }
 ```
 
@@ -238,7 +264,7 @@ Get deposit info of a specific node
 Request:
 
 ```
-grpcurl -plaintext -d '{"network_addr":"stsds12xeswat6yy3dg9e3q3ekl6dlnld4g9yhjz70c4","query_type": 1 }' 127.0.0.1:9090 stratos.register.v1.Query.DepositByNode
+grpcurl -plaintext -d '{"network_addr":"stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv","query_type": 0 }' 127.0.0.1:9090 stratos.register.v1.Query.DepositByNode
 ```
 
 Response:
@@ -246,30 +272,27 @@ Response:
 ```json
 {
   "deposit_info": {
-    "network_address": "stsds12xeswat6yy3dg9e3q3ekl6dlnld4g9yhjz70c4",
+    "network_address": "stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv",
     "pubkey": {
-      "type_url": "/cosmos.crypto.ed25519.PubKey",
-      "value": "CiD+uMRSnq9prSATpE8XPvAh9FM6xaQWri1mg1vihC7Feg=="
+      "@type": "/cosmos.crypto.ed25519.PubKey",
+      "key": "2OAeLO0+KrBkSxuFKU1ofJqGb4RtA8GpD8XCZlMYw2A="
     },
-    "suspend": false,
+    "suspend": true,
     "status": "BOND_STATUS_BONDED",
-    "tokens": "2000000000000000000000000",
-    "owner_address": "st19n4aa9gvjms5ax0zzrgzhpsdgg8hfy7p4m43xd",
+    "tokens": "1000000000000000000",
+    "owner_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
     "description": {
-      "moniker": "stratos-foundation",
+      "moniker": "resource-node0",
       "identity": "",
       "website": "",
       "security_contact": "",
       "details": ""
     },
-    "creation_time": {
-      "seconds": "-62135596800",
-      "nanos": 0
-    },
-    "node_type": 0,
+    "creation_time": "2024-03-08T19:18:51.591341919Z",
+    "node_type": 4,
     "bonded_deposit": {
       "denom": "wei",
-      "amount": "2000000000000000000000000"
+      "amount": "1000000000000000000"
     },
     "un_bonding_deposit": {
       "denom": "wei",
@@ -293,7 +316,7 @@ Get all deposit info of a specific owner
 Request:
 
 ```
-grpcurl -plaintext -d '{"owner_addr":"st19n4aa9gvjms5ax0zzrgzhpsdgg8hfy7p4m43xd", "pagination": {"limit":20}}' 127.0.0.1:9090 stratos.register.v1.Query.DepositByOwner
+grpcurl -plaintext -d '{"owner_addr":"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m", "pagination": {"limit":20}}' 127.0.0.1:9090 stratos.register.v1.Query.DepositByOwner
 ```
 
 Response:
@@ -302,30 +325,59 @@ Response:
 {
   "deposit_infos": [
     {
-      "network_address": "stsds12xeswat6yy3dg9e3q3ekl6dlnld4g9yhjz70c4",
+      "network_address": "stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv",
       "pubkey": {
-        "type_url": "/cosmos.crypto.ed25519.PubKey",
-        "value": "CiD+uMRSnq9prSATpE8XPvAh9FM6xaQWri1mg1vihC7Feg=="
+        "@type": "/cosmos.crypto.ed25519.PubKey",
+        "key": "2OAeLO0+KrBkSxuFKU1ofJqGb4RtA8GpD8XCZlMYw2A="
       },
-      "suspend": false,
+      "suspend": true,
       "status": "BOND_STATUS_BONDED",
-      "tokens": "2000000000000000000000000",
-      "owner_address": "st19n4aa9gvjms5ax0zzrgzhpsdgg8hfy7p4m43xd",
+      "tokens": "1000000000000000000",
+      "owner_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
       "description": {
-        "moniker": "stratos-foundation",
+        "moniker": "resource-node0",
         "identity": "",
         "website": "",
         "security_contact": "",
         "details": ""
       },
-      "creation_time": {
-        "seconds": "-62135596800",
-        "nanos": 0
+      "creation_time": "2024-03-08T19:18:51.591341919Z",
+      "node_type": 4,
+      "bonded_deposit": {
+        "denom": "wei",
+        "amount": "1000000000000000000"
       },
+      "un_bonding_deposit": {
+        "denom": "wei",
+        "amount": "0"
+      },
+      "un_bonded_deposit": {
+        "denom": "wei",
+        "amount": "0"
+      }
+    },
+    {
+      "network_address": "stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64",
+      "pubkey": {
+        "@type": "/cosmos.crypto.ed25519.PubKey",
+        "key": "ltODy8zL5IjJwCutlIexqlBb3GH0+aHZOrpT7f/aKnQ="
+      },
+      "suspend": false,
+      "status": "BOND_STATUS_BONDED",
+      "tokens": "100000000000000000000",
+      "owner_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+      "description": {
+        "moniker": "snode://stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64@127.0.0.1:8888",
+        "identity": "",
+        "website": "",
+        "security_contact": "",
+        "details": ""
+      },
+      "creation_time": "0001-01-01T00:00:00Z",
       "node_type": 0,
       "bonded_deposit": {
         "denom": "wei",
-        "amount": "2000000000000000000000000"
+        "amount": "100000000000000000000"
       },
       "un_bonding_deposit": {
         "denom": "wei",
@@ -338,8 +390,8 @@ Response:
     }
   ],
   "pagination": {
-    "next_key": "",
-    "total": "1"
+    "next_key": null,
+    "total": "2"
   }
 }
 ```
@@ -363,15 +415,15 @@ Response:
 {
   "resource_nodes_total_deposit": {
     "denom": "wei",
-    "amount": "26003000000000000000000"
+    "amount": "1000000000000000000"
   },
   "meta_nodes_total_deposit": {
     "denom": "wei",
-    "amount": "8000000000000000000000000"
+    "amount": "400000000000000000000"
   },
   "total_bonded_deposit": {
     "denom": "wei",
-    "amount": "8026003000000000000000000"
+    "amount": "401000000000000000000"
   },
   "total_unbonded_deposit": {
     "denom": "wei",
@@ -429,19 +481,40 @@ Response:
 <br>
 
 
+### - RemainingOzoneLimit
+
+Queries the current remaining ozone limit
+
+Request:
+
+```
+grpcurl -plaintext 127.0.0.1:9090 stratos.register.v1.Query.RemainingOzoneLimit
+```
+
+Response:
+
+```json
+{
+  "ozone_limit": "400000000000000"
+}
+```
+
+<br>
+
+
 ---
 
 ## SDS Module
 
 ### gRPC Gateway
 
-| Method Name | Request Type                                                           | Response Type                                                         | Description                                                                 |
-|-------------|------------------------------------------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| Fileupload  | QueryFileUploadRequest <br>fields:{"file_hash":string}                 | QueryFileUploadResponse <br>fields:{"file_info":FileInfo}             | Query uploaded file info by hash                                            |
-| SimPrepay   | QuerySimPrepayRequest <br>fields:{"amount":[]cosmos.base.v1beta1.Coin} | QuerySimPrepayResponse <br>fields:{"noz":string}                      | Simulate prepay to query the noz that can be purchased at the current price |
-| NozPrice    | QueryNozPriceRequest <br>fields:{}                                     | QueryNozPriceResponse <br>fields:{"price":string}                     | Query the current price of noz                                              |
-| NozSupply   | QueryNozSupplyRequest <br>fields:{}                                    | QueryNozSupplyResponse <br>fields:{"remaining":string,"total":string} | Query noz supply                                                            |
-| Params      | QueryParamsRequest <br>fields:{}                                       | QueryParamsResponse <br>fields:{"params":Params}                      | Get params of SDS Module                                                    |
+| Method Name | Request Type                                           | Response Type                                                         | Description                                                                 |
+|-------------|--------------------------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| Fileupload  | QueryFileUploadRequest <br>fields:{"file_hash":string} | QueryFileUploadResponse <br>fields:{"file_info":FileInfo}             | Query uploaded file info by hash                                            |
+| SimPrepay   | QuerySimPrepayRequest <br>fields:{"amount":string}     | QuerySimPrepayResponse <br>fields:{"noz":string}                      | Simulate prepay to query the noz that can be purchased at the current price |
+| NozPrice    | QueryNozPriceRequest <br>fields:{}                     | QueryNozPriceResponse <br>fields:{"price":string}                     | Query the current price of noz                                              |
+| NozSupply   | QueryNozSupplyRequest <br>fields:{}                    | QueryNozSupplyResponse <br>fields:{"remaining":string,"total":string} | Query noz supply                                                            |
+| Params      | QueryParamsRequest <br>fields:{}                       | QueryParamsResponse <br>fields:{"params":Params}                      | Get params of SDS Module                                                    |
 
 FileInfo:
 
@@ -513,14 +586,14 @@ Simulate prepay to query the noz that can be purchased at the current price
 Request:
 
 ```
- grpcurl -plaintext -d '{"amount":[{"amount":"100000000000","denom":"wei"}]}' 127.0.0.1:9090 stratos.sds.v1.Query.SimPrepay
+ grpcurl -plaintext -d '{"amount":"1stos"}' 127.0.0.1:9090 stratos.sds.v1.Query.SimPrepay
 ```
 
 Response:
 
 ```json
 {
-    "noz": "98736"
+  "noz": "949522847536"
 }
 ```
 
@@ -599,15 +672,16 @@ Response:
 
 ### gRPC Gateway
 
-| Method Name       | Request Type                                                                                                                         | Response Type	                                                                                                                    | Description                    |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| VolumeReport      | QueryVolumeReportRequest <br>fields:{"epoch":int64}                                                                                  | QueryVolumeReportResponse <br>fields:{"report_info":ReportInfo,"height":int64 }                                                   | Get pot volume report by epoch |
-| RewardsByEpoch    | QueryRewardsByEpochRequest <br>fields:{"epoch":int64,"wallet_address":string,<br>pagination":cosmos.base.query.v1beta1.PageResponse} | QueryRewardsByEpochResponse <br>fields:{"rewards":[]Reward,"height":int64,<br>"pagination":cosmos.base.query.v1beta1.PageRequest} | Query pot reward by epoch      |
-| RewardsByOwner    | QueryRewardsByOwnerRequest <br>fields:{"wallet_address":string}                                                                      | QueryRewardsByOwnerResponse <br>fields:{"rewards":RewardByOwner,"height":int64}                                                   | Get pot reward by owner        |
-| SlashingByOwner   | QuerySlashingByOwnerRequest <br>fields:{"wallet_address":string}                                                                     | QuerySlashingByOwnerResponse <br>fields:{"slashing":string,"height":int64}                                                        | Get pot slashing by owner      |
-| Params            | QueryParamsRequest <br>fields:{}                                                                                                     | QueryParamsResponse <br>fields:{"params":Params}                                                                                  | Get params of POT Module       |
-| TotalMinedToken   | QueryTotalMinedTokenRequest <br>fields:{}                                                                                            | QueryTotalMinedTokenResponse <br>fields:{"total_mined_token": cosmos.base.v1beta1.Coin}                                           | Get total mined token          |
-| CirculationSupply | QueryCirculationSupplyRequest <br>fields:{}                                                                                          | QueryCirculationSupplyResponse <br>fields:{"circulation_supply":[]cosmos.base.v1beta1.Coin}                                       | Get circulation supply         |
+| Method Name             | Request Type                                                                                                                                      | Response Type	                                                                                                               | Description                                     |
+|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| VolumeReport            | QueryVolumeReportRequest <br>fields:{"epoch":int64}                                                                                               | QueryVolumeReportResponse <br>fields:{"report_info":ReportInfo }                                                             | Get pot volume report by epoch                  |
+| RewardsByEpoch          | QueryRewardsByEpochRequest <br>fields:{"epoch":int64,<br>"pagination":cosmos.base.query.v1beta1.PageRequest}                                      | QueryRewardsByEpochResponse <br>fields:{"rewards":[]Reward,<br>"pagination":cosmos.base.query.v1beta1.PageResponse}          | Query pot reward by epoch                       |
+| RewardsByWallet         | QueryRewardsByWalletRequest <br>fields:{"wallet_address":string}                                                                                  | QueryRewardsByWalletResponse <br>fields:{"rewards":RewardByWallet}                                                           | Get pot reward by beneficiary address           |
+| RewardsByWalletAndEpoch | QueryRewardsByWalletAndEpochRequest <br>fields:{"wallet_address":string,<br>"epoch":int64,<br>"pagination":cosmos.base.query.v1beta1.PageRequest} | QueryRewardsByWalletAndEpochResponse <br>fields:{"rewards":[]Reward,<br>"pagination":cosmos.base.query.v1beta1.PageResponse} | Get pot reward by beneficiary address and epoch |
+| SlashingByOwner         | QuerySlashingByOwnerRequest <br>fields:{"wallet_address":string}                                                                                  | QuerySlashingByOwnerResponse <br>fields:{"slashing":string}                                                                  | Get pot slashing by owner                       |
+| Params                  | QueryParamsRequest <br>fields:{}                                                                                                                  | QueryParamsResponse <br>fields:{"params":Params}                                                                             | Get params of POT Module                        |
+| TotalMinedToken         | QueryTotalMinedTokenRequest <br>fields:{}                                                                                                         | QueryTotalMinedTokenResponse <br>fields:{"total_mined_token": cosmos.base.v1beta1.Coin}                                      | Get total mined token                           |
+| CirculationSupply       | QueryCirculationSupplyRequest <br>fields:{}                                                                                                       | QueryCirculationSupplyResponse <br>fields:{"circulation_supply":[]cosmos.base.v1beta1.Coin}                                  | Get circulation supply                          |
 
 
 ReportInfo:
@@ -627,7 +701,7 @@ Reward:
 | reward_from_mining_pool  | cosmos.base.v1beta1.Coin  | repeated  |
 | reward_from_traffic_pool | cosmos.base.v1beta1.Coin  | repeated  |
 
-RewardByOwner:
+RewardByWallet:
 
 | Field                 | Type                     | Label    |
 |-----------------------|--------------------------|----------|
@@ -673,7 +747,8 @@ Response:
 ``` { .yaml .no-copy }
 stratos.pot.v1.Query.VolumeReport
 stratos.pot.v1.Query.RewardsByEpoch
-stratos.pot.v1.Query.RewardsByOwner
+stratos.pot.v1.Query.RewardsByWallet
+stratos.pot.v1.Query.RewardsByWalletAndEpoch
 stratos.pot.v1.Query.SlashingByOwner
 stratos.pot.v1.Query.Params
 stratos.pot.v1.Query.TotalMinedToken
@@ -690,7 +765,7 @@ Get pot volume report by epoch
 Request:
 
 ```
-grpcurl -plaintext -d '{"epoch": 2 }' 127.0.0.1:9090 stratos.pot.v1.Query.VolumeReport
+grpcurl -plaintext -d '{"epoch": 1 }' 127.0.0.1:9090 stratos.pot.v1.Query.VolumeReport
 ```
 
 Response:
@@ -698,12 +773,11 @@ Response:
 ```json
 {
   "report_info": {
-    "epoch": "2",
-    "reference": "volume_report_stsds12s8q4hhh0tnvrqfd4u4dn988lfewfsmzn2wp36_2",
-    "tx_hash": "7DBECF6582285983B25999BB0D3B8FFBADE0468543DFBF5BF7961162DB0129A9",
-    "reporter": "stsds12s8q4hhh0tnvrqfd4u4dn988lfewfsmzn2wp36"
-  },
-  "height": "18519"
+    "epoch": "1",
+    "reference": "100A1FC0B82DD3B0353B59E90388EEA2B73DEECA872955B414EBC99ECD3E3C1F",
+    "tx_hash": "7F51147DB44185A1A4DC572EC0C69DEA6E9495DDCDF27CD46CA27935D4B93943",
+    "reporter": "stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64"
+  }
 }
 ```
 
@@ -717,7 +791,7 @@ Query pot reward by epoch
 Request:
 
 ```
-grpcurl -plaintext -d '{"epoch": 2, "wallet_address": "st18jxmc78ws5wq7q7umr6plpz8x0d9qtzu98v8em" }' 127.0.0.1:9090 stratos.pot.v1.Query.RewardsByEpoch
+grpcurl -plaintext -d '{"epoch": 1}' 127.0.0.1:9090 stratos.pot.v1.Query.RewardsByEpoch
 ```
 
 Response:
@@ -726,24 +800,38 @@ Response:
 {
   "rewards": [
     {
+      "wallet_address": "st1rwnmgk0x2n2wry876dkxq2hhcce8k7kzspppax",
       "reward_from_mining_pool": [
         {
           "denom": "wei",
-          "amount": "7813154022"
+          "amount": "4000000000000000000"
         }
       ],
       "reward_from_traffic_pool": [
         {
           "denom": "wei",
-          "amount": "1016440675459"
+          "amount": "25740279520266"
+        }
+      ]
+    },
+    {
+      "wallet_address": "st1k9hfqps9s2tpnfxch2avvevyvtry0zth39gdzc",
+      "reward_from_mining_pool": [
+        {
+          "denom": "wei",
+          "amount": "4000000000000000000"
         }
       ],
-      "wallet_address": "st18jxmc78ws5wq7q7umr6plpz8x0d9qtzu98v8em"
+      "reward_from_traffic_pool": [
+        {
+          "denom": "wei",
+          "amount": "25740279520266"
+        }
+      ]
     }
   ],
-  "height": "18980",
   "pagination": {
-    "next_key": "",
+    "next_key": "y0JUWCEwpMwgs3XzfSwlHBHU9Xg=",
     "total": "0"
   }
 }
@@ -752,14 +840,14 @@ Response:
 <br>
 
 
-### - RewardsByOwner
+### - RewardsByWallet
 
-Get pot reward by owner
+Get pot reward by beneficiary address
 
 Request:
 
 ```
-grpcurl -plaintext -d '{"wallet_address": "st18jxmc78ws5wq7q7umr6plpz8x0d9qtzu98v8em"} ' 127.0.0.1:9090 stratos.pot.v1.Query.RewardsByOwner
+grpcurl -plaintext -d '{"wallet_address": "st1rwnmgk0x2n2wry876dkxq2hhcce8k7kzspppax"} ' 127.0.0.1:9090 stratos.pot.v1.Query.RewardsByWallet
 ```
 
 Response:
@@ -767,24 +855,57 @@ Response:
 ```json
 {
   "rewards": {
+    "wallet_address": "st1rwnmgk0x2n2wry876dkxq2hhcce8k7kzspppax",
     "mature_total_reward": [],
     "immature_total_reward": [
       {
         "denom": "wei",
-        "amount": "93757827824"
-      },
-      {
-        "denom": "wei",
-        "amount": "88509725445757"
+        "amount": "16000257399827064713"
       }
-    ],
-    "wallet_address": "st18jxmc78ws5wq7q7umr6plpz8x0d9qtzu98v8em"
-  },
-  "height": "18998"
+    ]
+  }
 }
 ```
 
 <br>
+
+### - RewardsByWalletAndEpoch
+
+Get pot reward by beneficiary address and epoch
+
+Request:
+
+```
+grpcurl -plaintext -d '{"wallet_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m", "epoch": 2} ' 127.0.0.1:9090 stratos.pot.v1.Query.RewardsByWalletAndEpoch
+```
+
+Response:
+
+```json
+{
+  "rewards": [
+    {
+      "wallet_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+      "reward_from_mining_pool": [
+        {
+          "denom": "wei",
+          "amount": "52000000000000000000"
+        }
+      ],
+      "reward_from_traffic_pool": [
+        {
+          "denom": "wei",
+          "amount": "669244695117639"
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "0"
+  }
+}
+```
 
 
 ### - SlashingByOwner
@@ -801,8 +922,7 @@ Response:
 
 ```json
 {
- "slashing": "0",
- "height": "2977"
+ "slashing": "0"
 }
 ```
 
@@ -824,6 +944,9 @@ Response:
 ```json
 {
   "params": {
+    "bond_denom": "wei",
+    "reward_denom": "wei",
+    "mature_epoch": "2016",
     "mining_reward_params": [
       {
         "total_mined_valve_start": {
@@ -832,11 +955,11 @@ Response:
         },
         "total_mined_valve_end": {
           "denom": "wei",
-          "amount": "16819200000000000"
+          "amount": "16819200000000000000000000"
         },
         "mining_reward": {
           "denom": "wei",
-          "amount": "80000000000"
+          "amount": "80000000000000000000"
         },
         "block_chain_percentage_in_bp": "2000",
         "resource_node_percentage_in_bp": "6000",
@@ -845,15 +968,15 @@ Response:
       {
         "total_mined_valve_start": {
           "denom": "wei",
-          "amount": "16819200000000000"
+          "amount": "16819200000000000000000000"
         },
         "total_mined_valve_end": {
           "denom": "wei",
-          "amount": "25228800000000000"
+          "amount": "25228800000000000000000000"
         },
         "mining_reward": {
           "denom": "wei",
-          "amount": "40000000000"
+          "amount": "40000000000000000000"
         },
         "block_chain_percentage_in_bp": "2000",
         "resource_node_percentage_in_bp": "6200",
@@ -862,15 +985,15 @@ Response:
       {
         "total_mined_valve_start": {
           "denom": "wei",
-          "amount": "25228800000000000"
+          "amount": "25228800000000000000000000"
         },
         "total_mined_valve_end": {
           "denom": "wei",
-          "amount": "29433600000000000"
+          "amount": "29433600000000000000000000"
         },
         "mining_reward": {
           "denom": "wei",
-          "amount": "20000000000"
+          "amount": "20000000000000000000"
         },
         "block_chain_percentage_in_bp": "2000",
         "resource_node_percentage_in_bp": "6400",
@@ -879,15 +1002,15 @@ Response:
       {
         "total_mined_valve_start": {
           "denom": "wei",
-          "amount": "29433600000000000"
+          "amount": "29433600000000000000000000"
         },
         "total_mined_valve_end": {
           "denom": "wei",
-          "amount": "31536000000000000"
+          "amount": "31536000000000000000000000"
         },
         "mining_reward": {
           "denom": "wei",
-          "amount": "10000000000"
+          "amount": "10000000000000000000"
         },
         "block_chain_percentage_in_bp": "2000",
         "resource_node_percentage_in_bp": "6600",
@@ -896,15 +1019,15 @@ Response:
       {
         "total_mined_valve_start": {
           "denom": "wei",
-          "amount": "31536000000000000"
+          "amount": "31536000000000000000000000"
         },
         "total_mined_valve_end": {
           "denom": "wei",
-          "amount": "32587200000000000"
+          "amount": "32587200000000000000000000"
         },
         "mining_reward": {
           "denom": "wei",
-          "amount": "5000000000"
+          "amount": "5000000000000000000"
         },
         "block_chain_percentage_in_bp": "2000",
         "resource_node_percentage_in_bp": "6800",
@@ -913,25 +1036,22 @@ Response:
       {
         "total_mined_valve_start": {
           "denom": "wei",
-          "amount": "32587200000000000"
+          "amount": "32587200000000000000000000"
         },
         "total_mined_valve_end": {
           "denom": "wei",
-          "amount": "40000000000000000"
+          "amount": "40000000000000000000000000"
         },
         "mining_reward": {
           "denom": "wei",
-          "amount": "2500000000"
+          "amount": "2500000000000000000"
         },
         "block_chain_percentage_in_bp": "2000",
         "resource_node_percentage_in_bp": "7000",
         "meta_node_percentage_in_bp": "1000"
       }
     ],
-    "bond_denom": "wei",
-    "reward_denom": "wei",
-    "mature_epoch": "2016",
-    "community_tax": "20000000000000000",
+    "community_tax": "0.020000000000000000",
     "initial_total_supply": {
       "denom": "wei",
       "amount": "100000000000000000000000000"

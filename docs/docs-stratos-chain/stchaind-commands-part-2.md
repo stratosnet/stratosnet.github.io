@@ -832,9 +832,79 @@ stchaind tx register update-meta-node-deposit \
 --gas-prices=1000000000wei -y
 ```
 
-
 <br>
 
+### -`kick-meta-node-vote`
+
+kick specified meta node by other meta nodes
+
+```{ .yaml .no-copy }
+Usage:
+  stchaind tx register kick-meta-node-vote [flags]
+
+Flags:
+  -a, --account-number uint             The account number of the signing account (offline mode only)
+      --aux                             Generate aux signer data instead of sending a tx
+  -b, --broadcast-mode string           Transaction broadcasting mode (sync|async) (default "sync")
+      --chain-id string                 The network chain ID
+      --dry-run                         ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-granter string              Fee granter grants fees for the transaction
+      --fee-payer string                Fee payer pays fees for the transaction instead of deducting from the signer
+      --fees string                     Fees to pay along with transaction; eg: 10uatom
+      --from string                     Name or address of private key with which to sign
+      --gas string                      gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically. Note: "auto" option doesn't always report accurate results. Set a valid coin value to adjust the result. Can be used instead of "fees". (default 200000)
+      --gas-adjustment float            adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string               Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                   Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase only accessed when providing a key name)
+  -h, --help                            help for kick-meta-node-vote
+      --keyring-backend string          Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string              The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                          Use a connected Ledger device
+      --node string                     <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                     Note to add a description to the transaction (previously --memo)
+      --offline                         Offline mode (does not allow any online functionality)
+      --opinion                         Opinion of the vote for kicking meta node.
+  -o, --output string                   Output format (text|json) (default "json")
+  -s, --sequence uint                   The sequence number of the signing account (offline mode only)
+      --sign-mode string                Choose sign mode (direct|amino-json|direct-aux), this is an advanced feature
+      --target-network-address string   The network address of the meta node to be kicked
+      --timeout-height uint             Set a block timeout height to prevent the tx from being committed past a certain height
+      --tip string                      Tip is the amount that is going to be transferred to the fee payer on the target chain. This flag is only valid when used with --aux, and is ignored if the target chain didn't enable the TipDecorator
+      --voter-network-address string    The network address of the meta node that made the vote
+  -y, --yes                             Skip tx broadcasting prompt confirmation
+  
+  
+  In testing phase, --keyring-backend="test"
+```
+
+Example:
+
+
+``` { .yaml .no-copy }
+Usage:
+stchaind tx register kick-meta-node-vote \
+--voter-network-address=<voter_meta_node_address> \
+--target-network-address=<target_meta_node_address> \
+--opinion=<true|false> \
+--from=<owner_address> \
+--chain-id=<current chain-id> \
+--keyring-backend=<keyring's backend>
+```
+
+Transaction example:
+
+```shell
+stchaind tx register kick-meta-node-vote \
+--voter-network-address=stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64 \
+--target-network-address=stsds13yakj2xgzzdfcw7kd5gtfcfv2k6sn5eg4vdfem \
+--from=st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh \
+--chain-id=mesos-1 \
+--keyring-backend=test \
+--gas=auto \
+--gas-prices=1gwei -y
+```
+
+<br>
 
 ### -`get-resource-nodes`
 

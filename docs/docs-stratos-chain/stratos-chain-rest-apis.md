@@ -16,122 +16,6 @@ The response content type is `application/json`. If it has a request body, the r
 
 A `POST` request  will return an **unsigned** transaction, which equals to its equivalent `stchaind` command with a `--generate-only` flag.
 
-<!--
-<details>
-    <summary>Comparison between REST API and its equivalent <code>stchaind</code> command</summary>
-
-Suppose a `send` transaction that transfers tokens from one account to another.
-The following comparison demonstrates we can get the same response in both methods.
-
-## REST API
-Http `POST` request
-```http
-https://rest.thestratos.org/bank/accounts/st1jfv3lyd67w5uywzywlsvgnym0hh9sqlujrw5l6/transfers
-```
-Request body
-```json
-{
-  "base_req": {
-    "from": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-    "memo": "Send Tx Example",
-    "chain_id": "test-chain",
-    "account_number": "0",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "100"
-      }
-    ],
-    "simulate": false
-  },
-  "amount": [
-    {
-      "denom": "ustos",
-      "amount": "1000000"
-    }
-  ]
-}
-```
-Response
-```json
-{
-    "type": "cosmos-sdk/StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "cosmos-sdk/MsgSend",
-                "value": {
-                    "from_address": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-                    "to_address": "st1jfv3lyd67w5uywzywlsvgnym0hh9sqlujrw5l6",
-                    "amount": [
-                        {
-                            "denom": "ustos",
-                            "amount": "1000000"
-                        }
-                    ]
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "ustos",
-                    "amount": "100"
-                }
-            ],
-            "gas": "200000"
-        },
-        "signatures": null,
-        "memo": "Send Tx Example"
-    }
-}
-```
-
-## `stchaind` command.
-```shell
-$ ./build/stchaind tx send st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2 st1jfv3lyd67w5uywzywlsvgnym0hh9sqlujrw5l6 1000000ustos --fees 100ustos --chain-id=test-chain --keyring-backend=test --memo "Send Tx Example" --generate-only --gas=auto
-```
-Output
-```json
-{
-    "type": "cosmos-sdk/StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "cosmos-sdk/MsgSend",
-                "value": {
-                    "from_address": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-                    "to_address": "st1jfv3lyd67w5uywzywlsvgnym0hh9sqlujrw5l6",
-                    "amount": [
-                        {
-                            "denom": "ustos",
-                            "amount": "1000000"
-                        }
-                    ]
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "ustos",
-                    "amount": "100"
-                }
-            ],
-            "gas": "200000"
-        },
-        "signatures": null,
-        "memo": "Send Tx Example"
-    }
-}
-```
-</details>
-<br>
-
--->
-
 ***
 ## Stratos-chain REST APIs
 
@@ -142,172 +26,55 @@ Output
 ### Node Status
 
 <details>
-    <summary><code>GET /node_info</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queries information about the connected node</summary>
+    <summary><code>GET /status</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queries information about the connected node</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/node_info
+https://rpc.thestratos.org/status
 ```
 Response Example:
 ```json
 {
+  "jsonrpc": "2.0",
+  "id": -1,
+  "result": {
     "node_info": {
-        "protocol_version": {
-            "p2p": "8",
-            "block": "11",
-            "app": "0"
-        },
-        "id": "16a0758d175cbf5c08d41dffa73eb5c0190869ed",
-        "listen_addr": "tcp://0.0.0.0:26656",
-        "network": "test-chain",
-        "version": "0.34.21",
-        "channels": "40202122233038606100",
-        "moniker": "node",
-        "other": {
-            "tx_index": "on",
-            "rpc_address": "tcp://127.0.0.1:26657"
-        }
+      "protocol_version": {
+        "p2p": "8",
+        "block": "11",
+        "app": "0"
+      },
+      "id": "173ebeb219ae7e8d53e7882063429213b9176b6f",
+      "listen_addr": "tcp://0.0.0.0:26656",
+      "network": "testchain",
+      "version": "0.37.2",
+      "channels": "40202122233038606100",
+      "moniker": "node",
+      "other": {
+        "tx_index": "on",
+        "rpc_address": "tcp://127.0.0.1:26657"
+      }
     },
-    "application_version": {
-        "name": "",
-        "server_name": "stchaind",
-        "version": "v0.8.0",
-        "commit": "",
-        "build_tags": "",
-        "go": "go version go1.19.4 linux/amd64",
-        "build_deps": [
-            "filippo.io/edwards25519@v1.0.0-beta.2",
-            "github.com/99designs/keyring@v1.1.6 => github.com/cosmos/keyring@v1.1.7-0.20210622111912-ef00f8ac3d76",
-            "github.com/ChainSafe/go-schnorrkel@v0.0.0-20200405005733-88cbf1b4c40d",
-            "github.com/VictoriaMetrics/fastcache@v1.6.0",
-            "github.com/Workiva/go-datastructures@v1.0.53",
-            "github.com/armon/go-metrics@v0.3.10",
-            "github.com/beorn7/perks@v1.0.1",
-            "github.com/bgentry/speakeasy@v0.1.0",
-            "github.com/btcsuite/btcd@v0.22.1",
-            "github.com/btcsuite/btcd/chaincfg/chainhash@v1.0.1",
-            "github.com/btcsuite/btcutil@v1.0.3-0.20201208143702-a53e38424cce",
-            "github.com/cenkalti/backoff/v4@v4.1.1",
-            "github.com/cespare/xxhash/v2@v2.1.2",
-            "github.com/coinbase/rosetta-sdk-go@v0.7.0",
-            "github.com/confio/ics23/go@v0.7.0 => github.com/cosmos/cosmos-sdk/ics23/go@v0.8.0",
-            "github.com/cosmos/btcutil@v1.0.4",
-            "github.com/cosmos/cosmos-sdk@v0.45.9",
-            "github.com/cosmos/go-bip39@v1.0.0",
-            "github.com/cosmos/iavl@v0.19.3",
-            "github.com/cosmos/ibc-go/v3@v3.0.0",
-            "github.com/creachadair/taskgroup@v0.3.2",
-            "github.com/davecgh/go-spew@v1.1.1",
-            "github.com/deckarep/golang-set@v1.8.0",
-            "github.com/desertbit/timer@v0.0.0-20180107155436-c41aec40b27f",
-            "github.com/dvsekhvalnov/jose2go@v0.0.0-20200901110807-248326c1351b",
-            "github.com/edsrzf/mmap-go@v1.0.0",
-            "github.com/ethereum/go-ethereum@v1.10.16",
-            "github.com/felixge/httpsnoop@v1.0.1",
-            "github.com/fsnotify/fsnotify@v1.5.4",
-            "github.com/gballet/go-libpcsclite@v0.0.0-20190607065134-2772fd86a8ff",
-            "github.com/go-kit/kit@v0.12.0",
-            "github.com/go-kit/log@v0.2.1",
-            "github.com/go-logfmt/logfmt@v0.5.1",
-            "github.com/go-stack/stack@v1.8.0",
-            "github.com/godbus/dbus@v0.0.0-20190726142602-4481cbc300e2",
-            "github.com/gogo/gateway@v1.1.0",
-            "github.com/gogo/protobuf@v1.3.3 => github.com/regen-network/protobuf@v1.3.3-alpha.regen.1",
-            "github.com/golang/protobuf@v1.5.2",
-            "github.com/golang/snappy@v0.0.4",
-            "github.com/google/btree@v1.0.0",
-            "github.com/google/orderedcode@v0.0.1",
-            "github.com/google/uuid@v1.3.0",
-            "github.com/gorilla/handlers@v1.5.1",
-            "github.com/gorilla/mux@v1.8.0",
-            "github.com/gorilla/websocket@v1.5.0",
-            "github.com/grpc-ecosystem/go-grpc-middleware@v1.3.0",
-            "github.com/grpc-ecosystem/grpc-gateway@v1.16.0",
-            "github.com/gsterjov/go-libsecret@v0.0.0-20161001094733-a6f4afe4910c",
-            "github.com/gtank/merlin@v0.1.1",
-            "github.com/gtank/ristretto255@v0.1.2",
-            "github.com/hashicorp/go-immutable-radix@v1.3.1",
-            "github.com/hashicorp/golang-lru@v0.5.5-0.20210104140557-80c98217689d",
-            "github.com/hashicorp/hcl@v1.0.0",
-            "github.com/hdevalence/ed25519consensus@v0.0.0-20210204194344-59a8610d2b87",
-            "github.com/holiman/bloomfilter/v2@v2.0.3",
-            "github.com/holiman/uint256@v1.2.0",
-            "github.com/huin/goupnp@v1.0.2",
-            "github.com/improbable-eng/grpc-web@v0.15.0",
-            "github.com/ipfs/go-cid@v0.1.0",
-            "github.com/jackpal/go-nat-pmp@v1.0.2",
-            "github.com/klauspost/compress@v1.15.9",
-            "github.com/klauspost/cpuid/v2@v2.0.4",
-            "github.com/lib/pq@v1.10.6",
-            "github.com/libp2p/go-buffer-pool@v0.1.0",
-            "github.com/magiconair/properties@v1.8.6",
-            "github.com/mattn/go-colorable@v0.1.12",
-            "github.com/mattn/go-isatty@v0.0.14",
-            "github.com/mattn/go-runewidth@v0.0.9",
-            "github.com/matttproud/golang_protobuf_extensions@v1.0.2-0.20181231171920-c182affec369",
-            "github.com/mimoo/StrobeGo@v0.0.0-20181016162300-f8f6d4d2b643",
-            "github.com/minio/blake2b-simd@v0.0.0-20160723061019-3f5f724cb5b1",
-            "github.com/minio/highwayhash@v1.0.2",
-            "github.com/minio/sha256-simd@v1.0.0",
-            "github.com/mitchellh/mapstructure@v1.5.0",
-            "github.com/mr-tron/base58@v1.2.0",
-            "github.com/mtibben/percent@v0.2.1",
-            "github.com/multiformats/go-base32@v0.0.3",
-            "github.com/multiformats/go-base36@v0.1.0",
-            "github.com/multiformats/go-multibase@v0.0.3",
-            "github.com/multiformats/go-multihash@v0.0.15",
-            "github.com/multiformats/go-varint@v0.0.6",
-            "github.com/olekukonko/tablewriter@v0.0.5",
-            "github.com/pelletier/go-toml/v2@v2.0.2",
-            "github.com/pkg/errors@v0.9.1",
-            "github.com/pmezard/go-difflib@v1.0.0",
-            "github.com/prometheus/client_golang@v1.12.2",
-            "github.com/prometheus/client_model@v0.2.0",
-            "github.com/prometheus/common@v0.34.0",
-            "github.com/prometheus/procfs@v0.7.3",
-            "github.com/prometheus/tsdb@v0.7.1",
-            "github.com/rakyll/statik@v0.1.7",
-            "github.com/rcrowley/go-metrics@v0.0.0-20200313005456-10cdbea86bc0",
-            "github.com/regen-network/cosmos-proto@v0.3.1",
-            "github.com/rjeczalik/notify@v0.9.1",
-            "github.com/rs/cors@v1.8.2",
-            "github.com/rs/zerolog@v1.27.0",
-            "github.com/shirou/gopsutil@v3.21.4-0.20210419000835-c7a38de76ee5+incompatible",
-            "github.com/spf13/afero@v1.8.2",
-            "github.com/spf13/cast@v1.5.0",
-            "github.com/spf13/cobra@v1.5.0",
-            "github.com/spf13/jwalterweatherman@v1.1.0",
-            "github.com/spf13/pflag@v1.0.5",
-            "github.com/spf13/viper@v1.12.0",
-            "github.com/status-im/keycard-go@v0.0.0-20200402102358-957c09536969",
-            "github.com/stretchr/testify@v1.8.0",
-            "github.com/subosito/gotenv@v1.4.0",
-            "github.com/syndtr/goleveldb@v1.0.1-0.20210819022825-2ae1ddf74ef7",
-            "github.com/tendermint/btcd@v0.1.1",
-            "github.com/tendermint/crypto@v0.0.0-20191022145703-50d29ede1e15",
-            "github.com/tendermint/go-amino@v0.16.0",
-            "github.com/tendermint/tendermint@v0.34.21",
-            "github.com/tendermint/tm-db@v0.6.7",
-            "github.com/tklauser/go-sysconf@v0.3.5",
-            "github.com/tklauser/numcpus@v0.2.2",
-            "github.com/tyler-smith/go-bip39@v1.1.0",
-            "golang.org/x/crypto@v0.0.0-20220525230936-793ad666bf5e",
-            "golang.org/x/exp@v0.0.0-20220722155223-a9213eeb770e",
-            "golang.org/x/net@v0.0.0-20220726230323-06994584191e",
-            "golang.org/x/sync@v0.0.0-20220722155255-886fb9371eb4",
-            "golang.org/x/sys@v0.0.0-20220727055044-e65921a090b8",
-            "golang.org/x/term@v0.0.0-20220722155259-a9ba230a4035",
-            "golang.org/x/text@v0.3.7",
-            "google.golang.org/genproto@v0.0.0-20220725144611-272f38e5d71b",
-            "google.golang.org/grpc@v1.48.0 => google.golang.org/grpc@v1.33.2",
-            "google.golang.org/protobuf@v1.28.0",
-            "gopkg.in/ini.v1@v1.66.6",
-            "gopkg.in/yaml.v2@v2.4.0",
-            "gopkg.in/yaml.v3@v3.0.1",
-            "nhooyr.io/websocket@v1.8.6"
-        ],
-        "cosmos_sdk_version": "v0.45.9"
+    "sync_info": {
+      "latest_block_hash": "0F9E487D5536E51A394674DA4238D7A9A6FC5B6914337C85B2246736DCA920C6",
+      "latest_app_hash": "2163AE296ACA24085E56D9DC422EC530A3DA99925E621DCA9DDDC51FBF70B50F",
+      "latest_block_height": "1155",
+      "latest_block_time": "2024-03-07T22:52:06.74704475Z",
+      "earliest_block_hash": "351DCDB243332806931B7FCD220C442E03A69AD97004CB2078F70ADEA38DB52A",
+      "earliest_app_hash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "earliest_block_height": "1",
+      "earliest_block_time": "2024-03-07T14:14:09.179630523Z",
+      "catching_up": false
+    },
+    "validator_info": {
+      "address": "05949FEF030908686B36079C8BE958EE412D8744",
+      "pub_key": {
+        "type": "tendermint/PubKeyEd25519",
+        "value": "yaG6YrluzJfxOgwFuRhlgpOvQAmzBS7kqMVvISN8XWs="
+      },
+      "voting_power": "504000000000000"
     }
+  }
 }
 ```
 </details>
@@ -319,120 +86,112 @@ Response Example:
 Tendermint APIs, such as query blocks, transactions and validator set
 
 <details>
-    <summary><code>GET /syncing</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries if the node is currently syning with other nodes</summary>
+    <summary><code>GET /block?height={height}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries a block at a specific {height}</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/syncing
+https://rpc.thestratos.org/block?height=3
 ```
 Response Example:
 ```json
 {
-    "syncing": true
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>GET /blocks/{height | latest}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries a block at a specific {height | latest}</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/blocks/latest
-```
-Response Example:
-```json
-{
+  "jsonrpc": "2.0",
+  "id": -1,
+  "result": {
     "block_id": {
-        "hash": "97E6AF89C839417D1FC1B10DEFC747C14BF0F20F42ECF8116EE1EA55758556D1",
-        "parts": {
-            "total": 1,
-            "hash": "4A32889C023AF838666A90D69A28238C4A62BBA692B85F8AB754A19BB0DAEC3D"
-        }
+      "hash": "0D743AAB873C590EAEE65A82036B0E2719A8C5FB6BCC6AD4BFE5E16A6D2384D9",
+      "parts": {
+        "total": 1,
+        "hash": "9AEE29A0BCF4478CB648760024DC1BC62A0CF1E7CD8F518F5A952C6A51A4C519"
+      }
     },
     "block": {
-        "header": {
-            "version": {
-                "block": "11"
-            },
-            "chain_id": "test-chain",
-            "height": "1101",
-            "time": "2023-01-11T02:01:16.294185637Z",
-            "last_block_id": {
-                "hash": "EF2D1E436E3DC8D60CD3F52839DBF7347FB6C37863DFF0FB8F86496F594268BF",
-                "parts": {
-                    "total": 1,
-                    "hash": "1A05B4D2C3813E05B7742AF1B2AB6024F2E68F174698DEC8B4A570D3F5DA068B"
-                }
-            },
-            "last_commit_hash": "395C284AEB59B7B1C9EDE5D22E39281A5EFAE2864A896EB42639F6CABF49F8B7",
-            "data_hash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
-            "validators_hash": "5234BD91A3A751E055C35876578DE4A466311A80D540B59885AF68EF6D4D56DE",
-            "next_validators_hash": "5234BD91A3A751E055C35876578DE4A466311A80D540B59885AF68EF6D4D56DE",
-            "consensus_hash": "048091BC7DDC283F77BFBF91D73C44DA58C3DF8A9CBC867405D8B7F3DAADA22F",
-            "app_hash": "FE115D4597A8CD9F7C508D43156778FF88CF85D95BE508D28FA55DDE5C947784",
-            "last_results_hash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
-            "evidence_hash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
-            "proposer_address": "18A7169C1B427D994133F7B3D4504E92789DB37C"
+      "header": {
+        "version": {
+          "block": "11"
         },
-        "data": {
-            "txs": []
+        "chain_id": "testchain",
+        "height": "3",
+        "time": "2024-03-07T21:15:18.727039882Z",
+        "last_block_id": {
+          "hash": "47380D904092AD1CAB0D6EE05529108E1C16DDA57DA548F92B808826B57BFC2F",
+          "parts": {
+            "total": 1,
+            "hash": "5636DB87347A6B6688311A8337BC072B42F6A711A79B03E059669AC18BA369F8"
+          }
         },
-        "evidence": {
-            "evidence": []
+        "last_commit_hash": "EE243348801D7A14265326D57A87F5411514DF4488E0F9A0D1CB5EFA4C59302E",
+        "data_hash": "880D0616234E0498E005E4BE6D14CD2B4B973808CBC5123F6CB94B55F412CE1E",
+        "validators_hash": "FC72D5166A86C81AFD8405DD7788E9C56531E8AA69A1ADDD1C1F3132D2A665CD",
+        "next_validators_hash": "FC72D5166A86C81AFD8405DD7788E9C56531E8AA69A1ADDD1C1F3132D2A665CD",
+        "consensus_hash": "048091BC7DDC283F77BFBF91D73C44DA58C3DF8A9CBC867405D8B7F3DAADA22F",
+        "app_hash": "2879EC791843B2FA808D7914D8554252F9724A8ADD953806AC5CE48405233B1C",
+        "last_results_hash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "evidence_hash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "proposer_address": "05949FEF030908686B36079C8BE958EE412D8744"
+      },
+      "data": {
+        "txs": [
+          "CtgCCtUCCiUvY29zbW9zLmdvdi52MWJldGExLk1zZ1N1Ym1pdFByb3Bvc2FsEqsCCv0BCi4vY29zbW9zLnBhcmFtcy52MWJldGExLlBhcmFtZXRlckNoYW5nZVByb3Bvc2FsEsoBChR1cGRhdGUgdm90aW5nIHBhcmFtcxIUdXBkYXRlIHZvdGluZyBwZXJpb2QaLwoDZ292Egx2b3RpbmdwYXJhbXMaGnsidm90aW5nX3BlcmlvZCI6ICI4NjQwMCJ9GmsKA2dvdhINZGVwb3NpdHBhcmFtcxpVeyJtaW5fZGVwb3NpdCI6IFt7ImRlbm9tIjogIndlaSIsImFtb3VudCI6ICIxMDAwMDAwIn1dLCJtYXhfZGVwb3NpdF9wZXJpb2QiOiAiODY0MDAifRopc3QxZWRwOWdrcHB4emp2Y2c5bndoZWg2dHA5cnNnYWZhdGNrZmRsNm0SdwpXCk0KJi9zdHJhdG9zLmNyeXB0by52MS5ldGhzZWNwMjU2azEuUHViS2V5EiMKIQNBlPndlLdbenThBfi5/mQPaDXY4fL0x4Vm+/PEzgiFKxIECgIIARgBEhwKFgoDd2VpEg83MTk0ODYwMDAwMDAwMDAQ/vQrGkFPkIR+nuWxlSCMABNwvragzNLy0REfuAJibSYiA05YfiDwdIYtUhgvZXvD02Kh4YbVSmVIY0IyiesiHP3884EYAA=="
+        ]
+      },
+      "evidence": {
+        "evidence": []
+      },
+      "last_commit": {
+        "height": "2",
+        "round": 0,
+        "block_id": {
+          "hash": "47380D904092AD1CAB0D6EE05529108E1C16DDA57DA548F92B808826B57BFC2F",
+          "parts": {
+            "total": 1,
+            "hash": "5636DB87347A6B6688311A8337BC072B42F6A711A79B03E059669AC18BA369F8"
+          }
         },
-        "last_commit": {
-            "height": "1100",
-            "round": 0,
-            "block_id": {
-                "hash": "EF2D1E436E3DC8D60CD3F52839DBF7347FB6C37863DFF0FB8F86496F594268BF",
-                "parts": {
-                    "total": 1,
-                    "hash": "1A05B4D2C3813E05B7742AF1B2AB6024F2E68F174698DEC8B4A570D3F5DA068B"
-                }
-            },
-            "signatures": [
-                {
-                    "block_id_flag": 2,
-                    "validator_address": "18A7169C1B427D994133F7B3D4504E92789DB37C",
-                    "timestamp": "2023-01-11T02:01:16.294185637Z",
-                    "signature": "pLQMUuJJ23T2u5oNpR5xIt4+T/73TXxe6bj/LF0ue+hg8UseqFEGTDybLeAukUUMcudPnE3BS5oQoRwB9245BA=="
-                }
-            ]
-        }
+        "signatures": [
+          {
+            "block_id_flag": 2,
+            "validator_address": "05949FEF030908686B36079C8BE958EE412D8744",
+            "timestamp": "2024-03-07T21:15:18.727039882Z",
+            "signature": "QwMSz37OTLM0nBLnfg2ct7FdjZRyA8nYhi+vFRUK3Wb2boX/OiKN6r/LUxo/JxwCkhsXJWJI/HOnHV+SE6qYDA=="
+          }
+        ]
+      }
     }
+  }
 }
 ```
 </details>
 <br>
 
 <details>
-    <summary><code>GET /validatorsets/{height | latest}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries validator set at certain {height | latest}</summary>
+    <summary><code>GET /validators?height={height}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries validator set at certain {height}</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/validatorsets/latest
+https://rpc.thestratos.org/validators?height=800
 ```
 Response Example:
 ```json
 {
-    "height": "0",
-    "result": {
-        "block_height": "1115",
-        "validators": [
-            {
-                "address": "stvalcons1rzn3d8qmgf7ejsfn77eag5zwjfufmvmu7sn802",
-                "pub_key": {
-                    "type": "tendermint/PubKeyEd25519",
-                    "value": "69gothWTE9FJBZ5gBjjSNhg8y/5SsI1hBaD81Dum7lo="
-                },
-                "proposer_priority": "0",
-                "voting_power": "500000"
-            }
-        ],
-        "total": "1"
-    }
+  "jsonrpc": "2.0",
+  "id": -1,
+  "result": {
+    "block_height": "800",
+    "validators": [
+      {
+        "address": "05949FEF030908686B36079C8BE958EE412D8744",
+        "pub_key": {
+          "type": "tendermint/PubKeyEd25519",
+          "value": "yaG6YrluzJfxOgwFuRhlgpOvQAmzBS7kqMVvISN8XWs="
+        },
+        "voting_power": "504000000000000",
+        "proposer_priority": "0"
+      }
+    ],
+    "count": "1",
+    "total": "1"
+  }
 }
 ```
 </details>
@@ -452,281 +211,169 @@ https://rest.thestratos.org/cosmos/auth/v1beta1/accounts
 Response Example:
 ```json
 {
-    "accounts": [
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
-            "pub_key": {
-                "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
-                "key": "Agkwb1xacHBqeqGBIqRacXgf0qKTnEBPCEtH2vTE01Ke"
-            },
-            "account_number": "0",
-            "sequence": "4"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1zdv2enwn0eldmu9e2zwwz2zmgqswjzdv5w5g5j",
-            "pub_key": null,
-            "account_number": "6",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1r2gh2h8kjtz4slek6aua95ukyd8zmey2y9uatt",
-            "pub_key": null,
-            "account_number": "7",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1rwnmgk0x2n2wry876dkxq2hhcce8k7kzspppax",
-            "pub_key": null,
-            "account_number": "19",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.ModuleAccount",
-            "base_account": {
-                "address": "st1y0ujk7aqvuxt6t058gn6k2kq8f3pe96vzwknau",
-                "pub_key": null,
-                "account_number": "29",
-                "sequence": "0"
-            },
-            "name": "foundation_account",
-            "permissions": [
-                "minter",
-                "burner"
-            ]
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.ModuleAccount",
-            "base_account": {
-                "address": "st1yl6hdjhmkf37639730gffanpzndzdpmhjjzmk7",
-                "pub_key": null,
-                "account_number": "27",
-                "sequence": "0"
-            },
-            "name": "transfer",
-            "permissions": [
-                "minter",
-                "burner"
-            ]
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1g3wp24epahx2u8xn3jzh5ry8ugkh239l38wgrc",
-            "pub_key": null,
-            "account_number": "9",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1g54kyu2tk2e80wqq4q3t2dl4mm5ydwwyyu4pq5",
-            "pub_key": null,
-            "account_number": "8",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.ModuleAccount",
-            "base_account": {
-                "address": "st1fz67scxv3hjy0nxafuf0c4made74gfcf7myjqg",
-                "pub_key": null,
-                "account_number": "28",
-                "sequence": "0"
-            },
-            "name": "meta_node_bonded_pool",
-            "permissions": [
-                "minter"
-            ]
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1f4d2tdddwv8304sfhe39r83d4ldz2dc3z40qtk",
-            "pub_key": null,
-            "account_number": "12",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.ModuleAccount",
-            "base_account": {
-                "address": "st1fl48vsnmsdzcv85q5d2q4z5ajdha8yu3fkaac2",
-                "pub_key": null,
-                "account_number": "23",
-                "sequence": "0"
-            },
-            "name": "bonded_tokens_pool",
-            "permissions": [
-                "burner",
-                "staking"
-            ]
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.ModuleAccount",
-            "base_account": {
-                "address": "st1tygms3xhhs3yv487phx3dw4a95jn7t7lakpvw7",
-                "pub_key": null,
-                "account_number": "24",
-                "sequence": "0"
-            },
-            "name": "not_bonded_tokens_pool",
-            "permissions": [
-                "burner",
-                "staking"
-            ]
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1vznztham7975ukx4hve497kxftejwatsjfw4gc",
-            "pub_key": null,
-            "account_number": "15",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1vvysda6ylqz2adauqg4djsz4rx6hv6mqv9fepp",
-            "pub_key": null,
-            "account_number": "3",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.ModuleAccount",
-            "base_account": {
-                "address": "st10d07y265gmmuvt4z0w9aw880jnsr700jx08hhw",
-                "pub_key": null,
-                "account_number": "25",
-                "sequence": "0"
-            },
-            "name": "gov",
-            "permissions": [
-                "burner"
-            ]
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx",
-            "pub_key": null,
-            "account_number": "1",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.ModuleAccount",
-            "base_account": {
-                "address": "st1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8mjswgz",
-                "pub_key": null,
-                "account_number": "22",
-                "sequence": "0"
-            },
-            "name": "distribution",
-            "permissions": [
-            ]
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1nvh4nrjh6hhy7pxr2d9zp4zrzphg8tdccmf47x",
-            "pub_key": null,
-            "account_number": "11",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st14rtmcurt5rvgy8pu3srleskfjjyry3n9a00nw9",
-            "pub_key": null,
-            "account_number": "5",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st144ykkar9fhl8khs7lwz0s7py9vj4w9adp37kt9",
-            "pub_key": null,
-            "account_number": "2",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1k9hfqps9s2tpnfxch2avvevyvtry0zth39gdzc",
-            "pub_key": null,
-            "account_number": "18",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1kwtqfxk654urrannhsl7shsm3r7q9tyn40yq4e",
-            "pub_key": null,
-            "account_number": "16",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1ewlfmhl8j0p2jesfd2xrqp0qjeh2222gs9uefh",
-            "pub_key": null,
-            "account_number": "20",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1mgatj2a65ksmhznf6lseweq835m7gyjvzmphhm",
-            "pub_key": null,
-            "account_number": "14",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.ModuleAccount",
-            "base_account": {
-                "address": "st1m3h30wlvsf8llruxtpukdvsy0km2kum85un2xa",
-                "pub_key": null,
-                "account_number": "26",
-                "sequence": "0"
-            },
-            "name": "mint",
-            "permissions": [
-                "minter"
-            ]
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1uuxxf8kt5ey7rgwdgpch2l7ye2597cz5y4077n",
-            "pub_key": null,
-            "account_number": "13",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1a8ngk4tjvuxneyuvyuy9nvgehkpfa38hm8mp3x",
-            "pub_key": null,
-            "account_number": "17",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st1afcwl869ehc6m4zsqp096dj9t9m75uh5wq4qrs",
-            "pub_key": null,
-            "account_number": "10",
-            "sequence": "0"
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.ModuleAccount",
-            "base_account": {
-                "address": "st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q",
-                "pub_key": null,
-                "account_number": "21",
-                "sequence": "0"
-            },
-            "name": "fee_collector",
-            "permissions": [
-            ]
-        },
-        {
-            "@type": "/cosmos.auth.v1beta1.BaseAccount",
-            "address": "st172v4u8ysfgaphjs8uyy0svvc6d6tzl6gp07kn4",
-            "pub_key": null,
-            "account_number": "4",
-            "sequence": "0"
-        }
-    ],
-    "pagination": {
-        "next_key": null,
-        "total": "30"
+  "accounts": [
+    {
+      "@type": "/cosmos.auth.v1beta1.BaseAccount",
+      "address": "st1rwnmgk0x2n2wry876dkxq2hhcce8k7kzspppax",
+      "pub_key": null,
+      "account_number": "7",
+      "sequence": "0"
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+      "base_account": {
+        "address": "st1fz67scxv3hjy0nxafuf0c4made74gfcf7myjqg",
+        "pub_key": null,
+        "account_number": "15",
+        "sequence": "0"
+      },
+      "name": "meta_node_bonded_pool",
+      "permissions": [
+        "minter"
+      ]
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+      "base_account": {
+        "address": "st1fl48vsnmsdzcv85q5d2q4z5ajdha8yu3fkaac2",
+        "pub_key": null,
+        "account_number": "11",
+        "sequence": "0"
+      },
+      "name": "bonded_tokens_pool",
+      "permissions": [
+        "burner",
+        "staking"
+      ]
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+      "base_account": {
+        "address": "st1tygms3xhhs3yv487phx3dw4a95jn7t7lakpvw7",
+        "pub_key": null,
+        "account_number": "12",
+        "sequence": "0"
+      },
+      "name": "not_bonded_tokens_pool",
+      "permissions": [
+        "burner",
+        "staking"
+      ]
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.BaseAccount",
+      "address": "st1vvysda6ylqz2adauqg4djsz4rx6hv6mqv9fepp",
+      "pub_key": null,
+      "account_number": "3",
+      "sequence": "0"
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+      "base_account": {
+        "address": "st10d07y265gmmuvt4z0w9aw880jnsr700jx08hhw",
+        "pub_key": null,
+        "account_number": "13",
+        "sequence": "0"
+      },
+      "name": "gov",
+      "permissions": [
+        "burner"
+      ]
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.BaseAccount",
+      "address": "st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx",
+      "pub_key": null,
+      "account_number": "1",
+      "sequence": "0"
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+      "base_account": {
+        "address": "st1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8mjswgz",
+        "pub_key": null,
+        "account_number": "10",
+        "sequence": "0"
+      },
+      "name": "distribution",
+      "permissions": [
+        "burner"
+      ]
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.BaseAccount",
+      "address": "st144ykkar9fhl8khs7lwz0s7py9vj4w9adp37kt9",
+      "pub_key": null,
+      "account_number": "2",
+      "sequence": "0"
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.BaseAccount",
+      "address": "st1k9hfqps9s2tpnfxch2avvevyvtry0zth39gdzc",
+      "pub_key": null,
+      "account_number": "8",
+      "sequence": "0"
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.BaseAccount",
+      "address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+      "pub_key": {
+        "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
+        "key": "A0GU+d2Ut1t6dOEF+Ln+ZA9oNdjh8vTHhWb788TOCIUr"
+      },
+      "account_number": "0",
+      "sequence": "2"
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.BaseAccount",
+      "address": "st1ewlfmhl8j0p2jesfd2xrqp0qjeh2222gs9uefh",
+      "pub_key": null,
+      "account_number": "6",
+      "sequence": "0"
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+      "base_account": {
+        "address": "st1m3h30wlvsf8llruxtpukdvsy0km2kum85un2xa",
+        "pub_key": null,
+        "account_number": "14",
+        "sequence": "0"
+      },
+      "name": "mint",
+      "permissions": [
+        "minter"
+      ]
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.BaseAccount",
+      "address": "st1a8ngk4tjvuxneyuvyuy9nvgehkpfa38hm8mp3x",
+      "pub_key": null,
+      "account_number": "5",
+      "sequence": "0"
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+      "base_account": {
+        "address": "st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q",
+        "pub_key": null,
+        "account_number": "9",
+        "sequence": "0"
+      },
+      "name": "fee_collector",
+      "permissions": []
+    },
+    {
+      "@type": "/cosmos.auth.v1beta1.BaseAccount",
+      "address": "st172v4u8ysfgaphjs8uyy0svvc6d6tzl6gp07kn4",
+      "pub_key": null,
+      "account_number": "4",
+      "sequence": "0"
     }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "16"
+  }
 }
 ```
 </details>
@@ -771,44 +418,15 @@ Response Example:
     "params": {
         "max_memo_characters": "256",
         "tx_sig_limit": "7",
-        "tx_size_cost_per_byte": "10",
-        "sig_verify_cost_ed25519": "590",
-        "sig_verify_cost_secp256k1": "1000"
+        "tx_size_cost_per_byte": "1000",
+        "sig_verify_cost_ed25519": "59000",
+        "sig_verify_cost_secp256k1": "100000"
     }
 }
 ```
 </details>
+
 <br>
-
-<!--
-
-<details>
-    <summary><code>GET /auth/accounts/{address}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries account information on blockchain</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/auth/accounts/st1v33vxhmu9kp9yrncfldvt0zg9qlcepc75lyggk
-```
-Response Example:
-```json
-{
-    "height": "14",
-    "result": {
-        "type": "cosmos-sdk/BaseAccount",
-        "value": {
-            "address": "st1v33vxhmu9kp9yrncfldvt0zg9qlcepc75lyggk",
-            "public_key": {
-                "type": "tendermint/PubKeySecp256k1",
-                "value": "Aj/sbA5nIEpPunm5lG3ITuuPPGVPvYWVPXBR2Rme0jYj"
-            },
-            "sequence": "1"
-        }
-    }
-}
-```
-</details>
-<br>
--->
 
 ***
 
@@ -817,23 +435,24 @@ Response Example:
 <details>
     <summary><code>GET /cosmos/bank/v1beta1/balances/{address}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries the balance of all coins for a single account</summary>
 
-    Alias: /bank/balances/{address}
-
 Request Example:
 ```http
 https://rest.thestratos.org/cosmos/bank/v1beta1/balances/st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh
-or 
-https://rest.thestratos.org/bank/balances/st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh
 ```
 Response Example:
 ```json
-
-{"height":"46424","result":[
-  {
-    "denom": "wei",
-    "amount": "49999999628382000000000"
+{
+  "balances": [
+    {
+      "denom": "wei",
+      "amount": "99991399999400000000000000"
+    }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "1"
   }
-]}
+}
 ```
 </details>
 <br>
@@ -860,28 +479,24 @@ Response Example:
 <details>
     <summary><code>GET /cosmos/bank/v1beta1/supply</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; returns total supply of coins in the chain</summary>
 
-    Alias: /bank/total
-
 Request Example:
 ```http
 https://rest.thestratos.org/cosmos/bank/v1beta1/supply
-or
-https://rest.thestratos.org/bank/total
 ```
 Response Example:
 ```json
-
-{"height":"46428","result":{
+{
   "supply": [
     {
       "denom": "wei",
-      "amount": "400000000000000000000000000"
+      "amount": "100000000000000000000000000"
     }
   ],
   "pagination": {
+    "next_key": null,
     "total": "1"
   }
-}}
+}
 ```
 </details>
 <br>
@@ -889,15 +504,11 @@ Response Example:
 
 
 <details>
-    <summary><code>GET /cosmos/bank/v1beta1/supply/{denom}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries the supply of a single coin</summary>
-
-    Alias: /bank/total/{denom}
+    <summary><code>GET /cosmos/bank/v1beta1/supply/by_denom?denom={denom}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries the supply of a single coin</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/bank/v1beta1/supply/wei
-or
-https://rest.thestratos.org/bank/total/wei
+https://rest.thestratos.org/cosmos/bank/v1beta1/supply/by_denom?denom=wei
 ```
 Response Example:
 ```json
@@ -909,81 +520,8 @@ Response Example:
 }
 ```
 </details>
+
 <br>
-
-
-<!--
-<details>
-    <summary><code>POST /bank/accounts/{address}/transfers</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Send coins from one account to another</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/bank/accounts/st1jfv3lyd67w5uywzywlsvgnym0hh9sqlujrw5l6/transfers
-```
-Request Body
-```json
-{
-  "base_req": {
-    "from": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-    "memo": "Send Tx Example",
-    "chain_id": "test-chain",
-    "account_number": "0",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "100"
-      }
-    ],
-    "simulate": false
-  },
-  "amount": [
-    {
-      "denom": "ustos",
-      "amount": "1000000"
-    }
-  ]
-}
-```
-Response Example:
-```json
-{
-  "type": "cosmos-sdk/StdTx",
-  "value": {
-    "msg": [
-      {
-        "type": "cosmos-sdk/MsgSend",
-        "value": {
-          "from_address": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-          "to_address": "st1jfv3lyd67w5uywzywlsvgnym0hh9sqlujrw5l6",
-          "amount": [
-            {
-              "denom": "ustos",
-              "amount": "1000000"
-            }
-          ]
-        }
-      }
-    ],
-    "fee": {
-      "amount": [
-        {
-          "denom": "ustos",
-          "amount": "100"
-        }
-      ],
-      "gas": "200000"
-    },
-    "signatures": null,
-    "memo": "Send Tx Example"
-  }
-}
-```
-</details>
-<br>
-
--->
 
 ***
 
@@ -1101,8 +639,7 @@ https://rest.thestratos.org/cosmos/distribution/delegators/st1pvyjzlhwrpgklu0044
 Response Example:
 ```json
 {
-    "height": "1430",
-    "result": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh"
+  "withdraw_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh"
 }
 ```
 </details>
@@ -1133,33 +670,28 @@ Response Example:
 
 
 <details>
-    <summary><code>GET /distribution/validators/{validatorAddr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries validator distribution information</summary>
+    <summary><code>GET /cosmos/distribution/v1beta1/validators/{validatorAddr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries validator distribution information</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/distribution/validators/stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu
+https://rest.thestratos.org//cosmos/distribution/v1beta1/validators/stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu
 ```
 Response Example:
 ```json
 {
-    "height": "1544",
-    "result": {
-        "operator_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
-        "self_bond_rewards": [
-            {
-                "denom": "wei",
-                "amount": "589121578147958674973.028000000000000000"
-            }
-        ],
-        "val_commission": {
-            "commission": [
-                {
-                    "denom": "wei",
-                    "amount": "65457953127550963885.892000000000000000"
-                }
-            ]
-        }
+  "operator_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
+  "self_bond_rewards": [
+    {
+      "denom": "wei",
+      "amount": "589121578147958674973.028000000000000000"
     }
+  ],
+  "commission": [
+    {
+      "denom": "wei",
+      "amount": "65457953127550963885.892000000000000000"
+    }
+  ]
 }
 ```
 </details>
@@ -1169,13 +701,9 @@ Response Example:
 <details>
     <summary><code>GET /cosmos/distribution/v1beta1/validators/{validator_address}/outstanding_rewards</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries outstanding rewards of a validator address</summary>
 
-    Alias: /distribution/validators/{validatorAddr}/outstanding_rewards
-
 Request Example:
 ```http
 https://rest.thestratos.org/cosmos/distribution/v1beta1/validators/stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu/outstanding_rewards
-or
-https://rest.thestratos.org/distribution/validators/stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu/outstanding_rewards
 ```
 Response Example:
 ```json
@@ -1191,51 +719,7 @@ Response Example:
 }
 ```
 </details>
-<br>
 
-<details>
-    <summary><code>GET /distribution/validators/{validator_address}/rewards</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries the total rewards of a single validator</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/distribution/validators/stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu/rewards
-```
-Response Example:
-```json
-{"height":"1578","result":[
-    {
-        "denom": "wei",
-        "amount": "602096285784320679462.390000000000000000"
-    }
-]}
-```
-</details>
-<br>
-
-
-<details>
-    <summary><code>GET /cosmos/distribution/v1beta1/params</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries params of the distribution module</summary>
-
-    Alias: /distribution/parameters
-
-Request Example:
-```http
-https://rest.thestratos.org/cosmos/distribution/v1beta1/params
-or 
-https://rest.thestratos.org/distribution/parameters
-```
-Response Example:
-```json
-{
-    "params": {
-        "community_tax": "0.020000000000000000",
-        "base_proposer_reward": "0.010000000000000000",
-        "bonus_proposer_reward": "0.040000000000000000",
-        "withdraw_addr_enabled": true
-    }
-}
-```
-</details>
 <br>
 
 <details>
@@ -1257,351 +741,108 @@ Response Example:
 }
 ```
 </details>
+
 <br>
 
-<!--
 <details>
-    <summary><code>POST /distribution/delegators/{delegatorAddr}/rewards</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Withdraw all the delegator's delegation rewards</summary>
+    <summary><code>GET /cosmos/distribution/v1beta1/params</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries params of the distribution module</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/distribution/delegators/st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2/rewards
-```
-Request Body
-```json
-{
-  "base_req": {
-    "from": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-    "memo": "Withdraw Rewards Tx Example",
-    "chain_id": "test-chain",
-    "account_number": "0",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "1000"
-      }
-    ],
-    "simulate": false
-  }
-}
+https://rest.thestratos.org/cosmos/distribution/v1beta1/params
 ```
 Response Example:
 ```json
 {
-    "type": "cosmos-sdk/StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "cosmos-sdk/MsgWithdrawDelegationReward",
-                "value": {
-                    "delegator_address": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-                    "validator_address": "stvaloper1xnhfx7c0nev9me835409efjj7whd672x8ky28p"
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "ustos",
-                    "amount": "1000"
-                }
-            ],
-            "gas": "200000"
-        },
-        "signatures": null,
-        "memo": "Withdraw Rewards Tx Example"
+    "params": {
+        "community_tax": "0.020000000000000000",
+        "base_proposer_reward": "0.010000000000000000",
+        "bonus_proposer_reward": "0.040000000000000000",
+        "withdraw_addr_enabled": true
     }
 }
 ```
 </details>
+
 <br>
-
-
-
-<details>
-    <summary><code>POST /distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Withdraw a delegator's delegation reward from a single validator</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/distribution/delegators/st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2/rewards/stvaloper1xnhfx7c0nev9me835409efjj7whd672x8ky28p
-```
-Request Body
-```json
-{
-  "base_req": {
-    "from": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-    "memo": "Withdraw Rewards From a Single Validator Tx Example",
-    "chain_id": "test-chain",
-    "account_number": "0",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "100"
-      }
-    ],
-    "simulate": false
-  }
-}
-```
-Response Example:
-```json
-{
-    "type": "cosmos-sdk/StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "cosmos-sdk/MsgWithdrawDelegationReward",
-                "value": {
-                    "delegator_address": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-                    "validator_address": "stvaloper1xnhfx7c0nev9me835409efjj7whd672x8ky28p"
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "ustos",
-                    "amount": "100"
-                }
-            ],
-            "gas": "200000"
-        },
-        "signatures": null,
-        "memo": "Withdraw Rewards From a Single Validator Tx Example"
-    }
-}
-```
-</details>
-<br>
-
-
-<details>
-    <summary><code>POST /distribution/delegators/{delegatorAddr}/withdraw_address</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Replace the delegations' rewards withdrawal address for a new one.</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/distribution/delegators/st1wkya79c9dvqrwc7um4n9vljc0duds3z5y56j7f/withdraw_address
-```
-Request Body
-```json
-{
-  "base_req": {
-    "from": "st1wkya79c9dvqrwc7um4n9vljc0duds3z5y56j7f",
-    "memo": "Replace the Rewards Withdrawal Address Tx Example",
-    "chain_id": "test-chain",
-    "account_number": "0",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "100"
-      }
-    ],
-    "simulate": false
-  },
-  "withdraw_address": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2"
-}
-```
-Response Example:
-```json
-{
-    "type": "cosmos-sdk/StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "cosmos-sdk/MsgModifyWithdrawAddress",
-                "value": {
-                    "delegator_address": "st1wkya79c9dvqrwc7um4n9vljc0duds3z5y56j7f",
-                    "withdraw_address": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2"
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "ustos",
-                    "amount": "100"
-                }
-            ],
-            "gas": "200000"
-        },
-        "signatures": null,
-        "memo": "Replace the Rewards Withdrawal Address Tx Example"
-    }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>POST /distribution/validators/{validatorAddr}/rewards</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Withdraw the validator's self-delegation and commissions rewards</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/distribution/validators/stvaloper1xnhfx7c0nev9me835409efjj7whd672x8ky28p/rewards
-```
-Request Body
-```json
-{
-  "base_req": {
-    "from": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-    "memo": "Withdraw the Validator's Rewards Tx Example",
-    "chain_id": "test-chain",
-    "account_number": "0",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "100"
-      }
-    ],
-    "simulate": false
-  }
-}
-```
-Response Example:
-```json
-{
-    "type": "cosmos-sdk/StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
-                "value": {
-                    "validator_address": "stvaloper1xnhfx7c0nev9me835409efjj7whd672x8ky28p"
-                }
-            },
-            {
-                "type": "cosmos-sdk/MsgWithdrawDelegationReward",
-                "value": {
-                    "delegator_address": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-                    "validator_address": "stvaloper1xnhfx7c0nev9me835409efjj7whd672x8ky28p"
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "ustos",
-                    "amount": "100"
-                }
-            ],
-            "gas": "200000"
-        },
-        "signatures": null,
-        "memo": "Withdraw the Validator's Rewards Tx Example"
-    }
-}
-```
-</details>
-<br>
--->
 
 ***
 
 ### Gov
 
 <details>
-    <summary><code>GET /gov/proposals</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all proposals information</summary>
+    <summary><code>GET /cosmos/gov/v1/proposals</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all proposals information</summary>
 
 
 Request Example:
 ```http
-https://rest.thestratos.org/gov/proposals
+https://rest.thestratos.org/cosmos/gov/v1/proposals
 ```
 Response Example:
 ```json
 {
-    "height": "6224",
-    "result": [
+  "proposals": [
+    {
+      "id": "1",
+      "messages": [
         {
-            "id": "1",
-            "content": {
-                "type": "cosmos-sdk/ParameterChangeProposal",
-                "value": {
-                    "title": "Parameter changes for validator downtime",
-                    "description": "If passed, this governance proposal will do two things:\n\n1. Increase the slashing penalty for downtime from 0.01% to 0.50%\n2. Decrease the window \n\nIf this proposal passes, validators must sign at least 5% of 5,000 blocks, which is 250 blocks. That means that a validator that misses 4,750 consecutive blocks will be considered by the system to have committed a liveness violation, where previously 9,500 consecutive blocks would need to have been missed to violate these system rules. Assuming 7s block times, validators offline for approximately 9.25 consecutive hours (instead of ~18.5 hours) will be slashed 0.5% (instead of 0.01%).",
-                    "changes": [
-                        {
-                            "subspace": "slashing",
-                            "key": "SlashFractionDowntime",
-                            "value": "\"0.005000000000000000\""
-                        },
-                        {
-                            "subspace": "slashing",
-                            "key": "SignedBlocksWindow",
-                            "value": "\"5000\""
-                        }
-                    ]
-                }
-            },
-            "status": 2,
-            "final_tally_result": {
-                "yes": "0",
-                "abstain": "0",
-                "no": "0",
-                "no_with_veto": "0"
-            },
-            "submit_time": "2022-07-19T23:37:29.577871179Z",
-            "deposit_end_time": "2022-07-21T23:37:29.577871179Z",
-            "total_deposit": [
-                {
-                    "denom": "wei",
-                    "amount": "100000000000"
-                }
-            ],
-            "voting_start_time": "2022-07-19T23:37:29.577871179Z",
-            "voting_end_time": "2022-07-21T23:37:29.577871179Z"
-        },
-        {
-            "id": "2",
-            "content": {
-                "type": "cosmos-sdk/ParameterChangeProposal",
-                "value": {
-                    "title": "Param-Change",
-                    "description": "This is a test to update deposit params in gov Module",
-                    "changes": [
-                        {
-                            "subspace": "gov",
-                            "key": "depositparams",
-                            "value": "{\"max_deposit_period\":\"72800000000000\"}"
-                        }
-                    ]
-                }
-            },
-            "status": 2,
-            "final_tally_result": {
-                "yes": "0",
-                "abstain": "0",
-                "no": "0",
-                "no_with_veto": "0"
-            },
-            "submit_time": "2022-07-19T23:40:40.359241471Z",
-            "deposit_end_time": "2022-07-21T23:40:40.359241471Z",
-            "total_deposit": [
-                {
-                    "denom": "wei",
-                    "amount": "1000000000000"
-                }
-            ],
-            "voting_start_time": "2022-07-19T23:40:40.359241471Z",
-            "voting_end_time": "2022-07-21T23:40:40.359241471Z"
+          "@type": "/cosmos.gov.v1.MsgExecLegacyContent",
+          "content": {
+            "@type": "/cosmos.params.v1beta1.ParameterChangeProposal",
+            "title": "update voting params",
+            "description": "update voting period",
+            "changes": [
+              {
+                "subspace": "gov",
+                "key": "votingparams",
+                "value": "{\"voting_period\": \"86400\"}"
+              },
+              {
+                "subspace": "gov",
+                "key": "depositparams",
+                "value": "{\"min_deposit\": [{\"denom\": \"wei\",\"amount\": \"1000000\"}],\"max_deposit_period\": \"86400\"}"
+              }
+            ]
+          },
+          "authority": "st10d07y265gmmuvt4z0w9aw880jnsr700jx08hhw"
         }
-    ]
+      ],
+      "status": "PROPOSAL_STATUS_DEPOSIT_PERIOD",
+      "final_tally_result": {
+        "yes_count": "0",
+        "abstain_count": "0",
+        "no_count": "0",
+        "no_with_veto_count": "0"
+      },
+      "submit_time": "2024-03-07T20:26:22.453900094Z",
+      "deposit_end_time": "2024-03-09T20:26:22.453900094Z",
+      "total_deposit": [
+        {
+          "denom": "wei",
+          "amount": "10000000000"
+        }
+      ],
+      "voting_start_time": null,
+      "voting_end_time": null,
+      "metadata": "",
+      "title": "update voting params",
+      "summary": "update voting period",
+      "proposer": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+    }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "1"
+  }
 }
+
 ```
 </details>
 <br>
 
 
 <details>
-    <summary><code>GET /gov/proposals?{params}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries proposals information with parameters</summary>
+    <summary><code>GET /cosmos/gov/v1/proposals?{params}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries proposals information with parameters</summary>
 
 Parameters:
 ```diff
@@ -1612,125 +853,160 @@ Parameters:
 
 Request Example:
 ```http
-https://rest.thestratos.org/gov/proposals?status=PROPOSAL_STATUS_UNSPECIFIED
+https://rest.thestratos.org/cosmos/gov/v1/proposals?status=PROPOSAL_STATUS_DEPOSIT_PERIOD
 ```
 Response Example:
 ```json
 {
-    "height": "6187",
-    "result": [
+  "proposals": [
+    {
+      "id": "1",
+      "messages": [
         {
-            "id": "1",
-            "content": {
-                "type": "cosmos-sdk/ParameterChangeProposal",
-                "value": {
-                    "title": "Parameter changes for validator downtime",
-                    "description": "If passed, this governance proposal will do two things:\n\n1. Increase the slashing penalty for downtime from 0.01% to 0.50%\n2. Decrease the window \n\nIf this proposal passes, validators must sign at least 5% of 5,000 blocks, which is 250 blocks. That means that a validator that misses 4,750 consecutive blocks will be considered by the system to have committed a liveness violation, where previously 9,500 consecutive blocks would need to have been missed to violate these system rules. Assuming 7s block times, validators offline for approximately 9.25 consecutive hours (instead of ~18.5 hours) will be slashed 0.5% (instead of 0.01%).",
-                    "changes": [
-                        {
-                            "subspace": "slashing",
-                            "key": "SlashFractionDowntime",
-                            "value": "\"0.005000000000000000\""
-                        },
-                        {
-                            "subspace": "slashing",
-                            "key": "SignedBlocksWindow",
-                            "value": "\"5000\""
-                        }
-                    ]
-                }
-            },
-            "status": 2,
-            "final_tally_result": {
-                "yes": "0",
-                "abstain": "0",
-                "no": "0",
-                "no_with_veto": "0"
-            },
-            "submit_time": "2022-07-19T23:37:29.577871179Z",
-            "deposit_end_time": "2022-07-21T23:37:29.577871179Z",
-            "total_deposit": [
-                {
-                    "denom": "wei",
-                    "amount": "100000000000"
-                }
-            ],
-            "voting_start_time": "2022-07-19T23:37:29.577871179Z",
-            "voting_end_time": "2022-07-21T23:37:29.577871179Z"
-        }
-    ]
-}
-```
-</details>
-<br>
-
-
-<details>
-    <summary><code>GET /cosmos/gov/v1beta1/proposals/{proposal_id}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries proposal details based on ProposalID</summary>
-
-    Alias: /gov/proposals/{proposalId}
-
-Request Example:
-```http
-https://rest.thestratos.org/cosmos/gov/v1beta1/proposals/2
-or
-https://rest.thestratos.org/gov/proposals/2
-```
-Response Example:
-```json
-{
-    "proposal": {
-        "proposal_id": "2",
-        "content": {
+          "@type": "/cosmos.gov.v1.MsgExecLegacyContent",
+          "content": {
             "@type": "/cosmos.params.v1beta1.ParameterChangeProposal",
-            "title": "Param-Change",
-            "description": "This is a test to update deposit params in gov Module",
+            "title": "update voting params",
+            "description": "update voting period",
             "changes": [
-                {
-                    "subspace": "gov",
-                    "key": "depositparams",
-                    "value": "{\"max_deposit_period\":\"72800000000000\"}"
-                }
+              {
+                "subspace": "gov",
+                "key": "votingparams",
+                "value": "{\"voting_period\": \"86400\"}"
+              },
+              {
+                "subspace": "gov",
+                "key": "depositparams",
+                "value": "{\"min_deposit\": [{\"denom\": \"wei\",\"amount\": \"1000000\"}],\"max_deposit_period\": \"86400\"}"
+              }
             ]
-        },
-        "status": "PROPOSAL_STATUS_VOTING_PERIOD",
-        "final_tally_result": {
-            "yes": "0",
-            "abstain": "0",
-            "no": "0",
-            "no_with_veto": "0"
-        },
-        "submit_time": "2022-07-19T23:40:40.359241471Z",
-        "deposit_end_time": "2022-07-21T23:40:40.359241471Z",
-        "total_deposit": [
-            {
-                "denom": "wei",
-                "amount": "1000000000000"
-            }
-        ],
-        "voting_start_time": "2022-07-19T23:40:40.359241471Z",
-        "voting_end_time": "2022-07-21T23:40:40.359241471Z"
+          },
+          "authority": "st10d07y265gmmuvt4z0w9aw880jnsr700jx08hhw"
+        }
+      ],
+      "status": "PROPOSAL_STATUS_DEPOSIT_PERIOD",
+      "final_tally_result": {
+        "yes_count": "0",
+        "abstain_count": "0",
+        "no_count": "0",
+        "no_with_veto_count": "0"
+      },
+      "submit_time": "2024-03-07T20:26:22.453900094Z",
+      "deposit_end_time": "2024-03-09T20:26:22.453900094Z",
+      "total_deposit": [
+        {
+          "denom": "wei",
+          "amount": "10000000000"
+        }
+      ],
+      "voting_start_time": null,
+      "voting_end_time": null,
+      "metadata": "",
+      "title": "update voting params",
+      "summary": "update voting period",
+      "proposer": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
     }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "1"
+  }
 }
 ```
 </details>
 <br>
 
+
 <details>
-    <summary><code>GET /gov/proposals/{proposalId}/proposer</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries for the proposer for a proposal</summary>
+    <summary><code>GET /cosmos/gov/v1/proposals/{proposal_id}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries proposal details based on ProposalID</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/gov/proposals/1/proposer
+https://rest.thestratos.org/cosmos/gov/v1/proposals/1
 ```
 Response Example:
 ```json
 {
-    "height": "0",
-    "result": {
-        "proposal_id": "1",
-        "proposer": "st1v33vxhmu9kp9yrncfldvt0zg9qlcepc75lyggk"
+  "proposal": {
+    "id": "1",
+    "messages": [
+      {
+        "@type": "/cosmos.gov.v1.MsgExecLegacyContent",
+        "content": {
+          "@type": "/cosmos.params.v1beta1.ParameterChangeProposal",
+          "title": "update voting params",
+          "description": "update voting period",
+          "changes": [
+            {
+              "subspace": "gov",
+              "key": "votingparams",
+              "value": "{\"voting_period\": \"86400\"}"
+            },
+            {
+              "subspace": "gov",
+              "key": "depositparams",
+              "value": "{\"min_deposit\": [{\"denom\": \"wei\",\"amount\": \"1000000\"}],\"max_deposit_period\": \"86400\"}"
+            }
+          ]
+        },
+        "authority": "st10d07y265gmmuvt4z0w9aw880jnsr700jx08hhw"
+      }
+    ],
+    "status": "PROPOSAL_STATUS_DEPOSIT_PERIOD",
+    "final_tally_result": {
+      "yes_count": "0",
+      "abstain_count": "0",
+      "no_count": "0",
+      "no_with_veto_count": "0"
+    },
+    "submit_time": "2024-03-07T20:26:22.453900094Z",
+    "deposit_end_time": "2024-03-09T20:26:22.453900094Z",
+    "total_deposit": [
+      {
+        "denom": "wei",
+        "amount": "10000000000"
+      }
+    ],
+    "voting_start_time": null,
+    "voting_end_time": null,
+    "metadata": "",
+    "title": "update voting params",
+    "summary": "update voting period",
+    "proposer": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+  }
+}
+```
+</details>
+
+<br>
+
+
+<details>
+    <summary><code>GET /cosmos/gov/v1/proposals/{proposal_id}/deposits</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all deposits of a single proposal</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/cosmos/gov/v1/proposals/1/deposits
+```
+Response Example:
+```json
+{
+  "deposits": [
+    {
+      "proposal_id": "1",
+      "depositor": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+      "amount": [
+        {
+          "denom": "wei",
+          "amount": "10000000000"
+        }
+      ]
     }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "1"
+  }
 }
 ```
 </details>
@@ -1738,7 +1014,112 @@ Response Example:
 
 
 <details>
-    <summary><code>GET /cosmos/gov/v1beta1/params/{params_type}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all parameters of the gov module</summary>
+    <summary><code>GET /cosmos/gov/v1/proposals/{proposal_id}/deposits/{depositor}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries single deposit information based proposalID, depositAddr</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/cosmos/gov/v1/proposals/1/deposits/st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m
+```
+Response Example:
+```json
+{
+  "deposit": {
+    "proposal_id": "1",
+    "depositor": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+    "amount": [
+      {
+        "denom": "wei",
+        "amount": "10000000000"
+      }
+    ]
+  }
+}
+```
+</details>
+<br>
+
+
+<details>
+    <summary><code>GET /cosmos/gov/v1/proposals/{proposal_id}/votes</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries votes of a given proposal</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/cosmos/gov/v1/proposals/1/votes
+```
+Response Example:
+```json
+{
+  "votes": [
+    {
+      "proposal_id": "1",
+      "voter": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+      "options": [
+        {
+          "option": "VOTE_OPTION_YES",
+          "weight": "1.000000000000000000"
+        }
+      ],
+      "metadata": ""
+    }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "1"
+  }
+}
+```
+</details>
+<br>
+
+<details>
+    <summary><code>GET /cosmos/gov/v1/proposals/{proposal_id}/votes/{voter}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries voted information based on proposalID, voterAddr</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/cosmos/gov/v1/proposals/1/votes/st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m
+```
+Response Example:
+```json
+{
+  "vote": {
+    "proposal_id": "1",
+    "voter": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+    "options": [
+      {
+        "option": "VOTE_OPTION_YES",
+        "weight": "1.000000000000000000"
+      }
+    ],
+    "metadata": ""
+  }
+}
+```
+</details>
+<br>
+
+<details>
+    <summary><code>GET /cosmos/gov/v1/proposals/{proposal_id}/tally</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries the tally of a proposal vote</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/cosmos/gov/v1/proposals/1/tally
+```
+Response Example:
+```json
+{
+  "tally": {
+    "yes_count": "500000000000000000000",
+    "abstain_count": "0",
+    "no_count": "0",
+    "no_with_veto_count": "0"
+  }
+}
+```
+</details>
+<br>
+
+<details>
+    <summary><code>GET /cosmos/gov/v1/params/{params_type}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all parameters of the gov module</summary>
 
 Request Example:
 
@@ -1747,568 +1128,44 @@ Request Example:
 ```
 
 ```http
-https://rest.thestratos.org/cosmos/gov/v1beta1/params/deposit
+https://rest.thestratos.org/cosmos/gov/v1/params/deposit
 ```
 Response Example:
 ```json
 {
-    "voting_params": {
-        "voting_period": "0s"
-    },
-    "deposit_params": {
-        "min_deposit": [
-            {
-                "denom": "wei",
-                "amount": "10000000000"
-            }
-        ],
-        "max_deposit_period": "172800s"
-    },
-    "tally_params": {
-        "quorum": "0.000000000000000000",
-        "threshold": "0.000000000000000000",
-        "veto_threshold": "0.000000000000000000"
-    }
-}
-```
-</details>
-<br>
-
-
-
-<details>
-    <summary><code>GET /cosmos/gov/v1beta1/proposals/{proposal_id}/deposits</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all deposits of a single proposal</summary>
-
-    Alias: /gov/proposals/{proposalId}/deposits
-
-Request Example:
-```http
-https://rest.thestratos.org/cosmos/gov/v1beta1/proposals/2/deposits
-or
-https://rest.thestratos.org/gov/proposals/2/deposits
-```
-Response Example:
-```json
-{
-    "deposits": [
-        {
-            "proposal_id": "2",
-            "depositor": "st1v33vxhmu9kp9yrncfldvt0zg9qlcepc75lyggk",
-            "amount": [
-                {
-                    "denom": "wei",
-                    "amount": "1000000000000"
-                }
-            ]
-        }
-    ],
-    "pagination": {
-        "next_key": null,
-        "total": "1"
-    }
-}
-```
-</details>
-<br>
-
-
-<details>
-    <summary><code>GET /cosmos/gov/v1beta1/proposals/{proposal_id}/deposits/{depositor}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries single deposit information based proposalID, depositAddr</summary>
-
-    Alias: /gov/proposals/{proposalId}/deposits/{depositor}
-
-Request Example:
-```http
-https://rest.thestratos.org/cosmos/gov/v1beta1/proposals/2/deposits/st1v33vxhmu9kp9yrncfldvt0zg9qlcepc75lyggk
-or
-https://rest.thestratos.org/gov/proposals/2/deposits/st1v33vxhmu9kp9yrncfldvt0zg9qlcepc75lyggk
-```
-Response Example:
-```json
-{
-    "deposit": {
-        "proposal_id": "2",
-        "depositor": "st1v33vxhmu9kp9yrncfldvt0zg9qlcepc75lyggk",
-        "amount": [
-            {
-                "denom": "wei",
-                "amount": "1000000000000"
-            }
-        ]
-    }
-}
-```
-</details>
-<br>
-
-
-<details>
-    <summary><code>GET /cosmos/gov/v1beta1/proposals/{proposal_id}/votes</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries votes of a given proposal</summary>
-
-    Alias: /gov/proposals/{proposalId}/votes
-
-Request Example:
-```http
-https://rest.thestratos.org/gov/proposals/1/votes
-or
-https://rest.thestratos.org/gov/proposals/1/votes
-```
-Response Example:
-```json
-{
-    "height": "0",
-    "result": [
-        {
-            "proposal_id": "1",
-            "voter": "st1fw6tcpku363yz6le7569wzzg84val68e9eayq7",
-            "option": 1,
-            "options": [
-                {
-                    "option": 1,
-                    "weight": "1.000000000000000000"
-                }
-            ]
-        },
-        {
-            "proposal_id": "1",
-            "voter": "st1v33vxhmu9kp9yrncfldvt0zg9qlcepc75lyggk",
-            "option": 1,
-            "options": [
-                {
-                    "option": 1,
-                    "weight": "1.000000000000000000"
-                }
-            ]
-        }
-    ]
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>GET /cosmos/gov/v1beta1/proposals/{proposal_id}/votes/{voter}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries voted information based on proposalID, voterAddr</summary>
-
-    Alias: /gov/proposals/{proposalId}/votes/{voter}
-
-Request Example:
-```http
-https://rest.thestratos.org/cosmos/gov/v1beta1/proposals/1/votes/st1v33vxhmu9kp9yrncfldvt0zg9qlcepc75lyggk
-or
-https://rest.thestratos.org/gov/proposals/1/votes/st1v33vxhmu9kp9yrncfldvt0zg9qlcepc75lyggk
-```
-Response Example:
-```json
-{
-    "vote": {
-        "proposal_id": "1",
-        "voter": "st1v33vxhmu9kp9yrncfldvt0zg9qlcepc75lyggk",
-        "option": "VOTE_OPTION_YES",
-        "options": [
-            {
-                "option": "VOTE_OPTION_YES",
-                "weight": "1.000000000000000000"
-            }
-        ]
-    }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>GET /cosmos/gov/v1beta1/proposals/{proposal_id}/tally</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries the tally of a proposal vote</summary>
-
-
-    Alias: /gov/proposals/{proposalId}/tally
-
-Request Example:
-```http
-https://rest.thestratos.org/cosmos/gov/v1beta1/proposals/1/tally
-or
-https://rest.thestratos.org/gov/proposals/1/tally
-```
-Response Example:
-```json
-{
-    "tally": {
-        "yes": "500000000900",
-        "abstain": "0",
-        "no": "0",
-        "no_with_veto": "0"
-    }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>GET /gov/parameters/deposit</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries gov deposit parameters</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/gov/parameters/deposit
-```
-Response Example:
-```json
-{
-    "height": "6625",
-    "result": {
-        "min_deposit": [
-            {
-                "denom": "wei",
-                "amount": "10000000000"
-            }
-        ],
-        "max_deposit_period": "172800000000000"
-    }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>GET /gov/parameters/tallying</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries governance tally parameters</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/gov/parameters/tallying
-```
-Response Example:
-```json
-{
-    "height": "6629",
-    "result": {
-        "quorum": "0.334000000000000000",
-        "threshold": "0.500000000000000000",
-        "veto_threshold": "0.334000000000000000"
-    }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>GET /gov/parameters/voting</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries governance voting parameters</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/gov/parameters/voting
-```
-Response Example:
-```json
-{
-    "height": "6635",
-    "result": {
-        "voting_period": "172800000000000"
-    }
-}
-```
-</details>
-<br>
-
-<!--
-<details>
-    <summary><code>POST /gov/proposals</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Send transaction to submit a proposal</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/gov/proposals
-```
-Request Body:
-```json
-{
-  "base_req": {
-    "from": "st1g3saypgcxzfzpsx94lmr30gzk0rrfc892guayr",
-    "memo": "Submit Proposal Tx Example",
-    "chain_id": "test-chain",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
+  "voting_params": null,
+  "deposit_params": {
+    "min_deposit": [
       {
-        "denom": "ustos",
-        "amount": "100"
+        "denom": "wei",
+        "amount": "10000000"
       }
     ],
-    "simulate": false
+    "max_deposit_period": "172800s"
   },
-  "title": "Text Proposal",
-  "description": "This is a text proposal example",
-  "proposal_type": "text",
-  "proposer": "st1g3saypgcxzfzpsx94lmr30gzk0rrfc892guayr",
-  "initial_deposit": [
-    {
-      "denom": "ustos",
-      "amount": "1000000"
-    }
-  ]
-}
-```
-Response Example:
-```json
-{
-  "type": "cosmos-sdk/StdTx",
-  "value": {
-    "msg": [
+  "tally_params": null,
+  "params": {
+    "min_deposit": [
       {
-        "type": "cosmos-sdk/MsgSubmitProposal",
-        "value": {
-          "content": {
-            "type": "cosmos-sdk/TextProposal",
-            "value": {
-              "title": "Text Proposal",
-              "description": "This is a text proposal example"
-            }
-          },
-          "initial_deposit": [
-            {
-              "denom": "ustos",
-              "amount": "1000000"
-            }
-          ],
-          "proposer": "st1g3saypgcxzfzpsx94lmr30gzk0rrfc892guayr"
-        }
+        "denom": "wei",
+        "amount": "10000000"
       }
     ],
-    "fee": {
-      "amount": [
-        {
-          "denom": "ustos",
-          "amount": "100"
-        }
-      ],
-      "gas": "200000"
-    },
-    "signatures": null,
-    "memo": "Submit Proposal Tx Example"
+    "max_deposit_period": "172800s",
+    "voting_period": "172800s",
+    "quorum": "0.334000000000000000",
+    "threshold": "0.500000000000000000",
+    "veto_threshold": "0.334000000000000000",
+    "min_initial_deposit_ratio": "0.000000000000000000",
+    "burn_vote_quorum": false,
+    "burn_proposal_deposit_prevote": false,
+    "burn_vote_veto": true
   }
 }
 ```
 </details>
+
 <br>
-
-<details>
-    <summary><code>POST /gov/proposals/param_change</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Generate a parameter change proposal transaction</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/gov/proposals/param_change
-```
-Request Body:
-```json
-{
-  "base_req": {
-    "from": "st1g3saypgcxzfzpsx94lmr30gzk0rrfc892guayr",
-    "memo": "Generate a parameter-change proposal Tx Example",
-    "chain_id": "test-chain",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "100"
-      }
-    ],
-    "simulate": false
-  },
-  "title": "Param-Change Staking MaxValidators to 100",
-  "description": "This is a test to update MaxValidators to 100 in staking Module",
-  "proposer": "st1g3saypgcxzfzpsx94lmr30gzk0rrfc892guayr",
-  "deposit": [
-    {
-      "denom": "ustos",
-      "amount": "10000000"
-    }
-  ],
-  "changes": [
-    {
-      "subspace": "staking",
-      "key": "MaxValidators",
-      "value": 100
-    }
-  ]
-}
-```
-Response Example:
-```json
-{
-    "type": "cosmos-sdk/StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "cosmos-sdk/MsgSubmitProposal",
-                "value": {
-                    "content": {
-                        "type": "cosmos-sdk/ParameterChangeProposal",
-                        "value": {
-                            "title": "Param-Change Staking MaxValidators to 100",
-                            "description": "This is a test to update MaxValidators to 100 in staking Module",
-                            "changes": [
-                                {
-                                    "subspace": "staking",
-                                    "key": "MaxValidators",
-                                    "value": "100"
-                                }
-                            ]
-                        }
-                    },
-                    "initial_deposit": [
-                        {
-                            "denom": "ustos",
-                            "amount": "10000000"
-                        }
-                    ],
-                    "proposer": "st1g3saypgcxzfzpsx94lmr30gzk0rrfc892guayr"
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "ustos",
-                    "amount": "100"
-                }
-            ],
-            "gas": "200000"
-        },
-        "signatures": null,
-        "memo": "Generate a parameter-change proposal Tx Example"
-    }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>POST /gov/proposals/{proposalId}/deposits</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Deposit tokens to a proposal</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/gov/proposals/1/deposits
-```
-Request Body:
-```json
-{
-  "base_req": {
-    "from": "st1g3saypgcxzfzpsx94lmr30gzk0rrfc892guayr",
-    "memo": "Deposit tokens to Proposal 1 Tx Example",
-    "chain_id": "test-chain",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "100"
-      }
-    ],
-    "simulate": false
-  },
-   "depositor": "st1g3saypgcxzfzpsx94lmr30gzk0rrfc892guayr",
-  "amount": [
-    {
-      "denom": "ustos",
-      "amount": "10000000"
-    }
-  ]
-}
-```
-Response Example:
-```json
-{
-    "type": "cosmos-sdk/StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "cosmos-sdk/MsgDeposit",
-                "value": {
-                    "proposal_id": "1",
-                    "depositor": "st1g3saypgcxzfzpsx94lmr30gzk0rrfc892guayr",
-                    "amount": [
-                        {
-                            "denom": "ustos",
-                            "amount": "10000000"
-                        }
-                    ]
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "ustos",
-                    "amount": "100"
-                }
-            ],
-            "gas": "200000"
-        },
-        "signatures": null,
-        "memo": "Deposit tokens to Proposal 1 Tx Example"
-    }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>POST /gov/proposals/{proposalId}/votes</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Send transaction to vote a proposal</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/gov/proposals/1/votes
-```
-Request Body:
-```json
-{
-  "base_req": {
-    "from": "st1g3saypgcxzfzpsx94lmr30gzk0rrfc892guayr",
-    "memo": "Vote Proposal 1 Tx Example",
-    "chain_id": "test-chain",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "100"
-      }
-    ],
-    "simulate": false
-  },
-  "voter": "st1g3saypgcxzfzpsx94lmr30gzk0rrfc892guayr",
-  "option": "yes"
-}
-```
-Response Example:
-```json
-{
-    "type": "cosmos-sdk/StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "cosmos-sdk/MsgVote",
-                "value": {
-                    "proposal_id": "1",
-                    "voter": "st1g3saypgcxzfzpsx94lmr30gzk0rrfc892guayr",
-                    "option": "Yes"
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "ustos",
-                    "amount": "100"
-                }
-            ],
-            "gas": "200000"
-        },
-        "signatures": null,
-        "memo": "Vote Proposal 1 Tx Example"
-    }
-}
-```
-</details>
-<br>
--->
 
 ***
 
@@ -2317,25 +1174,21 @@ Response Example:
 <details>
     <summary><code>GET /cosmos/mint/v1beta1/params</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries mint module parameters</summary>
 
-    Alias: /minting/parameters
-
 Request Example:
 ```http
 https://rest.thestratos.org/cosmos/mint/v1beta1/params
-or 
-https://rest.thestratos.org/minting/parameters
 ```
 Response Example:
 ```json
 {
-    "params": {
-        "mint_denom": "wei",
-        "inflation_rate_change": "0.130000000000000000",
-        "inflation_max": "0.200000000000000000",
-        "inflation_min": "0.070000000000000000",
-        "goal_bonded": "0.670000000000000000",
-        "blocks_per_year": "6311520"
-    }
+  "params": {
+    "mint_denom": "wei",
+    "inflation_rate_change": "0.130000000000000000",
+    "inflation_max": "0.200000000000000000",
+    "inflation_min": "0.070000000000000000",
+    "goal_bonded": "0.670000000000000000",
+    "blocks_per_year": "6311520"
+  }
 }
 ```
 </details>
@@ -2344,13 +1197,9 @@ Response Example:
 <details>
     <summary><code>GET /cosmos/mint/v1beta1/inflation</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries current minting inflation value</summary>
 
-    Alias: /minting/inflation    
-
 Request Example:
 ```http
 https://rest.thestratos.org/cosmos/mint/v1beta1/inflation
- or
-https://rest.thestratos.org/minting/inflation
 ```
 Response Example:
 ```json
@@ -2364,12 +1213,9 @@ Response Example:
 <details>
     <summary><code>GET /cosmos/mint/v1beta1/annual_provisions</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries current minting annual provisions value</summary>
 
-    Alias: /minting/annual-provisions
 Request Example:
 ```http
 https://rest.thestratos.org/cosmos/mint/v1beta1/annual_provisions
-or 
-https://rest.thestratos.org/minting/annual-provisions
 ```
 Response Example:
 ```json
@@ -2387,30 +1233,27 @@ Response Example:
 <details>
     <summary><code>GET /cosmos/slashing/v1beta1/signing_infos</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries signing info of all validators</summary>
 
-    Alias: /slashing/signing_infos
 Request Example:
 ```http
 https://rest.thestratos.org/cosmos/slashing/v1beta1/signing_infos
-or 
-https://rest.thestratos.org/slashing/signing_infos
 ```
 Response Example:
 ```json
 {
-    "info": [
-        {
-            "address": "stvalcons1rzn3d8qmgf7ejsfn77eag5zwjfufmvmu7sn802",
-            "start_height": "0",
-            "index_offset": "2986",
-            "jailed_until": "1970-01-01T00:00:00Z",
-            "tombstoned": false,
-            "missed_blocks_counter": "0"
-        }
-    ],
-    "pagination": {
-        "next_key": null,
-        "total": "1"
+  "info": [
+    {
+      "address": "stvalcons1qk2flmcrpyyxs6ekq7wgh62caeqjmp6ymddlvp",
+      "start_height": "0",
+      "index_offset": "195",
+      "jailed_until": "1970-01-01T00:00:00Z",
+      "tombstoned": false,
+      "missed_blocks_counter": "0"
     }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "1"
+  }
 }
 ```
 </details>
@@ -2419,24 +1262,20 @@ Response Example:
 <details>
     <summary><code>GET /cosmos/slashing/v1beta1/params</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries the current slashing parameters</summary>
 
-    Alias: /slashing/parameters
-
 Request Example:
 ```http
 https://rest.thestratos.org/cosmos/slashing/v1beta1/params
-or
-https://rest.thestratos.org/slashing/parameters
 ```
 Response Example:
 ```json
 {
-    "params": {
-        "signed_blocks_window": "100",
-        "min_signed_per_window": "0.500000000000000000",
-        "downtime_jail_duration": "600s",
-        "slash_fraction_double_sign": "0.050000000000000000",
-        "slash_fraction_downtime": "0.010000000000000000"
-    }
+  "params": {
+    "signed_blocks_window": "100",
+    "min_signed_per_window": "0.500000000000000000",
+    "downtime_jail_duration": "600s",
+    "slash_fraction_double_sign": "0.050000000000000000",
+    "slash_fraction_downtime": "0.010000000000000000"
+  }
 }
 ```
 </details>
@@ -2447,183 +1286,301 @@ Response Example:
 
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/slashing/v1beta1/signing_infos/stvalcons1rzn3d8qmgf7ejsfn77eag5zwjfufmvmu7sn802
+https://rest.thestratos.org/cosmos/slashing/v1beta1/signing_infos/stvalcons1qk2flmcrpyyxs6ekq7wgh62caeqjmp6ymddlvp
 ```
 Response Example:
 ```json
 {
-    "val_signing_info": {
-        "address": "stvalcons1rzn3d8qmgf7ejsfn77eag5zwjfufmvmu7sn802",
-        "start_height": "0",
-        "index_offset": "3004",
-        "jailed_until": "1970-01-01T00:00:00Z",
-        "tombstoned": false,
-        "missed_blocks_counter": "0"
-    }
-}
-```
-</details>
-<br>
-
-<!--
-<details>
-    <summary><code>POST /slashing/validators/{validatorAddr}/unjail</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Send transaction to unjail a jailed validator</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/slashing/validators/stvaloper1xnhfx7c0nev9me835409efjj7whd672x8ky28p/unjail
-```
-Request Body
-```shell
-{
-  "base_req": {
-    "from": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-    "memo": "Unjail a Jailed Validator Tx Example",
-    "chain_id": "test-chain",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "100"
-      }
-    ],
-    "simulate": false
-  }
-}
-```
-Response Example:
-```json
-{
-  "type": "cosmos-sdk/StdTx",
-  "value": {
-    "msg": [
-      {
-        "type": "cosmos-sdk/MsgUnjail",
-        "value": {
-          "address": "stvaloper1xnhfx7c0nev9me835409efjj7whd672x8ky28p"
-        }
-      }
-    ],
-    "fee": {
-      "amount": [
-        {
-          "denom": "ustos",
-          "amount": "100"
-        }
-      ],
-      "gas": "200000"
-    },
-    "signatures": null,
-    "memo": "Unjail a Jailed Validator Tx Example"
+  "val_signing_info": {
+    "address": "stvalcons1qk2flmcrpyyxs6ekq7wgh62caeqjmp6ymddlvp",
+    "start_height": "0",
+    "index_offset": "198",
+    "jailed_until": "1970-01-01T00:00:00Z",
+    "tombstoned": false,
+    "missed_blocks_counter": "0"
   }
 }
 ```
 </details>
+
 <br>
--->
 
 ***
 
 ### Staking
 
 <details>
-    <summary><code>GET /cosmos/staking/v1beta1/delegations/{delegator_addr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all delegations of a given delegator address</summary>
-
-    Alias: /staking/delegators/{delegatorAddr}/delegations
+    <summary><code>GET /cosmos/staking/v1beta1/validators</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all validator candidates</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/staking/v1beta1/delegations/st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh
-or
-https://rest.thestratos.org/staking/delegators/st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh/delegations
+https://rest.thestratos.org/cosmos/staking/v1beta1/validators
 ```
+
+
+|:warning: By default it returns only the bonded validators|
+|:------------------------------------|
+
 Response Example:
 ```json
 {
-    "delegation_responses": [
-        {
-            "delegation": {
-                "delegator_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
-                "validator_address": "stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu",
-                "shares": "500000000000.000000000000000000"
-            },
-            "balance": {
-                "denom": "wei",
-                "amount": "500000000000"
-            }
-        }
-    ],
-    "pagination": {
-        "next_key": null,
-        "total": "1"
-    }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>GET /staking/delegators/{delegatorAddr}/delegations/{validatorAddr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries current delegation between a delegator and a validator</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/staking/delegators/st1fw6tcpku363yz6le7569wzzg84val68e9eayq7/delegations/stvaloper1v33vxhmu9kp9yrncfldvt0zg9qlcepc7rndg5a
-```
-Response Example:
-```json
-{
-    "height": "3060",
-    "result": {
-        "delegation": {
-            "delegator_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
-            "validator_address": "stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu",
-            "shares": "500000000000.000000000000000000"
-        },
-        "balance": {
-            "denom": "wei",
-            "amount": "500000000000"
-        }
-    }
-}
-```
-</details>
-<br>
-
-
-<!--
-<details>
-    <summary><code>GET /staking/redelegations</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all redelegations</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/staking/redelegations
-```
-Response Example:
-```json
-{
-  "height": "2823",
-  "result": [
+  "validators": [
     {
-      "delegator_address": "st15xlpwafgnvvs5hdk8938dp2ve6cjmy4vcf4l76",
-      "validator_src_address": "stvaloper1gamc7ajhzukp08nle9z9asyfx4u4dlz53dquzj",
-      "validator_dst_address": "stvaloper1zgqhnz69jppcwg9z27vtq3zq9r3du5v6vjqvpq",
+      "operator_address": "stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs",
+      "consensus_pubkey": {
+        "@type": "/cosmos.crypto.ed25519.PubKey",
+        "key": "yaG6YrluzJfxOgwFuRhlgpOvQAmzBS7kqMVvISN8XWs="
+      },
+      "jailed": false,
+      "status": "BOND_STATUS_BONDED",
+      "tokens": "504000000000000000000",
+      "delegator_shares": "504000000000000000000.000000000000000000",
+      "description": {
+        "moniker": "node",
+        "identity": "",
+        "website": "",
+        "security_contact": "",
+        "details": ""
+      },
+      "unbonding_height": "0",
+      "unbonding_time": "1970-01-01T00:00:00Z",
+      "commission": {
+        "commission_rates": {
+          "rate": "0.100000000000000000",
+          "max_rate": "0.200000000000000000",
+          "max_change_rate": "0.010000000000000000"
+        },
+        "update_time": "2024-03-07T14:14:09.179630523Z"
+      },
+      "min_self_delegation": "1",
+      "unbonding_on_hold_ref_count": "0",
+      "unbonding_ids": []
+    }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "1"
+  }
+}
+```
+</details>
+
+<br>
+
+<details>
+    <summary><code>GET /cosmos/staking/v1beta1/validators/{validator_addr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries validator info for given validator address</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/cosmos/staking/v1beta1/validators/stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs
+```
+Response Example:
+```json
+{
+  "validator": {
+    "operator_address": "stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs",
+    "consensus_pubkey": {
+      "@type": "/cosmos.crypto.ed25519.PubKey",
+      "key": "yaG6YrluzJfxOgwFuRhlgpOvQAmzBS7kqMVvISN8XWs="
+    },
+    "jailed": false,
+    "status": "BOND_STATUS_BONDED",
+    "tokens": "504000000000000000000",
+    "delegator_shares": "504000000000000000000.000000000000000000",
+    "description": {
+      "moniker": "node",
+      "identity": "",
+      "website": "",
+      "security_contact": "",
+      "details": ""
+    },
+    "unbonding_height": "0",
+    "unbonding_time": "1970-01-01T00:00:00Z",
+    "commission": {
+      "commission_rates": {
+        "rate": "0.100000000000000000",
+        "max_rate": "0.200000000000000000",
+        "max_change_rate": "0.010000000000000000"
+      },
+      "update_time": "2024-03-07T14:14:09.179630523Z"
+    },
+    "min_self_delegation": "1",
+    "unbonding_on_hold_ref_count": "0",
+    "unbonding_ids": []
+  }
+}
+```
+</details>
+<br>
+
+<details>
+    <summary><code>GET /cosmos/staking/v1beta1/validators/{validator_addr}/delegations</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries delegate info for given validator</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/cosmos/staking/v1beta1/validators/stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs/delegations
+```
+Response Example:
+```json
+{
+  "delegation_responses": [
+    {
+      "delegation": {
+        "delegator_address": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+        "validator_address": "stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs",
+        "shares": "4000000000000000000.000000000000000000"
+      },
+      "balance": {
+        "denom": "wei",
+        "amount": "4000000000000000000"
+      }
+    },
+    {
+      "delegation": {
+        "delegator_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+        "validator_address": "stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs",
+        "shares": "500000000000000000000.000000000000000000"
+      },
+      "balance": {
+        "denom": "wei",
+        "amount": "500000000000000000000"
+      }
+    }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "2"
+  }
+}
+```
+</details>
+<br>
+
+<details>
+    <summary><code>GET /cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries delegate info for given validator delegator pair</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/cosmos/staking/v1beta1/validators/stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs/delegations/st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m
+```
+Response Example:
+```json
+{
+  "delegation_response": {
+    "delegation": {
+      "delegator_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+      "validator_address": "stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs",
+      "shares": "500000000000000000000.000000000000000000"
+    },
+    "balance": {
+      "denom": "wei",
+      "amount": "500000000000000000000"
+    }
+  }
+}
+```
+</details>
+<br>
+
+
+<details>
+    <summary><code>GET /cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries unbonding info for given validator delegator pair</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/cosmos/staking/v1beta1/validators/stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs/delegations/st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l/unbonding_delegation
+```
+Response Example:
+```json
+{
+  "unbond": {
+    "delegator_address": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+    "validator_address": "stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs",
+    "entries": [
+      {
+        "creation_height": "595",
+        "completion_time": "2024-03-28T22:05:03.666256743Z",
+        "initial_balance": "1000000000000000000",
+        "balance": "1000000000000000000",
+        "unbonding_id": "1",
+        "unbonding_on_hold_ref_count": "0"
+      }
+    ]
+  }
+}
+```
+</details>
+<br>
+
+
+<details>
+    <summary><code>GET /cosmos/staking/v1beta1/validators/{validator_addr}/unbonding_delegations</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries unbonding delegations of a validator.</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/cosmos/staking/v1beta1/validators/stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs/unbonding_delegations
+```
+Response Example:
+```json
+{
+  "unbonding_responses": [
+    {
+      "delegator_address": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+      "validator_address": "stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs",
       "entries": [
         {
-          "creation_height": 1909,
-          "completion_time": "2021-09-02T19:33:26.890343914Z",
-          "initial_balance": "10000",
-          "shares_dst": "10000.000000000000000000",
-          "balance": "10000"
+          "creation_height": "595",
+          "completion_time": "2024-03-28T22:05:03.666256743Z",
+          "initial_balance": "1000000000000000000",
+          "balance": "1000000000000000000",
+          "unbonding_id": "1",
+          "unbonding_on_hold_ref_count": "0"
         }
       ]
     }
-  ]
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "1"
+  }
 }
 ```
 </details>
 <br>
--->
+
+
+<details>
+    <summary><code>GET /cosmos/staking/v1beta1/delegations/{delegator_addr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all delegations of a given delegator address</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/cosmos/staking/v1beta1/delegations/st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m
+```
+Response Example:
+```json
+{
+  "delegation_responses": [
+    {
+      "delegation": {
+        "delegator_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+        "validator_address": "stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs",
+        "shares": "500000000000000000000.000000000000000000"
+      },
+      "balance": {
+        "denom": "wei",
+        "amount": "500000000000000000000"
+      }
+    }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "1"
+  }
+}
+```
+</details>
+
+<br>
 
 <details>
     <summary><code>GET /cosmos/staking/v1beta1/delegators/{delegator_addr}/redelegations</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries redelegations of given address.</summary>
@@ -2676,93 +1633,60 @@ Response Example:
 <details>
     <summary><code>GET /cosmos/staking/v1beta1/delegators/{delegator_addr}/unbonding_delegations</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all unbonding delegations of a given delegator address</summary>
 
-    Alias:  /staking/delegators/{delegatorAddr}/unbonding_delegations
-
-
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/staking/v1beta1/delegators/st1fw6tcpku363yz6le7569wzzg84val68e9eayq7/unbonding_delegations
-or
-https://rest.thestratos.org/staking/delegators/st1fw6tcpku363yz6le7569wzzg84val68e9eayq7/unbonding_delegations
+https://rest.thestratos.org/cosmos/staking/v1beta1/delegators/st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l/unbonding_delegations
 ```
 Response Example:
 ```json
 {
   "unbonding_responses": [
     {
-      "delegator_address": "string",
-      "validator_address": "string",
+      "delegator_address": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+      "validator_address": "stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs",
       "entries": [
         {
-          "creation_height": "string",
-          "completion_time": "2022-07-19T19:59:10.339Z",
-          "initial_balance": "string",
-          "balance": "string"
+          "creation_height": "595",
+          "completion_time": "2024-03-28T22:05:03.666256743Z",
+          "initial_balance": "1000000000000000000",
+          "balance": "1000000000000000000",
+          "unbonding_id": "1",
+          "unbonding_on_hold_ref_count": "0"
         }
       ]
     }
   ],
   "pagination": {
-    "next_key": "string",
-    "total": "string"
+    "next_key": null,
+    "total": "1"
   }
 }
 ```
 </details>
-<br>
 
-<details>
-    <summary><code>GET /staking/delegators/{delegatorAddr}/unbonding_delegations/{validatorAddr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all unbonding delegations between a delegator and a validator</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/staking/delegators/st12adksjsd7gcsn23h5jmvdygzx2lfw5q4kgq5zh/unbonding_delegations/stvaloper12adksjsd7gcsn23h5jmvdygzx2lfw5q4pyf57u
-```
-Response Example:
-```json
-{
-  "height": "2742",
-  "result": {
-    "delegator_address": "st12adksjsd7gcsn23h5jmvdygzx2lfw5q4kgq5zh",
-    "validator_address": "stvaloper12adksjsd7gcsn23h5jmvdygzx2lfw5q4pyf57u",
-    "entries": [
-      {
-        "creation_height": "2739",
-        "completion_time": "2021-09-03T00:26:44.825391686Z",
-        "initial_balance": "10000",
-        "balance": "10000"
-      }
-    ]
-  }
-}
-```
-</details>
 <br>
 
 <details>
     <summary><code>GET /cosmos/staking/v1beta1/delegators/{delegator_addr}/validators</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all validators info for given delegator address.</summary>
 
-    Alias: /staking/delegators/{delegatorAddr}/validators
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/staking/v1beta1/delegators/st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh/validators
-or
-https://rest.thestratos.org/staking/delegators/st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh/validators
+https://rest.thestratos.org/cosmos/staking/v1beta1/delegators/st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l/validators
 ```
 Response Example:
 ```json
 {
   "validators": [
     {
-      "operator_address": "stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu",
+      "operator_address": "stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs",
       "consensus_pubkey": {
         "@type": "/cosmos.crypto.ed25519.PubKey",
-        "key": "69gothWTE9FJBZ5gBjjSNhg8y/5SsI1hBaD81Dum7lo="
+        "key": "yaG6YrluzJfxOgwFuRhlgpOvQAmzBS7kqMVvISN8XWs="
       },
       "jailed": false,
       "status": "BOND_STATUS_BONDED",
-      "tokens": "500000000000",
-      "delegator_shares": "500000000000.000000000000000000",
+      "tokens": "504000000000000000000",
+      "delegator_shares": "504000000000000000000.000000000000000000",
       "description": {
         "moniker": "node",
         "identity": "",
@@ -2778,9 +1702,11 @@ Response Example:
           "max_rate": "0.200000000000000000",
           "max_change_rate": "0.010000000000000000"
         },
-        "update_time": "2023-01-09T17:08:58.489050300Z"
+        "update_time": "2024-03-07T14:14:09.179630523Z"
       },
-      "min_self_delegation": "1"
+      "min_self_delegation": "1",
+      "unbonding_on_hold_ref_count": "0",
+      "unbonding_ids": []
     }
   ],
   "pagination": {
@@ -2795,129 +1721,24 @@ Response Example:
 <details>
     <summary><code>GET /cosmos/staking/v1beta1/delegators/{delegator_addr}/validators/{validator_addr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries validator info for given delegator validator pair.</summary>
 
-    Alias: /staking/delegators/{delegatorAddr}/validators/{validatorAddr}
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/staking/v1beta1/delegators/st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh/validators/stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu
-or
-https://rest.thestratos.org/staking/delegators/st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh/validators/stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu
+https://rest.thestratos.org/cosmos/staking/v1beta1/delegators/st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l/validators/stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs
 ```
 
-Response Example:
-```json
-{
-  "height": "3158",
-  "result": {
-    "operator_address": "stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu",
-    "consensus_pubkey": {
-      "type": "tendermint/PubKeyEd25519",
-      "value": "69gothWTE9FJBZ5gBjjSNhg8y/5SsI1hBaD81Dum7lo="
-    },
-    "status": 3,
-    "tokens": "500000000000",
-    "delegator_shares": "500000000000.000000000000000000",
-    "description": {
-      "moniker": "node"
-    },
-    "unbonding_time": "1970-01-01T00:00:00Z",
-    "commission": {
-      "commission_rates": {
-        "rate": "0.100000000000000000",
-        "max_rate": "0.200000000000000000",
-        "max_change_rate": "0.010000000000000000"
-      },
-      "update_time": "2023-01-09T17:08:58.4890503Z"
-    },
-    "min_self_delegation": "1"
-  }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>GET /cosmos/staking/v1beta1/validators</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all validator candidates</summary>
-
-    Alias: /staking/validators
-
-Request Example:
-```http
-https://rest.thestratos.org/cosmos/staking/v1beta1/validators
-or
-https://rest.thestratos.org/staking/validators
-```
-
-
-|:warning: By default it returns only the bonded validators|
-|:------------------------------------|
-
-Response Example:
-```json
-{
-  "validators": [
-    {
-      "operator_address": "stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu",
-      "consensus_pubkey": {
-        "@type": "/cosmos.crypto.ed25519.PubKey",
-        "key": "69gothWTE9FJBZ5gBjjSNhg8y/5SsI1hBaD81Dum7lo="
-      },
-      "jailed": false,
-      "status": "BOND_STATUS_BONDED",
-      "tokens": "500000000000",
-      "delegator_shares": "500000000000.000000000000000000",
-      "description": {
-        "moniker": "node",
-        "identity": "",
-        "website": "",
-        "security_contact": "",
-        "details": ""
-      },
-      "unbonding_height": "0",
-      "unbonding_time": "1970-01-01T00:00:00Z",
-      "commission": {
-        "commission_rates": {
-          "rate": "0.100000000000000000",
-          "max_rate": "0.200000000000000000",
-          "max_change_rate": "0.010000000000000000"
-        },
-        "update_time": "2023-01-09T17:08:58.489050300Z"
-      },
-      "min_self_delegation": "1"
-    }
-  ],
-  "pagination": {
-    "next_key": null,
-    "total": "1"
-  }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>GET /cosmos/staking/v1beta1/validators/{validator_addr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries validator info for given validator address</summary>
-
-    Alias: /staking/validators/{validatorAddr}
-
-Request Example:
-```http
-https://rest.thestratos.org/cosmos/staking/v1beta1/validators/stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu
-or
-https://rest.thestratos.org/staking/validators/stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu
-```
 Response Example:
 ```json
 {
   "validator": {
-    "operator_address": "stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu",
+    "operator_address": "stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs",
     "consensus_pubkey": {
       "@type": "/cosmos.crypto.ed25519.PubKey",
-      "key": "69gothWTE9FJBZ5gBjjSNhg8y/5SsI1hBaD81Dum7lo="
+      "key": "yaG6YrluzJfxOgwFuRhlgpOvQAmzBS7kqMVvISN8XWs="
     },
     "jailed": false,
     "status": "BOND_STATUS_BONDED",
-    "tokens": "500000000000",
-    "delegator_shares": "500000000000.000000000000000000",
+    "tokens": "504000000000000000000",
+    "delegator_shares": "504000000000000000000.000000000000000000",
     "description": {
       "moniker": "node",
       "identity": "",
@@ -2933,135 +1754,11 @@ Response Example:
         "max_rate": "0.200000000000000000",
         "max_change_rate": "0.010000000000000000"
       },
-      "update_time": "2023-01-09T17:08:58.489050300Z"
+      "update_time": "2024-03-07T14:14:09.179630523Z"
     },
-    "min_self_delegation": "1"
-  }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>GET /cosmos/staking/v1beta1/validators/{validator_addr}/delegations</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries delegate info for given validator</summary>
-
-    Alias: /staking/validators/{validatorAddr}/delegations
-Request Example:
-```http
-https://rest.thestratos.org/cosmos/staking/v1beta1/validators/stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu/delegations
-or
-https://rest.thestratos.org/staking/validators/stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu/delegations
-```
-Response Example:
-```json
-{
-  "delegation_responses": [
-    {
-      "delegation": {
-        "delegator_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
-        "validator_address": "stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu",
-        "shares": "500000000000.000000000000000000"
-      },
-      "balance": {
-        "denom": "wei",
-        "amount": "500000000000"
-      }
-    }
-  ],
-  "pagination": {
-    "next_key": null,
-    "total": "1"
-  }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>GET /cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries delegate info for given validator delegator pair</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/cosmos/staking/v1beta1/validators/stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu/delegations/st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh
-```
-Response Example:
-```json
-{
-  "delegation_response": {
-    "delegation": {
-      "delegator_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
-      "validator_address": "stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu",
-      "shares": "500000000000.000000000000000000"
-    },
-    "balance": {
-      "denom": "wei",
-      "amount": "500000000000"
-    }
-  }
-}
-```
-</details>
-<br>
-
-
-<details>
-    <summary><code>GET /cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries unbonding info for given validator delegator pair</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/cosmos/staking/v1beta1/validators/stvaloper1v33vxhmu9kp9yrncfldvt0zg9qlcepc7rndg5a/delegations/st1fw6tcpku363yz6le7569wzzg84val68e9eayq7/unbonding_delegation
-```
-Response Example:
-```json
-{
-  "unbond": {
-    "delegator_address": "st1fw6tcpku363yz6le7569wzzg84val68e9eayq7",
-    "validator_address": "stvaloper1v33vxhmu9kp9yrncfldvt0zg9qlcepc7rndg5a",
-    "entries": [
-      {
-        "creation_height": "4336",
-        "completion_time": "2022-08-09T21:02:38.208383315Z",
-        "initial_balance": "100",
-        "balance": "100"
-      }
-    ]
-  }
-}
-```
-</details>
-<br>
-
-
-<details>
-    <summary><code>GET /cosmos/staking/v1beta1/validators/{validator_addr}/unbonding_delegations</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries unbonding delegations of a validator.</summary>
-
-    Alias: /staking/validators/{validatorAddr}/unbonding_delegations
-Request Example:
-```http
-https://rest.thestratos.org/cosmos/staking/v1beta1/validators/stvaloper1v33vxhmu9kp9yrncfldvt0zg9qlcepc7rndg5a/unbonding_delegations
-or
-https://rest.thestratos.org/staking/validators/stvaloper1v33vxhmu9kp9yrncfldvt0zg9qlcepc7rndg5a/unbonding_delegations
-```
-Response Example:
-```json
-{
-  "unbonding_responses": [
-    {
-      "delegator_address": "st1fw6tcpku363yz6le7569wzzg84val68e9eayq7",
-      "validator_address": "stvaloper1v33vxhmu9kp9yrncfldvt0zg9qlcepc7rndg5a",
-      "entries": [
-        {
-          "creation_height": "4336",
-          "completion_time": "2022-08-09T21:02:38.208383315Z",
-          "initial_balance": "100",
-          "balance": "100"
-        }
-      ]
-    }
-  ],
-  "pagination": {
-    "next_key": null,
-    "total": "1"
+    "min_self_delegation": "1",
+    "unbonding_on_hold_ref_count": "0",
+    "unbonding_ids": []
   }
 }
 ```
@@ -3071,20 +1768,16 @@ Response Example:
 <details>
     <summary><code>GET /cosmos/staking/v1beta1/pool</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries the current state of the staking pool</summary>
 
-    Alias: /staking/pool
 Request Example:
 ```http
 https://rest.thestratos.org/cosmos/staking/v1beta1/pool
-or
-https://rest.thestratos.org/staking/pool
 ```
 Response Example:
 ```json
 {
-  "height": "3295",
-  "result": {
-    "not_bonded_tokens": "0",
-    "bonded_tokens": "500000000000"
+  "pool": {
+    "not_bonded_tokens": "1000000000000000000",
+    "bonded_tokens": "504000000000000000000"
   }
 }
 ```
@@ -3094,23 +1787,21 @@ Response Example:
 <details>
     <summary><code>GET /cosmos/staking/v1beta1/params</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries the current staking parameter values</summary>
 
-    Alias: /staking/parameters
 Request Example:
 ```http
 https://rest.thestratos.org/cosmos/staking/v1beta1/params
-or
-https://rest.thestratos.org/staking/parameters
+
 ```
 Response Example:
 ```json
 {
-  "height": "3306",
-  "result": {
-    "unbonding_time": "1814400000000000",
+  "params": {
+    "unbonding_time": "1814400s",
     "max_validators": 100,
     "max_entries": 7,
     "historical_entries": 10000,
-    "bond_denom": "wei"
+    "bond_denom": "wei",
+    "min_commission_rate": "0.000000000000000000"
   }
 }
 ```
@@ -3122,7 +1813,7 @@ Response Example:
 
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/staking/v1beta1/historical_info/3306
+https://rest.thestratos.org/cosmos/staking/v1beta1/historical_info/700
 ```
 Response Example:
 ```json
@@ -3133,37 +1824,37 @@ Response Example:
         "block": "11",
         "app": "0"
       },
-      "chain_id": "test-chain",
-      "height": "3306",
-      "time": "2023-01-11T16:52:59.055776222Z",
+      "chain_id": "testchain",
+      "height": "700",
+      "time": "2024-03-07T22:13:53.403600862Z",
       "last_block_id": {
-        "hash": "m9Oo8OpUP0fhPJdidZlFKtAPlQhwSgEfiYKrEkqvUF8=",
+        "hash": "ciQRFn0JV6YMcF5SH505JExie/8o0HHftFNGw06nbvU=",
         "part_set_header": {
           "total": 1,
-          "hash": "pUakkavHHERRXfzunIB4hyPB2wPl9DeTqmgunmTsmXY="
+          "hash": "KIlY8gHbKLbl0Yf2bPct/VURG1Fd40Cn4KK28fzzkbU="
         }
       },
-      "last_commit_hash": "x7G3rcph4rtTJDmXOn/hdHwnq6jb3dLV9thcS2zv8fc=",
+      "last_commit_hash": "CmoVerksnE+b6CIfEzrPjUdNa0HDkFgZPJ8b2N+ptEI=",
       "data_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
-      "validators_hash": "UjS9kaOnUeBVw1h2V43kpGYxGoDVQLWYha9o721NVt4=",
-      "next_validators_hash": "UjS9kaOnUeBVw1h2V43kpGYxGoDVQLWYha9o721NVt4=",
+      "validators_hash": "JoO6Nk+7nESoqIzxXZ0RKF+BhgYedjPL5HD5LFKHwaA=",
+      "next_validators_hash": "JoO6Nk+7nESoqIzxXZ0RKF+BhgYedjPL5HD5LFKHwaA=",
       "consensus_hash": "BICRvH3cKD93v7+R1zxE2ljD34qcvIZ0Bdi389qtoi8=",
-      "app_hash": "I769v0BCHX/DgctOF5/Y+mnM8m+ia11goQXvUM2uto8=",
+      "app_hash": "Ccf/psHVEHdBnxVSErJ9QF0YAxpZMefD/BeHsJnJzVE=",
       "last_results_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
       "evidence_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
-      "proposer_address": "GKcWnBtCfZlBM/ez1FBOknids3w="
+      "proposer_address": "BZSf7wMJCGhrNgeci+lY7kEth0Q="
     },
     "valset": [
       {
-        "operator_address": "stvaloper1pvyjzlhwrpgklu0044at4t6qh7m23k3k5xpswu",
+        "operator_address": "stvaloper1edp9gkppxzjvcg9nwheh6tp9rsgafatcp9ylxs",
         "consensus_pubkey": {
           "@type": "/cosmos.crypto.ed25519.PubKey",
-          "key": "69gothWTE9FJBZ5gBjjSNhg8y/5SsI1hBaD81Dum7lo="
+          "key": "yaG6YrluzJfxOgwFuRhlgpOvQAmzBS7kqMVvISN8XWs="
         },
         "jailed": false,
         "status": "BOND_STATUS_BONDED",
-        "tokens": "500000000000",
-        "delegator_shares": "500000000000.000000000000000000",
+        "tokens": "504000000000000000000",
+        "delegator_shares": "504000000000000000000.000000000000000000",
         "description": {
           "moniker": "node",
           "identity": "",
@@ -3179,226 +1870,19 @@ Response Example:
             "max_rate": "0.200000000000000000",
             "max_change_rate": "0.010000000000000000"
           },
-          "update_time": "2023-01-09T17:08:58.489050300Z"
+          "update_time": "2024-03-07T14:14:09.179630523Z"
         },
-        "min_self_delegation": "1"
+        "min_self_delegation": "1",
+        "unbonding_on_hold_ref_count": "0",
+        "unbonding_ids": []
       }
     ]
   }
 }
 ```
 </details>
+
 <br>
-
-
-
-<!--
-<details>
-    <summary><code>POST /staking/delegators/{delegatorAddr}/delegations</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Submit delegation</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/staking/delegators/st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2/delegations
-```
-Request Body:
-```json
-{
-  "base_req": {
-    "from": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-    "memo": "Submit Delegation Tx Example",
-    "chain_id": "test-chain",
-    "account_number": "0",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "100"
-      }
-    ],
-    "simulate": false
-  },
-   "delegator_address": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-    "validator_address": "stvaloper1xnhfx7c0nev9me835409efjj7whd672x8ky28p",
-    "amount": {
-        "denom": "ustos",
-        "amount": "10000"
-    }
-}
-```
-Response Example:
-```json
-{
-    "type": "cosmos-sdk/StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "cosmos-sdk/MsgDelegate",
-                "value": {
-                    "delegator_address": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-                    "validator_address": "stvaloper1xnhfx7c0nev9me835409efjj7whd672x8ky28p",
-                    "amount": {
-                        "denom": "ustos",
-                        "amount": "10000"
-                    }
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "ustos",
-                    "amount": "100"
-                }
-            ],
-            "gas": "200000"
-        },
-        "signatures": null,
-        "memo": "Submit Delegation Tx Example"
-    }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>POST /staking/delegators/{delegatorAddr}/unbonding_delegations</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Submit an unbonding delegation</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/staking/delegators/st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2/unbonding_delegations
-```
-Request Body:
-```json
-{
-  "base_req": {
-    "from": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-    "memo": "Submit Unbonding-delegation Tx Example",
-    "chain_id": "test-chain",
-    "account_number": "0",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "100"
-      }
-    ],
-    "simulate": false
-  },
-   "delegator_address": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-    "validator_address": "stvaloper1xnhfx7c0nev9me835409efjj7whd672x8ky28p",
-    "amount": {
-        "denom": "ustos",
-        "amount": "10000"
-    }
-}
-```
-Response Example:
-```json
-{
-    "type": "cosmos-sdk/StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "cosmos-sdk/MsgUndelegate",
-                "value": {
-                    "delegator_address": "st1xnhfx7c0nev9me835409efjj7whd672xs6d2m2",
-                    "validator_address": "stvaloper1xnhfx7c0nev9me835409efjj7whd672x8ky28p",
-                    "amount": {
-                        "denom": "ustos",
-                        "amount": "10000"
-                    }
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "ustos",
-                    "amount": "100"
-                }
-            ],
-            "gas": "200000"
-        },
-        "signatures": null,
-        "memo": "Submit Unbonding-delegation Tx Example"
-    }
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>POST /staking/delegators/{delegatorAddr}/redelegations</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Submit a redelegation</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/staking/delegators/st15xlpwafgnvvs5hdk8938dp2ve6cjmy4vcf4l76/redelegations
-```
-Request Body:
-```json
-{
-  "base_req": {
-    "from": "st15xlpwafgnvvs5hdk8938dp2ve6cjmy4vcf4l76",
-    "memo": "Submit Re-delegation Tx Example",
-    "chain_id": "test-chain",
-    "account_number": "0",
-    "gas": "200000",
-    "gas_adjustment": "1.2",
-    "fees": [
-      {
-        "denom": "ustos",
-        "amount": "100"
-      }
-    ],
-    "simulate": false
-  },
-  "delegator_address": "st15xlpwafgnvvs5hdk8938dp2ve6cjmy4vcf4l76",
-  "validator_src_address": "stvaloper1gamc7ajhzukp08nle9z9asyfx4u4dlz53dquzj",
-  "validator_dst_address": "stvaloper1zgqhnz69jppcwg9z27vtq3zq9r3du5v6vjqvpq",
-  "amount": {
-    "denom": "ustos",
-    "amount": "10000"
-  }
-}
-```
-Response Example:
-```json
-{
-  "type": "cosmos-sdk/StdTx",
-  "value": {
-    "msg": [
-      {
-        "type": "cosmos-sdk/MsgBeginRedelegate",
-        "value": {
-          "delegator_address": "st15xlpwafgnvvs5hdk8938dp2ve6cjmy4vcf4l76",
-          "validator_src_address": "stvaloper1gamc7ajhzukp08nle9z9asyfx4u4dlz53dquzj",
-          "validator_dst_address": "stvaloper1zgqhnz69jppcwg9z27vtq3zq9r3du5v6vjqvpq",
-          "amount": {
-            "denom": "ustos",
-            "amount": "10000"
-          }
-        }
-      }
-    ],
-    "fee": {
-      "amount": [
-        {
-          "denom": "ustos",
-          "amount": "100"
-        }
-      ],
-      "gas": "200000"
-    },
-    "signatures": null,
-    "memo": "Submit Re-delegation Tx Example"
-  }
-}
-```
-</details>
-<br>
--->
 
 ***
 
@@ -3415,10 +1899,10 @@ Response Example:
 ```json
 {
   "block_id": {
-    "hash": "sMqrEks0H7oR/8svEPNfQNDs/ohLHMRF63VOd5nUCIo=",
+    "hash": "lBHIQTVmY69uPYLO2U+6Hc+WnTyxJCOg4KHEdE61cLg=",
     "part_set_header": {
       "total": 1,
-      "hash": "KAPRCqsANSLnnJy5SplBnGtP3c1xPZ+IUe0k2pUU8aE="
+      "hash": "BI05Rm+Cu9tcyaD6MtcZT/TELH3usNEb06Ow6hAePGg="
     }
   },
   "block": {
@@ -3427,25 +1911,25 @@ Response Example:
         "block": "11",
         "app": "0"
       },
-      "chain_id": "test-chain",
-      "height": "3342",
-      "time": "2023-01-11T16:55:59.811290254Z",
+      "chain_id": "testchain",
+      "height": "838",
+      "time": "2024-03-07T22:25:29.761240552Z",
       "last_block_id": {
-        "hash": "FdTnVbBsS5nnK66URj5Lv6v6/889XdJTyShJC6eREvY=",
+        "hash": "SdSpYG72uqNEMMV1o8ziDFPKt/PM7M00k0bwA3hUmKw=",
         "part_set_header": {
           "total": 1,
-          "hash": "ucD3c65YyXhsqe21apRAs9R4Ytw3TBM42yVNV1hohKg="
+          "hash": "rAs9rndCQE5yGY5PEDlP9kz6i4HlJ/dcQbRr7BogF6E="
         }
       },
-      "last_commit_hash": "/oU+N+xWq/0a1vHz9hte2BlMGn33LQcJAdNWaYOaX1s=",
+      "last_commit_hash": "I11Q6Pn8ElFS6jxf2mbTg4rRUWMU0ref9ZVTodTpUPc=",
       "data_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
-      "validators_hash": "UjS9kaOnUeBVw1h2V43kpGYxGoDVQLWYha9o721NVt4=",
-      "next_validators_hash": "UjS9kaOnUeBVw1h2V43kpGYxGoDVQLWYha9o721NVt4=",
+      "validators_hash": "JoO6Nk+7nESoqIzxXZ0RKF+BhgYedjPL5HD5LFKHwaA=",
+      "next_validators_hash": "JoO6Nk+7nESoqIzxXZ0RKF+BhgYedjPL5HD5LFKHwaA=",
       "consensus_hash": "BICRvH3cKD93v7+R1zxE2ljD34qcvIZ0Bdi389qtoi8=",
-      "app_hash": "Pgf0fbYlN8UPoOOI5c0qQZCuuL3Q32NV8swM+OJnvLo=",
+      "app_hash": "IGWGjx9a8FbYmkpNQ5z6H/r28ZIIjWx8oTaYS1Myb7s=",
       "last_results_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
       "evidence_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
-      "proposer_address": "GKcWnBtCfZlBM/ez1FBOknids3w="
+      "proposer_address": "BZSf7wMJCGhrNgeci+lY7kEth0Q="
     },
     "data": {
       "txs": []
@@ -3454,21 +1938,73 @@ Response Example:
       "evidence": []
     },
     "last_commit": {
-      "height": "3341",
+      "height": "837",
       "round": 0,
       "block_id": {
-        "hash": "FdTnVbBsS5nnK66URj5Lv6v6/889XdJTyShJC6eREvY=",
+        "hash": "SdSpYG72uqNEMMV1o8ziDFPKt/PM7M00k0bwA3hUmKw=",
         "part_set_header": {
           "total": 1,
-          "hash": "ucD3c65YyXhsqe21apRAs9R4Ytw3TBM42yVNV1hohKg="
+          "hash": "rAs9rndCQE5yGY5PEDlP9kz6i4HlJ/dcQbRr7BogF6E="
         }
       },
       "signatures": [
         {
           "block_id_flag": "BLOCK_ID_FLAG_COMMIT",
-          "validator_address": "GKcWnBtCfZlBM/ez1FBOknids3w=",
-          "timestamp": "2023-01-11T16:55:59.811290254Z",
-          "signature": "tspmnLBjoCTfUbfh1gv1/YTnCOlcJAjadfbguSFvWB+GwROVoxcPvGjxqHBiFbKvyG/yJTjr4FSauLXDvoBgAw=="
+          "validator_address": "BZSf7wMJCGhrNgeci+lY7kEth0Q=",
+          "timestamp": "2024-03-07T22:25:29.761240552Z",
+          "signature": "ocwelTOQbyvbAuWUl8D3A3lezTsAKq+Ia/VCUVhHCGa2rE9knzmUV/zXrXtyej5eCGLaHpHRWAdu9pfcPhEUCA=="
+        }
+      ]
+    }
+  },
+  "sdk_block": {
+    "header": {
+      "version": {
+        "block": "11",
+        "app": "0"
+      },
+      "chain_id": "testchain",
+      "height": "838",
+      "time": "2024-03-07T22:25:29.761240552Z",
+      "last_block_id": {
+        "hash": "SdSpYG72uqNEMMV1o8ziDFPKt/PM7M00k0bwA3hUmKw=",
+        "part_set_header": {
+          "total": 1,
+          "hash": "rAs9rndCQE5yGY5PEDlP9kz6i4HlJ/dcQbRr7BogF6E="
+        }
+      },
+      "last_commit_hash": "I11Q6Pn8ElFS6jxf2mbTg4rRUWMU0ref9ZVTodTpUPc=",
+      "data_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+      "validators_hash": "JoO6Nk+7nESoqIzxXZ0RKF+BhgYedjPL5HD5LFKHwaA=",
+      "next_validators_hash": "JoO6Nk+7nESoqIzxXZ0RKF+BhgYedjPL5HD5LFKHwaA=",
+      "consensus_hash": "BICRvH3cKD93v7+R1zxE2ljD34qcvIZ0Bdi389qtoi8=",
+      "app_hash": "IGWGjx9a8FbYmkpNQ5z6H/r28ZIIjWx8oTaYS1Myb7s=",
+      "last_results_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+      "evidence_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+      "proposer_address": "stvalcons1qk2flmcrpyyxs6ekq7wgh62caeqjmp6ymddlvp"
+    },
+    "data": {
+      "txs": []
+    },
+    "evidence": {
+      "evidence": []
+    },
+    "last_commit": {
+      "height": "837",
+      "round": 0,
+      "block_id": {
+        "hash": "SdSpYG72uqNEMMV1o8ziDFPKt/PM7M00k0bwA3hUmKw=",
+        "part_set_header": {
+          "total": 1,
+          "hash": "rAs9rndCQE5yGY5PEDlP9kz6i4HlJ/dcQbRr7BogF6E="
+        }
+      },
+      "signatures": [
+        {
+          "block_id_flag": "BLOCK_ID_FLAG_COMMIT",
+          "validator_address": "BZSf7wMJCGhrNgeci+lY7kEth0Q=",
+          "timestamp": "2024-03-07T22:25:29.761240552Z",
+          "signature": "ocwelTOQbyvbAuWUl8D3A3lezTsAKq+Ia/VCUVhHCGa2rE9knzmUV/zXrXtyej5eCGLaHpHRWAdu9pfcPhEUCA=="
         }
       ]
     }
@@ -3483,17 +2019,17 @@ Response Example:
 
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/base/tendermint/v1beta1/blocks/latest
+https://rest.thestratos.org/cosmos/base/tendermint/v1beta1/blocks/3
 ```
 
 Response Example:
 ```json
 {
   "block_id": {
-    "hash": "v3fqwUVL/XL0rwCxmO4x96Euvy2V7ZJso8+4rqohl9o=",
+    "hash": "DXQ6q4c8WQ6u5lqCA2sOJxmoxftrzGrUv+Xham0jhNk=",
     "part_set_header": {
       "total": 1,
-      "hash": "t8wCFw2/VHBOHYAIO4k7MZNgUIzjBazvNjQS3R89NuM="
+      "hash": "mu4poLz0R4y2SHYAJNwbxioM8efNj1GPWpUsalGkxRk="
     }
   },
   "block": {
@@ -3502,50 +2038,104 @@ Response Example:
         "block": "11",
         "app": "0"
       },
-      "chain_id": "test-chain",
-      "height": "3355",
-      "time": "2023-01-11T16:57:05.012011668Z",
+      "chain_id": "testchain",
+      "height": "3",
+      "time": "2024-03-07T21:15:18.727039882Z",
       "last_block_id": {
-        "hash": "IdID2P6phDleoQAdMrLwzVr2DY02Omx3VnlATf4TwKI=",
+        "hash": "RzgNkECSrRyrDW7gVSkQjhwW3aV9pUj5K4CIJrV7/C8=",
         "part_set_header": {
           "total": 1,
-          "hash": "D/UcqWz7vvjUZ+yBezcVNymswrPpsYNMC0YfW5veVBM="
+          "hash": "VjbbhzR6a2aIMRqDN7wHK0L2pxGnmwPgWWaawYujafg="
         }
       },
-      "last_commit_hash": "//C9EwF2qjAPjGaykugAv4N4kRY3+DqiXJI/QRMtSfk=",
-      "data_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
-      "validators_hash": "UjS9kaOnUeBVw1h2V43kpGYxGoDVQLWYha9o721NVt4=",
-      "next_validators_hash": "UjS9kaOnUeBVw1h2V43kpGYxGoDVQLWYha9o721NVt4=",
+      "last_commit_hash": "7iQzSIAdehQmUybVeof1QRUU30SI4Pmg0cte+kxZMC4=",
+      "data_hash": "iA0GFiNOBJjgBeS+bRTNK0uXOAjLxRI/bLlLVfQSzh4=",
+      "validators_hash": "/HLVFmqGyBr9hAXdd4jpxWUx6Kppoa3dHB8xMtKmZc0=",
+      "next_validators_hash": "/HLVFmqGyBr9hAXdd4jpxWUx6Kppoa3dHB8xMtKmZc0=",
       "consensus_hash": "BICRvH3cKD93v7+R1zxE2ljD34qcvIZ0Bdi389qtoi8=",
-      "app_hash": "vJ+axVi3DlFFnA6bPzqAaco9J3mXsObourreZUhz01M=",
+      "app_hash": "KHnseRhDsvqAjXkU2FVCUvlySordlTgGrFzkhAUjOxw=",
       "last_results_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
       "evidence_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
-      "proposer_address": "GKcWnBtCfZlBM/ez1FBOknids3w="
+      "proposer_address": "BZSf7wMJCGhrNgeci+lY7kEth0Q="
     },
     "data": {
       "txs": [
+        "CtgCCtUCCiUvY29zbW9zLmdvdi52MWJldGExLk1zZ1N1Ym1pdFByb3Bvc2FsEqsCCv0BCi4vY29zbW9zLnBhcmFtcy52MWJldGExLlBhcmFtZXRlckNoYW5nZVByb3Bvc2FsEsoBChR1cGRhdGUgdm90aW5nIHBhcmFtcxIUdXBkYXRlIHZvdGluZyBwZXJpb2QaLwoDZ292Egx2b3RpbmdwYXJhbXMaGnsidm90aW5nX3BlcmlvZCI6ICI4NjQwMCJ9GmsKA2dvdhINZGVwb3NpdHBhcmFtcxpVeyJtaW5fZGVwb3NpdCI6IFt7ImRlbm9tIjogIndlaSIsImFtb3VudCI6ICIxMDAwMDAwIn1dLCJtYXhfZGVwb3NpdF9wZXJpb2QiOiAiODY0MDAifRopc3QxZWRwOWdrcHB4emp2Y2c5bndoZWg2dHA5cnNnYWZhdGNrZmRsNm0SdwpXCk0KJi9zdHJhdG9zLmNyeXB0by52MS5ldGhzZWNwMjU2azEuUHViS2V5EiMKIQNBlPndlLdbenThBfi5/mQPaDXY4fL0x4Vm+/PEzgiFKxIECgIIARgBEhwKFgoDd2VpEg83MTk0ODYwMDAwMDAwMDAQ/vQrGkFPkIR+nuWxlSCMABNwvragzNLy0REfuAJibSYiA05YfiDwdIYtUhgvZXvD02Kh4YbVSmVIY0IyiesiHP3884EYAA=="
       ]
     },
     "evidence": {
-      "evidence": [
-      ]
+      "evidence": []
     },
     "last_commit": {
-      "height": "3354",
+      "height": "2",
       "round": 0,
       "block_id": {
-        "hash": "IdID2P6phDleoQAdMrLwzVr2DY02Omx3VnlATf4TwKI=",
+        "hash": "RzgNkECSrRyrDW7gVSkQjhwW3aV9pUj5K4CIJrV7/C8=",
         "part_set_header": {
           "total": 1,
-          "hash": "D/UcqWz7vvjUZ+yBezcVNymswrPpsYNMC0YfW5veVBM="
+          "hash": "VjbbhzR6a2aIMRqDN7wHK0L2pxGnmwPgWWaawYujafg="
         }
       },
       "signatures": [
         {
           "block_id_flag": "BLOCK_ID_FLAG_COMMIT",
-          "validator_address": "GKcWnBtCfZlBM/ez1FBOknids3w=",
-          "timestamp": "2023-01-11T16:57:05.012011668Z",
-          "signature": "dHppKwAZFYzv19VLgmngOKq/Un2zJpZ5Fg7llx0iTNo72pbXXvSPi7BSvsqOzd4AKWTtO3XgQ6X97jxOpKd0CQ=="
+          "validator_address": "BZSf7wMJCGhrNgeci+lY7kEth0Q=",
+          "timestamp": "2024-03-07T21:15:18.727039882Z",
+          "signature": "QwMSz37OTLM0nBLnfg2ct7FdjZRyA8nYhi+vFRUK3Wb2boX/OiKN6r/LUxo/JxwCkhsXJWJI/HOnHV+SE6qYDA=="
+        }
+      ]
+    }
+  },
+  "sdk_block": {
+    "header": {
+      "version": {
+        "block": "11",
+        "app": "0"
+      },
+      "chain_id": "testchain",
+      "height": "3",
+      "time": "2024-03-07T21:15:18.727039882Z",
+      "last_block_id": {
+        "hash": "RzgNkECSrRyrDW7gVSkQjhwW3aV9pUj5K4CIJrV7/C8=",
+        "part_set_header": {
+          "total": 1,
+          "hash": "VjbbhzR6a2aIMRqDN7wHK0L2pxGnmwPgWWaawYujafg="
+        }
+      },
+      "last_commit_hash": "7iQzSIAdehQmUybVeof1QRUU30SI4Pmg0cte+kxZMC4=",
+      "data_hash": "iA0GFiNOBJjgBeS+bRTNK0uXOAjLxRI/bLlLVfQSzh4=",
+      "validators_hash": "/HLVFmqGyBr9hAXdd4jpxWUx6Kppoa3dHB8xMtKmZc0=",
+      "next_validators_hash": "/HLVFmqGyBr9hAXdd4jpxWUx6Kppoa3dHB8xMtKmZc0=",
+      "consensus_hash": "BICRvH3cKD93v7+R1zxE2ljD34qcvIZ0Bdi389qtoi8=",
+      "app_hash": "KHnseRhDsvqAjXkU2FVCUvlySordlTgGrFzkhAUjOxw=",
+      "last_results_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+      "evidence_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+      "proposer_address": "stvalcons1qk2flmcrpyyxs6ekq7wgh62caeqjmp6ymddlvp"
+    },
+    "data": {
+      "txs": [
+        "CtgCCtUCCiUvY29zbW9zLmdvdi52MWJldGExLk1zZ1N1Ym1pdFByb3Bvc2FsEqsCCv0BCi4vY29zbW9zLnBhcmFtcy52MWJldGExLlBhcmFtZXRlckNoYW5nZVByb3Bvc2FsEsoBChR1cGRhdGUgdm90aW5nIHBhcmFtcxIUdXBkYXRlIHZvdGluZyBwZXJpb2QaLwoDZ292Egx2b3RpbmdwYXJhbXMaGnsidm90aW5nX3BlcmlvZCI6ICI4NjQwMCJ9GmsKA2dvdhINZGVwb3NpdHBhcmFtcxpVeyJtaW5fZGVwb3NpdCI6IFt7ImRlbm9tIjogIndlaSIsImFtb3VudCI6ICIxMDAwMDAwIn1dLCJtYXhfZGVwb3NpdF9wZXJpb2QiOiAiODY0MDAifRopc3QxZWRwOWdrcHB4emp2Y2c5bndoZWg2dHA5cnNnYWZhdGNrZmRsNm0SdwpXCk0KJi9zdHJhdG9zLmNyeXB0by52MS5ldGhzZWNwMjU2azEuUHViS2V5EiMKIQNBlPndlLdbenThBfi5/mQPaDXY4fL0x4Vm+/PEzgiFKxIECgIIARgBEhwKFgoDd2VpEg83MTk0ODYwMDAwMDAwMDAQ/vQrGkFPkIR+nuWxlSCMABNwvragzNLy0REfuAJibSYiA05YfiDwdIYtUhgvZXvD02Kh4YbVSmVIY0IyiesiHP3884EYAA=="
+      ]
+    },
+    "evidence": {
+      "evidence": []
+    },
+    "last_commit": {
+      "height": "2",
+      "round": 0,
+      "block_id": {
+        "hash": "RzgNkECSrRyrDW7gVSkQjhwW3aV9pUj5K4CIJrV7/C8=",
+        "part_set_header": {
+          "total": 1,
+          "hash": "VjbbhzR6a2aIMRqDN7wHK0L2pxGnmwPgWWaawYujafg="
+        }
+      },
+      "signatures": [
+        {
+          "block_id_flag": "BLOCK_ID_FLAG_COMMIT",
+          "validator_address": "BZSf7wMJCGhrNgeci+lY7kEth0Q=",
+          "timestamp": "2024-03-07T21:15:18.727039882Z",
+          "signature": "QwMSz37OTLM0nBLnfg2ct7FdjZRyA8nYhi+vFRUK3Wb2boX/OiKN6r/LUxo/JxwCkhsXJWJI/HOnHV+SE6qYDA=="
         }
       ]
     }
@@ -3567,679 +2157,1004 @@ https://rest.thestratos.org/cosmos/base/tendermint/v1beta1/node_info
 Response Example:
 ```json
 {
-    "default_node_info": {
-        "protocol_version": {
-            "p2p": "8",
-            "block": "11",
-            "app": "0"
-        },
-        "default_node_id": "16a0758d175cbf5c08d41dffa73eb5c0190869ed",
-        "listen_addr": "tcp://0.0.0.0:26656",
-        "network": "test-chain",
-        "version": "0.34.21",
-        "channels": "QCAhIiMwOGBhAA==",
-        "moniker": "node",
-        "other": {
-            "tx_index": "on",
-            "rpc_address": "tcp://127.0.0.1:26657"
-        }
+  "default_node_info": {
+    "protocol_version": {
+      "p2p": "8",
+      "block": "11",
+      "app": "0"
     },
-    "application_version": {
-        "name": "",
-        "app_name": "stchaind",
-        "version": "v0.8.0",
-        "git_commit": "",
-        "build_tags": "",
-        "go_version": "go version go1.19.4 linux/amd64",
-        "build_deps": [
-            {
-                "path": "filippo.io/edwards25519",
-                "version": "v1.0.0-beta.2",
-                "sum": "h1:/BZRNzm8N4K4eWfK28dL4yescorxtO7YG1yun8fy+pI="
-            },
-            {
-                "path": "github.com/99designs/keyring",
-                "version": "v1.1.6",
-                "sum": ""
-            },
-            {
-                "path": "github.com/ChainSafe/go-schnorrkel",
-                "version": "v0.0.0-20200405005733-88cbf1b4c40d",
-                "sum": "h1:nalkkPQcITbvhmL4+C4cKA87NW0tfm3Kl9VXRoPywFg="
-            },
-            {
-                "path": "github.com/VictoriaMetrics/fastcache",
-                "version": "v1.6.0",
-                "sum": "h1:C/3Oi3EiBCqufydp1neRZkqcwmEiuRT9c3fqvvgKm5o="
-            },
-            {
-                "path": "github.com/Workiva/go-datastructures",
-                "version": "v1.0.53",
-                "sum": "h1:J6Y/52yX10Xc5JjXmGtWoSSxs3mZnGSaq37xZZh7Yig="
-            },
-            {
-                "path": "github.com/armon/go-metrics",
-                "version": "v0.3.10",
-                "sum": "h1:FR+drcQStOe+32sYyJYyZ7FIdgoGGBnwLl+flodp8Uo="
-            },
-            {
-                "path": "github.com/beorn7/perks",
-                "version": "v1.0.1",
-                "sum": "h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM="
-            },
-            {
-                "path": "github.com/bgentry/speakeasy",
-                "version": "v0.1.0",
-                "sum": "h1:ByYyxL9InA1OWqxJqqp2A5pYHUrCiAL6K3J+LKSsQkY="
-            },
-            {
-                "path": "github.com/btcsuite/btcd",
-                "version": "v0.22.1",
-                "sum": "h1:CnwP9LM/M9xuRrGSCGeMVs9iv09uMqwsVX7EeIpgV2c="
-            },
-            {
-                "path": "github.com/btcsuite/btcd/chaincfg/chainhash",
-                "version": "v1.0.1",
-                "sum": "h1:q0rUy8C/TYNBQS1+CGKw68tLOFYSNEs0TFnxxnS9+4U="
-            },
-            {
-                "path": "github.com/btcsuite/btcutil",
-                "version": "v1.0.3-0.20201208143702-a53e38424cce",
-                "sum": "h1:YtWJF7RHm2pYCvA5t0RPmAaLUhREsKuKd+SLhxFbFeQ="
-            },
-            {
-                "path": "github.com/cenkalti/backoff/v4",
-                "version": "v4.1.1",
-                "sum": "h1:G2HAfAmvm/GcKan2oOQpBXOd2tT2G57ZnZGWa1PxPBQ="
-            },
-            {
-                "path": "github.com/cespare/xxhash/v2",
-                "version": "v2.1.2",
-                "sum": "h1:YRXhKfTDauu4ajMg1TPgFO5jnlC2HCbmLXMcTG5cbYE="
-            },
-            {
-                "path": "github.com/coinbase/rosetta-sdk-go",
-                "version": "v0.7.0",
-                "sum": "h1:lmTO/JEpCvZgpbkOITL95rA80CPKb5CtMzLaqF2mCNg="
-            },
-            {
-                "path": "github.com/confio/ics23/go",
-                "version": "v0.7.0",
-                "sum": ""
-            },
-            {
-                "path": "github.com/cosmos/btcutil",
-                "version": "v1.0.4",
-                "sum": "h1:n7C2ngKXo7UC9gNyMNLbzqz7Asuf+7Qv4gnX/rOdQ44="
-            },
-            {
-                "path": "github.com/cosmos/cosmos-sdk",
-                "version": "v0.45.9",
-                "sum": "h1:Z4s1EZL/mfM8uSSZr8WmyEbWp4hqbWVI5sAIFR432KY="
-            },
-            {
-                "path": "github.com/cosmos/go-bip39",
-                "version": "v1.0.0",
-                "sum": "h1:pcomnQdrdH22njcAatO0yWojsUnCO3y2tNoV1cb6hHY="
-            },
-            {
-                "path": "github.com/cosmos/iavl",
-                "version": "v0.19.3",
-                "sum": "h1:cESO0OwTTxQm5rmyESKW+zESheDUYI7CcZDWWDwnuxg="
-            },
-            {
-                "path": "github.com/cosmos/ibc-go/v3",
-                "version": "v3.0.0",
-                "sum": "h1:XUNplHVS51Q2gMnTFsFsH9QJ7flsovMamnltKbEgPQ4="
-            },
-            {
-                "path": "github.com/creachadair/taskgroup",
-                "version": "v0.3.2",
-                "sum": "h1:zlfutDS+5XG40AOxcHDSThxKzns8Tnr9jnr6VqkYlkM="
-            },
-            {
-                "path": "github.com/davecgh/go-spew",
-                "version": "v1.1.1",
-                "sum": "h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c="
-            },
-            {
-                "path": "github.com/deckarep/golang-set",
-                "version": "v1.8.0",
-                "sum": "h1:sk9/l/KqpunDwP7pSjUg0keiOOLEnOBHzykLrsPppp4="
-            },
-            {
-                "path": "github.com/desertbit/timer",
-                "version": "v0.0.0-20180107155436-c41aec40b27f",
-                "sum": "h1:U5y3Y5UE0w7amNe7Z5G/twsBW0KEalRQXZzf8ufSh9I="
-            },
-            {
-                "path": "github.com/dvsekhvalnov/jose2go",
-                "version": "v0.0.0-20200901110807-248326c1351b",
-                "sum": "h1:HBah4D48ypg3J7Np4N+HY/ZR76fx3HEUGxDU6Uk39oQ="
-            },
-            {
-                "path": "github.com/edsrzf/mmap-go",
-                "version": "v1.0.0",
-                "sum": "h1:CEBF7HpRnUCSJgGUb5h1Gm7e3VkmVDrR8lvWVLtrOFw="
-            },
-            {
-                "path": "github.com/ethereum/go-ethereum",
-                "version": "v1.10.16",
-                "sum": "h1:3oPrumn0bCW/idjcxMn5YYVCdK7VzJYIvwGZUGLEaoc="
-            },
-            {
-                "path": "github.com/felixge/httpsnoop",
-                "version": "v1.0.1",
-                "sum": "h1:lvB5Jl89CsZtGIWuTcDM1E/vkVs49/Ml7JJe07l8SPQ="
-            },
-            {
-                "path": "github.com/fsnotify/fsnotify",
-                "version": "v1.5.4",
-                "sum": "h1:jRbGcIw6P2Meqdwuo0H1p6JVLbL5DHKAKlYndzMwVZI="
-            },
-            {
-                "path": "github.com/gballet/go-libpcsclite",
-                "version": "v0.0.0-20190607065134-2772fd86a8ff",
-                "sum": "h1:tY80oXqGNY4FhTFhk+o9oFHGINQ/+vhlm8HFzi6znCI="
-            },
-            {
-                "path": "github.com/go-kit/kit",
-                "version": "v0.12.0",
-                "sum": "h1:e4o3o3IsBfAKQh5Qbbiqyfu97Ku7jrO/JbohvztANh4="
-            },
-            {
-                "path": "github.com/go-kit/log",
-                "version": "v0.2.1",
-                "sum": "h1:MRVx0/zhvdseW+Gza6N9rVzU/IVzaeE1SFI4raAhmBU="
-            },
-            {
-                "path": "github.com/go-logfmt/logfmt",
-                "version": "v0.5.1",
-                "sum": "h1:otpy5pqBCBZ1ng9RQ0dPu4PN7ba75Y/aA+UpowDyNVA="
-            },
-            {
-                "path": "github.com/go-stack/stack",
-                "version": "v1.8.0",
-                "sum": "h1:5SgMzNM5HxrEjV0ww2lTmX6E2Izsfxas4+YHWRs3Lsk="
-            },
-            {
-                "path": "github.com/godbus/dbus",
-                "version": "v0.0.0-20190726142602-4481cbc300e2",
-                "sum": "h1:ZpnhV/YsD2/4cESfV5+Hoeu/iUR3ruzNvZ+yQfO03a0="
-            },
-            {
-                "path": "github.com/gogo/gateway",
-                "version": "v1.1.0",
-                "sum": "h1:u0SuhL9+Il+UbjM9VIE3ntfRujKbvVpFvNB4HbjeVQ0="
-            },
-            {
-                "path": "github.com/gogo/protobuf",
-                "version": "v1.3.3",
-                "sum": ""
-            },
-            {
-                "path": "github.com/golang/protobuf",
-                "version": "v1.5.2",
-                "sum": "h1:ROPKBNFfQgOUMifHyP+KYbvpjbdoFNs+aK7DXlji0Tw="
-            },
-            {
-                "path": "github.com/golang/snappy",
-                "version": "v0.0.4",
-                "sum": "h1:yAGX7huGHXlcLOEtBnF4w7FQwA26wojNCwOYAEhLjQM="
-            },
-            {
-                "path": "github.com/google/btree",
-                "version": "v1.0.0",
-                "sum": "h1:0udJVsspx3VBr5FwtLhQQtuAsVc79tTq0ocGIPAU6qo="
-            },
-            {
-                "path": "github.com/google/orderedcode",
-                "version": "v0.0.1",
-                "sum": "h1:UzfcAexk9Vhv8+9pNOgRu41f16lHq725vPwnSeiG/Us="
-            },
-            {
-                "path": "github.com/google/uuid",
-                "version": "v1.3.0",
-                "sum": "h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I="
-            },
-            {
-                "path": "github.com/gorilla/handlers",
-                "version": "v1.5.1",
-                "sum": "h1:9lRY6j8DEeeBT10CvO9hGW0gmky0BprnvDI5vfhUHH4="
-            },
-            {
-                "path": "github.com/gorilla/mux",
-                "version": "v1.8.0",
-                "sum": "h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI="
-            },
-            {
-                "path": "github.com/gorilla/websocket",
-                "version": "v1.5.0",
-                "sum": "h1:PPwGk2jz7EePpoHN/+ClbZu8SPxiqlu12wZP/3sWmnc="
-            },
-            {
-                "path": "github.com/grpc-ecosystem/go-grpc-middleware",
-                "version": "v1.3.0",
-                "sum": "h1:+9834+KizmvFV7pXQGSXQTsaWhq2GjuNUt0aUU0YBYw="
-            },
-            {
-                "path": "github.com/grpc-ecosystem/grpc-gateway",
-                "version": "v1.16.0",
-                "sum": "h1:gmcG1KaJ57LophUzW0Hy8NmPhnMZb4M0+kPpLofRdBo="
-            },
-            {
-                "path": "github.com/gsterjov/go-libsecret",
-                "version": "v0.0.0-20161001094733-a6f4afe4910c",
-                "sum": "h1:6rhixN/i8ZofjG1Y75iExal34USq5p+wiN1tpie8IrU="
-            },
-            {
-                "path": "github.com/gtank/merlin",
-                "version": "v0.1.1",
-                "sum": "h1:eQ90iG7K9pOhtereWsmyRJ6RAwcP4tHTDBHXNg+u5is="
-            },
-            {
-                "path": "github.com/gtank/ristretto255",
-                "version": "v0.1.2",
-                "sum": "h1:JEqUCPA1NvLq5DwYtuzigd7ss8fwbYay9fi4/5uMzcc="
-            },
-            {
-                "path": "github.com/hashicorp/go-immutable-radix",
-                "version": "v1.3.1",
-                "sum": "h1:DKHmCUm2hRBK510BaiZlwvpD40f8bJFeZnpfm2KLowc="
-            },
-            {
-                "path": "github.com/hashicorp/golang-lru",
-                "version": "v0.5.5-0.20210104140557-80c98217689d",
-                "sum": "h1:dg1dEPuWpEqDnvIw251EVy4zlP8gWbsGj4BsUKCRpYs="
-            },
-            {
-                "path": "github.com/hashicorp/hcl",
-                "version": "v1.0.0",
-                "sum": "h1:0Anlzjpi4vEasTeNFn2mLJgTSwt0+6sfsiTG8qcWGx4="
-            },
-            {
-                "path": "github.com/hdevalence/ed25519consensus",
-                "version": "v0.0.0-20210204194344-59a8610d2b87",
-                "sum": "h1:uUjLpLt6bVvZ72SQc/B4dXcPBw4Vgd7soowdRl52qEM="
-            },
-            {
-                "path": "github.com/holiman/bloomfilter/v2",
-                "version": "v2.0.3",
-                "sum": "h1:73e0e/V0tCydx14a0SCYS/EWCxgwLZ18CZcZKVu0fao="
-            },
-            {
-                "path": "github.com/holiman/uint256",
-                "version": "v1.2.0",
-                "sum": "h1:gpSYcPLWGv4sG43I2mVLiDZCNDh/EpGjSk8tmtxitHM="
-            },
-            {
-                "path": "github.com/huin/goupnp",
-                "version": "v1.0.2",
-                "sum": "h1:RfGLP+h3mvisuWEyybxNq5Eft3NWhHLPeUN72kpKZoI="
-            },
-            {
-                "path": "github.com/improbable-eng/grpc-web",
-                "version": "v0.15.0",
-                "sum": "h1:BN+7z6uNXZ1tQGcNAuaU1YjsLTApzkjt2tzCixLaUPQ="
-            },
-            {
-                "path": "github.com/ipfs/go-cid",
-                "version": "v0.1.0",
-                "sum": "h1:YN33LQulcRHjfom/i25yoOZR4Telp1Hr/2RU3d0PnC0="
-            },
-            {
-                "path": "github.com/jackpal/go-nat-pmp",
-                "version": "v1.0.2",
-                "sum": "h1:KzKSgb7qkJvOUTqYl9/Hg/me3pWgBmERKrTGD7BdWus="
-            },
-            {
-                "path": "github.com/klauspost/compress",
-                "version": "v1.15.9",
-                "sum": "h1:wKRjX6JRtDdrE9qwa4b/Cip7ACOshUI4smpCQanqjSY="
-            },
-            {
-                "path": "github.com/klauspost/cpuid/v2",
-                "version": "v2.0.4",
-                "sum": "h1:g0I61F2K2DjRHz1cnxlkNSBIaePVoJIjjnHui8QHbiw="
-            },
-            {
-                "path": "github.com/lib/pq",
-                "version": "v1.10.6",
-                "sum": "h1:jbk+ZieJ0D7EVGJYpL9QTz7/YW6UHbmdnZWYyK5cdBs="
-            },
-            {
-                "path": "github.com/libp2p/go-buffer-pool",
-                "version": "v0.1.0",
-                "sum": "h1:oK4mSFcQz7cTQIfqbe4MIj9gLW+mnanjyFtc6cdF0Y8="
-            },
-            {
-                "path": "github.com/magiconair/properties",
-                "version": "v1.8.6",
-                "sum": "h1:5ibWZ6iY0NctNGWo87LalDlEZ6R41TqbbDamhfG/Qzo="
-            },
-            {
-                "path": "github.com/mattn/go-colorable",
-                "version": "v0.1.12",
-                "sum": "h1:jF+Du6AlPIjs2BiUiQlKOX0rt3SujHxPnksPKZbaA40="
-            },
-            {
-                "path": "github.com/mattn/go-isatty",
-                "version": "v0.0.14",
-                "sum": "h1:yVuAays6BHfxijgZPzw+3Zlu5yQgKGP2/hcQbHb7S9Y="
-            },
-            {
-                "path": "github.com/mattn/go-runewidth",
-                "version": "v0.0.9",
-                "sum": "h1:Lm995f3rfxdpd6TSmuVCHVb/QhupuXlYr8sCI/QdE+0="
-            },
-            {
-                "path": "github.com/matttproud/golang_protobuf_extensions",
-                "version": "v1.0.2-0.20181231171920-c182affec369",
-                "sum": "h1:I0XW9+e1XWDxdcEniV4rQAIOPUGDq67JSCiRCgGCZLI="
-            },
-            {
-                "path": "github.com/mimoo/StrobeGo",
-                "version": "v0.0.0-20181016162300-f8f6d4d2b643",
-                "sum": "h1:hLDRPB66XQT/8+wG9WsDpiCvZf1yKO7sz7scAjSlBa0="
-            },
-            {
-                "path": "github.com/minio/blake2b-simd",
-                "version": "v0.0.0-20160723061019-3f5f724cb5b1",
-                "sum": "h1:lYpkrQH5ajf0OXOcUbGjvZxxijuBwbbmlSxLiuofa+g="
-            },
-            {
-                "path": "github.com/minio/highwayhash",
-                "version": "v1.0.2",
-                "sum": "h1:Aak5U0nElisjDCfPSG79Tgzkn2gl66NxOMspRrKnA/g="
-            },
-            {
-                "path": "github.com/minio/sha256-simd",
-                "version": "v1.0.0",
-                "sum": "h1:v1ta+49hkWZyvaKwrQB8elexRqm6Y0aMLjCNsrYxo6g="
-            },
-            {
-                "path": "github.com/mitchellh/mapstructure",
-                "version": "v1.5.0",
-                "sum": "h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY="
-            },
-            {
-                "path": "github.com/mr-tron/base58",
-                "version": "v1.2.0",
-                "sum": "h1:T/HDJBh4ZCPbU39/+c3rRvE0uKBQlU27+QI8LJ4t64o="
-            },
-            {
-                "path": "github.com/mtibben/percent",
-                "version": "v0.2.1",
-                "sum": "h1:5gssi8Nqo8QU/r2pynCm+hBQHpkB/uNK7BJCFogWdzs="
-            },
-            {
-                "path": "github.com/multiformats/go-base32",
-                "version": "v0.0.3",
-                "sum": "h1:tw5+NhuwaOjJCC5Pp82QuXbrmLzWg7uxlMFp8Nq/kkI="
-            },
-            {
-                "path": "github.com/multiformats/go-base36",
-                "version": "v0.1.0",
-                "sum": "h1:JR6TyF7JjGd3m6FbLU2cOxhC0Li8z8dLNGQ89tUg4F4="
-            },
-            {
-                "path": "github.com/multiformats/go-multibase",
-                "version": "v0.0.3",
-                "sum": "h1:l/B6bJDQjvQ5G52jw4QGSYeOTZoAwIO77RblWplfIqk="
-            },
-            {
-                "path": "github.com/multiformats/go-multihash",
-                "version": "v0.0.15",
-                "sum": "h1:hWOPdrNqDjwHDx82vsYGSDZNyktOJJ2dzZJzFkOV1jM="
-            },
-            {
-                "path": "github.com/multiformats/go-varint",
-                "version": "v0.0.6",
-                "sum": "h1:gk85QWKxh3TazbLxED/NlDVv8+q+ReFJk7Y2W/KhfNY="
-            },
-            {
-                "path": "github.com/olekukonko/tablewriter",
-                "version": "v0.0.5",
-                "sum": "h1:P2Ga83D34wi1o9J6Wh1mRuqd4mF/x/lgBS7N7AbDhec="
-            },
-            {
-                "path": "github.com/pelletier/go-toml/v2",
-                "version": "v2.0.2",
-                "sum": "h1:+jQXlF3scKIcSEKkdHzXhCTDLPFi5r1wnK6yPS+49Gw="
-            },
-            {
-                "path": "github.com/pkg/errors",
-                "version": "v0.9.1",
-                "sum": "h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4="
-            },
-            {
-                "path": "github.com/pmezard/go-difflib",
-                "version": "v1.0.0",
-                "sum": "h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM="
-            },
-            {
-                "path": "github.com/prometheus/client_golang",
-                "version": "v1.12.2",
-                "sum": "h1:51L9cDoUHVrXx4zWYlcLQIZ+d+VXHgqnYKkIuq4g/34="
-            },
-            {
-                "path": "github.com/prometheus/client_model",
-                "version": "v0.2.0",
-                "sum": "h1:uq5h0d+GuxiXLJLNABMgp2qUWDPiLvgCzz2dUR+/W/M="
-            },
-            {
-                "path": "github.com/prometheus/common",
-                "version": "v0.34.0",
-                "sum": "h1:RBmGO9d/FVjqHT0yUGQwBJhkwKV+wPCn7KGpvfab0uE="
-            },
-            {
-                "path": "github.com/prometheus/procfs",
-                "version": "v0.7.3",
-                "sum": "h1:4jVXhlkAyzOScmCkXBTOLRLTz8EeU+eyjrwB/EPq0VU="
-            },
-            {
-                "path": "github.com/prometheus/tsdb",
-                "version": "v0.7.1",
-                "sum": "h1:YZcsG11NqnK4czYLrWd9mpEuAJIHVQLwdrleYfszMAA="
-            },
-            {
-                "path": "github.com/rakyll/statik",
-                "version": "v0.1.7",
-                "sum": "h1:OF3QCZUuyPxuGEP7B4ypUa7sB/iHtqOTDYZXGM8KOdQ="
-            },
-            {
-                "path": "github.com/rcrowley/go-metrics",
-                "version": "v0.0.0-20200313005456-10cdbea86bc0",
-                "sum": "h1:MkV+77GLUNo5oJ0jf870itWm3D0Sjh7+Za9gazKc5LQ="
-            },
-            {
-                "path": "github.com/regen-network/cosmos-proto",
-                "version": "v0.3.1",
-                "sum": "h1:rV7iM4SSFAagvy8RiyhiACbWEGotmqzywPxOvwMdxcg="
-            },
-            {
-                "path": "github.com/rjeczalik/notify",
-                "version": "v0.9.1",
-                "sum": "h1:CLCKso/QK1snAlnhNR/CNvNiFU2saUtjV0bx3EwNeCE="
-            },
-            {
-                "path": "github.com/rs/cors",
-                "version": "v1.8.2",
-                "sum": "h1:KCooALfAYGs415Cwu5ABvv9n9509fSiG5SQJn/AQo4U="
-            },
-            {
-                "path": "github.com/rs/zerolog",
-                "version": "v1.27.0",
-                "sum": "h1:1T7qCieN22GVc8S4Q2yuexzBb1EqjbgjSH9RohbMjKs="
-            },
-            {
-                "path": "github.com/shirou/gopsutil",
-                "version": "v3.21.4-0.20210419000835-c7a38de76ee5+incompatible",
-                "sum": "h1:Bn1aCHHRnjv4Bl16T8rcaFjYSrGrIZvpiGO6P3Q4GpU="
-            },
-            {
-                "path": "github.com/spf13/afero",
-                "version": "v1.8.2",
-                "sum": "h1:xehSyVa0YnHWsJ49JFljMpg1HX19V6NDZ1fkm1Xznbo="
-            },
-            {
-                "path": "github.com/spf13/cast",
-                "version": "v1.5.0",
-                "sum": "h1:rj3WzYc11XZaIZMPKmwP96zkFEnnAmV8s6XbB2aY32w="
-            },
-            {
-                "path": "github.com/spf13/cobra",
-                "version": "v1.5.0",
-                "sum": "h1:X+jTBEBqF0bHN+9cSMgmfuvv2VHJ9ezmFNf9Y/XstYU="
-            },
-            {
-                "path": "github.com/spf13/jwalterweatherman",
-                "version": "v1.1.0",
-                "sum": "h1:ue6voC5bR5F8YxI5S67j9i582FU4Qvo2bmqnqMYADFk="
-            },
-            {
-                "path": "github.com/spf13/pflag",
-                "version": "v1.0.5",
-                "sum": "h1:iy+VFUOCP1a+8yFto/drg2CJ5u0yRoB7fZw3DKv/JXA="
-            },
-            {
-                "path": "github.com/spf13/viper",
-                "version": "v1.12.0",
-                "sum": "h1:CZ7eSOd3kZoaYDLbXnmzgQI5RlciuXBMA+18HwHRfZQ="
-            },
-            {
-                "path": "github.com/status-im/keycard-go",
-                "version": "v0.0.0-20200402102358-957c09536969",
-                "sum": "h1:Oo2KZNP70KE0+IUJSidPj/BFS/RXNHmKIJOdckzml2E="
-            },
-            {
-                "path": "github.com/stretchr/testify",
-                "version": "v1.8.0",
-                "sum": "h1:pSgiaMZlXftHpm5L7V1+rVB+AZJydKsMxsQBIJw4PKk="
-            },
-            {
-                "path": "github.com/subosito/gotenv",
-                "version": "v1.4.0",
-                "sum": "h1:yAzM1+SmVcz5R4tXGsNMu1jUl2aOJXoiWUCEwwnGrvs="
-            },
-            {
-                "path": "github.com/syndtr/goleveldb",
-                "version": "v1.0.1-0.20210819022825-2ae1ddf74ef7",
-                "sum": "h1:epCh84lMvA70Z7CTTCmYQn2CKbY8j86K7/FAIr141uY="
-            },
-            {
-                "path": "github.com/tendermint/btcd",
-                "version": "v0.1.1",
-                "sum": "h1:0VcxPfflS2zZ3RiOAHkBiFUcPvbtRj5O7zHmcJWHV7s="
-            },
-            {
-                "path": "github.com/tendermint/crypto",
-                "version": "v0.0.0-20191022145703-50d29ede1e15",
-                "sum": "h1:hqAk8riJvK4RMWx1aInLzndwxKalgi5rTqgfXxOxbEI="
-            },
-            {
-                "path": "github.com/tendermint/go-amino",
-                "version": "v0.16.0",
-                "sum": "h1:GyhmgQKvqF82e2oZeuMSp9JTN0N09emoSZlb2lyGa2E="
-            },
-            {
-                "path": "github.com/tendermint/tendermint",
-                "version": "v0.34.21",
-                "sum": "h1:UiGGnBFHVrZhoQVQ7EfwSOLuCtarqCSsRf8VrklqB7s="
-            },
-            {
-                "path": "github.com/tendermint/tm-db",
-                "version": "v0.6.7",
-                "sum": "h1:fE00Cbl0jayAoqlExN6oyQJ7fR/ZtoVOmvPJ//+shu8="
-            },
-            {
-                "path": "github.com/tklauser/go-sysconf",
-                "version": "v0.3.5",
-                "sum": "h1:uu3Xl4nkLzQfXNsWn15rPc/HQCJKObbt1dKJeWp3vU4="
-            },
-            {
-                "path": "github.com/tklauser/numcpus",
-                "version": "v0.2.2",
-                "sum": "h1:oyhllyrScuYI6g+h/zUvNXNp1wy7x8qQy3t/piefldA="
-            },
-            {
-                "path": "github.com/tyler-smith/go-bip39",
-                "version": "v1.1.0",
-                "sum": "h1:5eUemwrMargf3BSLRRCalXT93Ns6pQJIjYQN2nyfOP8="
-            },
-            {
-                "path": "golang.org/x/crypto",
-                "version": "v0.0.0-20220525230936-793ad666bf5e",
-                "sum": "h1:T8NU3HyQ8ClP4SEE+KbFlg6n0NhuTsN4MyznaarGsZM="
-            },
-            {
-                "path": "golang.org/x/exp",
-                "version": "v0.0.0-20220722155223-a9213eeb770e",
-                "sum": "h1:+WEEuIdZHnUeJJmEUjyYC2gfUMj69yZXw17EnHg/otA="
-            },
-            {
-                "path": "golang.org/x/net",
-                "version": "v0.0.0-20220726230323-06994584191e",
-                "sum": "h1:wOQNKh1uuDGRnmgF0jDxh7ctgGy/3P4rYWQRVJD4/Yg="
-            },
-            {
-                "path": "golang.org/x/sync",
-                "version": "v0.0.0-20220722155255-886fb9371eb4",
-                "sum": "h1:uVc8UZUe6tr40fFVnUP5Oj+veunVezqYl9z7DYw9xzw="
-            },
-            {
-                "path": "golang.org/x/sys",
-                "version": "v0.0.0-20220727055044-e65921a090b8",
-                "sum": "h1:dyU22nBWzrmTQxtNrr4dzVOvaw35nUYE279vF9UmsI8="
-            },
-            {
-                "path": "golang.org/x/term",
-                "version": "v0.0.0-20220722155259-a9ba230a4035",
-                "sum": "h1:Q5284mrmYTpACcm+eAKjKJH48BBwSyfJqmmGDTtT8Vc="
-            },
-            {
-                "path": "golang.org/x/text",
-                "version": "v0.3.7",
-                "sum": "h1:olpwvP2KacW1ZWvsR7uQhoyTYvKAupfQrRGBFM352Gk="
-            },
-            {
-                "path": "google.golang.org/genproto",
-                "version": "v0.0.0-20220725144611-272f38e5d71b",
-                "sum": "h1:SfSkJugek6xm7lWywqth4r2iTrYLpD8lOj1nMIIhMNM="
-            },
-            {
-                "path": "google.golang.org/grpc",
-                "version": "v1.48.0",
-                "sum": ""
-            },
-            {
-                "path": "google.golang.org/protobuf",
-                "version": "v1.28.0",
-                "sum": "h1:w43yiav+6bVFTBQFZX0r7ipe9JQ1QsbMgHwbBziscLw="
-            },
-            {
-                "path": "gopkg.in/ini.v1",
-                "version": "v1.66.6",
-                "sum": "h1:LATuAqN/shcYAOkv3wl2L4rkaKqkcgTBQjOyYDvcPKI="
-            },
-            {
-                "path": "gopkg.in/yaml.v2",
-                "version": "v2.4.0",
-                "sum": "h1:D8xgwECY7CYvx+Y2n4sBz93Jn9JRvxdiyyo8CTfuKaY="
-            },
-            {
-                "path": "gopkg.in/yaml.v3",
-                "version": "v3.0.1",
-                "sum": "h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA="
-            },
-            {
-                "path": "nhooyr.io/websocket",
-                "version": "v1.8.6",
-                "sum": "h1:s+C3xAMLwGmlI31Nyn/eAehUlZPwfYZu2JXM621Q5/k="
-            }
-        ],
-        "cosmos_sdk_version": "v0.45.9"
+    "default_node_id": "173ebeb219ae7e8d53e7882063429213b9176b6f",
+    "listen_addr": "tcp://0.0.0.0:26656",
+    "network": "testchain",
+    "version": "0.37.2",
+    "channels": "QCAhIiMwOGBhAA==",
+    "moniker": "node",
+    "other": {
+      "tx_index": "on",
+      "rpc_address": "tcp://127.0.0.1:26657"
     }
+  },
+  "application_version": {
+    "name": "stchain",
+    "app_name": "stchaind",
+    "version": "v0.12.0",
+    "git_commit": "",
+    "build_tags": "",
+    "go_version": "go version go1.21.7 linux/amd64",
+    "build_deps": [
+      {
+        "path": "cloud.google.com/go",
+        "version": "v0.110.8",
+        "sum": "h1:tyNdfIxjzaWctIiLYOTalaLKZ17SI44SKFW26QbOhME="
+      },
+      {
+        "path": "cloud.google.com/go/compute/metadata",
+        "version": "v0.2.3",
+        "sum": "h1:mg4jlk7mCAj6xXp9UJ4fjI9VUI5rubuGBW5aJ7UnBMY="
+      },
+      {
+        "path": "cloud.google.com/go/iam",
+        "version": "v1.1.2",
+        "sum": "h1:gacbrBdWcoVmGLozRuStX45YKvJtzIjJdAolzUs1sm4="
+      },
+      {
+        "path": "cloud.google.com/go/storage",
+        "version": "v1.30.1",
+        "sum": "h1:uOdMxAs8HExqBlnLtnQyP0YkvbiDpdGShGKtx6U/oNM="
+      },
+      {
+        "path": "cosmossdk.io/api",
+        "version": "v0.3.1",
+        "sum": "h1:NNiOclKRR0AOlO4KIqeaG6PS6kswOMhHD0ir0SscNXE="
+      },
+      {
+        "path": "cosmossdk.io/core",
+        "version": "v0.5.1",
+        "sum": "h1:vQVtFrIYOQJDV3f7rw4pjjVqc1id4+mE0L9hHP66pyI="
+      },
+      {
+        "path": "cosmossdk.io/depinject",
+        "version": "v1.0.0-alpha.4",
+        "sum": "h1:PLNp8ZYAMPTUKyG9IK2hsbciDWqna2z1Wsl98okJopc="
+      },
+      {
+        "path": "cosmossdk.io/errors",
+        "version": "v1.0.0",
+        "sum": "h1:nxF07lmlBbB8NKQhtJ+sJm6ef5uV1XkvPXG2bUntb04="
+      },
+      {
+        "path": "cosmossdk.io/log",
+        "version": "v1.2.1",
+        "sum": "h1:Xc1GgTCicniwmMiKwDxUjO4eLhPxoVdI9vtMW8Ti/uk="
+      },
+      {
+        "path": "cosmossdk.io/math",
+        "version": "v1.2.0",
+        "sum": "h1:8gudhTkkD3NxOP2YyyJIYYmt6dQ55ZfJkDOaxXpy7Ig="
+      },
+      {
+        "path": "cosmossdk.io/simapp",
+        "version": "v0.0.0-20230828070859-c9144f02dda8",
+        "sum": "h1:xQBu6b8LinrtmUkpYhCfnz9/aF1iW0BxHp7D71Z4CyI="
+      },
+      {
+        "path": "cosmossdk.io/tools/rosetta",
+        "version": "v0.2.1",
+        "sum": "h1:ddOMatOH+pbxWbrGJKRAawdBkPYLfKXutK9IETnjYxw="
+      },
+      {
+        "path": "filippo.io/edwards25519",
+        "version": "v1.0.0",
+        "sum": "h1:0wAIcmJUqRdI8IJ/3eGi5/HwXZWPujYXXlkrQogz0Ek="
+      },
+      {
+        "path": "github.com/99designs/keyring",
+        "version": "v1.2.1",
+        "sum": ""
+      },
+      {
+        "path": "github.com/ChainSafe/go-schnorrkel",
+        "version": "v0.0.0-20200405005733-88cbf1b4c40d",
+        "sum": "h1:nalkkPQcITbvhmL4+C4cKA87NW0tfm3Kl9VXRoPywFg="
+      },
+      {
+        "path": "github.com/Nik-U/pbc",
+        "version": "v0.0.0-20181205041846-3e516ca0c5d6",
+        "sum": "h1:GU/vL5sj0IgGYEOIIAJ1HDI9dgqT0gJXkhXINri7Otc="
+      },
+      {
+        "path": "github.com/VictoriaMetrics/fastcache",
+        "version": "v1.6.0",
+        "sum": "h1:C/3Oi3EiBCqufydp1neRZkqcwmEiuRT9c3fqvvgKm5o="
+      },
+      {
+        "path": "github.com/armon/go-metrics",
+        "version": "v0.4.1",
+        "sum": "h1:hR91U9KYmb6bLBYLQjyM+3j+rcd/UhE+G78SFnF8gJA="
+      },
+      {
+        "path": "github.com/aws/aws-sdk-go",
+        "version": "v1.44.203",
+        "sum": "h1:pcsP805b9acL3wUqa4JR2vg1k2wnItkDYNvfmcy6F+U="
+      },
+      {
+        "path": "github.com/beorn7/perks",
+        "version": "v1.0.1",
+        "sum": "h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM="
+      },
+      {
+        "path": "github.com/bgentry/go-netrc",
+        "version": "v0.0.0-20140422174119-9fd32a8b3d3d",
+        "sum": "h1:xDfNPAt8lFiC1UJrqV3uuy861HCTo708pDMbjHHdCas="
+      },
+      {
+        "path": "github.com/bgentry/speakeasy",
+        "version": "v0.1.1-0.20220910012023-760eaf8b6816",
+        "sum": "h1:41iFGWnSlI2gVpmOtVTJZNodLdLQLn/KsJqFvXwnd/s="
+      },
+      {
+        "path": "github.com/btcsuite/btcd",
+        "version": "v0.23.4",
+        "sum": "h1:IzV6qqkfwbItOS/sg/aDfPDsjPP8twrCOE2R93hxMlQ="
+      },
+      {
+        "path": "github.com/btcsuite/btcd/btcec/v2",
+        "version": "v2.3.2",
+        "sum": "h1:5n0X6hX0Zk+6omWcihdYvdAlGf2DfasC0GMf7DClJ3U="
+      },
+      {
+        "path": "github.com/btcsuite/btcd/btcutil",
+        "version": "v1.1.2",
+        "sum": "h1:XLMbX8JQEiwMcYft2EGi8zPUkoa0abKIU6/BJSRsjzQ="
+      },
+      {
+        "path": "github.com/btcsuite/btcd/chaincfg/chainhash",
+        "version": "v1.0.1",
+        "sum": "h1:q0rUy8C/TYNBQS1+CGKw68tLOFYSNEs0TFnxxnS9+4U="
+      },
+      {
+        "path": "github.com/cenkalti/backoff/v4",
+        "version": "v4.1.3",
+        "sum": "h1:cFAlzYUlVYDysBEH2T5hyJZMh3+5+WCBvSnK6Q8UtC4="
+      },
+      {
+        "path": "github.com/cespare/xxhash/v2",
+        "version": "v2.2.0",
+        "sum": "h1:DC2CZ1Ep5Y4k3ZQ899DldepgrayRUGE6BBZ/cd9Cj44="
+      },
+      {
+        "path": "github.com/chzyer/readline",
+        "version": "v1.5.1",
+        "sum": "h1:upd/6fQk4src78LMRzh5vItIt361/o4uq553V8B5sGI="
+      },
+      {
+        "path": "github.com/cockroachdb/apd/v2",
+        "version": "v2.0.2",
+        "sum": "h1:weh8u7Cneje73dDh+2tEVLUvyBc89iwepWCD8b8034E="
+      },
+      {
+        "path": "github.com/cockroachdb/errors",
+        "version": "v1.10.0",
+        "sum": "h1:lfxS8zZz1+OjtV4MtNWgboi/W5tyLEB6VQZBXN+0VUU="
+      },
+      {
+        "path": "github.com/cockroachdb/logtags",
+        "version": "v0.0.0-20230118201751-21c54148d20b",
+        "sum": "h1:r6VH0faHjZeQy818SGhaone5OnYfxFR/+AzdY3sf5aE="
+      },
+      {
+        "path": "github.com/cockroachdb/redact",
+        "version": "v1.1.5",
+        "sum": "h1:u1PMllDkdFfPWaNGMyLD1+so+aq3uUItthCFqzwPJ30="
+      },
+      {
+        "path": "github.com/coinbase/rosetta-sdk-go/types",
+        "version": "v1.0.0",
+        "sum": "h1:jpVIwLcPoOeCR6o1tU+Xv7r5bMONNbHU7MuEHboiFuA="
+      },
+      {
+        "path": "github.com/cometbft/cometbft",
+        "version": "v0.37.2",
+        "sum": ""
+      },
+      {
+        "path": "github.com/cometbft/cometbft-db",
+        "version": "v0.8.0",
+        "sum": "h1:vUMDaH3ApkX8m0KZvOFFy9b5DZHBAjsnEuo9AKVZpjo="
+      },
+      {
+        "path": "github.com/confio/ics23/go",
+        "version": "v0.9.0",
+        "sum": "h1:cWs+wdbS2KRPZezoaaj+qBleXgUk5WOQFMP3CQFGTr4="
+      },
+      {
+        "path": "github.com/cosmos/btcutil",
+        "version": "v1.0.5",
+        "sum": "h1:t+ZFcX77LpKtDBhjucvnOH8C2l2ioGsBNEQ3jef8xFk="
+      },
+      {
+        "path": "github.com/cosmos/cosmos-proto",
+        "version": "v1.0.0-beta.2",
+        "sum": "h1:X3OKvWgK9Gsejo0F1qs5l8Qn6xJV/AzgIWR2wZ8Nua8="
+      },
+      {
+        "path": "github.com/cosmos/cosmos-sdk",
+        "version": "v0.47.5",
+        "sum": ""
+      },
+      {
+        "path": "github.com/cosmos/go-bip39",
+        "version": "v1.0.0",
+        "sum": "h1:pcomnQdrdH22njcAatO0yWojsUnCO3y2tNoV1cb6hHY="
+      },
+      {
+        "path": "github.com/cosmos/gogogateway",
+        "version": "v1.2.0",
+        "sum": "h1:Ae/OivNhp8DqBi/sh2A8a1D0y638GpL3tkmLQAiKxTE="
+      },
+      {
+        "path": "github.com/cosmos/gogoproto",
+        "version": "v1.4.10",
+        "sum": "h1:QH/yT8X+c0F4ZDacDv3z+xE3WU1P1Z3wQoLMBRJoKuI="
+      },
+      {
+        "path": "github.com/cosmos/iavl",
+        "version": "v0.20.0",
+        "sum": "h1:fTVznVlepH0KK8NyKq8w+U7c2L6jofa27aFX6YGlm38="
+      },
+      {
+        "path": "github.com/cosmos/ibc-go/v7",
+        "version": "v7.3.1",
+        "sum": "h1:bil1IjnHdyWDASFYKfwdRiNtFP6WK3osW7QFEAgU4I8="
+      },
+      {
+        "path": "github.com/cosmos/ics23/go",
+        "version": "v0.10.0",
+        "sum": "h1:iXqLLgp2Lp+EdpIuwXTYIQU+AiHj9mOC2X9ab++bZDM="
+      },
+      {
+        "path": "github.com/cosmos/rosetta-sdk-go",
+        "version": "v0.10.0",
+        "sum": "h1:E5RhTruuoA7KTIXUcMicL76cffyeoyvNybzUGSKFTcM="
+      },
+      {
+        "path": "github.com/cpuguy83/go-md2man/v2",
+        "version": "v2.0.2",
+        "sum": "h1:p1EgwI/C7NhT0JmVkwCD2ZBK8j4aeHQX2pMHHBfMQ6w="
+      },
+      {
+        "path": "github.com/creachadair/taskgroup",
+        "version": "v0.4.2",
+        "sum": "h1:jsBLdAJE42asreGss2xZGZ8fJra7WtwnHWeJFxv2Li8="
+      },
+      {
+        "path": "github.com/davecgh/go-spew",
+        "version": "v1.1.1",
+        "sum": "h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c="
+      },
+      {
+        "path": "github.com/deckarep/golang-set",
+        "version": "v1.8.0",
+        "sum": "h1:sk9/l/KqpunDwP7pSjUg0keiOOLEnOBHzykLrsPppp4="
+      },
+      {
+        "path": "github.com/decred/dcrd/dcrec/secp256k1/v4",
+        "version": "v4.1.0",
+        "sum": "h1:HbphB4TFFXpv7MNrT52FGrrgVXF1owhMVTHFZIlnvd4="
+      },
+      {
+        "path": "github.com/desertbit/timer",
+        "version": "v0.0.0-20180107155436-c41aec40b27f",
+        "sum": "h1:U5y3Y5UE0w7amNe7Z5G/twsBW0KEalRQXZzf8ufSh9I="
+      },
+      {
+        "path": "github.com/dlclark/regexp2",
+        "version": "v1.4.1-0.20201116162257-a2a8dda75c91",
+        "sum": "h1:Izz0+t1Z5nI16/II7vuEo/nHjodOg0p7+OiDpjX5t1E="
+      },
+      {
+        "path": "github.com/dop251/goja",
+        "version": "v0.0.0-20220405120441-9037c2b61cbf",
+        "sum": "h1:Yt+4K30SdjOkRoRRm3vYNQgR+/ZIy0RmeUDZo7Y8zeQ="
+      },
+      {
+        "path": "github.com/dvsekhvalnov/jose2go",
+        "version": "v1.5.0",
+        "sum": "h1:3j8ya4Z4kMCwT5nXIKFSV84YS+HdqSSO0VsTQxaLAeM="
+      },
+      {
+        "path": "github.com/edsrzf/mmap-go",
+        "version": "v1.0.0",
+        "sum": "h1:CEBF7HpRnUCSJgGUb5h1Gm7e3VkmVDrR8lvWVLtrOFw="
+      },
+      {
+        "path": "github.com/ethereum/go-ethereum",
+        "version": "v1.10.26",
+        "sum": "h1:i/7d9RBBwiXCEuyduBQzJw/mKmnvzsN14jqBmytw72s="
+      },
+      {
+        "path": "github.com/felixge/httpsnoop",
+        "version": "v1.0.2",
+        "sum": "h1:+nS9g82KMXccJ/wp0zyRW9ZBHFETmMGtkk+2CTTrW4o="
+      },
+      {
+        "path": "github.com/fjl/memsize",
+        "version": "v0.0.0-20190710130421-bcb5799ab5e5",
+        "sum": "h1:FtmdgXiUlNeRsoNMFlKLDt+S+6hbjVMEW6RGQ7aUf7c="
+      },
+      {
+        "path": "github.com/fsnotify/fsnotify",
+        "version": "v1.6.0",
+        "sum": "h1:n+5WquG0fcWoWp6xPWfHdbskMCQaFnG6PfBrh1Ky4HY="
+      },
+      {
+        "path": "github.com/getsentry/sentry-go",
+        "version": "v0.23.0",
+        "sum": "h1:dn+QRCeJv4pPt9OjVXiMcGIBIefaTJPw/h0bZWO05nE="
+      },
+      {
+        "path": "github.com/go-kit/kit",
+        "version": "v0.12.0",
+        "sum": "h1:e4o3o3IsBfAKQh5Qbbiqyfu97Ku7jrO/JbohvztANh4="
+      },
+      {
+        "path": "github.com/go-kit/log",
+        "version": "v0.2.1",
+        "sum": "h1:MRVx0/zhvdseW+Gza6N9rVzU/IVzaeE1SFI4raAhmBU="
+      },
+      {
+        "path": "github.com/go-logfmt/logfmt",
+        "version": "v0.6.0",
+        "sum": "h1:wGYYu3uicYdqXVgoYbvnkrPVXkuLM1p1ifugDMEdRi4="
+      },
+      {
+        "path": "github.com/go-sourcemap/sourcemap",
+        "version": "v2.1.3+incompatible",
+        "sum": "h1:W1iEw64niKVGogNgBN3ePyLFfuisuzeidWPMPWmECqU="
+      },
+      {
+        "path": "github.com/go-stack/stack",
+        "version": "v1.8.0",
+        "sum": "h1:5SgMzNM5HxrEjV0ww2lTmX6E2Izsfxas4+YHWRs3Lsk="
+      },
+      {
+        "path": "github.com/godbus/dbus",
+        "version": "v0.0.0-20190726142602-4481cbc300e2",
+        "sum": "h1:ZpnhV/YsD2/4cESfV5+Hoeu/iUR3ruzNvZ+yQfO03a0="
+      },
+      {
+        "path": "github.com/gogo/googleapis",
+        "version": "v1.4.1",
+        "sum": "h1:1Yx4Myt7BxzvUr5ldGSbwYiZG6t9wGBZ+8/fX3Wvtq0="
+      },
+      {
+        "path": "github.com/gogo/protobuf",
+        "version": "v1.3.2",
+        "sum": "h1:Ov1cvc58UF3b5XjBnZv7+opcTcQFZebYjWzi34vdm4Q="
+      },
+      {
+        "path": "github.com/golang-jwt/jwt/v4",
+        "version": "v4.3.0",
+        "sum": "h1:kHL1vqdqWNfATmA0FNMdmZNMyZI1U6O31X4rlIPoBog="
+      },
+      {
+        "path": "github.com/golang/groupcache",
+        "version": "v0.0.0-20210331224755-41bb18bfe9da",
+        "sum": "h1:oI5xCqsCo564l8iNU+DwB5epxmsaqB+rhGL0m5jtYqE="
+      },
+      {
+        "path": "github.com/golang/mock",
+        "version": "v1.6.0",
+        "sum": "h1:ErTB+efbowRARo13NNdxyJji2egdxLGQhRaY+DUumQc="
+      },
+      {
+        "path": "github.com/golang/protobuf",
+        "version": "v1.5.3",
+        "sum": "h1:KhyjKVUg7Usr/dYsdSqoFveMYd5ko72D+zANwlG1mmg="
+      },
+      {
+        "path": "github.com/golang/snappy",
+        "version": "v0.0.4",
+        "sum": "h1:yAGX7huGHXlcLOEtBnF4w7FQwA26wojNCwOYAEhLjQM="
+      },
+      {
+        "path": "github.com/google/btree",
+        "version": "v1.1.2",
+        "sum": "h1:xf4v41cLI2Z6FxbKm+8Bu+m8ifhj15JuZ9sa0jZCMUU="
+      },
+      {
+        "path": "github.com/google/go-cmp",
+        "version": "v0.5.9",
+        "sum": "h1:O2Tfq5qg4qc4AmwVlvv0oLiVAGB7enBSJ2x2DqQFi38="
+      },
+      {
+        "path": "github.com/google/orderedcode",
+        "version": "v0.0.1",
+        "sum": "h1:UzfcAexk9Vhv8+9pNOgRu41f16lHq725vPwnSeiG/Us="
+      },
+      {
+        "path": "github.com/google/s2a-go",
+        "version": "v0.1.4",
+        "sum": "h1:1kZ/sQM3srePvKs3tXAvQzo66XfcReoqFpIpIccE7Oc="
+      },
+      {
+        "path": "github.com/google/uuid",
+        "version": "v1.3.0",
+        "sum": "h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I="
+      },
+      {
+        "path": "github.com/googleapis/enterprise-certificate-proxy",
+        "version": "v0.2.4",
+        "sum": "h1:uGy6JWR/uMIILU8wbf+OkstIrNiMjGpEIyhx8f6W7s4="
+      },
+      {
+        "path": "github.com/googleapis/gax-go/v2",
+        "version": "v2.12.0",
+        "sum": "h1:A+gCJKdRfqXkr+BIRGtZLibNXf0m1f9E4HG56etFpas="
+      },
+      {
+        "path": "github.com/gorilla/handlers",
+        "version": "v1.5.1",
+        "sum": "h1:9lRY6j8DEeeBT10CvO9hGW0gmky0BprnvDI5vfhUHH4="
+      },
+      {
+        "path": "github.com/gorilla/mux",
+        "version": "v1.8.0",
+        "sum": "h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI="
+      },
+      {
+        "path": "github.com/gorilla/websocket",
+        "version": "v1.5.0",
+        "sum": "h1:PPwGk2jz7EePpoHN/+ClbZu8SPxiqlu12wZP/3sWmnc="
+      },
+      {
+        "path": "github.com/grpc-ecosystem/go-grpc-middleware",
+        "version": "v1.3.0",
+        "sum": "h1:+9834+KizmvFV7pXQGSXQTsaWhq2GjuNUt0aUU0YBYw="
+      },
+      {
+        "path": "github.com/grpc-ecosystem/grpc-gateway",
+        "version": "v1.16.0",
+        "sum": "h1:gmcG1KaJ57LophUzW0Hy8NmPhnMZb4M0+kPpLofRdBo="
+      },
+      {
+        "path": "github.com/gsterjov/go-libsecret",
+        "version": "v0.0.0-20161001094733-a6f4afe4910c",
+        "sum": "h1:6rhixN/i8ZofjG1Y75iExal34USq5p+wiN1tpie8IrU="
+      },
+      {
+        "path": "github.com/gtank/merlin",
+        "version": "v0.1.1",
+        "sum": "h1:eQ90iG7K9pOhtereWsmyRJ6RAwcP4tHTDBHXNg+u5is="
+      },
+      {
+        "path": "github.com/gtank/ristretto255",
+        "version": "v0.1.2",
+        "sum": "h1:JEqUCPA1NvLq5DwYtuzigd7ss8fwbYay9fi4/5uMzcc="
+      },
+      {
+        "path": "github.com/hashicorp/go-bexpr",
+        "version": "v0.1.10",
+        "sum": "h1:9kuI5PFotCboP3dkDYFr/wi0gg0QVbSNz5oFRpxn4uE="
+      },
+      {
+        "path": "github.com/hashicorp/go-cleanhttp",
+        "version": "v0.5.2",
+        "sum": "h1:035FKYIWjmULyFRBKPs8TBQoi0x6d9G4xc9neXJWAZQ="
+      },
+      {
+        "path": "github.com/hashicorp/go-getter",
+        "version": "v1.7.1",
+        "sum": "h1:SWiSWN/42qdpR0MdhaOc/bLR48PLuP1ZQtYLRlM69uY="
+      },
+      {
+        "path": "github.com/hashicorp/go-immutable-radix",
+        "version": "v1.3.1",
+        "sum": "h1:DKHmCUm2hRBK510BaiZlwvpD40f8bJFeZnpfm2KLowc="
+      },
+      {
+        "path": "github.com/hashicorp/go-safetemp",
+        "version": "v1.0.0",
+        "sum": "h1:2HR189eFNrjHQyENnQMMpCiBAsRxzbTMIgBhEyExpmo="
+      },
+      {
+        "path": "github.com/hashicorp/go-version",
+        "version": "v1.6.0",
+        "sum": "h1:feTTfFNnjP967rlCxM/I9g701jU+RN74YKx2mOkIeek="
+      },
+      {
+        "path": "github.com/hashicorp/golang-lru",
+        "version": "v0.5.5-0.20210104140557-80c98217689d",
+        "sum": "h1:dg1dEPuWpEqDnvIw251EVy4zlP8gWbsGj4BsUKCRpYs="
+      },
+      {
+        "path": "github.com/hashicorp/hcl",
+        "version": "v1.0.0",
+        "sum": "h1:0Anlzjpi4vEasTeNFn2mLJgTSwt0+6sfsiTG8qcWGx4="
+      },
+      {
+        "path": "github.com/hdevalence/ed25519consensus",
+        "version": "v0.1.0",
+        "sum": "h1:jtBwzzcHuTmFrQN6xQZn6CQEO/V9f7HsjsjeEZ6auqU="
+      },
+      {
+        "path": "github.com/holiman/bloomfilter/v2",
+        "version": "v2.0.3",
+        "sum": "h1:73e0e/V0tCydx14a0SCYS/EWCxgwLZ18CZcZKVu0fao="
+      },
+      {
+        "path": "github.com/holiman/uint256",
+        "version": "v1.2.0",
+        "sum": "h1:gpSYcPLWGv4sG43I2mVLiDZCNDh/EpGjSk8tmtxitHM="
+      },
+      {
+        "path": "github.com/huandu/skiplist",
+        "version": "v1.2.0",
+        "sum": "h1:gox56QD77HzSC0w+Ws3MH3iie755GBJU1OER3h5VsYw="
+      },
+      {
+        "path": "github.com/huin/goupnp",
+        "version": "v1.0.3",
+        "sum": "h1:N8No57ls+MnjlB+JPiCVSOyy/ot7MJTqlo7rn+NYSqQ="
+      },
+      {
+        "path": "github.com/improbable-eng/grpc-web",
+        "version": "v0.15.0",
+        "sum": "h1:BN+7z6uNXZ1tQGcNAuaU1YjsLTApzkjt2tzCixLaUPQ="
+      },
+      {
+        "path": "github.com/ipfs/go-cid",
+        "version": "v0.1.0",
+        "sum": "h1:YN33LQulcRHjfom/i25yoOZR4Telp1Hr/2RU3d0PnC0="
+      },
+      {
+        "path": "github.com/jackpal/go-nat-pmp",
+        "version": "v1.0.2",
+        "sum": "h1:KzKSgb7qkJvOUTqYl9/Hg/me3pWgBmERKrTGD7BdWus="
+      },
+      {
+        "path": "github.com/jmespath/go-jmespath",
+        "version": "v0.4.0",
+        "sum": "h1:BEgLn5cpjn8UN1mAw4NjwDrS35OdebyEtFe+9YPoQUg="
+      },
+      {
+        "path": "github.com/kelindar/bitmap",
+        "version": "v1.4.1",
+        "sum": "h1:Ih0BWMYXkkZxPMU536DsQKRhdvqFl7tuNjImfLJWC6E="
+      },
+      {
+        "path": "github.com/kelindar/simd",
+        "version": "v1.1.2",
+        "sum": "h1:KduKb+M9cMY2HIH8S/cdJyD+5n5EGgq+Aeeleos55To="
+      },
+      {
+        "path": "github.com/klauspost/compress",
+        "version": "v1.16.3",
+        "sum": "h1:XuJt9zzcnaz6a16/OU53ZjWp/v7/42WcR5t2a0PcNQY="
+      },
+      {
+        "path": "github.com/klauspost/cpuid/v2",
+        "version": "v2.2.4",
+        "sum": "h1:acbojRNwl3o09bUq+yDCtZFc1aiwaAAxtcn8YkZXnvk="
+      },
+      {
+        "path": "github.com/kr/pretty",
+        "version": "v0.3.1",
+        "sum": "h1:flRD4NNwYAUpkphVc1HcthR4KEIFJ65n8Mw5qdRn3LE="
+      },
+      {
+        "path": "github.com/kr/text",
+        "version": "v0.2.0",
+        "sum": "h1:5Nx0Ya0ZqY2ygV366QzturHI13Jq95ApcVaJBhpS+AY="
+      },
+      {
+        "path": "github.com/lib/pq",
+        "version": "v1.10.7",
+        "sum": "h1:p7ZhMD+KsSRozJr34udlUrhboJwWAgCg34+/ZZNvZZw="
+      },
+      {
+        "path": "github.com/libp2p/go-buffer-pool",
+        "version": "v0.1.0",
+        "sum": "h1:oK4mSFcQz7cTQIfqbe4MIj9gLW+mnanjyFtc6cdF0Y8="
+      },
+      {
+        "path": "github.com/magiconair/properties",
+        "version": "v1.8.7",
+        "sum": "h1:IeQXZAiQcpL9mgcAe1Nu6cX9LLw6ExEHKjN0VQdvPDY="
+      },
+      {
+        "path": "github.com/manifoldco/promptui",
+        "version": "v0.9.0",
+        "sum": "h1:3V4HzJk1TtXW1MTZMP7mdlwbBpIinw3HztaIlYthEiA="
+      },
+      {
+        "path": "github.com/mattn/go-colorable",
+        "version": "v0.1.13",
+        "sum": "h1:fFA4WZxdEF4tXPZVKMLwD8oUnCTTo08duU7wxecdEvA="
+      },
+      {
+        "path": "github.com/mattn/go-isatty",
+        "version": "v0.0.19",
+        "sum": "h1:JITubQf0MOLdlGRuRq+jtsDlekdYPia9ZFsB8h/APPA="
+      },
+      {
+        "path": "github.com/mattn/go-runewidth",
+        "version": "v0.0.9",
+        "sum": "h1:Lm995f3rfxdpd6TSmuVCHVb/QhupuXlYr8sCI/QdE+0="
+      },
+      {
+        "path": "github.com/matttproud/golang_protobuf_extensions",
+        "version": "v1.0.4",
+        "sum": "h1:mmDVorXM7PCGKw94cs5zkfA9PSy5pEvNWRP0ET0TIVo="
+      },
+      {
+        "path": "github.com/mimoo/StrobeGo",
+        "version": "v0.0.0-20210601165009-122bf33a46e0",
+        "sum": "h1:QRUSJEgZn2Snx0EmT/QLXibWjSUDjKWvXIT19NBVp94="
+      },
+      {
+        "path": "github.com/minio/blake2b-simd",
+        "version": "v0.0.0-20160723061019-3f5f724cb5b1",
+        "sum": "h1:lYpkrQH5ajf0OXOcUbGjvZxxijuBwbbmlSxLiuofa+g="
+      },
+      {
+        "path": "github.com/minio/highwayhash",
+        "version": "v1.0.2",
+        "sum": "h1:Aak5U0nElisjDCfPSG79Tgzkn2gl66NxOMspRrKnA/g="
+      },
+      {
+        "path": "github.com/minio/sha256-simd",
+        "version": "v1.0.0",
+        "sum": "h1:v1ta+49hkWZyvaKwrQB8elexRqm6Y0aMLjCNsrYxo6g="
+      },
+      {
+        "path": "github.com/mitchellh/go-homedir",
+        "version": "v1.1.0",
+        "sum": "h1:lukF9ziXFxDFPkA1vsr5zpc1XuPDn/wFntq5mG+4E0Y="
+      },
+      {
+        "path": "github.com/mitchellh/go-testing-interface",
+        "version": "v1.14.1",
+        "sum": "h1:jrgshOhYAUVNMAJiKbEu7EqAwgJJ2JqpQmpLJOu07cU="
+      },
+      {
+        "path": "github.com/mitchellh/mapstructure",
+        "version": "v1.5.0",
+        "sum": "h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY="
+      },
+      {
+        "path": "github.com/mitchellh/pointerstructure",
+        "version": "v1.2.0",
+        "sum": "h1:O+i9nHnXS3l/9Wu7r4NrEdwA2VFTicjUEN1uBnDo34A="
+      },
+      {
+        "path": "github.com/mr-tron/base58",
+        "version": "v1.2.0",
+        "sum": "h1:T/HDJBh4ZCPbU39/+c3rRvE0uKBQlU27+QI8LJ4t64o="
+      },
+      {
+        "path": "github.com/mtibben/percent",
+        "version": "v0.2.1",
+        "sum": "h1:5gssi8Nqo8QU/r2pynCm+hBQHpkB/uNK7BJCFogWdzs="
+      },
+      {
+        "path": "github.com/multiformats/go-base32",
+        "version": "v0.0.3",
+        "sum": "h1:tw5+NhuwaOjJCC5Pp82QuXbrmLzWg7uxlMFp8Nq/kkI="
+      },
+      {
+        "path": "github.com/multiformats/go-base36",
+        "version": "v0.1.0",
+        "sum": "h1:JR6TyF7JjGd3m6FbLU2cOxhC0Li8z8dLNGQ89tUg4F4="
+      },
+      {
+        "path": "github.com/multiformats/go-multibase",
+        "version": "v0.0.3",
+        "sum": "h1:l/B6bJDQjvQ5G52jw4QGSYeOTZoAwIO77RblWplfIqk="
+      },
+      {
+        "path": "github.com/multiformats/go-multihash",
+        "version": "v0.0.15",
+        "sum": "h1:hWOPdrNqDjwHDx82vsYGSDZNyktOJJ2dzZJzFkOV1jM="
+      },
+      {
+        "path": "github.com/multiformats/go-varint",
+        "version": "v0.0.6",
+        "sum": "h1:gk85QWKxh3TazbLxED/NlDVv8+q+ReFJk7Y2W/KhfNY="
+      },
+      {
+        "path": "github.com/olekukonko/tablewriter",
+        "version": "v0.0.5",
+        "sum": "h1:P2Ga83D34wi1o9J6Wh1mRuqd4mF/x/lgBS7N7AbDhec="
+      },
+      {
+        "path": "github.com/pelletier/go-toml/v2",
+        "version": "v2.0.8",
+        "sum": "h1:0ctb6s9mE31h0/lhu+J6OPmVeDxJn+kYnJc2jZR9tGQ="
+      },
+      {
+        "path": "github.com/pkg/errors",
+        "version": "v0.9.1",
+        "sum": "h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4="
+      },
+      {
+        "path": "github.com/pmezard/go-difflib",
+        "version": "v1.0.0",
+        "sum": "h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM="
+      },
+      {
+        "path": "github.com/prometheus/client_golang",
+        "version": "v1.17.0",
+        "sum": "h1:rl2sfwZMtSthVU752MqfjQozy7blglC+1SOtjMAMh+Q="
+      },
+      {
+        "path": "github.com/prometheus/client_model",
+        "version": "v0.4.1-0.20230718164431-9a2bf3000d16",
+        "sum": "h1:v7DLqVdK4VrYkVD5diGdl4sxJurKJEMnODWRJlxV9oM="
+      },
+      {
+        "path": "github.com/prometheus/common",
+        "version": "v0.44.0",
+        "sum": "h1:+5BrQJwiBB9xsMygAB3TNvpQKOwlkc25LbISbrdOOfY="
+      },
+      {
+        "path": "github.com/prometheus/procfs",
+        "version": "v0.11.1",
+        "sum": "h1:xRC8Iq1yyca5ypa9n1EZnWZkt7dwcoRPQwX/5gwaUuI="
+      },
+      {
+        "path": "github.com/prometheus/tsdb",
+        "version": "v0.7.1",
+        "sum": "h1:YZcsG11NqnK4czYLrWd9mpEuAJIHVQLwdrleYfszMAA="
+      },
+      {
+        "path": "github.com/rakyll/statik",
+        "version": "v0.1.7",
+        "sum": "h1:OF3QCZUuyPxuGEP7B4ypUa7sB/iHtqOTDYZXGM8KOdQ="
+      },
+      {
+        "path": "github.com/rcrowley/go-metrics",
+        "version": "v0.0.0-20201227073835-cf1acfcdf475",
+        "sum": "h1:N/ElC8H3+5XpJzTSTfLsJV/mx9Q9g7kxmchpfZyxgzM="
+      },
+      {
+        "path": "github.com/rjeczalik/notify",
+        "version": "v0.9.1",
+        "sum": "h1:CLCKso/QK1snAlnhNR/CNvNiFU2saUtjV0bx3EwNeCE="
+      },
+      {
+        "path": "github.com/rogpeppe/go-internal",
+        "version": "v1.11.0",
+        "sum": "h1:cWPaGQEPrBb5/AsnsZesgZZ9yb1OQ+GOISoDNXVBh4M="
+      },
+      {
+        "path": "github.com/rs/cors",
+        "version": "v1.8.3",
+        "sum": "h1:O+qNyWn7Z+F9M0ILBHgMVPuB1xTOucVd5gtaYyXBpRo="
+      },
+      {
+        "path": "github.com/rs/zerolog",
+        "version": "v1.30.0",
+        "sum": "h1:SymVODrcRsaRaSInD9yQtKbtWqwsfoPcRff/oRXLj4c="
+      },
+      {
+        "path": "github.com/russross/blackfriday/v2",
+        "version": "v2.1.0",
+        "sum": "h1:JIOH55/0cWyOuilr9/qlrm0BSXldqnqwMsf35Ld67mk="
+      },
+      {
+        "path": "github.com/shirou/gopsutil",
+        "version": "v3.21.4-0.20210419000835-c7a38de76ee5+incompatible",
+        "sum": "h1:Bn1aCHHRnjv4Bl16T8rcaFjYSrGrIZvpiGO6P3Q4GpU="
+      },
+      {
+        "path": "github.com/spf13/afero",
+        "version": "v1.9.5",
+        "sum": "h1:stMpOSZFs//0Lv29HduCmli3GUfpFoF3Y1Q/aXj/wVM="
+      },
+      {
+        "path": "github.com/spf13/cast",
+        "version": "v1.5.1",
+        "sum": "h1:R+kOtfhWQE6TVQzY+4D7wJLBgkdVasCEFxSUBYBYIlA="
+      },
+      {
+        "path": "github.com/spf13/cobra",
+        "version": "v1.7.0",
+        "sum": "h1:hyqWnYt1ZQShIddO5kBpj3vu05/++x6tJ6dg8EC572I="
+      },
+      {
+        "path": "github.com/spf13/jwalterweatherman",
+        "version": "v1.1.0",
+        "sum": "h1:ue6voC5bR5F8YxI5S67j9i582FU4Qvo2bmqnqMYADFk="
+      },
+      {
+        "path": "github.com/spf13/pflag",
+        "version": "v1.0.5",
+        "sum": "h1:iy+VFUOCP1a+8yFto/drg2CJ5u0yRoB7fZw3DKv/JXA="
+      },
+      {
+        "path": "github.com/spf13/viper",
+        "version": "v1.16.0",
+        "sum": "h1:rGGH0XDZhdUOryiDWjmIvUSWpbNqisK8Wk0Vyefw8hc="
+      },
+      {
+        "path": "github.com/stratosnet/stratos-chain/api",
+        "version": "v0.0.0-20231220214043-682f174b1c21",
+        "sum": "h1:aVfwtoQ4dCAXbzfQ9k4rLKkT4UAeWudH8OxNb3WXQm8="
+      },
+      {
+        "path": "github.com/stretchr/testify",
+        "version": "v1.8.4",
+        "sum": "h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk="
+      },
+      {
+        "path": "github.com/subosito/gotenv",
+        "version": "v1.4.2",
+        "sum": "h1:X1TuBLAMDFbaTAChgCBLu3DU3UPyELpnF2jjJ2cz/S8="
+      },
+      {
+        "path": "github.com/syndtr/goleveldb",
+        "version": "v1.0.1-0.20220721030215-126854af5e6d",
+        "sum": ""
+      },
+      {
+        "path": "github.com/tendermint/go-amino",
+        "version": "v0.16.0",
+        "sum": "h1:GyhmgQKvqF82e2oZeuMSp9JTN0N09emoSZlb2lyGa2E="
+      },
+      {
+        "path": "github.com/tidwall/btree",
+        "version": "v1.6.0",
+        "sum": "h1:LDZfKfQIBHGHWSwckhXI0RPSXzlo+KYdjK7FWSqOzzg="
+      },
+      {
+        "path": "github.com/tklauser/go-sysconf",
+        "version": "v0.3.11",
+        "sum": "h1:89WgdJhk5SNwJfu+GKyYveZ4IaJ7xAkecBo+KdJV0CM="
+      },
+      {
+        "path": "github.com/tklauser/numcpus",
+        "version": "v0.6.0",
+        "sum": "h1:kebhY2Qt+3U6RNK7UqpYNA+tJ23IBEGKkB7JQBfDYms="
+      },
+      {
+        "path": "github.com/tyler-smith/go-bip39",
+        "version": "v1.1.0",
+        "sum": "h1:5eUemwrMargf3BSLRRCalXT93Ns6pQJIjYQN2nyfOP8="
+      },
+      {
+        "path": "github.com/ulikunitz/xz",
+        "version": "v0.5.11",
+        "sum": "h1:kpFauv27b6ynzBNT/Xy+1k+fK4WswhN/6PN5WhFAGw8="
+      },
+      {
+        "path": "github.com/urfave/cli/v2",
+        "version": "v2.10.2",
+        "sum": "h1:x3p8awjp/2arX+Nl/G2040AZpOCHS/eMJJ1/a+mye4Y="
+      },
+      {
+        "path": "github.com/xrash/smetrics",
+        "version": "v0.0.0-20201216005158-039620a65673",
+        "sum": "h1:bAn7/zixMGCfxrRTfdpNzjtPYqr8smhKouy9mxVdGPU="
+      },
+      {
+        "path": "go.opencensus.io",
+        "version": "v0.24.0",
+        "sum": "h1:y73uSU6J157QMP2kn2r30vwW1A2W2WFwSCGnAVxeaD0="
+      },
+      {
+        "path": "golang.org/x/crypto",
+        "version": "v0.12.0",
+        "sum": "h1:tFM/ta59kqch6LlvYnPa0yx5a83cL2nHflFhYKvv9Yk="
+      },
+      {
+        "path": "golang.org/x/exp",
+        "version": "v0.0.0-20230711153332-06a737ee72cb",
+        "sum": "h1:xIApU0ow1zwMa2uL1VDNeQlNVFTWMQxZUZCMDy0Q4Us="
+      },
+      {
+        "path": "golang.org/x/net",
+        "version": "v0.14.0",
+        "sum": "h1:BONx9s002vGdD9umnlX1Po8vOZmrgH34qlHcD1MfK14="
+      },
+      {
+        "path": "golang.org/x/oauth2",
+        "version": "v0.10.0",
+        "sum": "h1:zHCpF2Khkwy4mMB4bv0U37YtJdTGW8jI0glAApi0Kh8="
+      },
+      {
+        "path": "golang.org/x/sync",
+        "version": "v0.3.0",
+        "sum": "h1:ftCYgMx6zT/asHUrPw8BLLscYtGznsLAnjq5RH9P66E="
+      },
+      {
+        "path": "golang.org/x/sys",
+        "version": "v0.11.0",
+        "sum": "h1:eG7RXZHdqOJ1i+0lgLgCpSXAp6M3LYlAo6osgSi0xOM="
+      },
+      {
+        "path": "golang.org/x/term",
+        "version": "v0.11.0",
+        "sum": "h1:F9tnn/DA/Im8nCwm+fX+1/eBwi4qFjRT++MhtVC4ZX0="
+      },
+      {
+        "path": "golang.org/x/text",
+        "version": "v0.12.0",
+        "sum": "h1:k+n5B8goJNdU7hSvEtMUz3d1Q6D/XW4COJSJR6fN0mc="
+      },
+      {
+        "path": "golang.org/x/xerrors",
+        "version": "v0.0.0-20220907171357-04be3eba64a2",
+        "sum": "h1:H2TDz8ibqkAF6YGhCdN3jS9O0/s90v0rJh3X/OLHEUk="
+      },
+      {
+        "path": "google.golang.org/api",
+        "version": "v0.128.0",
+        "sum": "h1:RjPESny5CnQRn9V6siglged+DZCgfu9l6mO9dkX9VOg="
+      },
+      {
+        "path": "google.golang.org/appengine",
+        "version": "v1.6.7",
+        "sum": "h1:FZR1q0exgwxzPzp/aF+VccGrSfxfPpkBqjIIEq3ru6c="
+      },
+      {
+        "path": "google.golang.org/genproto",
+        "version": "v0.0.0-20230920204549-e6e6cdab5c13",
+        "sum": "h1:vlzZttNJGVqTsRFU9AmdnrcO1Znh8Ew9kCD//yjigk0="
+      },
+      {
+        "path": "google.golang.org/genproto/googleapis/api",
+        "version": "v0.0.0-20231002182017-d307bd883b97",
+        "sum": "h1:W18sezcAYs+3tDZX4F80yctqa12jcP1PUS2gQu1zTPU="
+      },
+      {
+        "path": "google.golang.org/genproto/googleapis/rpc",
+        "version": "v0.0.0-20230920204549-e6e6cdab5c13",
+        "sum": "h1:N3bU/SQDCDyD6R528GJ/PwW9KjYcJA3dgyH+MovAkIM="
+      },
+      {
+        "path": "google.golang.org/grpc",
+        "version": "v1.58.3",
+        "sum": "h1:BjnpXut1btbtgN/6sp+brB2Kbm2LjNXnidYujAVbSoQ="
+      },
+      {
+        "path": "google.golang.org/protobuf",
+        "version": "v1.31.0",
+        "sum": "h1:g0LDEJHgrBl9N9r17Ru3sqWhkIx2NB67okBHPwC7hs8="
+      },
+      {
+        "path": "gopkg.in/ini.v1",
+        "version": "v1.67.0",
+        "sum": "h1:Dgnx+6+nfE+IfzjUEISNeydPJh9AXNNsWbGP9KzCsOA="
+      },
+      {
+        "path": "gopkg.in/yaml.v2",
+        "version": "v2.4.0",
+        "sum": "h1:D8xgwECY7CYvx+Y2n4sBz93Jn9JRvxdiyyo8CTfuKaY="
+      },
+      {
+        "path": "gopkg.in/yaml.v3",
+        "version": "v3.0.1",
+        "sum": "h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA="
+      },
+      {
+        "path": "nhooyr.io/websocket",
+        "version": "v1.8.6",
+        "sum": "h1:s+C3xAMLwGmlI31Nyn/eAehUlZPwfYZu2JXM621Q5/k="
+      },
+      {
+        "path": "pgregory.net/rapid",
+        "version": "v0.5.5",
+        "sum": "h1:jkgx1TjbQPD/feRoK+S/mXw9e1uj6WilpHrXJowi6oA="
+      },
+      {
+        "path": "sigs.k8s.io/yaml",
+        "version": "v1.3.0",
+        "sum": "h1:a2VclLzOGrwOHDiV8EfBGhvjHvP46CtW5j6POvhYGGo="
+      }
+    ],
+    "cosmos_sdk_version": "v0.47.5"
+  }
 }
 ```
 </details>
@@ -4262,8 +3177,6 @@ Response Example:
 <br>
 
 
-
-
 <details>
     <summary><code>GET /cosmos/base/tendermint/v1beta1/validatorsets/latest</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries latest validator-set.</summary>
 
@@ -4274,15 +3187,15 @@ https://rest.thestratos.org/cosmos/base/tendermint/v1beta1/validatorsets/latest
 Response Example:
 ```json
 {
-  "block_height": "3392",
+  "block_height": "927",
   "validators": [
     {
-      "address": "stvalcons1rzn3d8qmgf7ejsfn77eag5zwjfufmvmu7sn802",
+      "address": "stvalcons1qk2flmcrpyyxs6ekq7wgh62caeqjmp6ymddlvp",
       "pub_key": {
         "@type": "/cosmos.crypto.ed25519.PubKey",
-        "key": "69gothWTE9FJBZ5gBjjSNhg8y/5SsI1hBaD81Dum7lo="
+        "key": "yaG6YrluzJfxOgwFuRhlgpOvQAmzBS7kqMVvISN8XWs="
       },
-      "voting_power": "500000",
+      "voting_power": "504000000000000",
       "proposer_priority": "0"
     }
   ],
@@ -4302,20 +3215,20 @@ Response Example:
 
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/base/tendermint/v1beta1/validatorsets/1000
+https://rest.thestratos.org/cosmos/base/tendermint/v1beta1/validatorsets/800
 ```
 Response Example:
 ```json
 {
-  "block_height": "1000",
+  "block_height": "800",
   "validators": [
     {
-      "address": "stvalcons1rzn3d8qmgf7ejsfn77eag5zwjfufmvmu7sn802",
+      "address": "stvalcons1qk2flmcrpyyxs6ekq7wgh62caeqjmp6ymddlvp",
       "pub_key": {
         "@type": "/cosmos.crypto.ed25519.PubKey",
-        "key": "69gothWTE9FJBZ5gBjjSNhg8y/5SsI1hBaD81Dum7lo="
+        "key": "yaG6YrluzJfxOgwFuRhlgpOvQAmzBS7kqMVvISN8XWs="
       },
-      "voting_power": "500000",
+      "voting_power": "504000000000000",
       "proposer_priority": "0"
     }
   ],
@@ -4326,6 +3239,7 @@ Response Example:
 }
 ```
 </details>
+
 <br>
 
 ***
@@ -4338,379 +3252,388 @@ Search, encode, or broadcast transactions.
 
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/tx/v1beta1/txs?events=tx.height=611
+https://rest.thestratos.org/cosmos/tx/v1beta1/txs?events=tx.height=557
 ```
 Response Example:
 ```json
 {
-    "txs": [
-        {
-            "body": {
-                "messages": [
-                    {
-                        "@type": "/cosmos.bank.v1beta1.MsgSend",
-                        "from_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
-                        "to_address": "st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx",
-                        "amount": [
-                            {
-                                "denom": "wei",
-                                "amount": "1000000000"
-                            }
-                        ]
-                    }
-                ],
-                "memo": "",
-                "timeout_height": "0",
-                "extension_options": [],
-                "non_critical_extension_options": []
-            },
-            "auth_info": {
-                "signer_infos": [
-                    {
-                        "public_key": {
-                            "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
-                            "key": "Agkwb1xacHBqeqGBIqRacXgf0qKTnEBPCEtH2vTE01Ke"
-                        },
-                        "mode_info": {
-                            "single": {
-                                "mode": "SIGN_MODE_DIRECT"
-                            }
-                        },
-                        "sequence": "3"
-                    }
-                ],
-                "fee": {
-                    "amount": [
-                        {
-                            "denom": "wei",
-                            "amount": "200000000000000"
-                        }
-                    ],
-                    "gas_limit": "200000",
-                    "payer": "",
-                    "granter": ""
-                }
-            },
-            "signatures": [
-                "7FmgB+sTnP5Kk4q121YyVdJJkdEq3Gioydu8fTP+pxoMC/Tl77uJlCRBanSP7jx1xEjwTxt3znGL9KNQLRAA2QA="
+  "txs": [
+    {
+      "body": {
+        "messages": [
+          {
+            "@type": "/cosmos.bank.v1beta1.MsgSend",
+            "from_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "to_address": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+            "amount": [
+              {
+                "denom": "wei",
+                "amount": "10000000000000000000"
+              }
             ]
-        }
-    ],
-    "tx_responses": [
-        {
-            "height": "611",
-            "txhash": "AB0EF3761603145EDC1B4121C91B51001249186E1362E7148C82E7DB12F7BDF0",
-            "codespace": "",
-            "code": 0,
-            "data": "0A1E0A1C2F636F736D6F732E62616E6B2E763162657461312E4D736753656E64",
-            "raw_log": "[{\"events\":[{\"type\":\"coin_received\",\"attributes\":[{\"key\":\"receiver\",\"value\":\"st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx\"},{\"key\":\"amount\",\"value\":\"1000000000wei\"}]},{\"type\":\"coin_spent\",\"attributes\":[{\"key\":\"spender\",\"value\":\"st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh\"},{\"key\":\"amount\",\"value\":\"1000000000wei\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.bank.v1beta1.MsgSend\"},{\"key\":\"sender\",\"value\":\"st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx\"},{\"key\":\"sender\",\"value\":\"st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh\"},{\"key\":\"amount\",\"value\":\"1000000000wei\"}]}]}]",
-            "logs": [
-                {
-                    "msg_index": 0,
-                    "log": "",
-                    "events": [
-                        {
-                            "type": "coin_received",
-                            "attributes": [
-                                {
-                                    "key": "receiver",
-                                    "value": "st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx"
-                                },
-                                {
-                                    "key": "amount",
-                                    "value": "1000000000wei"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "coin_spent",
-                            "attributes": [
-                                {
-                                    "key": "spender",
-                                    "value": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh"
-                                },
-                                {
-                                    "key": "amount",
-                                    "value": "1000000000wei"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "message",
-                            "attributes": [
-                                {
-                                    "key": "action",
-                                    "value": "/cosmos.bank.v1beta1.MsgSend"
-                                },
-                                {
-                                    "key": "sender",
-                                    "value": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh"
-                                },
-                                {
-                                    "key": "module",
-                                    "value": "bank"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "transfer",
-                            "attributes": [
-                                {
-                                    "key": "recipient",
-                                    "value": "st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx"
-                                },
-                                {
-                                    "key": "sender",
-                                    "value": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh"
-                                },
-                                {
-                                    "key": "amount",
-                                    "value": "1000000000wei"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ],
-            "info": "",
-            "gas_wanted": "200000",
-            "gas_used": "88709",
-            "tx": {
-                "@type": "/cosmos.tx.v1beta1.Tx",
-                "body": {
-                    "messages": [
-                        {
-                            "@type": "/cosmos.bank.v1beta1.MsgSend",
-                            "from_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
-                            "to_address": "st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx",
-                            "amount": [
-                                {
-                                    "denom": "wei",
-                                    "amount": "1000000000"
-                                }
-                            ]
-                        }
-                    ],
-                    "memo": "",
-                    "timeout_height": "0",
-                    "extension_options": [],
-                    "non_critical_extension_options": []
-                },
-                "auth_info": {
-                    "signer_infos": [
-                        {
-                            "public_key": {
-                                "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
-                                "key": "Agkwb1xacHBqeqGBIqRacXgf0qKTnEBPCEtH2vTE01Ke"
-                            },
-                            "mode_info": {
-                                "single": {
-                                    "mode": "SIGN_MODE_DIRECT"
-                                }
-                            },
-                            "sequence": "3"
-                        }
-                    ],
-                    "fee": {
-                        "amount": [
-                            {
-                                "denom": "wei",
-                                "amount": "200000000000000"
-                            }
-                        ],
-                        "gas_limit": "200000",
-                        "payer": "",
-                        "granter": ""
-                    }
-                },
-                "signatures": [
-                    "7FmgB+sTnP5Kk4q121YyVdJJkdEq3Gioydu8fTP+pxoMC/Tl77uJlCRBanSP7jx1xEjwTxt3znGL9KNQLRAA2QA="
-                ]
+          }
+        ],
+        "memo": "",
+        "timeout_height": "0",
+        "extension_options": [],
+        "non_critical_extension_options": []
+      },
+      "auth_info": {
+        "signer_infos": [
+          {
+            "public_key": {
+              "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
+              "key": "A0GU+d2Ut1t6dOEF+Ln+ZA9oNdjh8vTHhWb788TOCIUr"
             },
-            "timestamp": "2023-01-11T01:20:11Z",
-            "events": [
-                {
-                    "type": "coin_spent",
-                    "attributes": [
-                        {
-                            "key": "c3BlbmRlcg==",
-                            "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                            "index": true
-                        },
-                        {
-                            "key": "YW1vdW50",
-                            "value": "MjAwMDAwMDAwMDAwMDAwd2Vp",
-                            "index": true
-                        }
-                    ]
-                },
-                {
-                    "type": "coin_received",
-                    "attributes": [
-                        {
-                            "key": "cmVjZWl2ZXI=",
-                            "value": "c3QxN3hwZnZha20yYW1nOTYyeWxzNmY4NHoza2VsbDhjNWx2NWhqMnE=",
-                            "index": true
-                        },
-                        {
-                            "key": "YW1vdW50",
-                            "value": "MjAwMDAwMDAwMDAwMDAwd2Vp",
-                            "index": true
-                        }
-                    ]
-                },
-                {
-                    "type": "transfer",
-                    "attributes": [
-                        {
-                            "key": "cmVjaXBpZW50",
-                            "value": "c3QxN3hwZnZha20yYW1nOTYyeWxzNmY4NHoza2VsbDhjNWx2NWhqMnE=",
-                            "index": true
-                        },
-                        {
-                            "key": "c2VuZGVy",
-                            "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                            "index": true
-                        },
-                        {
-                            "key": "YW1vdW50",
-                            "value": "MjAwMDAwMDAwMDAwMDAwd2Vp",
-                            "index": true
-                        }
-                    ]
-                },
-                {
-                    "type": "message",
-                    "attributes": [
-                        {
-                            "key": "c2VuZGVy",
-                            "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                            "index": true
-                        }
-                    ]
-                },
-                {
-                    "type": "tx",
-                    "attributes": [
-                        {
-                            "key": "ZmVl",
-                            "value": "MjAwMDAwMDAwMDAwMDAwd2Vp",
-                            "index": true
-                        },
-                        {
-                            "key": "ZmVlX3BheWVy",
-                            "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                            "index": true
-                        }
-                    ]
-                },
-                {
-                    "type": "tx",
-                    "attributes": [
-                        {
-                            "key": "YWNjX3NlcQ==",
-                            "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamgvMw==",
-                            "index": true
-                        }
-                    ]
-                },
-                {
-                    "type": "tx",
-                    "attributes": [
-                        {
-                            "key": "c2lnbmF0dXJl",
-                            "value": "N0ZtZ0Irc1RuUDVLazRxMTIxWXlWZEpKa2RFcTNHaW95ZHU4ZlRQK3B4b01DL1RsNzd1SmxDUkJhblNQN2p4MXhFandUeHQzem5HTDlLTlFMUkFBMlFBPQ==",
-                            "index": true
-                        }
-                    ]
-                },
-                {
-                    "type": "message",
-                    "attributes": [
-                        {
-                            "key": "YWN0aW9u",
-                            "value": "L2Nvc21vcy5iYW5rLnYxYmV0YTEuTXNnU2VuZA==",
-                            "index": true
-                        }
-                    ]
-                },
-                {
-                    "type": "coin_spent",
-                    "attributes": [
-                        {
-                            "key": "c3BlbmRlcg==",
-                            "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                            "index": true
-                        },
-                        {
-                            "key": "YW1vdW50",
-                            "value": "MTAwMDAwMDAwMHdlaQ==",
-                            "index": true
-                        }
-                    ]
-                },
-                {
-                    "type": "coin_received",
-                    "attributes": [
-                        {
-                            "key": "cmVjZWl2ZXI=",
-                            "value": "c3Qxc3F6c2s4bXBsdjUyNDhneDZkZGR6enh3ZXF2ZXc4cnRzdDk2Zng=",
-                            "index": true
-                        },
-                        {
-                            "key": "YW1vdW50",
-                            "value": "MTAwMDAwMDAwMHdlaQ==",
-                            "index": true
-                        }
-                    ]
-                },
-                {
-                    "type": "transfer",
-                    "attributes": [
-                        {
-                            "key": "cmVjaXBpZW50",
-                            "value": "c3Qxc3F6c2s4bXBsdjUyNDhneDZkZGR6enh3ZXF2ZXc4cnRzdDk2Zng=",
-                            "index": true
-                        },
-                        {
-                            "key": "c2VuZGVy",
-                            "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                            "index": true
-                        },
-                        {
-                            "key": "YW1vdW50",
-                            "value": "MTAwMDAwMDAwMHdlaQ==",
-                            "index": true
-                        }
-                    ]
-                },
-                {
-                    "type": "message",
-                    "attributes": [
-                        {
-                            "key": "c2VuZGVy",
-                            "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                            "index": true
-                        }
-                    ]
-                },
-                {
-                    "type": "message",
-                    "attributes": [
-                        {
-                            "key": "bW9kdWxl",
-                            "value": "YmFuaw==",
-                            "index": true
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
-    "pagination": {
-        "next_key": null,
-        "total": "1"
+            "mode_info": {
+              "single": {
+                "mode": "SIGN_MODE_DIRECT"
+              }
+            },
+            "sequence": "4"
+          }
+        ],
+        "fee": {
+          "amount": [
+            {
+              "denom": "wei",
+              "amount": "442524000000000"
+            }
+          ],
+          "gas_limit": "442524",
+          "payer": "",
+          "granter": ""
+        },
+        "tip": null
+      },
+      "signatures": [
+        "DOf7A9h7/Ahpu6M2+o8LUGEsI89FJnEb+iL63x6OHqEVgcKiHDkSxEVORhPoO/vnRSygKGhX7KdPlb1nKLOImAE="
+      ]
     }
+  ],
+  "tx_responses": [
+    {
+      "height": "557",
+      "txhash": "34E401829F23098FEA1F7B398CD9842A6010249F7720BAF1916A14077C97B3E7",
+      "codespace": "",
+      "code": 0,
+      "data": "12260A242F636F736D6F732E62616E6B2E763162657461312E4D736753656E64526573706F6E7365",
+      "raw_log": "[{\"msg_index\":0,\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.bank.v1beta1.MsgSend\"},{\"key\":\"sender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"coin_spent\",\"attributes\":[{\"key\":\"spender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"},{\"key\":\"amount\",\"value\":\"10000000000000000000wei\"}]},{\"type\":\"coin_received\",\"attributes\":[{\"key\":\"receiver\",\"value\":\"st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l\"},{\"key\":\"amount\",\"value\":\"10000000000000000000wei\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l\"},{\"key\":\"sender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"},{\"key\":\"amount\",\"value\":\"10000000000000000000wei\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"sender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"}]}]}]",
+      "logs": [
+        {
+          "msg_index": 0,
+          "log": "",
+          "events": [
+            {
+              "type": "message",
+              "attributes": [
+                {
+                  "key": "action",
+                  "value": "/cosmos.bank.v1beta1.MsgSend"
+                },
+                {
+                  "key": "sender",
+                  "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+                },
+                {
+                  "key": "module",
+                  "value": "bank"
+                }
+              ]
+            },
+            {
+              "type": "coin_spent",
+              "attributes": [
+                {
+                  "key": "spender",
+                  "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+                },
+                {
+                  "key": "amount",
+                  "value": "10000000000000000000wei"
+                }
+              ]
+            },
+            {
+              "type": "coin_received",
+              "attributes": [
+                {
+                  "key": "receiver",
+                  "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l"
+                },
+                {
+                  "key": "amount",
+                  "value": "10000000000000000000wei"
+                }
+              ]
+            },
+            {
+              "type": "transfer",
+              "attributes": [
+                {
+                  "key": "recipient",
+                  "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l"
+                },
+                {
+                  "key": "sender",
+                  "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+                },
+                {
+                  "key": "amount",
+                  "value": "10000000000000000000wei"
+                }
+              ]
+            },
+            {
+              "type": "message",
+              "attributes": [
+                {
+                  "key": "sender",
+                  "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "info": "",
+      "gas_wanted": "442524",
+      "gas_used": "431655",
+      "tx": {
+        "@type": "/cosmos.tx.v1beta1.Tx",
+        "body": {
+          "messages": [
+            {
+              "@type": "/cosmos.bank.v1beta1.MsgSend",
+              "from_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "to_address": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+              "amount": [
+                {
+                  "denom": "wei",
+                  "amount": "10000000000000000000"
+                }
+              ]
+            }
+          ],
+          "memo": "",
+          "timeout_height": "0",
+          "extension_options": [],
+          "non_critical_extension_options": []
+        },
+        "auth_info": {
+          "signer_infos": [
+            {
+              "public_key": {
+                "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
+                "key": "A0GU+d2Ut1t6dOEF+Ln+ZA9oNdjh8vTHhWb788TOCIUr"
+              },
+              "mode_info": {
+                "single": {
+                  "mode": "SIGN_MODE_DIRECT"
+                }
+              },
+              "sequence": "4"
+            }
+          ],
+          "fee": {
+            "amount": [
+              {
+                "denom": "wei",
+                "amount": "442524000000000"
+              }
+            ],
+            "gas_limit": "442524",
+            "payer": "",
+            "granter": ""
+          },
+          "tip": null
+        },
+        "signatures": [
+          "DOf7A9h7/Ahpu6M2+o8LUGEsI89FJnEb+iL63x6OHqEVgcKiHDkSxEVORhPoO/vnRSygKGhX7KdPlb1nKLOImAE="
+        ]
+      },
+      "timestamp": "2024-03-07T22:01:52Z",
+      "events": [
+        {
+          "type": "coin_spent",
+          "attributes": [
+            {
+              "key": "spender",
+              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "index": true
+            },
+            {
+              "key": "amount",
+              "value": "442524000000000wei",
+              "index": true
+            }
+          ]
+        },
+        {
+          "type": "coin_received",
+          "attributes": [
+            {
+              "key": "receiver",
+              "value": "st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q",
+              "index": true
+            },
+            {
+              "key": "amount",
+              "value": "442524000000000wei",
+              "index": true
+            }
+          ]
+        },
+        {
+          "type": "transfer",
+          "attributes": [
+            {
+              "key": "recipient",
+              "value": "st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q",
+              "index": true
+            },
+            {
+              "key": "sender",
+              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "index": true
+            },
+            {
+              "key": "amount",
+              "value": "442524000000000wei",
+              "index": true
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "sender",
+              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "index": true
+            }
+          ]
+        },
+        {
+          "type": "tx",
+          "attributes": [
+            {
+              "key": "fee",
+              "value": "442524000000000wei",
+              "index": true
+            },
+            {
+              "key": "fee_payer",
+              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "index": true
+            }
+          ]
+        },
+        {
+          "type": "tx",
+          "attributes": [
+            {
+              "key": "acc_seq",
+              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m/4",
+              "index": true
+            }
+          ]
+        },
+        {
+          "type": "tx",
+          "attributes": [
+            {
+              "key": "signature",
+              "value": "DOf7A9h7/Ahpu6M2+o8LUGEsI89FJnEb+iL63x6OHqEVgcKiHDkSxEVORhPoO/vnRSygKGhX7KdPlb1nKLOImAE=",
+              "index": true
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "action",
+              "value": "/cosmos.bank.v1beta1.MsgSend",
+              "index": true
+            },
+            {
+              "key": "sender",
+              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "index": true
+            },
+            {
+              "key": "module",
+              "value": "bank",
+              "index": true
+            }
+          ]
+        },
+        {
+          "type": "coin_spent",
+          "attributes": [
+            {
+              "key": "spender",
+              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "index": true
+            },
+            {
+              "key": "amount",
+              "value": "10000000000000000000wei",
+              "index": true
+            }
+          ]
+        },
+        {
+          "type": "coin_received",
+          "attributes": [
+            {
+              "key": "receiver",
+              "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+              "index": true
+            },
+            {
+              "key": "amount",
+              "value": "10000000000000000000wei",
+              "index": true
+            }
+          ]
+        },
+        {
+          "type": "transfer",
+          "attributes": [
+            {
+              "key": "recipient",
+              "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+              "index": true
+            },
+            {
+              "key": "sender",
+              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "index": true
+            },
+            {
+              "key": "amount",
+              "value": "10000000000000000000wei",
+              "index": true
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "attributes": [
+            {
+              "key": "sender",
+              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "index": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pagination": null,
+  "total": "1"
 }
 ```
 </details>
@@ -4721,405 +3644,413 @@ Response Example:
 
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/tx/v1beta1/txs/AB0EF3761603145EDC1B4121C91B51001249186E1362E7148C82E7DB12F7BDF0
+https://rest.thestratos.org/cosmos/tx/v1beta1/txs/34E401829F23098FEA1F7B398CD9842A6010249F7720BAF1916A14077C97B3E7
 ```
 Response Example:
 ```json
 {
-    "tx": {
-        "body": {
-            "messages": [
-                {
-                    "@type": "/cosmos.bank.v1beta1.MsgSend",
-                    "from_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
-                    "to_address": "st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx",
-                    "amount": [
-                        {
-                            "denom": "wei",
-                            "amount": "1000000000"
-                        }
-                    ]
-                }
-            ],
-            "memo": "",
-            "timeout_height": "0",
-            "extension_options": [],
-            "non_critical_extension_options": []
-        },
-        "auth_info": {
-            "signer_infos": [
-                {
-                    "public_key": {
-                        "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
-                        "key": "Agkwb1xacHBqeqGBIqRacXgf0qKTnEBPCEtH2vTE01Ke"
-                    },
-                    "mode_info": {
-                        "single": {
-                            "mode": "SIGN_MODE_DIRECT"
-                        }
-                    },
-                    "sequence": "3"
-                }
-            ],
-            "fee": {
-                "amount": [
-                    {
-                        "denom": "wei",
-                        "amount": "200000000000000"
-                    }
-                ],
-                "gas_limit": "200000",
-                "payer": "",
-                "granter": ""
+  "tx": {
+    "body": {
+      "messages": [
+        {
+          "@type": "/cosmos.bank.v1beta1.MsgSend",
+          "from_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+          "to_address": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+          "amount": [
+            {
+              "denom": "wei",
+              "amount": "10000000000000000000"
             }
-        },
-        "signatures": [
-            "7FmgB+sTnP5Kk4q121YyVdJJkdEq3Gioydu8fTP+pxoMC/Tl77uJlCRBanSP7jx1xEjwTxt3znGL9KNQLRAA2QA="
-        ]
+          ]
+        }
+      ],
+      "memo": "",
+      "timeout_height": "0",
+      "extension_options": [],
+      "non_critical_extension_options": []
     },
-    "tx_response": {
-        "height": "611",
-        "txhash": "AB0EF3761603145EDC1B4121C91B51001249186E1362E7148C82E7DB12F7BDF0",
-        "codespace": "",
-        "code": 0,
-        "data": "0A1E0A1C2F636F736D6F732E62616E6B2E763162657461312E4D736753656E64",
-        "raw_log": "[{\"events\":[{\"type\":\"coin_received\",\"attributes\":[{\"key\":\"receiver\",\"value\":\"st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx\"},{\"key\":\"amount\",\"value\":\"1000000000wei\"}]},{\"type\":\"coin_spent\",\"attributes\":[{\"key\":\"spender\",\"value\":\"st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh\"},{\"key\":\"amount\",\"value\":\"1000000000wei\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.bank.v1beta1.MsgSend\"},{\"key\":\"sender\",\"value\":\"st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx\"},{\"key\":\"sender\",\"value\":\"st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh\"},{\"key\":\"amount\",\"value\":\"1000000000wei\"}]}]}]",
-        "logs": [
-            {
-                "msg_index": 0,
-                "log": "",
-                "events": [
-                    {
-                        "type": "coin_received",
-                        "attributes": [
-                            {
-                                "key": "receiver",
-                                "value": "st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx"
-                            },
-                            {
-                                "key": "amount",
-                                "value": "1000000000wei"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "coin_spent",
-                        "attributes": [
-                            {
-                                "key": "spender",
-                                "value": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh"
-                            },
-                            {
-                                "key": "amount",
-                                "value": "1000000000wei"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "message",
-                        "attributes": [
-                            {
-                                "key": "action",
-                                "value": "/cosmos.bank.v1beta1.MsgSend"
-                            },
-                            {
-                                "key": "sender",
-                                "value": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh"
-                            },
-                            {
-                                "key": "module",
-                                "value": "bank"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "transfer",
-                        "attributes": [
-                            {
-                                "key": "recipient",
-                                "value": "st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx"
-                            },
-                            {
-                                "key": "sender",
-                                "value": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh"
-                            },
-                            {
-                                "key": "amount",
-                                "value": "1000000000wei"
-                            }
-                        ]
-                    }
-                ]
+    "auth_info": {
+      "signer_infos": [
+        {
+          "public_key": {
+            "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
+            "key": "A0GU+d2Ut1t6dOEF+Ln+ZA9oNdjh8vTHhWb788TOCIUr"
+          },
+          "mode_info": {
+            "single": {
+              "mode": "SIGN_MODE_DIRECT"
             }
+          },
+          "sequence": "4"
+        }
+      ],
+      "fee": {
+        "amount": [
+          {
+            "denom": "wei",
+            "amount": "442524000000000"
+          }
         ],
-        "info": "",
-        "gas_wanted": "200000",
-        "gas_used": "88709",
-        "tx": {
-            "@type": "/cosmos.tx.v1beta1.Tx",
-            "body": {
-                "messages": [
-                    {
-                        "@type": "/cosmos.bank.v1beta1.MsgSend",
-                        "from_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
-                        "to_address": "st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx",
-                        "amount": [
-                            {
-                                "denom": "wei",
-                                "amount": "1000000000"
-                            }
-                        ]
-                    }
-                ],
-                "memo": "",
-                "timeout_height": "0",
-                "extension_options": [],
-                "non_critical_extension_options": []
-            },
-            "auth_info": {
-                "signer_infos": [
-                    {
-                        "public_key": {
-                            "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
-                            "key": "Agkwb1xacHBqeqGBIqRacXgf0qKTnEBPCEtH2vTE01Ke"
-                        },
-                        "mode_info": {
-                            "single": {
-                                "mode": "SIGN_MODE_DIRECT"
-                            }
-                        },
-                        "sequence": "3"
-                    }
-                ],
-                "fee": {
-                    "amount": [
-                        {
-                            "denom": "wei",
-                            "amount": "200000000000000"
-                        }
-                    ],
-                    "gas_limit": "200000",
-                    "payer": "",
-                    "granter": ""
-                }
-            },
-            "signatures": [
-                "7FmgB+sTnP5Kk4q121YyVdJJkdEq3Gioydu8fTP+pxoMC/Tl77uJlCRBanSP7jx1xEjwTxt3znGL9KNQLRAA2QA="
-            ]
-        },
-        "timestamp": "2023-01-11T01:20:11Z",
+        "gas_limit": "442524",
+        "payer": "",
+        "granter": ""
+      },
+      "tip": null
+    },
+    "signatures": [
+      "DOf7A9h7/Ahpu6M2+o8LUGEsI89FJnEb+iL63x6OHqEVgcKiHDkSxEVORhPoO/vnRSygKGhX7KdPlb1nKLOImAE="
+    ]
+  },
+  "tx_response": {
+    "height": "557",
+    "txhash": "34E401829F23098FEA1F7B398CD9842A6010249F7720BAF1916A14077C97B3E7",
+    "codespace": "",
+    "code": 0,
+    "data": "12260A242F636F736D6F732E62616E6B2E763162657461312E4D736753656E64526573706F6E7365",
+    "raw_log": "[{\"msg_index\":0,\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.bank.v1beta1.MsgSend\"},{\"key\":\"sender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"coin_spent\",\"attributes\":[{\"key\":\"spender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"},{\"key\":\"amount\",\"value\":\"10000000000000000000wei\"}]},{\"type\":\"coin_received\",\"attributes\":[{\"key\":\"receiver\",\"value\":\"st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l\"},{\"key\":\"amount\",\"value\":\"10000000000000000000wei\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l\"},{\"key\":\"sender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"},{\"key\":\"amount\",\"value\":\"10000000000000000000wei\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"sender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"}]}]}]",
+    "logs": [
+      {
+        "msg_index": 0,
+        "log": "",
         "events": [
-            {
-                "type": "coin_spent",
-                "attributes": [
-                    {
-                        "key": "c3BlbmRlcg==",
-                        "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                        "index": true
-                    },
-                    {
-                        "key": "YW1vdW50",
-                        "value": "MjAwMDAwMDAwMDAwMDAwd2Vp",
-                        "index": true
-                    }
-                ]
-            },
-            {
-                "type": "coin_received",
-                "attributes": [
-                    {
-                        "key": "cmVjZWl2ZXI=",
-                        "value": "c3QxN3hwZnZha20yYW1nOTYyeWxzNmY4NHoza2VsbDhjNWx2NWhqMnE=",
-                        "index": true
-                    },
-                    {
-                        "key": "YW1vdW50",
-                        "value": "MjAwMDAwMDAwMDAwMDAwd2Vp",
-                        "index": true
-                    }
-                ]
-            },
-            {
-                "type": "transfer",
-                "attributes": [
-                    {
-                        "key": "cmVjaXBpZW50",
-                        "value": "c3QxN3hwZnZha20yYW1nOTYyeWxzNmY4NHoza2VsbDhjNWx2NWhqMnE=",
-                        "index": true
-                    },
-                    {
-                        "key": "c2VuZGVy",
-                        "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                        "index": true
-                    },
-                    {
-                        "key": "YW1vdW50",
-                        "value": "MjAwMDAwMDAwMDAwMDAwd2Vp",
-                        "index": true
-                    }
-                ]
-            },
-            {
-                "type": "message",
-                "attributes": [
-                    {
-                        "key": "c2VuZGVy",
-                        "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                        "index": true
-                    }
-                ]
-            },
-            {
-                "type": "tx",
-                "attributes": [
-                    {
-                        "key": "ZmVl",
-                        "value": "MjAwMDAwMDAwMDAwMDAwd2Vp",
-                        "index": true
-                    },
-                    {
-                        "key": "ZmVlX3BheWVy",
-                        "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                        "index": true
-                    }
-                ]
-            },
-            {
-                "type": "tx",
-                "attributes": [
-                    {
-                        "key": "YWNjX3NlcQ==",
-                        "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamgvMw==",
-                        "index": true
-                    }
-                ]
-            },
-            {
-                "type": "tx",
-                "attributes": [
-                    {
-                        "key": "c2lnbmF0dXJl",
-                        "value": "N0ZtZ0Irc1RuUDVLazRxMTIxWXlWZEpKa2RFcTNHaW95ZHU4ZlRQK3B4b01DL1RsNzd1SmxDUkJhblNQN2p4MXhFandUeHQzem5HTDlLTlFMUkFBMlFBPQ==",
-                        "index": true
-                    }
-                ]
-            },
-            {
-                "type": "message",
-                "attributes": [
-                    {
-                        "key": "YWN0aW9u",
-                        "value": "L2Nvc21vcy5iYW5rLnYxYmV0YTEuTXNnU2VuZA==",
-                        "index": true
-                    }
-                ]
-            },
-            {
-                "type": "coin_spent",
-                "attributes": [
-                    {
-                        "key": "c3BlbmRlcg==",
-                        "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                        "index": true
-                    },
-                    {
-                        "key": "YW1vdW50",
-                        "value": "MTAwMDAwMDAwMHdlaQ==",
-                        "index": true
-                    }
-                ]
-            },
-            {
-                "type": "coin_received",
-                "attributes": [
-                    {
-                        "key": "cmVjZWl2ZXI=",
-                        "value": "c3Qxc3F6c2s4bXBsdjUyNDhneDZkZGR6enh3ZXF2ZXc4cnRzdDk2Zng=",
-                        "index": true
-                    },
-                    {
-                        "key": "YW1vdW50",
-                        "value": "MTAwMDAwMDAwMHdlaQ==",
-                        "index": true
-                    }
-                ]
-            },
-            {
-                "type": "transfer",
-                "attributes": [
-                    {
-                        "key": "cmVjaXBpZW50",
-                        "value": "c3Qxc3F6c2s4bXBsdjUyNDhneDZkZGR6enh3ZXF2ZXc4cnRzdDk2Zng=",
-                        "index": true
-                    },
-                    {
-                        "key": "c2VuZGVy",
-                        "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                        "index": true
-                    },
-                    {
-                        "key": "YW1vdW50",
-                        "value": "MTAwMDAwMDAwMHdlaQ==",
-                        "index": true
-                    }
-                ]
-            },
-            {
-                "type": "message",
-                "attributes": [
-                    {
-                        "key": "c2VuZGVy",
-                        "value": "c3QxcHZ5anpsaHdycGdrbHUwMDQ0YXQ0dDZxaDdtMjNrM2tyMmdzamg=",
-                        "index": true
-                    }
-                ]
-            },
-            {
-                "type": "message",
-                "attributes": [
-                    {
-                        "key": "bW9kdWxl",
-                        "value": "YmFuaw==",
-                        "index": true
-                    }
-                ]
-            }
+          {
+            "type": "message",
+            "attributes": [
+              {
+                "key": "action",
+                "value": "/cosmos.bank.v1beta1.MsgSend"
+              },
+              {
+                "key": "sender",
+                "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+              },
+              {
+                "key": "module",
+                "value": "bank"
+              }
+            ]
+          },
+          {
+            "type": "coin_spent",
+            "attributes": [
+              {
+                "key": "spender",
+                "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+              },
+              {
+                "key": "amount",
+                "value": "10000000000000000000wei"
+              }
+            ]
+          },
+          {
+            "type": "coin_received",
+            "attributes": [
+              {
+                "key": "receiver",
+                "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l"
+              },
+              {
+                "key": "amount",
+                "value": "10000000000000000000wei"
+              }
+            ]
+          },
+          {
+            "type": "transfer",
+            "attributes": [
+              {
+                "key": "recipient",
+                "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l"
+              },
+              {
+                "key": "sender",
+                "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+              },
+              {
+                "key": "amount",
+                "value": "10000000000000000000wei"
+              }
+            ]
+          },
+          {
+            "type": "message",
+            "attributes": [
+              {
+                "key": "sender",
+                "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+              }
+            ]
+          }
         ]
-    }
+      }
+    ],
+    "info": "",
+    "gas_wanted": "442524",
+    "gas_used": "431655",
+    "tx": {
+      "@type": "/cosmos.tx.v1beta1.Tx",
+      "body": {
+        "messages": [
+          {
+            "@type": "/cosmos.bank.v1beta1.MsgSend",
+            "from_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "to_address": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+            "amount": [
+              {
+                "denom": "wei",
+                "amount": "10000000000000000000"
+              }
+            ]
+          }
+        ],
+        "memo": "",
+        "timeout_height": "0",
+        "extension_options": [],
+        "non_critical_extension_options": []
+      },
+      "auth_info": {
+        "signer_infos": [
+          {
+            "public_key": {
+              "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
+              "key": "A0GU+d2Ut1t6dOEF+Ln+ZA9oNdjh8vTHhWb788TOCIUr"
+            },
+            "mode_info": {
+              "single": {
+                "mode": "SIGN_MODE_DIRECT"
+              }
+            },
+            "sequence": "4"
+          }
+        ],
+        "fee": {
+          "amount": [
+            {
+              "denom": "wei",
+              "amount": "442524000000000"
+            }
+          ],
+          "gas_limit": "442524",
+          "payer": "",
+          "granter": ""
+        },
+        "tip": null
+      },
+      "signatures": [
+        "DOf7A9h7/Ahpu6M2+o8LUGEsI89FJnEb+iL63x6OHqEVgcKiHDkSxEVORhPoO/vnRSygKGhX7KdPlb1nKLOImAE="
+      ]
+    },
+    "timestamp": "2024-03-07T22:01:52Z",
+    "events": [
+      {
+        "type": "coin_spent",
+        "attributes": [
+          {
+            "key": "spender",
+            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "index": true
+          },
+          {
+            "key": "amount",
+            "value": "442524000000000wei",
+            "index": true
+          }
+        ]
+      },
+      {
+        "type": "coin_received",
+        "attributes": [
+          {
+            "key": "receiver",
+            "value": "st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q",
+            "index": true
+          },
+          {
+            "key": "amount",
+            "value": "442524000000000wei",
+            "index": true
+          }
+        ]
+      },
+      {
+        "type": "transfer",
+        "attributes": [
+          {
+            "key": "recipient",
+            "value": "st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q",
+            "index": true
+          },
+          {
+            "key": "sender",
+            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "index": true
+          },
+          {
+            "key": "amount",
+            "value": "442524000000000wei",
+            "index": true
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "attributes": [
+          {
+            "key": "sender",
+            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "index": true
+          }
+        ]
+      },
+      {
+        "type": "tx",
+        "attributes": [
+          {
+            "key": "fee",
+            "value": "442524000000000wei",
+            "index": true
+          },
+          {
+            "key": "fee_payer",
+            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "index": true
+          }
+        ]
+      },
+      {
+        "type": "tx",
+        "attributes": [
+          {
+            "key": "acc_seq",
+            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m/4",
+            "index": true
+          }
+        ]
+      },
+      {
+        "type": "tx",
+        "attributes": [
+          {
+            "key": "signature",
+            "value": "DOf7A9h7/Ahpu6M2+o8LUGEsI89FJnEb+iL63x6OHqEVgcKiHDkSxEVORhPoO/vnRSygKGhX7KdPlb1nKLOImAE=",
+            "index": true
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "attributes": [
+          {
+            "key": "action",
+            "value": "/cosmos.bank.v1beta1.MsgSend",
+            "index": true
+          },
+          {
+            "key": "sender",
+            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "index": true
+          },
+          {
+            "key": "module",
+            "value": "bank",
+            "index": true
+          }
+        ]
+      },
+      {
+        "type": "coin_spent",
+        "attributes": [
+          {
+            "key": "spender",
+            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "index": true
+          },
+          {
+            "key": "amount",
+            "value": "10000000000000000000wei",
+            "index": true
+          }
+        ]
+      },
+      {
+        "type": "coin_received",
+        "attributes": [
+          {
+            "key": "receiver",
+            "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+            "index": true
+          },
+          {
+            "key": "amount",
+            "value": "10000000000000000000wei",
+            "index": true
+          }
+        ]
+      },
+      {
+        "type": "transfer",
+        "attributes": [
+          {
+            "key": "recipient",
+            "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+            "index": true
+          },
+          {
+            "key": "sender",
+            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "index": true
+          },
+          {
+            "key": "amount",
+            "value": "10000000000000000000wei",
+            "index": true
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "attributes": [
+          {
+            "key": "sender",
+            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "index": true
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 </details>
+
 <br>
 
-
-
 ***
-
 
 ### Register
 
 <details>
-    <summary><code> GET /register/resource-node/{nodeAddress} </code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries info of a registered resource node</summary>
+    <summary><code> GET /stratos/register/v1/resource_node/{nodeAddress} </code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries info of a registered resource node</summary>
 
 
 Request Example:
 ```http
-https://rest.thestratos.org/register/resource-node/stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv
+https://rest.thestratos.org/stratos/register/v1/resource_node/stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv
 ```
 Response Example:
 ```json
 {
-  "height": "3712",
-  "result": {
+  "node": {
     "network_address": "stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv",
     "pubkey": {
-      "type": "tendermint/PubKeyEd25519",
-      "value": "2OAeLO0+KrBkSxuFKU1ofJqGb4RtA8GpD8XCZlMYw2A="
+      "@type": "/cosmos.crypto.ed25519.PubKey",
+      "key": "2OAeLO0+KrBkSxuFKU1ofJqGb4RtA8GpD8XCZlMYw2A="
     },
     "suspend": true,
-    "status": 3,
-    "tokens": "10000000000000000000",
-    "owner_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
+    "status": "BOND_STATUS_BONDED",
+    "tokens": "1000000000000000000",
+    "owner_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
     "description": {
       "moniker": "resource-node0",
       "identity": "",
@@ -5127,8 +4058,10 @@ Response Example:
       "security_contact": "",
       "details": ""
     },
-    "creation_time": "2023-01-11T17:26:06.410263787Z",
-    "node_type": 1
+    "creation_time": "2024-03-08T19:18:51.591341919Z",
+    "node_type": 4,
+    "effective_tokens": "0",
+    "beneficiary_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
   }
 }
 ```
@@ -5136,26 +4069,25 @@ Response Example:
 <br>
 
 <details>
-    <summary><code> GET /register/meta-node/{nodeAddress}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; returns info of a registered meta node</summary>
+    <summary><code> GET /stratos/register/v1/meta_node/{nodeAddress}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; returns info of a registered meta node</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/register/meta-node/stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64
+https://rest.thestratos.org/stratos/register/v1/meta_node/stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64
 ```
 Response Example:
 ```json
 {
-  "height": "3731",
-  "result": {
+  "node": {
     "network_address": "stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64",
     "pubkey": {
-      "type": "tendermint/PubKeyEd25519",
-      "value": "ltODy8zL5IjJwCutlIexqlBb3GH0+aHZOrpT7f/aKnQ="
+      "@type": "/cosmos.crypto.ed25519.PubKey",
+      "key": "ltODy8zL5IjJwCutlIexqlBb3GH0+aHZOrpT7f/aKnQ="
     },
     "suspend": false,
-    "status": 3,
+    "status": "BOND_STATUS_BONDED",
     "tokens": "100000000000000000000",
-    "owner_address": "st1a8ngk4tjvuxneyuvyuy9nvgehkpfa38hm8mp3x",
+    "owner_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
     "description": {
       "moniker": "snode://stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64@127.0.0.1:8888",
       "identity": "",
@@ -5163,7 +4095,8 @@ Response Example:
       "security_contact": "",
       "details": ""
     },
-    "creation_time": "1970-01-01T00:00:00Z"
+    "creation_time": "0001-01-01T00:00:00Z",
+    "beneficiary_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
   }
 }
 ```
@@ -5171,37 +4104,34 @@ Response Example:
 <br>
 
 <details>
-    <summary><code> GET /register/deposit</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries total deposit state of all registered resource nodes and meta nodes</summary>
+    <summary><code> GET /stratos/register/v1/deposit_total</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries total deposit state of all registered resource nodes and meta nodes</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/register/deposit
+https://rest.thestratos.org/stratos/register/v1/deposit_total
 ```
 Response Example:
 ```json
 {
-  "height": "47150",
-  "result": {
-    "resource_nodes_total_deposit": {
-      "denom": "wei",
-      "amount": "26003000000000000000000"
-    },
-    "meta_nodes_total_deposit": {
-      "denom": "wei",
-      "amount": "8000000000000000000000000"
-    },
-    "total_bonded_deposit": {
-      "denom": "wei",
-      "amount": "8026003000000000000000000"
-    },
-    "total_unbonded_deposit": {
-      "denom": "wei",
-      "amount": "0"
-    },
-    "total_unbonding_deposit": {
-      "denom": "wei",
-      "amount": "0"
-    }
+  "resource_nodes_total_deposit": {
+    "denom": "wei",
+    "amount": "1000000000000000000"
+  },
+  "meta_nodes_total_deposit": {
+    "denom": "wei",
+    "amount": "400000000000000000000"
+  },
+  "total_bonded_deposit": {
+    "denom": "wei",
+    "amount": "401000000000000000000"
+  },
+  "total_unbonded_deposit": {
+    "denom": "wei",
+    "amount": "0"
+  },
+  "total_unbonding_deposit": {
+    "denom": "wei",
+    "amount": "0"
   }
 }
 ```
@@ -5209,26 +4139,30 @@ Response Example:
 <br>
 
 <details>
-    <summary><code> GET /register/deposit/address/{nodeAddress}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries deposit info of a specific node</summary>
+    <summary><code> GET /stratos/register/v1/deposit_by_node/{network_addr}/{query_type}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries deposit info of a specific node</summary>
 
 Request Example:
+
+```diff
++ query_type      query_type defines which type of node to query for, can be one of 0 (all) | 1 (meta-node) | 2 (resource-node).
+```
+
 ```http
-https://rest.thestratos.org/register/deposit/address/stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv
+https://rest.thestratos.org/stratos/register/v1/deposit_by_node/stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv/0
 ```
 Response Example:
 ```json
 {
-  "height": "3749",
-  "result": {
+  "deposit_info": {
     "network_address": "stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv",
     "pubkey": {
-      "type": "tendermint/PubKeyEd25519",
-      "value": "2OAeLO0+KrBkSxuFKU1ofJqGb4RtA8GpD8XCZlMYw2A="
+      "@type": "/cosmos.crypto.ed25519.PubKey",
+      "key": "2OAeLO0+KrBkSxuFKU1ofJqGb4RtA8GpD8XCZlMYw2A="
     },
     "suspend": true,
-    "status": 3,
-    "tokens": "10000000000000000000",
-    "owner_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
+    "status": "BOND_STATUS_BONDED",
+    "tokens": "1000000000000000000",
+    "owner_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
     "description": {
       "moniker": "resource-node0",
       "identity": "",
@@ -5236,11 +4170,11 @@ Response Example:
       "security_contact": "",
       "details": ""
     },
-    "creation_time": "2023-01-11T17:26:06.410263787Z",
-    "node_type": 1,
+    "creation_time": "2024-03-08T19:18:51.591341919Z",
+    "node_type": 4,
     "bonded_deposit": {
       "denom": "wei",
-      "amount": "10000000000000000000"
+      "amount": "1000000000000000000"
     },
     "un_bonding_deposit": {
       "denom": "wei",
@@ -5257,27 +4191,26 @@ Response Example:
 <br>
 
 <details>
-    <summary><code> GET /register/deposit/owner/{ownerAddress}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all deposit info of a specific owner</summary>
+    <summary><code> GET /stratos/register/v1/deposit_by_owner/{owner_addr}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all deposit info of a specific owner</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/register/deposit/owner/st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh
+https://rest.thestratos.org/stratos/register/v1/deposit_by_owner/st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m
 ```
 Response Example:
 ```json
 {
-  "height": "3765",
-  "result": [
+  "deposit_infos": [
     {
       "network_address": "stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv",
       "pubkey": {
-        "type": "tendermint/PubKeyEd25519",
-        "value": "2OAeLO0+KrBkSxuFKU1ofJqGb4RtA8GpD8XCZlMYw2A="
+        "@type": "/cosmos.crypto.ed25519.PubKey",
+        "key": "2OAeLO0+KrBkSxuFKU1ofJqGb4RtA8GpD8XCZlMYw2A="
       },
       "suspend": true,
-      "status": 3,
-      "tokens": "10000000000000000000",
-      "owner_address": "st1pvyjzlhwrpgklu0044at4t6qh7m23k3kr2gsjh",
+      "status": "BOND_STATUS_BONDED",
+      "tokens": "1000000000000000000",
+      "owner_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
       "description": {
         "moniker": "resource-node0",
         "identity": "",
@@ -5285,11 +4218,43 @@ Response Example:
         "security_contact": "",
         "details": ""
       },
-      "creation_time": "2023-01-11T17:26:06.410263787Z",
-      "node_type": 1,
+      "creation_time": "2024-03-08T19:18:51.591341919Z",
+      "node_type": 4,
       "bonded_deposit": {
         "denom": "wei",
-        "amount": "10000000000000000000"
+        "amount": "1000000000000000000"
+      },
+      "un_bonding_deposit": {
+        "denom": "wei",
+        "amount": "0"
+      },
+      "un_bonded_deposit": {
+        "denom": "wei",
+        "amount": "0"
+      }
+    },
+    {
+      "network_address": "stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64",
+      "pubkey": {
+        "@type": "/cosmos.crypto.ed25519.PubKey",
+        "key": "ltODy8zL5IjJwCutlIexqlBb3GH0+aHZOrpT7f/aKnQ="
+      },
+      "suspend": false,
+      "status": "BOND_STATUS_BONDED",
+      "tokens": "100000000000000000000",
+      "owner_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+      "description": {
+        "moniker": "snode://stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64@127.0.0.1:8888",
+        "identity": "",
+        "website": "",
+        "security_contact": "",
+        "details": ""
+      },
+      "creation_time": "0001-01-01T00:00:00Z",
+      "node_type": 0,
+      "bonded_deposit": {
+        "denom": "wei",
+        "amount": "100000000000000000000"
       },
       "un_bonding_deposit": {
         "denom": "wei",
@@ -5300,29 +4265,10 @@ Response Example:
         "amount": "0"
       }
     }
-  ]
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code> GET /register/params</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries params of registered module</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/register/params
-```
-Response Example:
-```json
-{
-  "height": "3588",
-  "result": {
-    "bond_denom": "wei",
-    "unbonding_threashold_time": "15552000000000000",
-    "unbonding_completion_time": "1209600000000000",
-    "max_entries": 16,
-    "resource_node_reg_enabled": true
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "2"
   }
 }
 ```
@@ -5330,17 +4276,43 @@ Response Example:
 <br>
 
 <details>
-    <summary><code> GET /register/resource-count</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries total number of bonded resource nodes</summary>
+    <summary><code> GET /stratos/register/v1/params</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries params of registered module</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/register/resource-count
+https://rest.thestratos.org/stratos/register/v1/params
 ```
 Response Example:
 ```json
 {
-  "height": "1093",
-  "result": "2"
+  "params": {
+    "bond_denom": "wei",
+    "unbonding_threashold_time": "15552000s",
+    "unbonding_completion_time": "1209600s",
+    "max_entries": 16,
+    "resource_node_reg_enabled": true,
+    "resource_node_min_deposit": {
+      "denom": "wei",
+      "amount": "1000000000000000000"
+    },
+    "voting_period": "604800s"
+  }
+}
+```
+</details>
+<br>
+
+<details>
+    <summary><code> GET /stratos/register/v1/resource_node_count</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries total number of bonded resource nodes</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/stratos/register/v1/resource_node_count
+```
+Response Example:
+```json
+{
+  "number": "2"
 }
 ```
 </details>
@@ -5348,17 +4320,33 @@ Response Example:
 
 
 <details>
-    <summary><code> GET /register/meta-count</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries total number of bonded meta nodes</summary>
+    <summary><code> GET /stratos/register/v1/meta_node_count</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries total number of bonded meta nodes</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/register/meta-count
+https://rest.thestratos.org/stratos/register/v1/meta_node_count
 ```
 Response Example:
 ```json
 {
-  "height": "1118",
-  "result": "4"
+  "number": "4"
+}
+```
+</details>
+<br>
+
+
+<details>
+    <summary><code> GET /stratos/register/v1/remaining_ozone_limit</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries remaining ozone limit</summary>
+
+Request Example:
+```http
+https://rest.thestratos.org/stratos/register/v1/remaining_ozone_limit
+```
+Response Example:
+```json
+{
+  "ozone_limit": "400000000000000"
 }
 ```
 </details>
@@ -5369,20 +4357,20 @@ Response Example:
 ### Proof of Traffic (PoT)
 
 <details>
-    <summary><code> GET /pot/report/epoch/{epoch}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries Pot volume report info at a specific epoch</summary>
+    <summary><code> GET /stratos/pot/v1/volume_report/{epoch}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries Pot volume report info at a specific epoch</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/pot/report/epoch/1
+https://rest.thestratos.org/stratos/pot/v1/volume_report/1
 ```
 Response Example:
 ```json
 {
-  "height": "19979",
-  "result": {
-    "reporter": "stsds1umqakd5tkedkval6fsch0y67mjlfch0umxuqnh",
-    "report_reference": "volume_report_stsds1umqakd5tkedkval6fsch0y67mjlfch0umxuqnh_1",
-    "tx_hash": "B22B2F859627C6E2BC6D83DD76C0B06A304228E75213DC4E2024AAC1A20426A0"
+  "report_info": {
+    "epoch": "1",
+    "reference": "100A1FC0B82DD3B0353B59E90388EEA2B73DEECA872955B414EBC99ECD3E3C1F",
+    "tx_hash": "7F51147DB44185A1A4DC572EC0C69DEA6E9495DDCDF27CD46CA27935D4B93943",
+    "reporter": "stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64"
   }
 }
 ```
@@ -5390,86 +4378,73 @@ Response Example:
 <br>
 
 <details>
-    <summary><code> GET /pot/rewards/epoch/{epoch}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all rewards info at a specific epoch</summary>
+    <summary><code> GET /stratos/pot/v1/rewards/epoch/{epoch}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries all rewards info at a specific epoch</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/pot/rewards/epoch/1?page=1&limit=3
+https://rest.thestratos.org/stratos/pot/v1/rewards/epoch/1?pagination.limit=2
 ```
 Response Example:
 ```json
 {
-  "height": "19968",
-  "result": [
+  "rewards": [
     {
-      "wallet_address": "st1qk5crq35zzus7c3ztx6znez8xe3wmn9y755uzl",
+      "wallet_address": "st1rwnmgk0x2n2wry876dkxq2hhcce8k7kzspppax",
       "reward_from_mining_pool": [
         {
           "denom": "wei",
-          "amount": "3813153"
+          "amount": "4000000000000000000"
         }
       ],
       "reward_from_traffic_pool": [
         {
           "denom": "wei",
-          "amount": "5208698191"
+          "amount": "25740279520266"
         }
       ]
     },
     {
-      "wallet_address": "st1pfsrjnx74vwfpd96haml5054q9upvx4jtwmhxy",
+      "wallet_address": "st1k9hfqps9s2tpnfxch2avvevyvtry0zth39gdzc",
       "reward_from_mining_pool": [
         {
           "denom": "wei",
-          "amount": "7813153114"
+          "amount": "4000000000000000000"
         }
       ],
       "reward_from_traffic_pool": [
         {
           "denom": "wei",
-          "amount": "10672625850829"
-        }
-      ]
-    },
-    {
-      "wallet_address": "st19wcqrjdpl3259f9flfc4zhy04m22g0r6ndk9er",
-      "reward_from_mining_pool": [
-        {
-          "denom": "wei",
-          "amount": "3813153"
-        }
-      ],
-      "reward_from_traffic_pool": [
-        {
-          "denom": "wei",
-          "amount": "5208698191"
+          "amount": "25740279520266"
         }
       ]
     }
-  ]
+  ],
+  "pagination": {
+    "next_key": "y0JUWCEwpMwgs3XzfSwlHBHU9Xg=",
+    "total": "0"
+  }
 }
 ```
 </details>
 <br>
 
 <details>
-    <summary><code> GET /pot/rewards/wallet/{walletAddress}[?height={BlockHeight}, optional]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries owner's Pot rewards info at a specific height</summary>
+    <summary><code> GET /stratos/pot/v1/rewards/wallet/{wallet_address}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries latest Pot rewards by beneficiary address</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/pot/rewards/wallet/st18jxmc78ws5wq7q7umr6plpz8x0d9qtzu98v8em?height=10000
+https://rest.thestratos.org/stratos/pot/v1/rewards/wallet/st1rwnmgk0x2n2wry876dkxq2hhcce8k7kzspppax
 ```
 Response Example:
 ```json
 {
-  "height": "10000",
-  "result": {
-    "wallet_address": "st18jxmc78ws5wq7q7umr6plpz8x0d9qtzu98v8em",
+  "rewards": {
+    "wallet_address": "st1rwnmgk0x2n2wry876dkxq2hhcce8k7kzspppax",
     "mature_total_reward": [],
     "immature_total_reward": [
       {
         "denom": "wei",
-        "amount": "34050759021267"
+        "amount": "16000257399827064713"
       }
     ]
   }
@@ -5479,32 +4454,36 @@ Response Example:
 <br>
 
 
-
 <details>
-    <summary><code> GET /pot/rewards/wallet/{walletAddress}[?epoch={epoch}, optional]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries owner's Pot rewards info at a specific epoch</summary>
+    <summary><code> GET /stratos/pot/v1/rewards/wallet/{wallet_address}/epoch/{epoch}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries Pot rewards info by beneficiary address at a specific epoch</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/pot/rewards/wallet/st18jxmc78ws5wq7q7umr6plpz8x0d9qtzu98v8em?epoch=10
+https://rest.thestratos.org/stratos/pot/v1/rewards/wallet/st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m/epoch/2
 ```
 Response Example:
 ```json
 {
-  "height": "19941",
-  "result": {
-    "wallet_address": "st18jxmc78ws5wq7q7umr6plpz8x0d9qtzu98v8em",
-    "reward_from_mining_pool": [
-      {
-        "denom": "wei",
-        "amount": "7813151751"
-      }
-    ],
-    "reward_from_traffic_pool": [
-      {
-        "denom": "wei",
-        "amount": "5672467197734"
-      }
-    ]
+  "rewards": [
+    {
+      "wallet_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+      "reward_from_mining_pool": [
+        {
+          "denom": "wei",
+          "amount": "52000000000000000000"
+        }
+      ],
+      "reward_from_traffic_pool": [
+        {
+          "denom": "wei",
+          "amount": "669244695117639"
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "0"
   }
 }
 ```
@@ -5512,60 +4491,32 @@ Response Example:
 <br>
 
 <details>
-    <summary><code> GET /pot/rewards/wallet/{walletAddress}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries latest owner's Pot rewards info</summary>
+    <summary><code>GET /stratos/pot/v1/slashing/{wallet_address}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries owner's Pot slashing info at a specific height</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/pot/rewards/wallet/st18jxmc78ws5wq7q7umr6plpz8x0d9qtzu98v8em
+https://rest.thestratos.org/stratos/pot/v1/slashing/st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m
 ```
 Response Example:
 ```json
 {
-  "height": "19926",
-  "result": {
-    "wallet_address": "st18jxmc78ws5wq7q7umr6plpz8x0d9qtzu98v8em",
-    "mature_total_reward": [],
-    "immature_total_reward": [
-      {
-        "denom": "wei",
-        "amount": "88509725445757"
-      }
-    ]
-  }
+  "slashing": "0"
 }
 ```
 </details>
 <br>
 
 <details>
-    <summary><code>GET /pot/slashing/{walletAddress} [?height={BlockHeight}, optional]</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries owner's Pot slashing info at a specific height</summary>
+    <summary><code>GET /stratos/pot/v1/params</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Query params of POT module</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/pot/slashing/st1am40hqkacscgwvvsjcxzxk49r8cuamgyrcgppg?height=3877
+https://rest.thestratos.org/stratos/pot/v1/params
 ```
 Response Example:
 ```json
 {
-  "height": "3877",
-  "result": 0
-}
-```
-</details>
-<br>
-
-<details>
-    <summary><code>GET /pot/params</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Query params of POT module</summary>
-
-Request Example:
-```http
-https://rest.thestratos.org/pot/params
-```
-Response Example:
-```json
-{
-  "height": "19637",
-  "result": {
+  "params": {
     "bond_denom": "wei",
     "reward_denom": "wei",
     "mature_epoch": "2016",
@@ -5577,11 +4528,11 @@ Response Example:
         },
         "total_mined_valve_end": {
           "denom": "wei",
-          "amount": "16819200000000000"
+          "amount": "16819200000000000000000000"
         },
         "mining_reward": {
           "denom": "wei",
-          "amount": "80000000000"
+          "amount": "80000000000000000000"
         },
         "block_chain_percentage_in_bp": "2000",
         "resource_node_percentage_in_bp": "6000",
@@ -5590,15 +4541,15 @@ Response Example:
       {
         "total_mined_valve_start": {
           "denom": "wei",
-          "amount": "16819200000000000"
+          "amount": "16819200000000000000000000"
         },
         "total_mined_valve_end": {
           "denom": "wei",
-          "amount": "25228800000000000"
+          "amount": "25228800000000000000000000"
         },
         "mining_reward": {
           "denom": "wei",
-          "amount": "40000000000"
+          "amount": "40000000000000000000"
         },
         "block_chain_percentage_in_bp": "2000",
         "resource_node_percentage_in_bp": "6200",
@@ -5607,15 +4558,15 @@ Response Example:
       {
         "total_mined_valve_start": {
           "denom": "wei",
-          "amount": "25228800000000000"
+          "amount": "25228800000000000000000000"
         },
         "total_mined_valve_end": {
           "denom": "wei",
-          "amount": "29433600000000000"
+          "amount": "29433600000000000000000000"
         },
         "mining_reward": {
           "denom": "wei",
-          "amount": "20000000000"
+          "amount": "20000000000000000000"
         },
         "block_chain_percentage_in_bp": "2000",
         "resource_node_percentage_in_bp": "6400",
@@ -5624,15 +4575,15 @@ Response Example:
       {
         "total_mined_valve_start": {
           "denom": "wei",
-          "amount": "29433600000000000"
+          "amount": "29433600000000000000000000"
         },
         "total_mined_valve_end": {
           "denom": "wei",
-          "amount": "31536000000000000"
+          "amount": "31536000000000000000000000"
         },
         "mining_reward": {
           "denom": "wei",
-          "amount": "10000000000"
+          "amount": "10000000000000000000"
         },
         "block_chain_percentage_in_bp": "2000",
         "resource_node_percentage_in_bp": "6600",
@@ -5641,15 +4592,15 @@ Response Example:
       {
         "total_mined_valve_start": {
           "denom": "wei",
-          "amount": "31536000000000000"
+          "amount": "31536000000000000000000000"
         },
         "total_mined_valve_end": {
           "denom": "wei",
-          "amount": "32587200000000000"
+          "amount": "32587200000000000000000000"
         },
         "mining_reward": {
           "denom": "wei",
-          "amount": "5000000000"
+          "amount": "5000000000000000000"
         },
         "block_chain_percentage_in_bp": "2000",
         "resource_node_percentage_in_bp": "6800",
@@ -5658,15 +4609,15 @@ Response Example:
       {
         "total_mined_valve_start": {
           "denom": "wei",
-          "amount": "32587200000000000"
+          "amount": "32587200000000000000000000"
         },
         "total_mined_valve_end": {
           "denom": "wei",
-          "amount": "40000000000000000"
+          "amount": "40000000000000000000000000"
         },
         "mining_reward": {
           "denom": "wei",
-          "amount": "2500000000"
+          "amount": "2500000000000000000"
         },
         "block_chain_percentage_in_bp": "2000",
         "resource_node_percentage_in_bp": "7000",
@@ -5685,19 +4636,18 @@ Response Example:
 <br>
 
 <details>
-    <summary><code>GET /pot/total-mined-token</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries total mined token</summary>
+    <summary><code>GET /stratos/pot/v1/total_mined_token</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries total mined token</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/pot/total-mined-token
+https://rest.thestratos.org/stratos/pot/v1/total_mined_token
 ```
 Response Example:
 ```json
 {
-  "height": "19033",
-  "result": {
+  "total_mined_token": {
     "denom": "wei",
-    "amount": "959999999923"
+    "amount": "320000000000000000000"
   }
 }
 ```
@@ -5705,20 +4655,19 @@ Response Example:
 <br>
 
 <details>
-    <summary><code>GET /pot/circulation-supply</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries circulation supply</summary>
+    <summary><code>GET /stratos/pot/v1/circulation_supply</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries circulation supply</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/pot/circulation-supply
+https://rest.thestratos.org/stratos/pot/v1/circulation_supply
 ```
 Response Example:
 ```json
 {
-  "height": "19619",
-  "result": [
+  "circulation_supply": [
     {
       "denom": "wei",
-      "amount": "441335743191571263470157636"
+      "amount": "59999809005253057695198254"
     }
   ]
 }
@@ -5731,20 +4680,19 @@ Response Example:
 ### SDS
 
 <details>
-    <summary><code> GET /sds/fileUpload/{fileHash}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; query uploaded file info by hash </summary>
+    <summary><code> GET /stratos/sds/v1/file_upload/{file_hash}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; query uploaded file info by hash </summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/sds/fileUpload/v05ahm51dd62ise3fo7ojqub90p0ql2c3jg37hk8
+https://rest.thestratos.org/stratos/sds/v1/file_upload/v05j1m5535t62jdqc57r27gjq2nqcf0o1onavkv8
 ```
 Response Example:
 ```json
 {
-  "height": "20444",
-  "result": {
-    "height": "4109",
+  "file_info": {
+    "height": "235396",
     "reporters": "DwAAAAAAAAA=",
-    "uploader": "st18986jyng5vsprmtzkdxla80jrw7qyc6wl73h0u"
+    "uploader": "st1f58px9ysn9zsnucqtjejakkr8lezmwggq2k6av"
   }
 }
 ```
@@ -5756,67 +4704,61 @@ Response Example:
 
 Request Example:
 ```http
-https://rest.thestratos.org/sds/simPrepay/8000000000
+https://rest.thestratos.org/stratos/sds/v1/sim_prepay/1stos
 ```
 Response Example:
 ```json
 {
-  "height": "4036",
-  "result": "8799"
+  "noz": "949522847536"
 }
 ```
 </details>
 <br>
 
 <details>
-    <summary><code> GET /sds/nozPrice</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries current nozPrice </summary>
+    <summary><code> GET /stratos/sds/v1/noz_price</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries current nozPrice </summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/sds/nozPrice
+https://rest.thestratos.org/stratos/sds/v1/noz_price
 ```
 Response Example:
 ```json
 {
-  "height": "4088",
-  "result": "909090.909090909090909091"
+  "price": "1050598.078251776812024224"
 }
 ```
 </details>
 <br>
 
 <details>
-    <summary><code> GET /sds/nozSupply</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries current nozSupply </summary>
+    <summary><code> GET /stratos/sds/v1/noz_supply</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries current nozSupply </summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/sds/nozSupply
+https://rest.thestratos.org/stratos/sds/v1/noz_supply
 ```
 Response Example:
 ```json
 {
-  "height": "4078",
-  "result": {
-    "Remaining": "110000000000000",
-    "Total": "110000000000000"
-  }
+  "remaining": "390248902439025",
+  "total": "400000000000000"
 }
 ```
 </details>
 <br>
 
 <details>
-    <summary><code> GET /sds/params</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries params of SDS module </summary>
+    <summary><code> GET /stratos/sds/v1/params</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queries params of SDS module </summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/sds/params
+https://rest.thestratos.org/stratos/sds/v1/params
 ```
 Response Example:
 ```json
 {
-  "height": "4055",
-  "result": {
+  "params": {
     "bond_denom": "wei"
   }
 }
