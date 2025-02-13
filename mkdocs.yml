@@ -59,7 +59,7 @@ nav:
   - Decentralized Storage:
     - HOWTOs:
       - SDS Resource Node: docs-resource-node/setup-and-run-a-sds-resource-node.md
-      - SDS Update to v12: docs-resource-node/sds-update-v12.md
+      - SDS Update to v0.12.5: docs-resource-node/sds-update-v12.md
       - Migrate IPFS: docs-resource-node/sds-ipfs-handbook.md
       - Video Streaming: docs-resource-node/sds-video-streaming-handbook.md
     - Operating:

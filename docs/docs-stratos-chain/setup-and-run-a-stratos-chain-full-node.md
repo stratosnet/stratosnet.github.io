@@ -138,7 +138,7 @@ source ~/.profile
 The following binary `stchaind` has been built and ready to be downloaded directly.
 
 ```shell
-wget https://github.com/stratosnet/stratos-chain/releases/download/v0.12.1/stchaind \
+wget https://github.com/stratosnet/stratos-chain/releases/download/v0.12.2/stchaind \
 -O ~/bin/stchaind && \
 chmod +x ~/bin/stchaind
 ```
@@ -152,7 +152,7 @@ md5sum ~/bin/stchaind
 ```
 ```
 ## Expected output
-0277fc8036ae2414f447f839f43c91e2  /home/stratos/bin/stchaind
+e9c0f2a36ed91e10eeeeb84c00e2e454  /home/stratos/bin/stchaind
 ```
 
 <br>
@@ -162,7 +162,7 @@ md5sum ~/bin/stchaind
 ```shell
 stchaind version
 
-# Should return v0.12.1
+# Should return v0.12.2
 ```
 
 !!! tip
@@ -198,7 +198,7 @@ Alternatively, you can follow the official instructions: [install golang](https:
 ```shell
 git clone https://github.com/stratosnet/stratos-chain.git
 cd stratos-chain
-git checkout tags/v0.12.1
+git checkout tags/v0.12.2
 make build
 ```
 
@@ -220,7 +220,7 @@ chmod +x ~/bin/stchaind
 ```shell
 stchaind version
 
-# Should return v0.12.1
+# Should return v0.12.2
 ```
 
 <br>
