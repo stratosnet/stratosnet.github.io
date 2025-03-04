@@ -63,7 +63,7 @@ nav:
       - Migrate IPFS: docs-resource-node/sds-ipfs-handbook.md
       - Video Streaming: docs-resource-node/sds-video-streaming-handbook.md
     - Operating:
-      - IPFS Quick Guide: docs-resource-node/ipfs-quick-guide.md
+      - SPFS Quick Guide: docs-resource-node/spfs-quick-guide.md
       - ppd Commands: docs-resource-node/ppd-terminal-subcommands.md
       - File Operations RPC API: docs-resource-node/sds-rpc-for-file-operation.md
       - Node Monitor WebSocket API: docs-resource-node/node-monitor-websocket-api.md
