@@ -1,5 +1,5 @@
 ---
-title: SDS IPFS Quick Guide
+title: SPFS Quick Guide
 description: Stratos IPFS Setup and Commands Guide
 ---
 
