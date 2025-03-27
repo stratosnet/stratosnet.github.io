@@ -15,6 +15,8 @@ This guide provides a publicly shared SPFS API token for testing purposes. Howev
 
 A private access token provides exclusive access to your personal storage, ensuring only you can use it. Your data remains inaccessible to others unless you explicitly share it. The token is free with usage limitations, which can be expanded through a subscription. 
 
+For RPC API details, please refer to IPFS Docs: <a href="https://docs.ipfs.tech/reference/kubo/rpc/#getting-started" target="_blank">Kubo RPC API</a>
+
 !!! warning
     This RPC API is in beta version and is openly accessible for testing. 
 
