@@ -1,13 +1,13 @@
 ---
-title: SDS Update to v0.12.5
+title: SDS Update to v0.12.7
 description: SDS Update to v12 Documentation.
 ---
 
-# SDS Update to v0.12.5
+# SDS Update to v0.12.7
 
 ## Introduction
 
-SDS v12.5 is an important update, if you run a SDS node for Stratos, it's recommended that you apply this update in order for your node to continue normal operations.
+SDS v12.7 is an important update, if you run a SDS node for Stratos, it's recommended that you apply this update in order for your node to continue normal operations.
 
 ---
 
@@ -37,7 +37,7 @@ rm -rf sds
 ```shell
 git clone https://github.com/stratosnet/sds.git
 cd sds
-git checkout tags/v0.12.5
+git checkout tags/v0.12.7
 go clean -modcache
 make build
 ```
@@ -62,7 +62,7 @@ Make sure the newly installed `ppd` binary is up to date:
 ```shell
 ppd version
 ```
-Should return: `v0.12.5`
+Should return: `v0.12.7`
 
 ---
 
@@ -87,7 +87,7 @@ ppd config update
 Expected output:
 
 ```
-[INFO] config.go:122: Updated config version from v0.12.2 to v0.12.5
+[INFO] config.go:122: Updated config version from v0.12.2 to v0.12.7
 [INFO] config.go:128: Deleted entry node.auto_start = true
 [INFO] config.go:128: Deleted entry node.connectivity.allow_owner_rpc = false
 [INFO] config.go:135: Added entry keys.beneficiary_address =
@@ -107,7 +107,7 @@ Expected output:
     # Network connections from nodes below this version number will be rejected. Eg: 11
     min_app_ver = 12
     # Formatted version number. Eg: "v0.11.0"
-    show = 'v0.12.5'
+    show = 'v0.12.7'
 
     # Configuration of the connection to the Stratos blockchain
     [blockchain]
@@ -216,7 +216,7 @@ Expected output:
 
 Metanodes underwent a significant upgrade in February 2025. As part of this transition, all files stored prior to this date will be removed from metanode records, as they were primarily used for testing traffic and no longer hold value.
 
-To facilitate this process, SDS v12.5 introduces a new terminal command that allows you to automatically delete all files stored by your node up to February 03, 2025, ensuring a clean and optimized storage environment.
+To facilitate this process, SDS v12.7 introduces a new terminal command that allows you to automatically delete all files stored by your node up to February 03, 2025, ensuring a clean and optimized storage environment.
 
 To clean your storage, simply run the following commands:
 
