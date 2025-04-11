@@ -3248,11 +3248,330 @@ Response Example:
 Search, encode, or broadcast transactions.
 
 <details>
-    <summary><code>GET /cosmos/tx/v1beta1/txs</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fetches txs by event.</summary>
+    <summary><code>GET /cosmos/tx/v1beta1/txs</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fetches txs by height.</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/tx/v1beta1/txs?events=tx.height=557
+curl -X GET "https://rest.thestratos.org/cosmos/tx/v1beta1/txs?events=tx.height=8103466&limit=1&page=1&orderby=1"
+```
+Response Example:
+```json
+{
+    "txs": [
+        {
+            "body": {
+                "messages": [
+                    {
+                        "@type": "/stratos.sds.v1.MsgFileUpload",
+                        "file_hash": "v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro",
+                        "from": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                        "reporter": "stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu",
+                        "uploader": "st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"
+                    }
+                ],
+                "memo": "",
+                "timeout_height": "0",
+                "extension_options": [],
+                "non_critical_extension_options": []
+            },
+            "auth_info": {
+                "signer_infos": [
+                    {
+                        "public_key": {
+                            "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
+                            "key": "A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ"
+                        },
+                        "mode_info": {
+                            "single": {
+                                "mode": "SIGN_MODE_DIRECT"
+                            }
+                        },
+                        "sequence": "667409"
+                    }
+                ],
+                "fee": {
+                    "amount": [
+                        {
+                            "denom": "wei",
+                            "amount": "109168000000000"
+                        }
+                    ],
+                    "gas_limit": "109168",
+                    "payer": "",
+                    "granter": ""
+                },
+                "tip": null
+            },
+            "signatures": [
+                "VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE="
+            ]
+        }
+    ],
+    "tx_responses": [
+        {
+            "height": "8103466",
+            "txhash": "3674F0E96B313338879CC8E77C52B090B3DAEBF95F9A9FFC58F7110A7723327A",
+            "codespace": "",
+            "code": 0,
+            "data": "12270A252F73747261746F732E7364732E76312E4D736746696C6555706C6F6164526573706F6E7365",
+            "raw_log": "[{\"msg_index\":0,\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/stratos.sds.v1.MsgFileUpload\"},{\"key\":\"sender\",\"value\":\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\"},{\"key\":\"module\",\"value\":\"sds\"}]},{\"type\":\"stratos.sds.v1.EventFileUpload\",\"attributes\":[{\"key\":\"file_hash\",\"value\":\"\\\"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro\\\"\"},{\"key\":\"reporter\",\"value\":\"\\\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\\\"\"},{\"key\":\"sender\",\"value\":\"\\\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\\\"\"},{\"key\":\"uploader\",\"value\":\"\\\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\\\"\"}]}]}]",
+            "logs": [
+                {
+                    "msg_index": 0,
+                    "log": "",
+                    "events": [
+                        {
+                            "type": "message",
+                            "attributes": [
+                                {
+                                    "key": "action",
+                                    "value": "/stratos.sds.v1.MsgFileUpload"
+                                },
+                                {
+                                    "key": "sender",
+                                    "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"
+                                },
+                                {
+                                    "key": "module",
+                                    "value": "sds"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "stratos.sds.v1.EventFileUpload",
+                            "attributes": [
+                                {
+                                    "key": "file_hash",
+                                    "value": "\"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro\""
+                                },
+                                {
+                                    "key": "reporter",
+                                    "value": "\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\""
+                                },
+                                {
+                                    "key": "sender",
+                                    "value": "\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\""
+                                },
+                                {
+                                    "key": "uploader",
+                                    "value": "\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "info": "",
+            "gas_wanted": "109168",
+            "gas_used": "72391",
+            "tx": {
+                "@type": "/cosmos.tx.v1beta1.Tx",
+                "body": {
+                    "messages": [
+                        {
+                            "@type": "/stratos.sds.v1.MsgFileUpload",
+                            "file_hash": "v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro",
+                            "from": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "reporter": "stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu",
+                            "uploader": "st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"
+                        }
+                    ],
+                    "memo": "",
+                    "timeout_height": "0",
+                    "extension_options": [],
+                    "non_critical_extension_options": []
+                },
+                "auth_info": {
+                    "signer_infos": [
+                        {
+                            "public_key": {
+                                "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
+                                "key": "A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ"
+                            },
+                            "mode_info": {
+                                "single": {
+                                    "mode": "SIGN_MODE_DIRECT"
+                                }
+                            },
+                            "sequence": "667409"
+                        }
+                    ],
+                    "fee": {
+                        "amount": [
+                            {
+                                "denom": "wei",
+                                "amount": "109168000000000"
+                            }
+                        ],
+                        "gas_limit": "109168",
+                        "payer": "",
+                        "granter": ""
+                    },
+                    "tip": null
+                },
+                "signatures": [
+                    "VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE="
+                ]
+            },
+            "timestamp": "2025-04-11T19:00:49Z",
+            "events": [
+                {
+                    "type": "coin_spent",
+                    "attributes": [
+                        {
+                            "key": "spender",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        },
+                        {
+                            "key": "amount",
+                            "value": "109168000000000wei",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "coin_received",
+                    "attributes": [
+                        {
+                            "key": "receiver",
+                            "value": "st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q",
+                            "index": true
+                        },
+                        {
+                            "key": "amount",
+                            "value": "109168000000000wei",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "transfer",
+                    "attributes": [
+                        {
+                            "key": "recipient",
+                            "value": "st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q",
+                            "index": true
+                        },
+                        {
+                            "key": "sender",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        },
+                        {
+                            "key": "amount",
+                            "value": "109168000000000wei",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "message",
+                    "attributes": [
+                        {
+                            "key": "sender",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "tx",
+                    "attributes": [
+                        {
+                            "key": "fee",
+                            "value": "109168000000000wei",
+                            "index": true
+                        },
+                        {
+                            "key": "fee_payer",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "tx",
+                    "attributes": [
+                        {
+                            "key": "acc_seq",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w/667409",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "tx",
+                    "attributes": [
+                        {
+                            "key": "signature",
+                            "value": "VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE=",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "message",
+                    "attributes": [
+                        {
+                            "key": "action",
+                            "value": "/stratos.sds.v1.MsgFileUpload",
+                            "index": true
+                        },
+                        {
+                            "key": "sender",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        },
+                        {
+                            "key": "module",
+                            "value": "sds",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "stratos.sds.v1.EventFileUpload",
+                    "attributes": [
+                        {
+                            "key": "file_hash",
+                            "value": "\"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro\"",
+                            "index": true
+                        },
+                        {
+                            "key": "reporter",
+                            "value": "\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\"",
+                            "index": true
+                        },
+                        {
+                            "key": "sender",
+                            "value": "\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\"",
+                            "index": true
+                        },
+                        {
+                            "key": "uploader",
+                            "value": "\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\"",
+                            "index": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "pagination": null,
+    "total": "8"
+}
+```
+</details>
+<br>
+
+
+<details>
+    <summary><code>GET /cosmos/tx/v1beta1/txs</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fetches txs by message.action.</summary>
+
+Request Example:
+```http
+curl -X GET "https://rest.thestratos.org/cosmos/tx/v1beta1/txs?events=message.action='/stratos.sds.v1.MsgFileUpload'&limit=1&page=1&orderby=1"
 ```
 Response Example:
 ```json
@@ -3262,15 +3581,11 @@ Response Example:
       "body": {
         "messages": [
           {
-            "@type": "/cosmos.bank.v1beta1.MsgSend",
-            "from_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
-            "to_address": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
-            "amount": [
-              {
-                "denom": "wei",
-                "amount": "10000000000000000000"
-              }
-            ]
+            "@type": "/stratos.sds.v1.MsgFileUpload",
+            "file_hash": "v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg",
+            "from": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+            "reporter": "stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu",
+            "uploader": "st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"
           }
         ],
         "memo": "",
@@ -3283,42 +3598,42 @@ Response Example:
           {
             "public_key": {
               "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
-              "key": "A0GU+d2Ut1t6dOEF+Ln+ZA9oNdjh8vTHhWb788TOCIUr"
+              "key": "A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ"
             },
             "mode_info": {
               "single": {
                 "mode": "SIGN_MODE_DIRECT"
               }
             },
-            "sequence": "4"
+            "sequence": "667068"
           }
         ],
         "fee": {
           "amount": [
             {
               "denom": "wei",
-              "amount": "442524000000000"
+              "amount": "109168000000000"
             }
           ],
-          "gas_limit": "442524",
+          "gas_limit": "109168",
           "payer": "",
           "granter": ""
         },
         "tip": null
       },
       "signatures": [
-        "DOf7A9h7/Ahpu6M2+o8LUGEsI89FJnEb+iL63x6OHqEVgcKiHDkSxEVORhPoO/vnRSygKGhX7KdPlb1nKLOImAE="
+        "ErLmnIXvzsNjYZUFuT7LZ+qXU2r9Kj/n5hlEbdCHtDEjiD2i+9QIuJotgXpWE7bsm3EYuEUcAAgUBtvg9iY74QA="
       ]
     }
   ],
   "tx_responses": [
     {
-      "height": "557",
-      "txhash": "34E401829F23098FEA1F7B398CD9842A6010249F7720BAF1916A14077C97B3E7",
+      "height": "8101020",
+      "txhash": "83D5FC7B50BB2C8EA5D4DB547083C583341508CC6DE50751D3930221721826D8",
       "codespace": "",
       "code": 0,
-      "data": "12260A242F636F736D6F732E62616E6B2E763162657461312E4D736753656E64526573706F6E7365",
-      "raw_log": "[{\"msg_index\":0,\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.bank.v1beta1.MsgSend\"},{\"key\":\"sender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"coin_spent\",\"attributes\":[{\"key\":\"spender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"},{\"key\":\"amount\",\"value\":\"10000000000000000000wei\"}]},{\"type\":\"coin_received\",\"attributes\":[{\"key\":\"receiver\",\"value\":\"st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l\"},{\"key\":\"amount\",\"value\":\"10000000000000000000wei\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l\"},{\"key\":\"sender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"},{\"key\":\"amount\",\"value\":\"10000000000000000000wei\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"sender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"}]}]}]",
+      "data": "12270A252F73747261746F732E7364732E76312E4D736746696C6555706C6F6164526573706F6E7365",
+      "raw_log": "[{\"msg_index\":0,\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/stratos.sds.v1.MsgFileUpload\"},{\"key\":\"sender\",\"value\":\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\"},{\"key\":\"module\",\"value\":\"sds\"}]},{\"type\":\"stratos.sds.v1.EventFileUpload\",\"attributes\":[{\"key\":\"file_hash\",\"value\":\"\\\"v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg\\\"\"},{\"key\":\"reporter\",\"value\":\"\\\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\\\"\"},{\"key\":\"sender\",\"value\":\"\\\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\\\"\"},{\"key\":\"uploader\",\"value\":\"\\\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\\\"\"}]}]}]",
       "logs": [
         {
           "msg_index": 0,
@@ -3329,67 +3644,36 @@ Response Example:
               "attributes": [
                 {
                   "key": "action",
-                  "value": "/cosmos.bank.v1beta1.MsgSend"
+                  "value": "/stratos.sds.v1.MsgFileUpload"
                 },
                 {
                   "key": "sender",
-                  "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+                  "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"
                 },
                 {
                   "key": "module",
-                  "value": "bank"
+                  "value": "sds"
                 }
               ]
             },
             {
-              "type": "coin_spent",
+              "type": "stratos.sds.v1.EventFileUpload",
               "attributes": [
                 {
-                  "key": "spender",
-                  "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+                  "key": "file_hash",
+                  "value": "\"v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg\""
                 },
                 {
-                  "key": "amount",
-                  "value": "10000000000000000000wei"
-                }
-              ]
-            },
-            {
-              "type": "coin_received",
-              "attributes": [
-                {
-                  "key": "receiver",
-                  "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l"
-                },
-                {
-                  "key": "amount",
-                  "value": "10000000000000000000wei"
-                }
-              ]
-            },
-            {
-              "type": "transfer",
-              "attributes": [
-                {
-                  "key": "recipient",
-                  "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l"
+                  "key": "reporter",
+                  "value": "\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\""
                 },
                 {
                   "key": "sender",
-                  "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+                  "value": "\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\""
                 },
                 {
-                  "key": "amount",
-                  "value": "10000000000000000000wei"
-                }
-              ]
-            },
-            {
-              "type": "message",
-              "attributes": [
-                {
-                  "key": "sender",
-                  "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+                  "key": "uploader",
+                  "value": "\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\""
                 }
               ]
             }
@@ -3397,22 +3681,18 @@ Response Example:
         }
       ],
       "info": "",
-      "gas_wanted": "442524",
-      "gas_used": "431655",
+      "gas_wanted": "109168",
+      "gas_used": "72391",
       "tx": {
         "@type": "/cosmos.tx.v1beta1.Tx",
         "body": {
           "messages": [
             {
-              "@type": "/cosmos.bank.v1beta1.MsgSend",
-              "from_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
-              "to_address": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
-              "amount": [
-                {
-                  "denom": "wei",
-                  "amount": "10000000000000000000"
-                }
-              ]
+              "@type": "/stratos.sds.v1.MsgFileUpload",
+              "file_hash": "v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg",
+              "from": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+              "reporter": "stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu",
+              "uploader": "st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"
             }
           ],
           "memo": "",
@@ -3425,46 +3705,46 @@ Response Example:
             {
               "public_key": {
                 "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
-                "key": "A0GU+d2Ut1t6dOEF+Ln+ZA9oNdjh8vTHhWb788TOCIUr"
+                "key": "A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ"
               },
               "mode_info": {
                 "single": {
                   "mode": "SIGN_MODE_DIRECT"
                 }
               },
-              "sequence": "4"
+              "sequence": "667068"
             }
           ],
           "fee": {
             "amount": [
               {
                 "denom": "wei",
-                "amount": "442524000000000"
+                "amount": "109168000000000"
               }
             ],
-            "gas_limit": "442524",
+            "gas_limit": "109168",
             "payer": "",
             "granter": ""
           },
           "tip": null
         },
         "signatures": [
-          "DOf7A9h7/Ahpu6M2+o8LUGEsI89FJnEb+iL63x6OHqEVgcKiHDkSxEVORhPoO/vnRSygKGhX7KdPlb1nKLOImAE="
+          "ErLmnIXvzsNjYZUFuT7LZ+qXU2r9Kj/n5hlEbdCHtDEjiD2i+9QIuJotgXpWE7bsm3EYuEUcAAgUBtvg9iY74QA="
         ]
       },
-      "timestamp": "2024-03-07T22:01:52Z",
+      "timestamp": "2025-04-11T14:55:51Z",
       "events": [
         {
           "type": "coin_spent",
           "attributes": [
             {
               "key": "spender",
-              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
               "index": true
             },
             {
               "key": "amount",
-              "value": "442524000000000wei",
+              "value": "109168000000000wei",
               "index": true
             }
           ]
@@ -3479,7 +3759,7 @@ Response Example:
             },
             {
               "key": "amount",
-              "value": "442524000000000wei",
+              "value": "109168000000000wei",
               "index": true
             }
           ]
@@ -3494,12 +3774,12 @@ Response Example:
             },
             {
               "key": "sender",
-              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
               "index": true
             },
             {
               "key": "amount",
-              "value": "442524000000000wei",
+              "value": "109168000000000wei",
               "index": true
             }
           ]
@@ -3509,7 +3789,7 @@ Response Example:
           "attributes": [
             {
               "key": "sender",
-              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
               "index": true
             }
           ]
@@ -3519,12 +3799,12 @@ Response Example:
           "attributes": [
             {
               "key": "fee",
-              "value": "442524000000000wei",
+              "value": "109168000000000wei",
               "index": true
             },
             {
               "key": "fee_payer",
-              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
               "index": true
             }
           ]
@@ -3534,7 +3814,7 @@ Response Example:
           "attributes": [
             {
               "key": "acc_seq",
-              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m/4",
+              "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w/667068",
               "index": true
             }
           ]
@@ -3544,7 +3824,7 @@ Response Example:
           "attributes": [
             {
               "key": "signature",
-              "value": "DOf7A9h7/Ahpu6M2+o8LUGEsI89FJnEb+iL63x6OHqEVgcKiHDkSxEVORhPoO/vnRSygKGhX7KdPlb1nKLOImAE=",
+              "value": "ErLmnIXvzsNjYZUFuT7LZ+qXU2r9Kj/n5hlEbdCHtDEjiD2i+9QIuJotgXpWE7bsm3EYuEUcAAgUBtvg9iY74QA=",
               "index": true
             }
           ]
@@ -3554,77 +3834,42 @@ Response Example:
           "attributes": [
             {
               "key": "action",
-              "value": "/cosmos.bank.v1beta1.MsgSend",
+              "value": "/stratos.sds.v1.MsgFileUpload",
               "index": true
             },
             {
               "key": "sender",
-              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
               "index": true
             },
             {
               "key": "module",
-              "value": "bank",
+              "value": "sds",
               "index": true
             }
           ]
         },
         {
-          "type": "coin_spent",
+          "type": "stratos.sds.v1.EventFileUpload",
           "attributes": [
             {
-              "key": "spender",
-              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "key": "file_hash",
+              "value": "\"v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg\"",
               "index": true
             },
             {
-              "key": "amount",
-              "value": "10000000000000000000wei",
-              "index": true
-            }
-          ]
-        },
-        {
-          "type": "coin_received",
-          "attributes": [
-            {
-              "key": "receiver",
-              "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
-              "index": true
-            },
-            {
-              "key": "amount",
-              "value": "10000000000000000000wei",
-              "index": true
-            }
-          ]
-        },
-        {
-          "type": "transfer",
-          "attributes": [
-            {
-              "key": "recipient",
-              "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+              "key": "reporter",
+              "value": "\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\"",
               "index": true
             },
             {
               "key": "sender",
-              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "value": "\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\"",
               "index": true
             },
             {
-              "key": "amount",
-              "value": "10000000000000000000wei",
-              "index": true
-            }
-          ]
-        },
-        {
-          "type": "message",
-          "attributes": [
-            {
-              "key": "sender",
-              "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+              "key": "uploader",
+              "value": "\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\"",
               "index": true
             }
           ]
@@ -3633,18 +3878,659 @@ Response Example:
     }
   ],
   "pagination": null,
-  "total": "1"
+  "total": "2625"
 }
 ```
 </details>
 <br>
+
+
+<details>
+    <summary><code>GET /cosmos/tx/v1beta1/txs</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fetches txs by message.action & height.</summary>
+
+Request Example:
+```http
+curl -X GET "https://rest.thestratos.org/cosmos/tx/v1beta1/txs?events=message.action='/stratos.sds.v1.MsgFileUpload'&events=tx.height='8103466'&limit=1&page=1&orderby=1"
+```
+Response Example:
+```json
+{
+    "txs": [
+        {
+            "body": {
+                "messages": [
+                    {
+                        "@type": "/stratos.sds.v1.MsgFileUpload",
+                        "file_hash": "v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro",
+                        "from": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                        "reporter": "stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu",
+                        "uploader": "st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"
+                    }
+                ],
+                "memo": "",
+                "timeout_height": "0",
+                "extension_options": [],
+                "non_critical_extension_options": []
+            },
+            "auth_info": {
+                "signer_infos": [
+                    {
+                        "public_key": {
+                            "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
+                            "key": "A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ"
+                        },
+                        "mode_info": {
+                            "single": {
+                                "mode": "SIGN_MODE_DIRECT"
+                            }
+                        },
+                        "sequence": "667409"
+                    }
+                ],
+                "fee": {
+                    "amount": [
+                        {
+                            "denom": "wei",
+                            "amount": "109168000000000"
+                        }
+                    ],
+                    "gas_limit": "109168",
+                    "payer": "",
+                    "granter": ""
+                },
+                "tip": null
+            },
+            "signatures": [
+                "VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE="
+            ]
+        }
+    ],
+    "tx_responses": [
+        {
+            "height": "8103466",
+            "txhash": "3674F0E96B313338879CC8E77C52B090B3DAEBF95F9A9FFC58F7110A7723327A",
+            "codespace": "",
+            "code": 0,
+            "data": "12270A252F73747261746F732E7364732E76312E4D736746696C6555706C6F6164526573706F6E7365",
+            "raw_log": "[{\"msg_index\":0,\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/stratos.sds.v1.MsgFileUpload\"},{\"key\":\"sender\",\"value\":\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\"},{\"key\":\"module\",\"value\":\"sds\"}]},{\"type\":\"stratos.sds.v1.EventFileUpload\",\"attributes\":[{\"key\":\"file_hash\",\"value\":\"\\\"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro\\\"\"},{\"key\":\"reporter\",\"value\":\"\\\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\\\"\"},{\"key\":\"sender\",\"value\":\"\\\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\\\"\"},{\"key\":\"uploader\",\"value\":\"\\\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\\\"\"}]}]}]",
+            "logs": [
+                {
+                    "msg_index": 0,
+                    "log": "",
+                    "events": [
+                        {
+                            "type": "message",
+                            "attributes": [
+                                {
+                                    "key": "action",
+                                    "value": "/stratos.sds.v1.MsgFileUpload"
+                                },
+                                {
+                                    "key": "sender",
+                                    "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"
+                                },
+                                {
+                                    "key": "module",
+                                    "value": "sds"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "stratos.sds.v1.EventFileUpload",
+                            "attributes": [
+                                {
+                                    "key": "file_hash",
+                                    "value": "\"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro\""
+                                },
+                                {
+                                    "key": "reporter",
+                                    "value": "\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\""
+                                },
+                                {
+                                    "key": "sender",
+                                    "value": "\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\""
+                                },
+                                {
+                                    "key": "uploader",
+                                    "value": "\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "info": "",
+            "gas_wanted": "109168",
+            "gas_used": "72391",
+            "tx": {
+                "@type": "/cosmos.tx.v1beta1.Tx",
+                "body": {
+                    "messages": [
+                        {
+                            "@type": "/stratos.sds.v1.MsgFileUpload",
+                            "file_hash": "v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro",
+                            "from": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "reporter": "stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu",
+                            "uploader": "st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"
+                        }
+                    ],
+                    "memo": "",
+                    "timeout_height": "0",
+                    "extension_options": [],
+                    "non_critical_extension_options": []
+                },
+                "auth_info": {
+                    "signer_infos": [
+                        {
+                            "public_key": {
+                                "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
+                                "key": "A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ"
+                            },
+                            "mode_info": {
+                                "single": {
+                                    "mode": "SIGN_MODE_DIRECT"
+                                }
+                            },
+                            "sequence": "667409"
+                        }
+                    ],
+                    "fee": {
+                        "amount": [
+                            {
+                                "denom": "wei",
+                                "amount": "109168000000000"
+                            }
+                        ],
+                        "gas_limit": "109168",
+                        "payer": "",
+                        "granter": ""
+                    },
+                    "tip": null
+                },
+                "signatures": [
+                    "VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE="
+                ]
+            },
+            "timestamp": "2025-04-11T19:00:49Z",
+            "events": [
+                {
+                    "type": "coin_spent",
+                    "attributes": [
+                        {
+                            "key": "spender",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        },
+                        {
+                            "key": "amount",
+                            "value": "109168000000000wei",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "coin_received",
+                    "attributes": [
+                        {
+                            "key": "receiver",
+                            "value": "st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q",
+                            "index": true
+                        },
+                        {
+                            "key": "amount",
+                            "value": "109168000000000wei",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "transfer",
+                    "attributes": [
+                        {
+                            "key": "recipient",
+                            "value": "st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q",
+                            "index": true
+                        },
+                        {
+                            "key": "sender",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        },
+                        {
+                            "key": "amount",
+                            "value": "109168000000000wei",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "message",
+                    "attributes": [
+                        {
+                            "key": "sender",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "tx",
+                    "attributes": [
+                        {
+                            "key": "fee",
+                            "value": "109168000000000wei",
+                            "index": true
+                        },
+                        {
+                            "key": "fee_payer",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "tx",
+                    "attributes": [
+                        {
+                            "key": "acc_seq",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w/667409",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "tx",
+                    "attributes": [
+                        {
+                            "key": "signature",
+                            "value": "VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE=",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "message",
+                    "attributes": [
+                        {
+                            "key": "action",
+                            "value": "/stratos.sds.v1.MsgFileUpload",
+                            "index": true
+                        },
+                        {
+                            "key": "sender",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        },
+                        {
+                            "key": "module",
+                            "value": "sds",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "stratos.sds.v1.EventFileUpload",
+                    "attributes": [
+                        {
+                            "key": "file_hash",
+                            "value": "\"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro\"",
+                            "index": true
+                        },
+                        {
+                            "key": "reporter",
+                            "value": "\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\"",
+                            "index": true
+                        },
+                        {
+                            "key": "sender",
+                            "value": "\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\"",
+                            "index": true
+                        },
+                        {
+                            "key": "uploader",
+                            "value": "\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\"",
+                            "index": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "pagination": null,
+    "total": "7"
+}
+```
+</details>
+<br>
+
+
+
+<details>
+    <summary><code>GET /cosmos/tx/v1beta1/txs</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fetches txs by message.action & height range.</summary>
+
+Request Example:
+```http
+curl -X GET "https://rest.thestratos.org/cosmos/tx/v1beta1/txs?events=message.action='/stratos.sds.v1.MsgFileUpload'&events=tx.height>=8103466&events=tx.height<=8103467&limit=1&page=1&orderby=1"
+```
+Response Example:
+```json
+{
+    "txs": [
+        {
+            "body": {
+                "messages": [
+                    {
+                        "@type": "/stratos.sds.v1.MsgFileUpload",
+                        "file_hash": "v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro",
+                        "from": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                        "reporter": "stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu",
+                        "uploader": "st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"
+                    }
+                ],
+                "memo": "",
+                "timeout_height": "0",
+                "extension_options": [],
+                "non_critical_extension_options": []
+            },
+            "auth_info": {
+                "signer_infos": [
+                    {
+                        "public_key": {
+                            "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
+                            "key": "A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ"
+                        },
+                        "mode_info": {
+                            "single": {
+                                "mode": "SIGN_MODE_DIRECT"
+                            }
+                        },
+                        "sequence": "667409"
+                    }
+                ],
+                "fee": {
+                    "amount": [
+                        {
+                            "denom": "wei",
+                            "amount": "109168000000000"
+                        }
+                    ],
+                    "gas_limit": "109168",
+                    "payer": "",
+                    "granter": ""
+                },
+                "tip": null
+            },
+            "signatures": [
+                "VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE="
+            ]
+        }
+    ],
+    "tx_responses": [
+        {
+            "height": "8103466",
+            "txhash": "3674F0E96B313338879CC8E77C52B090B3DAEBF95F9A9FFC58F7110A7723327A",
+            "codespace": "",
+            "code": 0,
+            "data": "12270A252F73747261746F732E7364732E76312E4D736746696C6555706C6F6164526573706F6E7365",
+            "raw_log": "[{\"msg_index\":0,\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/stratos.sds.v1.MsgFileUpload\"},{\"key\":\"sender\",\"value\":\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\"},{\"key\":\"module\",\"value\":\"sds\"}]},{\"type\":\"stratos.sds.v1.EventFileUpload\",\"attributes\":[{\"key\":\"file_hash\",\"value\":\"\\\"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro\\\"\"},{\"key\":\"reporter\",\"value\":\"\\\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\\\"\"},{\"key\":\"sender\",\"value\":\"\\\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\\\"\"},{\"key\":\"uploader\",\"value\":\"\\\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\\\"\"}]}]}]",
+            "logs": [
+                {
+                    "msg_index": 0,
+                    "log": "",
+                    "events": [
+                        {
+                            "type": "message",
+                            "attributes": [
+                                {
+                                    "key": "action",
+                                    "value": "/stratos.sds.v1.MsgFileUpload"
+                                },
+                                {
+                                    "key": "sender",
+                                    "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"
+                                },
+                                {
+                                    "key": "module",
+                                    "value": "sds"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "stratos.sds.v1.EventFileUpload",
+                            "attributes": [
+                                {
+                                    "key": "file_hash",
+                                    "value": "\"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro\""
+                                },
+                                {
+                                    "key": "reporter",
+                                    "value": "\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\""
+                                },
+                                {
+                                    "key": "sender",
+                                    "value": "\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\""
+                                },
+                                {
+                                    "key": "uploader",
+                                    "value": "\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "info": "",
+            "gas_wanted": "109168",
+            "gas_used": "72391",
+            "tx": {
+                "@type": "/cosmos.tx.v1beta1.Tx",
+                "body": {
+                    "messages": [
+                        {
+                            "@type": "/stratos.sds.v1.MsgFileUpload",
+                            "file_hash": "v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro",
+                            "from": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "reporter": "stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu",
+                            "uploader": "st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"
+                        }
+                    ],
+                    "memo": "",
+                    "timeout_height": "0",
+                    "extension_options": [],
+                    "non_critical_extension_options": []
+                },
+                "auth_info": {
+                    "signer_infos": [
+                        {
+                            "public_key": {
+                                "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
+                                "key": "A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ"
+                            },
+                            "mode_info": {
+                                "single": {
+                                    "mode": "SIGN_MODE_DIRECT"
+                                }
+                            },
+                            "sequence": "667409"
+                        }
+                    ],
+                    "fee": {
+                        "amount": [
+                            {
+                                "denom": "wei",
+                                "amount": "109168000000000"
+                            }
+                        ],
+                        "gas_limit": "109168",
+                        "payer": "",
+                        "granter": ""
+                    },
+                    "tip": null
+                },
+                "signatures": [
+                    "VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE="
+                ]
+            },
+            "timestamp": "2025-04-11T19:00:49Z",
+            "events": [
+                {
+                    "type": "coin_spent",
+                    "attributes": [
+                        {
+                            "key": "spender",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        },
+                        {
+                            "key": "amount",
+                            "value": "109168000000000wei",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "coin_received",
+                    "attributes": [
+                        {
+                            "key": "receiver",
+                            "value": "st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q",
+                            "index": true
+                        },
+                        {
+                            "key": "amount",
+                            "value": "109168000000000wei",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "transfer",
+                    "attributes": [
+                        {
+                            "key": "recipient",
+                            "value": "st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q",
+                            "index": true
+                        },
+                        {
+                            "key": "sender",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        },
+                        {
+                            "key": "amount",
+                            "value": "109168000000000wei",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "message",
+                    "attributes": [
+                        {
+                            "key": "sender",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "tx",
+                    "attributes": [
+                        {
+                            "key": "fee",
+                            "value": "109168000000000wei",
+                            "index": true
+                        },
+                        {
+                            "key": "fee_payer",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "tx",
+                    "attributes": [
+                        {
+                            "key": "acc_seq",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w/667409",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "tx",
+                    "attributes": [
+                        {
+                            "key": "signature",
+                            "value": "VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE=",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "message",
+                    "attributes": [
+                        {
+                            "key": "action",
+                            "value": "/stratos.sds.v1.MsgFileUpload",
+                            "index": true
+                        },
+                        {
+                            "key": "sender",
+                            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+                            "index": true
+                        },
+                        {
+                            "key": "module",
+                            "value": "sds",
+                            "index": true
+                        }
+                    ]
+                },
+                {
+                    "type": "stratos.sds.v1.EventFileUpload",
+                    "attributes": [
+                        {
+                            "key": "file_hash",
+                            "value": "\"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro\"",
+                            "index": true
+                        },
+                        {
+                            "key": "reporter",
+                            "value": "\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\"",
+                            "index": true
+                        },
+                        {
+                            "key": "sender",
+                            "value": "\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\"",
+                            "index": true
+                        },
+                        {
+                            "key": "uploader",
+                            "value": "\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\"",
+                            "index": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "pagination": null,
+    "total": "7"
+}
+```
+</details>
+<br>
+
+
 
 <details>
     <summary><code>GET /cosmos/tx/v1beta1/txs/{hash}</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fetches a tx by hash.</summary>
 
 Request Example:
 ```http
-https://rest.thestratos.org/cosmos/tx/v1beta1/txs/34E401829F23098FEA1F7B398CD9842A6010249F7720BAF1916A14077C97B3E7
+curl -X GET "https://rest.thestratos.org/cosmos/tx/v1beta1/txs/40AA126AAA3735013E88CE4A59F59C66CB2AF319277DAD3A9FFA7638EAC83345"
 ```
 Response Example:
 ```json
@@ -3653,15 +4539,11 @@ Response Example:
     "body": {
       "messages": [
         {
-          "@type": "/cosmos.bank.v1beta1.MsgSend",
-          "from_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
-          "to_address": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
-          "amount": [
-            {
-              "denom": "wei",
-              "amount": "10000000000000000000"
-            }
-          ]
+          "@type": "/stratos.sds.v1.MsgFileUpload",
+          "file_hash": "v05j1m57ksr2flj56473p6lae298b711u8m7fq7o",
+          "from": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+          "reporter": "stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu",
+          "uploader": "st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"
         }
       ],
       "memo": "",
@@ -3674,40 +4556,40 @@ Response Example:
         {
           "public_key": {
             "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
-            "key": "A0GU+d2Ut1t6dOEF+Ln+ZA9oNdjh8vTHhWb788TOCIUr"
+            "key": "A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ"
           },
           "mode_info": {
             "single": {
               "mode": "SIGN_MODE_DIRECT"
             }
           },
-          "sequence": "4"
+          "sequence": "667327"
         }
       ],
       "fee": {
         "amount": [
           {
             "denom": "wei",
-            "amount": "442524000000000"
+            "amount": "109168000000000"
           }
         ],
-        "gas_limit": "442524",
+        "gas_limit": "109168",
         "payer": "",
         "granter": ""
       },
       "tip": null
     },
     "signatures": [
-      "DOf7A9h7/Ahpu6M2+o8LUGEsI89FJnEb+iL63x6OHqEVgcKiHDkSxEVORhPoO/vnRSygKGhX7KdPlb1nKLOImAE="
+      "D49zFtj1/M9TVgPSOKmWrYC/iZQnxZEfUoTbNVDRPSkUXMGZvBP3J+8GGIqQeLL/fYhhs+3RcrdHhIx0frG0PAE="
     ]
   },
   "tx_response": {
-    "height": "557",
-    "txhash": "34E401829F23098FEA1F7B398CD9842A6010249F7720BAF1916A14077C97B3E7",
+    "height": "8102805",
+    "txhash": "40AA126AAA3735013E88CE4A59F59C66CB2AF319277DAD3A9FFA7638EAC83345",
     "codespace": "",
     "code": 0,
-    "data": "12260A242F636F736D6F732E62616E6B2E763162657461312E4D736753656E64526573706F6E7365",
-    "raw_log": "[{\"msg_index\":0,\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.bank.v1beta1.MsgSend\"},{\"key\":\"sender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"coin_spent\",\"attributes\":[{\"key\":\"spender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"},{\"key\":\"amount\",\"value\":\"10000000000000000000wei\"}]},{\"type\":\"coin_received\",\"attributes\":[{\"key\":\"receiver\",\"value\":\"st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l\"},{\"key\":\"amount\",\"value\":\"10000000000000000000wei\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l\"},{\"key\":\"sender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"},{\"key\":\"amount\",\"value\":\"10000000000000000000wei\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"sender\",\"value\":\"st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m\"}]}]}]",
+    "data": "12270A252F73747261746F732E7364732E76312E4D736746696C6555706C6F6164526573706F6E7365",
+    "raw_log": "[{\"msg_index\":0,\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/stratos.sds.v1.MsgFileUpload\"},{\"key\":\"sender\",\"value\":\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\"},{\"key\":\"module\",\"value\":\"sds\"}]},{\"type\":\"stratos.sds.v1.EventFileUpload\",\"attributes\":[{\"key\":\"file_hash\",\"value\":\"\\\"v05j1m57ksr2flj56473p6lae298b711u8m7fq7o\\\"\"},{\"key\":\"reporter\",\"value\":\"\\\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\\\"\"},{\"key\":\"sender\",\"value\":\"\\\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\\\"\"},{\"key\":\"uploader\",\"value\":\"\\\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\\\"\"}]}]}]",
     "logs": [
       {
         "msg_index": 0,
@@ -3718,67 +4600,36 @@ Response Example:
             "attributes": [
               {
                 "key": "action",
-                "value": "/cosmos.bank.v1beta1.MsgSend"
+                "value": "/stratos.sds.v1.MsgFileUpload"
               },
               {
                 "key": "sender",
-                "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+                "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"
               },
               {
                 "key": "module",
-                "value": "bank"
+                "value": "sds"
               }
             ]
           },
           {
-            "type": "coin_spent",
+            "type": "stratos.sds.v1.EventFileUpload",
             "attributes": [
               {
-                "key": "spender",
-                "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+                "key": "file_hash",
+                "value": "\"v05j1m57ksr2flj56473p6lae298b711u8m7fq7o\""
               },
               {
-                "key": "amount",
-                "value": "10000000000000000000wei"
-              }
-            ]
-          },
-          {
-            "type": "coin_received",
-            "attributes": [
-              {
-                "key": "receiver",
-                "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l"
-              },
-              {
-                "key": "amount",
-                "value": "10000000000000000000wei"
-              }
-            ]
-          },
-          {
-            "type": "transfer",
-            "attributes": [
-              {
-                "key": "recipient",
-                "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l"
+                "key": "reporter",
+                "value": "\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\""
               },
               {
                 "key": "sender",
-                "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+                "value": "\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\""
               },
               {
-                "key": "amount",
-                "value": "10000000000000000000wei"
-              }
-            ]
-          },
-          {
-            "type": "message",
-            "attributes": [
-              {
-                "key": "sender",
-                "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m"
+                "key": "uploader",
+                "value": "\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\""
               }
             ]
           }
@@ -3786,22 +4637,18 @@ Response Example:
       }
     ],
     "info": "",
-    "gas_wanted": "442524",
-    "gas_used": "431655",
+    "gas_wanted": "109168",
+    "gas_used": "69815",
     "tx": {
       "@type": "/cosmos.tx.v1beta1.Tx",
       "body": {
         "messages": [
           {
-            "@type": "/cosmos.bank.v1beta1.MsgSend",
-            "from_address": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
-            "to_address": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
-            "amount": [
-              {
-                "denom": "wei",
-                "amount": "10000000000000000000"
-              }
-            ]
+            "@type": "/stratos.sds.v1.MsgFileUpload",
+            "file_hash": "v05j1m57ksr2flj56473p6lae298b711u8m7fq7o",
+            "from": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
+            "reporter": "stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu",
+            "uploader": "st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"
           }
         ],
         "memo": "",
@@ -3814,46 +4661,46 @@ Response Example:
           {
             "public_key": {
               "@type": "/stratos.crypto.v1.ethsecp256k1.PubKey",
-              "key": "A0GU+d2Ut1t6dOEF+Ln+ZA9oNdjh8vTHhWb788TOCIUr"
+              "key": "A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ"
             },
             "mode_info": {
               "single": {
                 "mode": "SIGN_MODE_DIRECT"
               }
             },
-            "sequence": "4"
+            "sequence": "667327"
           }
         ],
         "fee": {
           "amount": [
             {
               "denom": "wei",
-              "amount": "442524000000000"
+              "amount": "109168000000000"
             }
           ],
-          "gas_limit": "442524",
+          "gas_limit": "109168",
           "payer": "",
           "granter": ""
         },
         "tip": null
       },
       "signatures": [
-        "DOf7A9h7/Ahpu6M2+o8LUGEsI89FJnEb+iL63x6OHqEVgcKiHDkSxEVORhPoO/vnRSygKGhX7KdPlb1nKLOImAE="
+        "D49zFtj1/M9TVgPSOKmWrYC/iZQnxZEfUoTbNVDRPSkUXMGZvBP3J+8GGIqQeLL/fYhhs+3RcrdHhIx0frG0PAE="
       ]
     },
-    "timestamp": "2024-03-07T22:01:52Z",
+    "timestamp": "2025-04-11T17:54:47Z",
     "events": [
       {
         "type": "coin_spent",
         "attributes": [
           {
             "key": "spender",
-            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
             "index": true
           },
           {
             "key": "amount",
-            "value": "442524000000000wei",
+            "value": "109168000000000wei",
             "index": true
           }
         ]
@@ -3868,7 +4715,7 @@ Response Example:
           },
           {
             "key": "amount",
-            "value": "442524000000000wei",
+            "value": "109168000000000wei",
             "index": true
           }
         ]
@@ -3883,12 +4730,12 @@ Response Example:
           },
           {
             "key": "sender",
-            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
             "index": true
           },
           {
             "key": "amount",
-            "value": "442524000000000wei",
+            "value": "109168000000000wei",
             "index": true
           }
         ]
@@ -3898,7 +4745,7 @@ Response Example:
         "attributes": [
           {
             "key": "sender",
-            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
             "index": true
           }
         ]
@@ -3908,12 +4755,12 @@ Response Example:
         "attributes": [
           {
             "key": "fee",
-            "value": "442524000000000wei",
+            "value": "109168000000000wei",
             "index": true
           },
           {
             "key": "fee_payer",
-            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
             "index": true
           }
         ]
@@ -3923,7 +4770,7 @@ Response Example:
         "attributes": [
           {
             "key": "acc_seq",
-            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m/4",
+            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w/667327",
             "index": true
           }
         ]
@@ -3933,7 +4780,7 @@ Response Example:
         "attributes": [
           {
             "key": "signature",
-            "value": "DOf7A9h7/Ahpu6M2+o8LUGEsI89FJnEb+iL63x6OHqEVgcKiHDkSxEVORhPoO/vnRSygKGhX7KdPlb1nKLOImAE=",
+            "value": "D49zFtj1/M9TVgPSOKmWrYC/iZQnxZEfUoTbNVDRPSkUXMGZvBP3J+8GGIqQeLL/fYhhs+3RcrdHhIx0frG0PAE=",
             "index": true
           }
         ]
@@ -3943,77 +4790,42 @@ Response Example:
         "attributes": [
           {
             "key": "action",
-            "value": "/cosmos.bank.v1beta1.MsgSend",
+            "value": "/stratos.sds.v1.MsgFileUpload",
             "index": true
           },
           {
             "key": "sender",
-            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "value": "st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w",
             "index": true
           },
           {
             "key": "module",
-            "value": "bank",
+            "value": "sds",
             "index": true
           }
         ]
       },
       {
-        "type": "coin_spent",
+        "type": "stratos.sds.v1.EventFileUpload",
         "attributes": [
           {
-            "key": "spender",
-            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "key": "file_hash",
+            "value": "\"v05j1m57ksr2flj56473p6lae298b711u8m7fq7o\"",
             "index": true
           },
           {
-            "key": "amount",
-            "value": "10000000000000000000wei",
-            "index": true
-          }
-        ]
-      },
-      {
-        "type": "coin_received",
-        "attributes": [
-          {
-            "key": "receiver",
-            "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
-            "index": true
-          },
-          {
-            "key": "amount",
-            "value": "10000000000000000000wei",
-            "index": true
-          }
-        ]
-      },
-      {
-        "type": "transfer",
-        "attributes": [
-          {
-            "key": "recipient",
-            "value": "st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l",
+            "key": "reporter",
+            "value": "\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\"",
             "index": true
           },
           {
             "key": "sender",
-            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "value": "\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\"",
             "index": true
           },
           {
-            "key": "amount",
-            "value": "10000000000000000000wei",
-            "index": true
-          }
-        ]
-      },
-      {
-        "type": "message",
-        "attributes": [
-          {
-            "key": "sender",
-            "value": "st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m",
+            "key": "uploader",
+            "value": "\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\"",
             "index": true
           }
         ]

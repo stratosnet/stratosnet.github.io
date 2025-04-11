@@ -14,9 +14,9 @@ We recommend the following to run your node:
 
 <b>Minimum Hardware Requirements</b>
 
-| CPU | RAM | Storage | Stake |
-| --- | --- | ------- | ----- |
-| 8 Cores[¹](#), 2.5GHz[²](#) | 32 GB | 2 TB | 1 STOS[³](#) |
+| CPU                         | RAM   | Storage | Stake        |
+|-----------------------------|-------|---------|--------------|
+| 8 Cores[¹](#), 2.5GHz[²](#) | 32 GB | 2 TB    | 1 STOS[³](#) |
 
 <small> ¹ &nbsp;&nbsp; Can be achieved using dual CPU server configurations (eg. 2cpu x 8cores, as long as the frequency per core is respected).<br>
 ² &nbsp;&nbsp; 2.5GHz refers to Base Frequency, not Turbo/Boost Frequency. <br>

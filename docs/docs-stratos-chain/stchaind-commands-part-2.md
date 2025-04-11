@@ -2254,177 +2254,1248 @@ Example:
 stchaind query txs --events 'message.sender=cosmos1...&message.action=withdraw_delegator_reward' --page 1 --limit 30
 ```
 
-Example:
 
+Example(query by height):
 ```shell
-stchaind query txs \
---events 'message.sender=st1gtw399h9vfnekqsz3dg4n6mj0qgdpnh3c2n66k' \
---chain-id=stratos-1 \
---limit=20
+stchaind query txs --events "tx.height=8103466" \
+--limit=2 \
+--page=1
 ```
 
 Result:
+```
+count: "2"
+limit: "2"
+page_number: "1"
+page_total: "4"
+total_count: "8"
+txs:
+- code: 0
+  codespace: ""
+  data: 12270A252F73747261746F732E7364732E76312E4D736746696C6555706C6F6164526573706F6E7365
+  events:
+  - attributes:
+    - index: true
+      key: spender
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_spent
+  - attributes:
+    - index: true
+      key: receiver
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_received
+  - attributes:
+    - index: true
+      key: recipient
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: sender
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: transfer
+  - attributes:
+    - index: true
+      key: sender
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    type: message
+  - attributes:
+    - index: true
+      key: fee
+      value: 109168000000000wei
+    - index: true
+      key: fee_payer
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    type: tx
+  - attributes:
+    - index: true
+      key: acc_seq
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w/667409
+    type: tx
+  - attributes:
+    - index: true
+      key: signature
+      value: VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE=
+    type: tx
+  - attributes:
+    - index: true
+      key: action
+      value: /stratos.sds.v1.MsgFileUpload
+    - index: true
+      key: sender
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    - index: true
+      key: module
+      value: sds
+    type: message
+  - attributes:
+    - index: true
+      key: file_hash
+      value: '"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro"'
+    - index: true
+      key: reporter
+      value: '"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu"'
+    - index: true
+      key: sender
+      value: '"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"'
+    - index: true
+      key: uploader
+      value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+    type: stratos.sds.v1.EventFileUpload
+  gas_used: "72391"
+  gas_wanted: "109168"
+  height: "8103466"
+  info: ""
+  logs:
+  - events:
+    - attributes:
+      - key: action
+        value: /stratos.sds.v1.MsgFileUpload
+      - key: sender
+        value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+      - key: module
+        value: sds
+      type: message
+    - attributes:
+      - key: file_hash
+        value: '"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro"'
+      - key: reporter
+        value: '"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu"'
+      - key: sender
+        value: '"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"'
+      - key: uploader
+        value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+      type: stratos.sds.v1.EventFileUpload
+    log: ""
+    msg_index: 0
+  raw_log: '[{"msg_index":0,"events":[{"type":"message","attributes":[{"key":"action","value":"/stratos.sds.v1.MsgFileUpload"},{"key":"sender","value":"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"},{"key":"module","value":"sds"}]},{"type":"stratos.sds.v1.EventFileUpload","attributes":[{"key":"file_hash","value":"\"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro\""},{"key":"reporter","value":"\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\""},{"key":"sender","value":"\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\""},{"key":"uploader","value":"\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\""}]}]}]'
+  timestamp: "2025-04-11T19:00:49Z"
+  tx:
+    '@type': /cosmos.tx.v1beta1.Tx
+    auth_info:
+      fee:
+        amount:
+        - amount: "109168000000000"
+          denom: wei
+        gas_limit: "109168"
+        granter: ""
+        payer: ""
+      signer_infos:
+      - mode_info:
+          single:
+            mode: SIGN_MODE_DIRECT
+        public_key:
+          '@type': /stratos.crypto.v1.ethsecp256k1.PubKey
+          key: A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ
+        sequence: "667409"
+      tip: null
+    body:
+      extension_options: []
+      memo: ""
+      messages:
+      - '@type': /stratos.sds.v1.MsgFileUpload
+        file_hash: v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro
+        from: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+        reporter: stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu
+        uploader: st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd
+      non_critical_extension_options: []
+      timeout_height: "0"
+    signatures:
+    - VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE=
+  txhash: 3674F0E96B313338879CC8E77C52B090B3DAEBF95F9A9FFC58F7110A7723327A
+- code: 0
+  codespace: ""
+  data: 12250A232F73747261746F732E706F742E76312E4D73675769746864726177526573706F6E7365
+  events:
+  - attributes:
+    - index: true
+      key: spender
+      value: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n
+    - index: true
+      key: amount
+      value: 10000000000000000wei
+    type: coin_spent
+  - attributes:
+    - index: true
+      key: receiver
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: amount
+      value: 10000000000000000wei
+    type: coin_received
+  - attributes:
+    - index: true
+      key: recipient
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: sender
+      value: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n
+    - index: true
+      key: amount
+      value: 10000000000000000wei
+    type: transfer
+  - attributes:
+    - index: true
+      key: sender
+      value: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n
+    type: message
+  - attributes:
+    - index: true
+      key: fee
+      value: 10000000000000000wei
+    - index: true
+      key: fee_payer
+      value: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n
+    type: tx
+  - attributes:
+    - index: true
+      key: acc_seq
+      value: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n/31
+    type: tx
+  - attributes:
+    - index: true
+      key: signature
+      value: POGJ+YRZIDBMTxVZSy79oARua1yCYvR0tKNTSkx2Eq4YTKunfpuDsB13ZfZtCCnAdVfLyT4sIxPIoHQpo8g5UQA=
+    type: tx
+  - attributes:
+    - index: true
+      key: action
+      value: /stratos.pot.v1.MsgWithdraw
+    - index: true
+      key: sender
+      value: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n
+    - index: true
+      key: module
+      value: pot
+    type: message
+  - attributes:
+    - index: true
+      key: spender
+      value: st100qkxrzlcahgh4zeug0p0l8aqcnuaygz3vvv42
+    - index: true
+      key: amount
+      value: 1000000000000000000wei
+    type: coin_spent
+  - attributes:
+    - index: true
+      key: receiver
+      value: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n
+    - index: true
+      key: amount
+      value: 1000000000000000000wei
+    type: coin_received
+  - attributes:
+    - index: true
+      key: recipient
+      value: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n
+    - index: true
+      key: sender
+      value: st100qkxrzlcahgh4zeug0p0l8aqcnuaygz3vvv42
+    - index: true
+      key: amount
+      value: 1000000000000000000wei
+    type: transfer
+  - attributes:
+    - index: true
+      key: sender
+      value: st100qkxrzlcahgh4zeug0p0l8aqcnuaygz3vvv42
+    type: message
+  - attributes:
+    - index: true
+      key: amount
+      value: '"1000000000000000000wei"'
+    - index: true
+      key: target_address
+      value: '"st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n"'
+    - index: true
+      key: wallet_address
+      value: '"st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n"'
+    type: stratos.pot.v1.EventWithdraw
+  gas_used: "78890"
+  gas_wanted: "122422"
+  height: "8103466"
+  info: ""
+  logs:
+  - events:
+    - attributes:
+      - key: action
+        value: /stratos.pot.v1.MsgWithdraw
+      - key: sender
+        value: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n
+      - key: module
+        value: pot
+      type: message
+    - attributes:
+      - key: spender
+        value: st100qkxrzlcahgh4zeug0p0l8aqcnuaygz3vvv42
+      - key: amount
+        value: 1000000000000000000wei
+      type: coin_spent
+    - attributes:
+      - key: receiver
+        value: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n
+      - key: amount
+        value: 1000000000000000000wei
+      type: coin_received
+    - attributes:
+      - key: recipient
+        value: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n
+      - key: sender
+        value: st100qkxrzlcahgh4zeug0p0l8aqcnuaygz3vvv42
+      - key: amount
+        value: 1000000000000000000wei
+      type: transfer
+    - attributes:
+      - key: sender
+        value: st100qkxrzlcahgh4zeug0p0l8aqcnuaygz3vvv42
+      type: message
+    - attributes:
+      - key: amount
+        value: '"1000000000000000000wei"'
+      - key: target_address
+        value: '"st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n"'
+      - key: wallet_address
+        value: '"st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n"'
+      type: stratos.pot.v1.EventWithdraw
+    log: ""
+    msg_index: 0
+  raw_log: '[{"msg_index":0,"events":[{"type":"message","attributes":[{"key":"action","value":"/stratos.pot.v1.MsgWithdraw"},{"key":"sender","value":"st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n"},{"key":"module","value":"pot"}]},{"type":"coin_spent","attributes":[{"key":"spender","value":"st100qkxrzlcahgh4zeug0p0l8aqcnuaygz3vvv42"},{"key":"amount","value":"1000000000000000000wei"}]},{"type":"coin_received","attributes":[{"key":"receiver","value":"st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n"},{"key":"amount","value":"1000000000000000000wei"}]},{"type":"transfer","attributes":[{"key":"recipient","value":"st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n"},{"key":"sender","value":"st100qkxrzlcahgh4zeug0p0l8aqcnuaygz3vvv42"},{"key":"amount","value":"1000000000000000000wei"}]},{"type":"message","attributes":[{"key":"sender","value":"st100qkxrzlcahgh4zeug0p0l8aqcnuaygz3vvv42"}]},{"type":"stratos.pot.v1.EventWithdraw","attributes":[{"key":"amount","value":"\"1000000000000000000wei\""},{"key":"target_address","value":"\"st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n\""},{"key":"wallet_address","value":"\"st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n\""}]}]}]'
+  timestamp: "2025-04-11T19:00:49Z"
+  tx:
+    '@type': /cosmos.tx.v1beta1.Tx
+    auth_info:
+      fee:
+        amount:
+        - amount: "10000000000000000"
+          denom: wei
+        gas_limit: "122422"
+        granter: ""
+        payer: ""
+      signer_infos:
+      - mode_info:
+          single:
+            mode: SIGN_MODE_DIRECT
+        public_key:
+          '@type': /stratos.crypto.v1.ethsecp256k1.PubKey
+          key: AxsxwdMkSoGutC6pmm+8ILxEWo33HMk/uIoUBol8u1Qj
+        sequence: "31"
+      tip: null
+    body:
+      extension_options: []
+      memo: ""
+      messages:
+      - '@type': /stratos.pot.v1.MsgWithdraw
+        amount:
+        - amount: "1000000000000000000"
+          denom: wei
+        target_address: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n
+        wallet_address: st1y4qhwed5zjpt0g2ptdt4m0vrthwzzzulumgh0n
+      non_critical_extension_options: []
+      timeout_height: "0"
+    signatures:
+    - POGJ+YRZIDBMTxVZSy79oARua1yCYvR0tKNTSkx2Eq4YTKunfpuDsB13ZfZtCCnAdVfLyT4sIxPIoHQpo8g5UQA=
+  txhash: F38AF730B4988714264E1A6F6D90F35C7245766075AC66AE1732BBFA30C7B8D0
+```
 
-```json
-  {
-    "total_count": "2",
-    "count": "2",
-    "page_number": "1",
-    "page_total": "1",
-    "limit": "20",
-    "txs": [
-        {
-            "height": "3681",
-            "txhash": "EA0AB730219917533E73B1509EC38AE26614B2A8C4C4EA4E90026262127E8672",
-            "raw_log": "[{\"msg_index\":0,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"vote\"},{\"key\":\"module\",\"value\":\"governance\"},{\"key\":\"sender\",\"value\":\"st1gtw399h9vfnekqsz3dg4n6mj0qgdpnh3c2n66k\"}]},{\"type\":\"proposal_vote\",\"attributes\":[{\"key\":\"option\",\"value\":\"Yes\"},{\"key\":\"proposal_id\",\"value\":\"7\"}]}]}]",
-            "logs": [
-                {
-                    "msg_index": 0,
-                    "log": "",
-                    "events": [
-                        {
-                            "type": "message",
-                            "attributes": [
-                                {
-                                    "key": "action",
-                                    "value": "vote"
-                                },
-                                {
-                                    "key": "module",
-                                    "value": "governance"
-                                },
-                                {
-                                    "key": "sender",
-                                    "value": "st1gtw399h9vfnekqsz3dg4n6mj0qgdpnh3c2n66k"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "proposal_vote",
-                            "attributes": [
-                                {
-                                    "key": "option",
-                                    "value": "Yes"
-                                },
-                                {
-                                    "key": "proposal_id",
-                                    "value": "7"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ],
-            "gas_wanted": "200000",
-            "gas_used": "38472",
-            "tx": {
-                "type": "cosmos-sdk/StdTx",
-                "value": {
-                    "msg": [
-                        {
-                            "type": "cosmos-sdk/MsgVote",
-                            "value": {
-                                "proposal_id": "7",
-                                "voter": "st1gtw399h9vfnekqsz3dg4n6mj0qgdpnh3c2n66k",
-                                "option": "Yes"
-                            }
-                        }
-                    ],
-                    "fee": {
-                        "amount": [],
-                        "gas": "200000"
-                    },
-                    "signatures": [
-                        {
-                            "pub_key": {
-                                "type": "tendermint/PubKeySecp256k1",
-                                "value": "A8h5ZfH926q3EMdHeOdT2Z5W1KDjOc3LT33quKK8uCdZ"
-                            },
-                            "signature": "yE56xpZ4OI3+HxQr5bklYHuAOspKlwVC7hiSKnja63khIlU+TTnEhgoRvNgYub58HVbOBtslHU7QncNKSWEEbg=="
-                        }
-                    ],
-                    "memo": ""
-                }
-            },
-            "timestamp": "2021-07-23T14:41:18Z"
-        },
-        {
-            "height": "4400",
-            "txhash": "D21722FE6C3DE53268EEAF1A9C433DACF635B2715F6B5DCFBD5EED7B28705BE8",
-            "raw_log": "[{\"msg_index\":0,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"vote\"},{\"key\":\"module\",\"value\":\"governance\"},{\"key\":\"sender\",\"value\":\"st1gtw399h9vfnekqsz3dg4n6mj0qgdpnh3c2n66k\"}]},{\"type\":\"proposal_vote\",\"attributes\":[{\"key\":\"option\",\"value\":\"Yes\"},{\"key\":\"proposal_id\",\"value\":\"9\"}]}]}]",
-            "logs": [
-                {
-                    "msg_index": 0,
-                    "log": "",
-                    "events": [
-                        {
-                            "type": "message",
-                            "attributes": [
-                                {
-                                    "key": "action",
-                                    "value": "vote"
-                                },
-                                {
-                                    "key": "module",
-                                    "value": "governance"
-                                },
-                                {
-                                    "key": "sender",
-                                    "value": "st1gtw399h9vfnekqsz3dg4n6mj0qgdpnh3c2n66k"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "proposal_vote",
-                            "attributes": [
-                                {
-                                    "key": "option",
-                                    "value": "Yes"
-                                },
-                                {
-                                    "key": "proposal_id",
-                                    "value": "9"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ],
-            "gas_wanted": "200000",
-            "gas_used": "38508",
-            "tx": {
-                "type": "cosmos-sdk/StdTx",
-                "value": {
-                    "msg": [
-                        {
-                            "type": "cosmos-sdk/MsgVote",
-                            "value": {
-                                "proposal_id": "9",
-                                "voter": "st1gtw399h9vfnekqsz3dg4n6mj0qgdpnh3c2n66k",
-                                "option": "Yes"
-                            }
-                        }
-                    ],
-                    "fee": {
-                        "amount": [],
-                        "gas": "200000"
-                    },
-                    "signatures": [
-                        {
-                            "pub_key": {
-                                "type": "tendermint/PubKeySecp256k1",
-                                "value": "A8h5ZfH926q3EMdHeOdT2Z5W1KDjOc3LT33quKK8uCdZ"
-                            },
-                            "signature": "+w/Qhm6JdyQLXsquiKe0WCqCNjqois2Zhc76h0AphDhQZTKlpD9qlVuA/BX7gmVrmiUdqG/G4YExu8XkQSvnSg=="
-                        }
-                    ],
-                    "memo": ""
-                }
-            },
-            "timestamp": "2021-07-25T00:36:47Z"
-        }
-    ]
-}
+Example(query by message.action):
+```shell
+stchaind query txs --events "message.action=/stratos.sds.v1.MsgFileUpload" \
+--limit=2 \
+--page=1
+```
+
+Result:
+```
+count: "2"
+limit: "2"
+page_number: "1"
+page_total: "1243"
+total_count: "2485"
+txs:
+- code: 0
+  codespace: ""
+  data: 12270A252F73747261746F732E7364732E76312E4D736746696C6555706C6F6164526573706F6E7365
+  events:
+  - attributes:
+    - index: true
+      key: spender
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_spent
+  - attributes:
+    - index: true
+      key: receiver
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_received
+  - attributes:
+    - index: true
+      key: recipient
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: sender
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: transfer
+  - attributes:
+    - index: true
+      key: sender
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    type: message
+  - attributes:
+    - index: true
+      key: fee
+      value: 109168000000000wei
+    - index: true
+      key: fee_payer
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    type: tx
+  - attributes:
+    - index: true
+      key: acc_seq
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w/667068
+    type: tx
+  - attributes:
+    - index: true
+      key: signature
+      value: ErLmnIXvzsNjYZUFuT7LZ+qXU2r9Kj/n5hlEbdCHtDEjiD2i+9QIuJotgXpWE7bsm3EYuEUcAAgUBtvg9iY74QA=
+    type: tx
+  - attributes:
+    - index: true
+      key: action
+      value: /stratos.sds.v1.MsgFileUpload
+    - index: true
+      key: sender
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    - index: true
+      key: module
+      value: sds
+    type: message
+  - attributes:
+    - index: true
+      key: file_hash
+      value: '"v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg"'
+    - index: true
+      key: reporter
+      value: '"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu"'
+    - index: true
+      key: sender
+      value: '"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"'
+    - index: true
+      key: uploader
+      value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+    type: stratos.sds.v1.EventFileUpload
+  gas_used: "72391"
+  gas_wanted: "109168"
+  height: "8101020"
+  info: ""
+  logs:
+  - events:
+    - attributes:
+      - key: action
+        value: /stratos.sds.v1.MsgFileUpload
+      - key: sender
+        value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+      - key: module
+        value: sds
+      type: message
+    - attributes:
+      - key: file_hash
+        value: '"v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg"'
+      - key: reporter
+        value: '"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu"'
+      - key: sender
+        value: '"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"'
+      - key: uploader
+        value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+      type: stratos.sds.v1.EventFileUpload
+    log: ""
+    msg_index: 0
+  raw_log: '[{"msg_index":0,"events":[{"type":"message","attributes":[{"key":"action","value":"/stratos.sds.v1.MsgFileUpload"},{"key":"sender","value":"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"},{"key":"module","value":"sds"}]},{"type":"stratos.sds.v1.EventFileUpload","attributes":[{"key":"file_hash","value":"\"v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg\""},{"key":"reporter","value":"\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\""},{"key":"sender","value":"\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\""},{"key":"uploader","value":"\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\""}]}]}]'
+  timestamp: "2025-04-11T14:55:51Z"
+  tx:
+    '@type': /cosmos.tx.v1beta1.Tx
+    auth_info:
+      fee:
+        amount:
+        - amount: "109168000000000"
+          denom: wei
+        gas_limit: "109168"
+        granter: ""
+        payer: ""
+      signer_infos:
+      - mode_info:
+          single:
+            mode: SIGN_MODE_DIRECT
+        public_key:
+          '@type': /stratos.crypto.v1.ethsecp256k1.PubKey
+          key: A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ
+        sequence: "667068"
+      tip: null
+    body:
+      extension_options: []
+      memo: ""
+      messages:
+      - '@type': /stratos.sds.v1.MsgFileUpload
+        file_hash: v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg
+        from: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+        reporter: stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu
+        uploader: st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd
+      non_critical_extension_options: []
+      timeout_height: "0"
+    signatures:
+    - ErLmnIXvzsNjYZUFuT7LZ+qXU2r9Kj/n5hlEbdCHtDEjiD2i+9QIuJotgXpWE7bsm3EYuEUcAAgUBtvg9iY74QA=
+  txhash: 83D5FC7B50BB2C8EA5D4DB547083C583341508CC6DE50751D3930221721826D8
+- code: 0
+  codespace: ""
+  data: 12270A252F73747261746F732E7364732E76312E4D736746696C6555706C6F6164526573706F6E7365
+  events:
+  - attributes:
+    - index: true
+      key: spender
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_spent
+  - attributes:
+    - index: true
+      key: receiver
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_received
+  - attributes:
+    - index: true
+      key: recipient
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: sender
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: transfer
+  - attributes:
+    - index: true
+      key: sender
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    type: message
+  - attributes:
+    - index: true
+      key: fee
+      value: 109168000000000wei
+    - index: true
+      key: fee_payer
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    type: tx
+  - attributes:
+    - index: true
+      key: acc_seq
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z/660927
+    type: tx
+  - attributes:
+    - index: true
+      key: signature
+      value: l4t5rQIBcjZWheFmB7mDWYOf7OwW7yRQsmGtKsBxl8Bm1NcyDGdkpbez4WKQjgLF6TKH/NClhLIDYD40amBjzQE=
+    type: tx
+  - attributes:
+    - index: true
+      key: action
+      value: /stratos.sds.v1.MsgFileUpload
+    - index: true
+      key: sender
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    - index: true
+      key: module
+      value: sds
+    type: message
+  - attributes:
+    - index: true
+      key: file_hash
+      value: '"v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg"'
+    - index: true
+      key: reporter
+      value: '"stsds14yhh6duc40n3l3y3qxt0vetm9numlstlxxfz05"'
+    - index: true
+      key: sender
+      value: '"st166mmswr62x20mq4kar682enrsep70txp50ev3z"'
+    - index: true
+      key: uploader
+      value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+    type: stratos.sds.v1.EventFileUpload
+  gas_used: "69815"
+  gas_wanted: "109168"
+  height: "8101020"
+  info: ""
+  logs:
+  - events:
+    - attributes:
+      - key: action
+        value: /stratos.sds.v1.MsgFileUpload
+      - key: sender
+        value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+      - key: module
+        value: sds
+      type: message
+    - attributes:
+      - key: file_hash
+        value: '"v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg"'
+      - key: reporter
+        value: '"stsds14yhh6duc40n3l3y3qxt0vetm9numlstlxxfz05"'
+      - key: sender
+        value: '"st166mmswr62x20mq4kar682enrsep70txp50ev3z"'
+      - key: uploader
+        value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+      type: stratos.sds.v1.EventFileUpload
+    log: ""
+    msg_index: 0
+  raw_log: '[{"msg_index":0,"events":[{"type":"message","attributes":[{"key":"action","value":"/stratos.sds.v1.MsgFileUpload"},{"key":"sender","value":"st166mmswr62x20mq4kar682enrsep70txp50ev3z"},{"key":"module","value":"sds"}]},{"type":"stratos.sds.v1.EventFileUpload","attributes":[{"key":"file_hash","value":"\"v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg\""},{"key":"reporter","value":"\"stsds14yhh6duc40n3l3y3qxt0vetm9numlstlxxfz05\""},{"key":"sender","value":"\"st166mmswr62x20mq4kar682enrsep70txp50ev3z\""},{"key":"uploader","value":"\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\""}]}]}]'
+  timestamp: "2025-04-11T14:55:51Z"
+  tx:
+    '@type': /cosmos.tx.v1beta1.Tx
+    auth_info:
+      fee:
+        amount:
+        - amount: "109168000000000"
+          denom: wei
+        gas_limit: "109168"
+        granter: ""
+        payer: ""
+      signer_infos:
+      - mode_info:
+          single:
+            mode: SIGN_MODE_DIRECT
+        public_key:
+          '@type': /stratos.crypto.v1.ethsecp256k1.PubKey
+          key: A9CoYXd0DLu0gSpfGpdAepQBs33X43t4kfr17HJeCSyZ
+        sequence: "660927"
+      tip: null
+    body:
+      extension_options: []
+      memo: ""
+      messages:
+      - '@type': /stratos.sds.v1.MsgFileUpload
+        file_hash: v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg
+        from: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+        reporter: stsds14yhh6duc40n3l3y3qxt0vetm9numlstlxxfz05
+        uploader: st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd
+      non_critical_extension_options: []
+      timeout_height: "0"
+    signatures:
+    - l4t5rQIBcjZWheFmB7mDWYOf7OwW7yRQsmGtKsBxl8Bm1NcyDGdkpbez4WKQjgLF6TKH/NClhLIDYD40amBjzQE=
+  txhash: A5B7FCEBB2369406A76C9C61CA214133E9B0D84E4D39AADAFC91A7FFD8A7BF22
+```
+
+Example(query by message.action & height):
+```shell
+stchaind query txs --events="tx.height=8103466&message.action=/stratos.sds.v1.MsgFileUpload" \
+--limit=2 \
+--page=1
+```
+
+Result:
+```
+count: "2"
+limit: "2"
+page_number: "1"
+page_total: "4"
+total_count: "7"
+txs:
+- code: 0
+  codespace: ""
+  data: 12270A252F73747261746F732E7364732E76312E4D736746696C6555706C6F6164526573706F6E7365
+  events:
+  - attributes:
+    - index: true
+      key: spender
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_spent
+  - attributes:
+    - index: true
+      key: receiver
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_received
+  - attributes:
+    - index: true
+      key: recipient
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: sender
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: transfer
+  - attributes:
+    - index: true
+      key: sender
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    type: message
+  - attributes:
+    - index: true
+      key: fee
+      value: 109168000000000wei
+    - index: true
+      key: fee_payer
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    type: tx
+  - attributes:
+    - index: true
+      key: acc_seq
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w/667409
+    type: tx
+  - attributes:
+    - index: true
+      key: signature
+      value: VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE=
+    type: tx
+  - attributes:
+    - index: true
+      key: action
+      value: /stratos.sds.v1.MsgFileUpload
+    - index: true
+      key: sender
+      value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+    - index: true
+      key: module
+      value: sds
+    type: message
+  - attributes:
+    - index: true
+      key: file_hash
+      value: '"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro"'
+    - index: true
+      key: reporter
+      value: '"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu"'
+    - index: true
+      key: sender
+      value: '"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"'
+    - index: true
+      key: uploader
+      value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+    type: stratos.sds.v1.EventFileUpload
+  gas_used: "72391"
+  gas_wanted: "109168"
+  height: "8103466"
+  info: ""
+  logs:
+  - events:
+    - attributes:
+      - key: action
+        value: /stratos.sds.v1.MsgFileUpload
+      - key: sender
+        value: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+      - key: module
+        value: sds
+      type: message
+    - attributes:
+      - key: file_hash
+        value: '"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro"'
+      - key: reporter
+        value: '"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu"'
+      - key: sender
+        value: '"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"'
+      - key: uploader
+        value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+      type: stratos.sds.v1.EventFileUpload
+    log: ""
+    msg_index: 0
+  raw_log: '[{"msg_index":0,"events":[{"type":"message","attributes":[{"key":"action","value":"/stratos.sds.v1.MsgFileUpload"},{"key":"sender","value":"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w"},{"key":"module","value":"sds"}]},{"type":"stratos.sds.v1.EventFileUpload","attributes":[{"key":"file_hash","value":"\"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro\""},{"key":"reporter","value":"\"stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu\""},{"key":"sender","value":"\"st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w\""},{"key":"uploader","value":"\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\""}]}]}]'
+  timestamp: "2025-04-11T19:00:49Z"
+  tx:
+    '@type': /cosmos.tx.v1beta1.Tx
+    auth_info:
+      fee:
+        amount:
+        - amount: "109168000000000"
+          denom: wei
+        gas_limit: "109168"
+        granter: ""
+        payer: ""
+      signer_infos:
+      - mode_info:
+          single:
+            mode: SIGN_MODE_DIRECT
+        public_key:
+          '@type': /stratos.crypto.v1.ethsecp256k1.PubKey
+          key: A1ldPrqxNKr0JoinirFMeiHxbcBFbQS9UrwMQ5xxaaxQ
+        sequence: "667409"
+      tip: null
+    body:
+      extension_options: []
+      memo: ""
+      messages:
+      - '@type': /stratos.sds.v1.MsgFileUpload
+        file_hash: v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro
+        from: st17cgcczr7q3u5m9z0y7nm7avgsrygrfp4d2g48w
+        reporter: stsds1fxdk4cwm5nja6exxdey69pqqrj5tlnmysj2fwu
+        uploader: st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd
+      non_critical_extension_options: []
+      timeout_height: "0"
+    signatures:
+    - VtHyHwGx/nBxKtu+J8qdwK4vv8qDmWo8anAb031ROjNRsR7m/khvnMwmkbMVirnU9OZ66lXbi2ndE4CGNBmjBQE=
+  txhash: 3674F0E96B313338879CC8E77C52B090B3DAEBF95F9A9FFC58F7110A7723327A
+- code: 0
+  codespace: ""
+  data: 12270A252F73747261746F732E7364732E76312E4D736746696C6555706C6F6164526573706F6E7365
+  events:
+  - attributes:
+    - index: true
+      key: spender
+      value: st13z9efm0lwgz03xx5wm3hhv5jjcc3vsc45xwgpd
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_spent
+  - attributes:
+    - index: true
+      key: receiver
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_received
+  - attributes:
+    - index: true
+      key: recipient
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: sender
+      value: st13z9efm0lwgz03xx5wm3hhv5jjcc3vsc45xwgpd
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: transfer
+  - attributes:
+    - index: true
+      key: sender
+      value: st13z9efm0lwgz03xx5wm3hhv5jjcc3vsc45xwgpd
+    type: message
+  - attributes:
+    - index: true
+      key: fee
+      value: 109168000000000wei
+    - index: true
+      key: fee_payer
+      value: st13z9efm0lwgz03xx5wm3hhv5jjcc3vsc45xwgpd
+    type: tx
+  - attributes:
+    - index: true
+      key: acc_seq
+      value: st13z9efm0lwgz03xx5wm3hhv5jjcc3vsc45xwgpd/565055
+    type: tx
+  - attributes:
+    - index: true
+      key: signature
+      value: BOyNTyu7JuLOj+gi7eu7ZYOqTd6StbUlsrfup3ltEvRmo4CpOG4LyvTyajbfkRG05/k2WeEHP1ZWWVJMRzMflQE=
+    type: tx
+  - attributes:
+    - index: true
+      key: action
+      value: /stratos.sds.v1.MsgFileUpload
+    - index: true
+      key: sender
+      value: st13z9efm0lwgz03xx5wm3hhv5jjcc3vsc45xwgpd
+    - index: true
+      key: module
+      value: sds
+    type: message
+  - attributes:
+    - index: true
+      key: file_hash
+      value: '"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro"'
+    - index: true
+      key: reporter
+      value: '"stsds1793jm44fj9tw0c9c8gxwymc6dtnefw0u9p22wk"'
+    - index: true
+      key: sender
+      value: '"st13z9efm0lwgz03xx5wm3hhv5jjcc3vsc45xwgpd"'
+    - index: true
+      key: uploader
+      value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+    type: stratos.sds.v1.EventFileUpload
+  gas_used: "69881"
+  gas_wanted: "109168"
+  height: "8103466"
+  info: ""
+  logs:
+  - events:
+    - attributes:
+      - key: action
+        value: /stratos.sds.v1.MsgFileUpload
+      - key: sender
+        value: st13z9efm0lwgz03xx5wm3hhv5jjcc3vsc45xwgpd
+      - key: module
+        value: sds
+      type: message
+    - attributes:
+      - key: file_hash
+        value: '"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro"'
+      - key: reporter
+        value: '"stsds1793jm44fj9tw0c9c8gxwymc6dtnefw0u9p22wk"'
+      - key: sender
+        value: '"st13z9efm0lwgz03xx5wm3hhv5jjcc3vsc45xwgpd"'
+      - key: uploader
+        value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+      type: stratos.sds.v1.EventFileUpload
+    log: ""
+    msg_index: 0
+  raw_log: '[{"msg_index":0,"events":[{"type":"message","attributes":[{"key":"action","value":"/stratos.sds.v1.MsgFileUpload"},{"key":"sender","value":"st13z9efm0lwgz03xx5wm3hhv5jjcc3vsc45xwgpd"},{"key":"module","value":"sds"}]},{"type":"stratos.sds.v1.EventFileUpload","attributes":[{"key":"file_hash","value":"\"v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro\""},{"key":"reporter","value":"\"stsds1793jm44fj9tw0c9c8gxwymc6dtnefw0u9p22wk\""},{"key":"sender","value":"\"st13z9efm0lwgz03xx5wm3hhv5jjcc3vsc45xwgpd\""},{"key":"uploader","value":"\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\""}]}]}]'
+  timestamp: "2025-04-11T19:00:49Z"
+  tx:
+    '@type': /cosmos.tx.v1beta1.Tx
+    auth_info:
+      fee:
+        amount:
+        - amount: "109168000000000"
+          denom: wei
+        gas_limit: "109168"
+        granter: ""
+        payer: ""
+      signer_infos:
+      - mode_info:
+          single:
+            mode: SIGN_MODE_DIRECT
+        public_key:
+          '@type': /stratos.crypto.v1.ethsecp256k1.PubKey
+          key: AgKQwFSyu5BeTR1OSaTrnM0sZ6VI3uzUFne0XdCQsD5i
+        sequence: "565055"
+      tip: null
+    body:
+      extension_options: []
+      memo: ""
+      messages:
+      - '@type': /stratos.sds.v1.MsgFileUpload
+        file_hash: v05j1m556fr3qqj9cfc006rjcv7e15aekdakecro
+        from: st13z9efm0lwgz03xx5wm3hhv5jjcc3vsc45xwgpd
+        reporter: stsds1793jm44fj9tw0c9c8gxwymc6dtnefw0u9p22wk
+        uploader: st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd
+      non_critical_extension_options: []
+      timeout_height: "0"
+    signatures:
+    - BOyNTyu7JuLOj+gi7eu7ZYOqTd6StbUlsrfup3ltEvRmo4CpOG4LyvTyajbfkRG05/k2WeEHP1ZWWVJMRzMflQE=
+  txhash: E11A9F34C1074FAC5B0FCCE1485D8428CB79D34A13DE6EFFDDBD059D29175CDE
+```
+
+
+Example (query by message.sender):
+
+```shell
+stchaind query txs \
+--events 'message.sender=st166mmswr62x20mq4kar682enrsep70txp50ev3z' \
+--limit=2 \
+--page=1
+```
+
+Result:
+```
+count: "2"
+limit: "2"
+page_number: "1"
+page_total: "181"
+total_count: "361"
+txs:
+- code: 0
+  codespace: ""
+  data: 12270A252F73747261746F732E7364732E76312E4D736746696C6555706C6F6164526573706F6E7365
+  events:
+  - attributes:
+    - index: true
+      key: spender
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_spent
+  - attributes:
+    - index: true
+      key: receiver
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_received
+  - attributes:
+    - index: true
+      key: recipient
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: sender
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: transfer
+  - attributes:
+    - index: true
+      key: sender
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    type: message
+  - attributes:
+    - index: true
+      key: fee
+      value: 109168000000000wei
+    - index: true
+      key: fee_payer
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    type: tx
+  - attributes:
+    - index: true
+      key: acc_seq
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z/660927
+    type: tx
+  - attributes:
+    - index: true
+      key: signature
+      value: l4t5rQIBcjZWheFmB7mDWYOf7OwW7yRQsmGtKsBxl8Bm1NcyDGdkpbez4WKQjgLF6TKH/NClhLIDYD40amBjzQE=
+    type: tx
+  - attributes:
+    - index: true
+      key: action
+      value: /stratos.sds.v1.MsgFileUpload
+    - index: true
+      key: sender
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    - index: true
+      key: module
+      value: sds
+    type: message
+  - attributes:
+    - index: true
+      key: file_hash
+      value: '"v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg"'
+    - index: true
+      key: reporter
+      value: '"stsds14yhh6duc40n3l3y3qxt0vetm9numlstlxxfz05"'
+    - index: true
+      key: sender
+      value: '"st166mmswr62x20mq4kar682enrsep70txp50ev3z"'
+    - index: true
+      key: uploader
+      value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+    type: stratos.sds.v1.EventFileUpload
+  gas_used: "69815"
+  gas_wanted: "109168"
+  height: "8101020"
+  info: ""
+  logs:
+  - events:
+    - attributes:
+      - key: action
+        value: /stratos.sds.v1.MsgFileUpload
+      - key: sender
+        value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+      - key: module
+        value: sds
+      type: message
+    - attributes:
+      - key: file_hash
+        value: '"v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg"'
+      - key: reporter
+        value: '"stsds14yhh6duc40n3l3y3qxt0vetm9numlstlxxfz05"'
+      - key: sender
+        value: '"st166mmswr62x20mq4kar682enrsep70txp50ev3z"'
+      - key: uploader
+        value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+      type: stratos.sds.v1.EventFileUpload
+    log: ""
+    msg_index: 0
+  raw_log: '[{"msg_index":0,"events":[{"type":"message","attributes":[{"key":"action","value":"/stratos.sds.v1.MsgFileUpload"},{"key":"sender","value":"st166mmswr62x20mq4kar682enrsep70txp50ev3z"},{"key":"module","value":"sds"}]},{"type":"stratos.sds.v1.EventFileUpload","attributes":[{"key":"file_hash","value":"\"v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg\""},{"key":"reporter","value":"\"stsds14yhh6duc40n3l3y3qxt0vetm9numlstlxxfz05\""},{"key":"sender","value":"\"st166mmswr62x20mq4kar682enrsep70txp50ev3z\""},{"key":"uploader","value":"\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\""}]}]}]'
+  timestamp: "2025-04-11T14:55:51Z"
+  tx:
+    '@type': /cosmos.tx.v1beta1.Tx
+    auth_info:
+      fee:
+        amount:
+        - amount: "109168000000000"
+          denom: wei
+        gas_limit: "109168"
+        granter: ""
+        payer: ""
+      signer_infos:
+      - mode_info:
+          single:
+            mode: SIGN_MODE_DIRECT
+        public_key:
+          '@type': /stratos.crypto.v1.ethsecp256k1.PubKey
+          key: A9CoYXd0DLu0gSpfGpdAepQBs33X43t4kfr17HJeCSyZ
+        sequence: "660927"
+      tip: null
+    body:
+      extension_options: []
+      memo: ""
+      messages:
+      - '@type': /stratos.sds.v1.MsgFileUpload
+        file_hash: v05j1m50q72tto7dst1veah8ru8g96vfkejhaqtg
+        from: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+        reporter: stsds14yhh6duc40n3l3y3qxt0vetm9numlstlxxfz05
+        uploader: st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd
+      non_critical_extension_options: []
+      timeout_height: "0"
+    signatures:
+    - l4t5rQIBcjZWheFmB7mDWYOf7OwW7yRQsmGtKsBxl8Bm1NcyDGdkpbez4WKQjgLF6TKH/NClhLIDYD40amBjzQE=
+  txhash: A5B7FCEBB2369406A76C9C61CA214133E9B0D84E4D39AADAFC91A7FFD8A7BF22
+- code: 0
+  codespace: ""
+  data: 12270A252F73747261746F732E7364732E76312E4D736746696C6555706C6F6164526573706F6E7365
+  events:
+  - attributes:
+    - index: true
+      key: spender
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_spent
+  - attributes:
+    - index: true
+      key: receiver
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: coin_received
+  - attributes:
+    - index: true
+      key: recipient
+      value: st17xpfvakm2amg962yls6f84z3kell8c5lv5hj2q
+    - index: true
+      key: sender
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    - index: true
+      key: amount
+      value: 109168000000000wei
+    type: transfer
+  - attributes:
+    - index: true
+      key: sender
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    type: message
+  - attributes:
+    - index: true
+      key: fee
+      value: 109168000000000wei
+    - index: true
+      key: fee_payer
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    type: tx
+  - attributes:
+    - index: true
+      key: acc_seq
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z/660928
+    type: tx
+  - attributes:
+    - index: true
+      key: signature
+      value: e5quhA24gWcfPWePJLfCdznjMnZFRze+Mj076x1t9vI6gCOIeKn3G63fT6zk2AEkZmaMLDICS/3Z0JMzRLTYmQA=
+    type: tx
+  - attributes:
+    - index: true
+      key: action
+      value: /stratos.sds.v1.MsgFileUpload
+    - index: true
+      key: sender
+      value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+    - index: true
+      key: module
+      value: sds
+    type: message
+  - attributes:
+    - index: true
+      key: file_hash
+      value: '"v05j1m54bp298ppt4a6f8k4rih0p8h617mnu6vsg"'
+    - index: true
+      key: reporter
+      value: '"stsds14yhh6duc40n3l3y3qxt0vetm9numlstlxxfz05"'
+    - index: true
+      key: sender
+      value: '"st166mmswr62x20mq4kar682enrsep70txp50ev3z"'
+    - index: true
+      key: uploader
+      value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+    type: stratos.sds.v1.EventFileUpload
+  gas_used: "69815"
+  gas_wanted: "109168"
+  height: "8101032"
+  info: ""
+  logs:
+  - events:
+    - attributes:
+      - key: action
+        value: /stratos.sds.v1.MsgFileUpload
+      - key: sender
+        value: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+      - key: module
+        value: sds
+      type: message
+    - attributes:
+      - key: file_hash
+        value: '"v05j1m54bp298ppt4a6f8k4rih0p8h617mnu6vsg"'
+      - key: reporter
+        value: '"stsds14yhh6duc40n3l3y3qxt0vetm9numlstlxxfz05"'
+      - key: sender
+        value: '"st166mmswr62x20mq4kar682enrsep70txp50ev3z"'
+      - key: uploader
+        value: '"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd"'
+      type: stratos.sds.v1.EventFileUpload
+    log: ""
+    msg_index: 0
+  raw_log: '[{"msg_index":0,"events":[{"type":"message","attributes":[{"key":"action","value":"/stratos.sds.v1.MsgFileUpload"},{"key":"sender","value":"st166mmswr62x20mq4kar682enrsep70txp50ev3z"},{"key":"module","value":"sds"}]},{"type":"stratos.sds.v1.EventFileUpload","attributes":[{"key":"file_hash","value":"\"v05j1m54bp298ppt4a6f8k4rih0p8h617mnu6vsg\""},{"key":"reporter","value":"\"stsds14yhh6duc40n3l3y3qxt0vetm9numlstlxxfz05\""},{"key":"sender","value":"\"st166mmswr62x20mq4kar682enrsep70txp50ev3z\""},{"key":"uploader","value":"\"st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd\""}]}]}]'
+  timestamp: "2025-04-11T14:57:02Z"
+  tx:
+    '@type': /cosmos.tx.v1beta1.Tx
+    auth_info:
+      fee:
+        amount:
+        - amount: "109168000000000"
+          denom: wei
+        gas_limit: "109168"
+        granter: ""
+        payer: ""
+      signer_infos:
+      - mode_info:
+          single:
+            mode: SIGN_MODE_DIRECT
+        public_key:
+          '@type': /stratos.crypto.v1.ethsecp256k1.PubKey
+          key: A9CoYXd0DLu0gSpfGpdAepQBs33X43t4kfr17HJeCSyZ
+        sequence: "660928"
+      tip: null
+    body:
+      extension_options: []
+      memo: ""
+      messages:
+      - '@type': /stratos.sds.v1.MsgFileUpload
+        file_hash: v05j1m54bp298ppt4a6f8k4rih0p8h617mnu6vsg
+        from: st166mmswr62x20mq4kar682enrsep70txp50ev3z
+        reporter: stsds14yhh6duc40n3l3y3qxt0vetm9numlstlxxfz05
+        uploader: st10g872khf0s6v6zydwkv7fsfs3s490yugxg44pd
+      non_critical_extension_options: []
+      timeout_height: "0"
+    signatures:
+    - e5quhA24gWcfPWePJLfCdznjMnZFRze+Mj076x1t9vI6gCOIeKn3G63fT6zk2AEkZmaMLDICS/3Z0JMzRLTYmQA=
+  txhash: C2014652093650C4292F1108F1803FBB06AABC24CE2DD3B4B97969CF92071FBA
 ```
 
 <br>
