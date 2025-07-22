@@ -1,0 +1,3834 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Stratos Network Full-Chain stchaind gRPC queries.">
+      
+      
+      
+        <link rel="canonical" href="https://docs.thestratos.org/docs-stratos-chain/stratos-chain-grpc-queries/">
+      
+      
+        <link rel="prev" href="../stchaind-commands-part-2/">
+      
+      
+        <link rel="next" href="../stratos-chain-rest-apis/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Stratos Chain stchaind gRPC queries - Stratos Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="Stratos Chain stchaind gRPC queries - Stratos Documentation" >
+      
+        <meta  property="og:description"  content="Stratos Network Full-Chain stchaind gRPC queries." >
+      
+        <meta  property="og:image"  content="https://docs.thestratos.org/assets/images/social/docs-stratos-chain/stratos-chain-grpc-queries.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="https://docs.thestratos.org/docs-stratos-chain/stratos-chain-grpc-queries/" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="Stratos Chain stchaind gRPC queries - Stratos Documentation" >
+      
+        <meta  name="twitter:description"  content="Stratos Network Full-Chain stchaind gRPC queries." >
+      
+        <meta  name="twitter:image"  content="https://docs.thestratos.org/assets/images/social/docs-stratos-chain/stratos-chain-grpc-queries.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#register-module" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Stratos Documentation" class="md-header__button md-logo" aria-label="Stratos Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Stratos Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Stratos Chain stchaind gRPC queries
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../docs-about/about-stratos/" class="md-tabs__link">
+          
+  
+  
+  Introduction
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../setup-and-run-a-stratos-chain-full-node/" class="md-tabs__link">
+          
+  
+  
+  Stratos Chain
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../docs-resource-node/setup-and-run-a-sds-resource-node/" class="md-tabs__link">
+          
+  
+  
+  Decentralized Storage
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Stratos Documentation" class="md-nav__button md-logo" aria-label="Stratos Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Stratos Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-about/about-stratos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About Stratos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-about/stratos-token-economy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    STOS Token Economy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-about/changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Updates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stratos Chain
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Stratos Chain
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    HOWTOs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            HOWTOs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup-and-run-a-stratos-chain-full-node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Full-Chain Node
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-become-a-validator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Become a Validator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-start-with-state-sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use of State Sync
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-setup-rest-grpc-full-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Full-Chain as REST/gRPC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mainnet-bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mainnet Bridge
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mainnet-staking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mainnet Staking
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Operating
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Operating
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stchaind-commands-part-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    stchaind Commands Part 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stchaind-commands-part-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    stchaind Commands Part 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    gRPC Queries
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    gRPC Queries
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#register-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      Register Module
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Register Module">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grpc-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      gRPC Gateway
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      - List
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-resourcenode" class="md-nav__link">
+    <span class="md-ellipsis">
+      - ResourceNode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-metanode" class="md-nav__link">
+    <span class="md-ellipsis">
+      - MetaNode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-params" class="md-nav__link">
+    <span class="md-ellipsis">
+      - Params
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-depositbynode" class="md-nav__link">
+    <span class="md-ellipsis">
+      - DepositByNode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-depositbyowner" class="md-nav__link">
+    <span class="md-ellipsis">
+      - DepositByOwner
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-deposittotal" class="md-nav__link">
+    <span class="md-ellipsis">
+      - DepositTotal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-bondedresourcenodecount" class="md-nav__link">
+    <span class="md-ellipsis">
+      - BondedResourceNodeCount
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-bondedmetanodecount" class="md-nav__link">
+    <span class="md-ellipsis">
+      - BondedMetaNodeCount
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-remainingozonelimit" class="md-nav__link">
+    <span class="md-ellipsis">
+      - RemainingOzoneLimit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sds-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDS Module
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SDS Module">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grpc-gateway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      gRPC Gateway
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-list_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      - List
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-fileupload" class="md-nav__link">
+    <span class="md-ellipsis">
+      - Fileupload
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-simprepay" class="md-nav__link">
+    <span class="md-ellipsis">
+      - SimPrepay
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-nozprice" class="md-nav__link">
+    <span class="md-ellipsis">
+      - NozPrice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-nozsupply" class="md-nav__link">
+    <span class="md-ellipsis">
+      - NozSupply
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-params_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      - Params
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pot-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      POT Module
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="POT Module">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grpc-gateway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      gRPC Gateway
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-list_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      - List
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-volumereport" class="md-nav__link">
+    <span class="md-ellipsis">
+      - VolumeReport
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-rewardsbyepoch" class="md-nav__link">
+    <span class="md-ellipsis">
+      - RewardsByEpoch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-rewardsbywallet" class="md-nav__link">
+    <span class="md-ellipsis">
+      - RewardsByWallet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-rewardsbywalletandepoch" class="md-nav__link">
+    <span class="md-ellipsis">
+      - RewardsByWalletAndEpoch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-slashingbyowner" class="md-nav__link">
+    <span class="md-ellipsis">
+      - SlashingByOwner
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-params_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      - Params
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-totalminedtoken" class="md-nav__link">
+    <span class="md-ellipsis">
+      - TotalMinedToken
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-circulationsupply" class="md-nav__link">
+    <span class="md-ellipsis">
+      - CirculationSupply
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stratos-chain-rest-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    REST APIs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Network
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    EVM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            EVM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/node-config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Node config
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Deploying on Stratos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Deploying on Stratos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/deploy-smart-contracts/hardhat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using Hardhat
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/deploy-smart-contracts/truffle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using Truffle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Wallets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Wallets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/hello/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hello MetaMask
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/configure-on-metamask/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configure Stratos on MetaMask
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/multiple-accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multiple Accounts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/gas-token/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    STOS Gas token
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/available-dapps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Available dapps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Decentralized Storage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Decentralized Storage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    HOWTOs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            HOWTOs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/setup-and-run-a-sds-resource-node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDS Resource Node
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/sds-update-v12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDS Update to v0.12.10
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/sds-ipfs-handbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migrate IPFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/sds-video-streaming-handbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Video Streaming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Operating
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Operating
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/spfs-quick-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SPFS Quick Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/ppd-terminal-subcommands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ppd Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/sds-rpc-for-file-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    File Operations RPC API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/node-monitor-websocket-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Node Monitor WebSocket API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-resource-node/rpc-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RPC Client
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#register-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      Register Module
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Register Module">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grpc-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      gRPC Gateway
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      - List
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-resourcenode" class="md-nav__link">
+    <span class="md-ellipsis">
+      - ResourceNode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-metanode" class="md-nav__link">
+    <span class="md-ellipsis">
+      - MetaNode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-params" class="md-nav__link">
+    <span class="md-ellipsis">
+      - Params
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-depositbynode" class="md-nav__link">
+    <span class="md-ellipsis">
+      - DepositByNode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-depositbyowner" class="md-nav__link">
+    <span class="md-ellipsis">
+      - DepositByOwner
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-deposittotal" class="md-nav__link">
+    <span class="md-ellipsis">
+      - DepositTotal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-bondedresourcenodecount" class="md-nav__link">
+    <span class="md-ellipsis">
+      - BondedResourceNodeCount
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-bondedmetanodecount" class="md-nav__link">
+    <span class="md-ellipsis">
+      - BondedMetaNodeCount
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-remainingozonelimit" class="md-nav__link">
+    <span class="md-ellipsis">
+      - RemainingOzoneLimit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sds-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDS Module
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SDS Module">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grpc-gateway_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      gRPC Gateway
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-list_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      - List
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-fileupload" class="md-nav__link">
+    <span class="md-ellipsis">
+      - Fileupload
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-simprepay" class="md-nav__link">
+    <span class="md-ellipsis">
+      - SimPrepay
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-nozprice" class="md-nav__link">
+    <span class="md-ellipsis">
+      - NozPrice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-nozsupply" class="md-nav__link">
+    <span class="md-ellipsis">
+      - NozSupply
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-params_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      - Params
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pot-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      POT Module
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="POT Module">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grpc-gateway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      gRPC Gateway
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-list_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      - List
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-volumereport" class="md-nav__link">
+    <span class="md-ellipsis">
+      - VolumeReport
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-rewardsbyepoch" class="md-nav__link">
+    <span class="md-ellipsis">
+      - RewardsByEpoch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-rewardsbywallet" class="md-nav__link">
+    <span class="md-ellipsis">
+      - RewardsByWallet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-rewardsbywalletandepoch" class="md-nav__link">
+    <span class="md-ellipsis">
+      - RewardsByWalletAndEpoch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-slashingbyowner" class="md-nav__link">
+    <span class="md-ellipsis">
+      - SlashingByOwner
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-params_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      - Params
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-totalminedtoken" class="md-nav__link">
+    <span class="md-ellipsis">
+      - TotalMinedToken
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-circulationsupply" class="md-nav__link">
+    <span class="md-ellipsis">
+      - CirculationSupply
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>gRPC Queries</h1>
+
+<p>Cosmos SDK gRPC definitions have been documented <a href="https://docs.cosmos.network/api">here</a></p>
+<h2 id="register-module">Register Module<a class="headerlink" href="#register-module" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p><br></p>
+<hr />
+<h3 id="grpc-gateway">gRPC Gateway<a class="headerlink" href="#grpc-gateway" title="Permanent link">🔗&#xFE0E;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method Name</th>
+<th>Request Type</th>
+<th>Response Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ResourceNode</td>
+<td>QueryResourceNodeRequest <br>fields:{"network_addr":string}</td>
+<td>QueryResourceNodeResponse <br>fields:{"node":ResourceNode}</td>
+<td>Get info of a registered resource node</td>
+</tr>
+<tr>
+<td>MetaNode</td>
+<td>QueryMetaNodeRequest <br>fields:{"network_addr":string}</td>
+<td>QueryMetaNodeResponse <br>fields:{"node":MetaNode}</td>
+<td>Get info of a registered meta node</td>
+</tr>
+<tr>
+<td>Params</td>
+<td>QueryParamsRequest <br>fields:{}</td>
+<td>QueryParamsResponse <br>fields:{"params":Params}</td>
+<td>Get params of Register Module</td>
+</tr>
+<tr>
+<td>DepositByNode</td>
+<td>QueryDepositByNodeRequest <br>fields:{"network_addr":string, query_type:uint32}</td>
+<td>QueryDepositByNodeResponse <br>fields:{"deposit_info":DepositInfo }</td>
+<td>Get deposit info of a specific node</td>
+</tr>
+<tr>
+<td>DepositByOwner</td>
+<td>QueryDepositByOwnerRequest <br>fields:{"owner_addr":string}</td>
+<td>QueryDepositByOwnerResponse <br>fields:{"deposit_infos":[]DepositInfo, <br>"pagination": cosmos.base.query.v1beta1.PageResponse }</td>
+<td>Get all deposit info of a specific owner</td>
+</tr>
+<tr>
+<td>DepositTotal</td>
+<td>QueryDepositTotalRequest <br>fields:{}</td>
+<td>QueryDepositTotalResponse <br>fields:{"resource_nodes_total_deposit":cosmos.base.v1beta1.Coin, <br>"meta_nodes_total_deposit":cosmos.base.v1beta1.Coin, <br>"total_bonded_deposit":cosmos.base.v1beta1.Coin, <br>"total_unbonded_deposit":cosmos.base.v1beta1.Coin, <br>"total_unbonding_deposit":cosmos.base.v1beta1.Coin}</td>
+<td>Query total deposit state of all registered resource nodes and meta nodes</td>
+</tr>
+<tr>
+<td>BondedResourceNodeCount</td>
+<td>QueryBondedResourceNodeCountRequest <br>fields:{}</td>
+<td>QueryBondedResourceNodeCountResponse <br>fields:{"number": uint64}</td>
+<td>Get params of Register Module</td>
+</tr>
+<tr>
+<td>BondedMetaNodeCount</td>
+<td>QueryBondedMetaNodeCountRequest <br>fields:{}</td>
+<td>QueryBondedMetaNodeCountResponse <br>fields:{"number": uint64}</td>
+<td>Get params of Register Module</td>
+</tr>
+<tr>
+<td>RemainingOzoneLimit</td>
+<td>QueryRemainingOzoneLimitRequest <br>fields:{}</td>
+<td>QueryRemainingOzoneLimitResponse <br>fields:{"ozone_limit": string}</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr />
+<p>ResourceNode:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>network_address</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>pubkey</td>
+<td>google.protobuf.Any</td>
+<td></td>
+</tr>
+<tr>
+<td>suspend</td>
+<td>bool</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>cosmos.staking.v1beta1.BondStatus</td>
+<td></td>
+</tr>
+<tr>
+<td>tokens</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>owner_address</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description</td>
+<td></td>
+</tr>
+<tr>
+<td>creation_time</td>
+<td>google.protobuf.Timestamp</td>
+<td></td>
+</tr>
+<tr>
+<td>node_type</td>
+<td>uint32</td>
+<td></td>
+</tr>
+<tr>
+<td>effective_tokens</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>beneficiary_address</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr />
+<p>MetaNode:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>network_address</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>pubkey</td>
+<td>google.protobuf.Any</td>
+<td></td>
+</tr>
+<tr>
+<td>suspend</td>
+<td>bool</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>cosmos.staking.v1beta1.BondStatus</td>
+<td></td>
+</tr>
+<tr>
+<td>tokens</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>owner_address</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description</td>
+<td></td>
+</tr>
+<tr>
+<td>creation_time</td>
+<td>google.protobuf.Timestamp</td>
+<td></td>
+</tr>
+<tr>
+<td>beneficiary_address</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr />
+<p>Description:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>moniker</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>identity</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>website</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>security_contact</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>details</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr />
+<p>Params:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bond_denom</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>unbonding_threashold_time</td>
+<td>google.protobuf.Duration</td>
+<td></td>
+</tr>
+<tr>
+<td>unbonding_completion_time</td>
+<td>google.protobuf.Duration</td>
+<td></td>
+</tr>
+<tr>
+<td>max_entries</td>
+<td>uint32</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_node_reg_enabled</td>
+<td>bool</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_node_min_deposit</td>
+<td>cosmos.base.v1beta1.Coin</td>
+<td></td>
+</tr>
+<tr>
+<td>voting_period</td>
+<td>google.protobuf.Duration</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr />
+<p>DepositInfo:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>network_address</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>pubkey</td>
+<td>google.protobuf.Any</td>
+<td></td>
+</tr>
+<tr>
+<td>suspend</td>
+<td>bool</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>cosmos.staking.v1beta1.BondStatus</td>
+<td></td>
+</tr>
+<tr>
+<td>tokens</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>owner_address</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description</td>
+<td></td>
+</tr>
+<tr>
+<td>creation_time</td>
+<td>google.protobuf.Timestamp</td>
+<td></td>
+</tr>
+<tr>
+<td>node_type</td>
+<td>uint32</td>
+<td></td>
+</tr>
+<tr>
+<td>bonded_deposit</td>
+<td>cosmos.base.v1beta1.Coin</td>
+<td></td>
+</tr>
+<tr>
+<td>un_bonding_deposit</td>
+<td>cosmos.base.v1beta1.Coin</td>
+<td></td>
+</tr>
+<tr>
+<td>un_bonded_deposit</td>
+<td>cosmos.base.v1beta1.Coin</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<h3 id="-list">- List<a class="headerlink" href="#-list" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>List all available grpc queries in Register Module</p>
+<p>Request:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>grpcurl -plaintext 127.0.0.1:9090 list stratos.register.v1.Query
+</code></pre></div>
+Response:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="l l-Scalar l-Scalar-Plain">stratos.register.v1.Query.ResourceNode</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="l l-Scalar l-Scalar-Plain">stratos.register.v1.Query.MetaNode</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="l l-Scalar l-Scalar-Plain">stratos.register.v1.Query.Params</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="l l-Scalar l-Scalar-Plain">stratos.register.v1.Query.DepositByNode</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="l l-Scalar l-Scalar-Plain">stratos.register.v1.Query.DepositByOwner</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="l l-Scalar l-Scalar-Plain">stratos.register.v1.Query.DepositTotal</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="l l-Scalar l-Scalar-Plain">stratos.register.v1.Query.BondedResourceNodeCount</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="l l-Scalar l-Scalar-Plain">stratos.register.v1.Query.BondedMetaNodeCount</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="l l-Scalar l-Scalar-Plain">stratos.register.v1.Query.RemainingOzoneLimit</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-resourcenode">- ResourceNode<a class="headerlink" href="#-resourcenode" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get info of a registered resource node</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>grpcurl -plaintext -d &#39;{&quot;network_addr&quot;:&quot;stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv&quot;}&#39; 127.0.0.1:9090 stratos.register.v1.Query.ResourceNode
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;network_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;pubkey&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/cosmos.crypto.ed25519.PubKey&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2OAeLO0+KrBkSxuFKU1ofJqGb4RtA8GpD8XCZlMYw2A=&quot;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">&quot;suspend&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BOND_STATUS_BONDED&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">&quot;tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000000000000000000&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nt">&quot;owner_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">      </span><span class="nt">&quot;moniker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;resource-node0&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">      </span><span class="nt">&quot;identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">      </span><span class="nt">&quot;website&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">      </span><span class="nt">&quot;security_contact&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">      </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="nt">&quot;creation_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-03-08T19:18:51.591341919Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="nt">&quot;node_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span><span class="nt">&quot;effective_tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="nt">&quot;beneficiary_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m&quot;</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-metanode">- MetaNode<a class="headerlink" href="#-metanode" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get info of a registered meta node</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>grpcurl -plaintext -d &#39;{&quot;network_addr&quot;:&quot;stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64&quot;}&#39; 127.0.0.1:9090 stratos.register.v1.Query.MetaNode
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;node&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">&quot;network_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">&quot;pubkey&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">      </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/cosmos.crypto.ed25519.PubKey&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">      </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ltODy8zL5IjJwCutlIexqlBb3GH0+aHZOrpT7f/aKnQ=&quot;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">&quot;suspend&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BOND_STATUS_BONDED&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nt">&quot;tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100000000000000000000&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nt">&quot;owner_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">      </span><span class="nt">&quot;moniker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;snode://stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64@127.0.0.1:8888&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">      </span><span class="nt">&quot;identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">      </span><span class="nt">&quot;website&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">      </span><span class="nt">&quot;security_contact&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">      </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="nt">&quot;creation_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0001-01-01T00:00:00Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="nt">&quot;beneficiary_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m&quot;</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-params">- Params<a class="headerlink" href="#-params" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get params of Register Module</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>grpcurl -plaintext 127.0.0.1:9090 stratos.register.v1.Query.Params
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">&quot;bond_denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">&quot;unbonding_threashold_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;15552000s&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nt">&quot;unbonding_completion_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1209600s&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nt">&quot;max_entries&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="nt">&quot;resource_node_reg_enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="nt">&quot;resource_node_min_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">      </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">      </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000000000000000000&quot;</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="nt">&quot;voting_period&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;604800s&quot;</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-depositbynode">- DepositByNode<a class="headerlink" href="#-depositbynode" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get deposit info of a specific node</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>grpcurl -plaintext -d &#39;{&quot;network_addr&quot;:&quot;stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv&quot;,&quot;query_type&quot;: 0 }&#39; 127.0.0.1:9090 stratos.register.v1.Query.DepositByNode
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">&quot;deposit_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">&quot;network_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">&quot;pubkey&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">      </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/cosmos.crypto.ed25519.PubKey&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">      </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2OAeLO0+KrBkSxuFKU1ofJqGb4RtA8GpD8XCZlMYw2A=&quot;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nt">&quot;suspend&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BOND_STATUS_BONDED&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="nt">&quot;tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000000000000000000&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="nt">&quot;owner_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">      </span><span class="nt">&quot;moniker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;resource-node0&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">      </span><span class="nt">&quot;identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">      </span><span class="nt">&quot;website&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">      </span><span class="nt">&quot;security_contact&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">      </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">    </span><span class="nt">&quot;creation_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-03-08T19:18:51.591341919Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">    </span><span class="nt">&quot;node_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">    </span><span class="nt">&quot;bonded_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">      </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">      </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000000000000000000&quot;</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">    </span><span class="nt">&quot;un_bonding_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">      </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="w">      </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="w">    </span><span class="nt">&quot;un_bonded_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="w">      </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="w">      </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-depositbyowner">- DepositByOwner<a class="headerlink" href="#-depositbyowner" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get all deposit info of a specific owner</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>grpcurl -plaintext -d &#39;{&quot;owner_addr&quot;:&quot;st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m&quot;, &quot;pagination&quot;: {&quot;limit&quot;:20}}&#39; 127.0.0.1:9090 stratos.register.v1.Query.DepositByOwner
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">&quot;deposit_infos&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">      </span><span class="nt">&quot;network_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stsds1gl9ywg6jdfdgcja70ffum4ectq4fmt26ay4znv&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="nt">&quot;pubkey&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">        </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/cosmos.crypto.ed25519.PubKey&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">        </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2OAeLO0+KrBkSxuFKU1ofJqGb4RtA8GpD8XCZlMYw2A=&quot;</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">      </span><span class="nt">&quot;suspend&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BOND_STATUS_BONDED&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">      </span><span class="nt">&quot;tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000000000000000000&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">      </span><span class="nt">&quot;owner_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">        </span><span class="nt">&quot;moniker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;resource-node0&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">        </span><span class="nt">&quot;identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">        </span><span class="nt">&quot;website&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">        </span><span class="nt">&quot;security_contact&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="w">        </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">      </span><span class="nt">&quot;creation_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-03-08T19:18:51.591341919Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="w">      </span><span class="nt">&quot;node_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="w">      </span><span class="nt">&quot;bonded_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="w">        </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="w">        </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000000000000000000&quot;</span>
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="w">      </span><span class="nt">&quot;un_bonding_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a><span class="w">        </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a><span class="w">        </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="w">      </span><span class="nt">&quot;un_bonded_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="w">        </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a><span class="w">        </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a><span class="w">      </span><span class="nt">&quot;network_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a><span class="w">      </span><span class="nt">&quot;pubkey&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a><span class="w">        </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/cosmos.crypto.ed25519.PubKey&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a><span class="w">        </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ltODy8zL5IjJwCutlIexqlBb3GH0+aHZOrpT7f/aKnQ=&quot;</span>
+<a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a><span class="w">      </span><span class="nt">&quot;suspend&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a><span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BOND_STATUS_BONDED&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a><span class="w">      </span><span class="nt">&quot;tokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100000000000000000000&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a><span class="w">      </span><span class="nt">&quot;owner_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a><span class="w">        </span><span class="nt">&quot;moniker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;snode://stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64@127.0.0.1:8888&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a><span class="w">        </span><span class="nt">&quot;identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a><span class="w">        </span><span class="nt">&quot;website&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a><span class="w">        </span><span class="nt">&quot;security_contact&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a><span class="w">        </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a><span class="w">      </span><span class="nt">&quot;creation_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0001-01-01T00:00:00Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a><span class="w">      </span><span class="nt">&quot;node_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a><span class="w">      </span><span class="nt">&quot;bonded_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a><span class="w">        </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a><span class="w">        </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100000000000000000000&quot;</span>
+<a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a><span class="w">      </span><span class="nt">&quot;un_bonding_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a><span class="w">        </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a><span class="w">        </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a><span class="w">      </span><span class="nt">&quot;un_bonded_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a><span class="w">        </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a><span class="w">        </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-11-65" name="__codelineno-11-65" href="#__codelineno-11-65"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-11-66" name="__codelineno-11-66" href="#__codelineno-11-66"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-67" name="__codelineno-11-67" href="#__codelineno-11-67"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-11-68" name="__codelineno-11-68" href="#__codelineno-11-68"></a><span class="w">  </span><span class="nt">&quot;pagination&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-69" name="__codelineno-11-69" href="#__codelineno-11-69"></a><span class="w">    </span><span class="nt">&quot;next_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<a id="__codelineno-11-70" name="__codelineno-11-70" href="#__codelineno-11-70"></a><span class="w">    </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2&quot;</span>
+<a id="__codelineno-11-71" name="__codelineno-11-71" href="#__codelineno-11-71"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-11-72" name="__codelineno-11-72" href="#__codelineno-11-72"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-deposittotal">- DepositTotal<a class="headerlink" href="#-deposittotal" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Query total deposit state of all registered resource nodes and meta nodes</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a> grpcurl -plaintext 127.0.0.1:9090 stratos.register.v1.Query.DepositTotal
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">&quot;resource_nodes_total_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000000000000000000&quot;</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="nt">&quot;meta_nodes_total_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;400000000000000000000&quot;</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">  </span><span class="nt">&quot;total_bonded_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">    </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">    </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;401000000000000000000&quot;</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">  </span><span class="nt">&quot;total_unbonded_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">    </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">    </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="w">  </span><span class="nt">&quot;total_unbonding_deposit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">    </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="w">    </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-bondedresourcenodecount">- BondedResourceNodeCount<a class="headerlink" href="#-bondedresourcenodecount" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Queries total number of Bonded ResourceNodes</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>grpcurl -plaintext 127.0.0.1:9090 stratos.register.v1.Query.BondedResourceNodeCount
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2&quot;</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-bondedmetanodecount">- BondedMetaNodeCount<a class="headerlink" href="#-bondedmetanodecount" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Queries total number of Bonded MetaNodes</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>grpcurl -plaintext 127.0.0.1:9090 stratos.register.v1.Query.BondedMetaNodeCount
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">{</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4&quot;</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-remainingozonelimit">- RemainingOzoneLimit<a class="headerlink" href="#-remainingozonelimit" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Queries the current remaining ozone limit</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>grpcurl -plaintext 127.0.0.1:9090 stratos.register.v1.Query.RemainingOzoneLimit
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">{</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="nt">&quot;ozone_limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;400000000000000&quot;</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="sds-module">SDS Module<a class="headerlink" href="#sds-module" title="Permanent link">🔗&#xFE0E;</a></h2>
+<h3 id="grpc-gateway_1">gRPC Gateway<a class="headerlink" href="#grpc-gateway_1" title="Permanent link">🔗&#xFE0E;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method Name</th>
+<th>Request Type</th>
+<th>Response Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fileupload</td>
+<td>QueryFileUploadRequest <br>fields:{"file_hash":string}</td>
+<td>QueryFileUploadResponse <br>fields:{"file_info":FileInfo}</td>
+<td>Query uploaded file info by hash</td>
+</tr>
+<tr>
+<td>SimPrepay</td>
+<td>QuerySimPrepayRequest <br>fields:{"amount":string}</td>
+<td>QuerySimPrepayResponse <br>fields:{"noz":string}</td>
+<td>Simulate prepay to query the noz that can be purchased at the current price</td>
+</tr>
+<tr>
+<td>NozPrice</td>
+<td>QueryNozPriceRequest <br>fields:{}</td>
+<td>QueryNozPriceResponse <br>fields:{"price":string}</td>
+<td>Query the current price of noz</td>
+</tr>
+<tr>
+<td>NozSupply</td>
+<td>QueryNozSupplyRequest <br>fields:{}</td>
+<td>QueryNozSupplyResponse <br>fields:{"remaining":string,"total":string}</td>
+<td>Query noz supply</td>
+</tr>
+<tr>
+<td>Params</td>
+<td>QueryParamsRequest <br>fields:{}</td>
+<td>QueryParamsResponse <br>fields:{"params":Params}</td>
+<td>Get params of SDS Module</td>
+</tr>
+</tbody>
+</table>
+<p>FileInfo:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>height</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>reporters</td>
+<td>bytes</td>
+<td></td>
+</tr>
+<tr>
+<td>uploader</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Params:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bond_denom</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="-list_1">- List<a class="headerlink" href="#-list_1" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>List all available grpc queries in SDS Module</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a> grpcurl -plaintext 127.0.0.1:9090 list stratos.sds.v1.Query
+</code></pre></div>
+<p>Response:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="l l-Scalar l-Scalar-Plain">stratos.sds.v1.Query.Fileupload</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="l l-Scalar l-Scalar-Plain">stratos.sds.v1.Query.SimPrepay</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="l l-Scalar l-Scalar-Plain">stratos.sds.v1.Query.NozPrice</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="l l-Scalar l-Scalar-Plain">stratos.sds.v1.Query.NozSupply</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="l l-Scalar l-Scalar-Plain">stratos.sds.v1.Query.Params</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-fileupload">- Fileupload<a class="headerlink" href="#-fileupload" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Query uploaded file info by hash</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a> grpcurl -plaintext -d &#39;{&quot;file_hash&quot;:&quot;v05ahm51dd62ise3fo7ojqub90p0ql2c3jg37hk8&quot;}&#39; 127.0.0.1:9090 stratos.sds.v1.Query.Fileupload
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="p">{</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">    </span><span class="nt">&quot;file_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">        </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4109&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">        </span><span class="nt">&quot;reporters&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DwAAAAAAAAA=&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">        </span><span class="nt">&quot;uploader&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;st18986jyng5vsprmtzkdxla80jrw7qyc6wl73h0u&quot;</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-simprepay">- SimPrepay<a class="headerlink" href="#-simprepay" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Simulate prepay to query the noz that can be purchased at the current price</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a> grpcurl -plaintext -d &#39;{&quot;amount&quot;:&quot;1stos&quot;}&#39; 127.0.0.1:9090 stratos.sds.v1.Query.SimPrepay
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="p">{</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="nt">&quot;noz&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;949522847536&quot;</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-nozprice">- NozPrice<a class="headerlink" href="#-nozprice" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Query the current price of noz</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a> grpcurl -plaintext 127.0.0.1:9090 stratos.sds.v1.Query.NozPrice
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="p">{</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1012791644248016784459322&quot;</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-nozsupply">- NozSupply<a class="headerlink" href="#-nozsupply" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Query noz supply</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a> grpcurl -plaintext 127.0.0.1:9090 stratos.sds.v1.Query.NozSupply
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="p">{</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="nt">&quot;remaining&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7949398620856330560&quot;</span><span class="p">,</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8000080000000000000&quot;</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-params_1">- Params<a class="headerlink" href="#-params_1" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get params of SDS Module</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a> grpcurl -plaintext 127.0.0.1:9090 stratos.sds.v1.Query.Params
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="p">{</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">    </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">        </span><span class="nt">&quot;bond_denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="pot-module">POT Module<a class="headerlink" href="#pot-module" title="Permanent link">🔗&#xFE0E;</a></h2>
+<h3 id="grpc-gateway_2">gRPC Gateway<a class="headerlink" href="#grpc-gateway_2" title="Permanent link">🔗&#xFE0E;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method Name</th>
+<th>Request Type</th>
+<th>Response Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VolumeReport</td>
+<td>QueryVolumeReportRequest <br>fields:{"epoch":int64}</td>
+<td>QueryVolumeReportResponse <br>fields:{"report_info":ReportInfo }</td>
+<td>Get pot volume report by epoch</td>
+</tr>
+<tr>
+<td>RewardsByEpoch</td>
+<td>QueryRewardsByEpochRequest <br>fields:{"epoch":int64,<br>"pagination":cosmos.base.query.v1beta1.PageRequest}</td>
+<td>QueryRewardsByEpochResponse <br>fields:{"rewards":[]Reward,<br>"pagination":cosmos.base.query.v1beta1.PageResponse}</td>
+<td>Query pot reward by epoch</td>
+</tr>
+<tr>
+<td>RewardsByWallet</td>
+<td>QueryRewardsByWalletRequest <br>fields:{"wallet_address":string}</td>
+<td>QueryRewardsByWalletResponse <br>fields:{"rewards":RewardByWallet}</td>
+<td>Get pot reward by beneficiary address</td>
+</tr>
+<tr>
+<td>RewardsByWalletAndEpoch</td>
+<td>QueryRewardsByWalletAndEpochRequest <br>fields:{"wallet_address":string,<br>"epoch":int64,<br>"pagination":cosmos.base.query.v1beta1.PageRequest}</td>
+<td>QueryRewardsByWalletAndEpochResponse <br>fields:{"rewards":[]Reward,<br>"pagination":cosmos.base.query.v1beta1.PageResponse}</td>
+<td>Get pot reward by beneficiary address and epoch</td>
+</tr>
+<tr>
+<td>SlashingByOwner</td>
+<td>QuerySlashingByOwnerRequest <br>fields:{"wallet_address":string}</td>
+<td>QuerySlashingByOwnerResponse <br>fields:{"slashing":string}</td>
+<td>Get pot slashing by owner</td>
+</tr>
+<tr>
+<td>Params</td>
+<td>QueryParamsRequest <br>fields:{}</td>
+<td>QueryParamsResponse <br>fields:{"params":Params}</td>
+<td>Get params of POT Module</td>
+</tr>
+<tr>
+<td>TotalMinedToken</td>
+<td>QueryTotalMinedTokenRequest <br>fields:{}</td>
+<td>QueryTotalMinedTokenResponse <br>fields:{"total_mined_token": cosmos.base.v1beta1.Coin}</td>
+<td>Get total mined token</td>
+</tr>
+<tr>
+<td>CirculationSupply</td>
+<td>QueryCirculationSupplyRequest <br>fields:{}</td>
+<td>QueryCirculationSupplyResponse <br>fields:{"circulation_supply":[]cosmos.base.v1beta1.Coin}</td>
+<td>Get circulation supply</td>
+</tr>
+</tbody>
+</table>
+<p>ReportInfo:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>epoch</td>
+<td>int64</td>
+<td></td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>tx_hash</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>reporter</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Reward:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wallet_address</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>reward_from_mining_pool</td>
+<td>cosmos.base.v1beta1.Coin</td>
+<td>repeated</td>
+</tr>
+<tr>
+<td>reward_from_traffic_pool</td>
+<td>cosmos.base.v1beta1.Coin</td>
+<td>repeated</td>
+</tr>
+</tbody>
+</table>
+<p>RewardByWallet:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wallet_address</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>mature_total_reward</td>
+<td>cosmos.base.v1beta1.Coin</td>
+<td>repeated</td>
+</tr>
+<tr>
+<td>immature_total_reward</td>
+<td>cosmos.base.v1beta1.Coin</td>
+<td>repeated</td>
+</tr>
+</tbody>
+</table>
+<p>Params:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bond_denom</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>reward_denom</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>mature_epoch</td>
+<td>int64</td>
+<td></td>
+</tr>
+<tr>
+<td>mining_reward_params</td>
+<td>MiningRewardParam</td>
+<td>repeated</td>
+</tr>
+<tr>
+<td>community_tax</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>initial_total_supply</td>
+<td>cosmos.base.v1beta1.Coin</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>MiningRewardParam:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>total_mined_valve_start</td>
+<td>cosmos.base.v1beta1.Coin</td>
+<td></td>
+</tr>
+<tr>
+<td>total_mined_valve_end</td>
+<td>cosmos.base.v1beta1.Coin</td>
+<td></td>
+</tr>
+<tr>
+<td>mining_reward</td>
+<td>cosmos.base.v1beta1.Coin</td>
+<td></td>
+</tr>
+<tr>
+<td>block_chain_percentage_in_bp</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_node_percentage_in_bp</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>meta_node_percentage_in_bp</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="-list_2">- List<a class="headerlink" href="#-list_2" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>List all available grpc queries in POT Module</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a> grpcurl -plaintext 127.0.0.1:9090 list stratos.pot.v1.Query
+</code></pre></div>
+<p>Response:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="l l-Scalar l-Scalar-Plain">stratos.pot.v1.Query.VolumeReport</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="l l-Scalar l-Scalar-Plain">stratos.pot.v1.Query.RewardsByEpoch</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="l l-Scalar l-Scalar-Plain">stratos.pot.v1.Query.RewardsByWallet</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="l l-Scalar l-Scalar-Plain">stratos.pot.v1.Query.RewardsByWalletAndEpoch</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="l l-Scalar l-Scalar-Plain">stratos.pot.v1.Query.SlashingByOwner</span>
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="l l-Scalar l-Scalar-Plain">stratos.pot.v1.Query.Params</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="l l-Scalar l-Scalar-Plain">stratos.pot.v1.Query.TotalMinedToken</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="l l-Scalar l-Scalar-Plain">stratos.pot.v1.Query.CirculationSupply</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-volumereport">- VolumeReport<a class="headerlink" href="#-volumereport" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get pot volume report by epoch</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>grpcurl -plaintext -d &#39;{&quot;epoch&quot;: 1 }&#39; 127.0.0.1:9090 stratos.pot.v1.Query.VolumeReport
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="p">{</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">  </span><span class="nt">&quot;report_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">    </span><span class="nt">&quot;epoch&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">    </span><span class="nt">&quot;reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100A1FC0B82DD3B0353B59E90388EEA2B73DEECA872955B414EBC99ECD3E3C1F&quot;</span><span class="p">,</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="w">    </span><span class="nt">&quot;tx_hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7F51147DB44185A1A4DC572EC0C69DEA6E9495DDCDF27CD46CA27935D4B93943&quot;</span><span class="p">,</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="w">    </span><span class="nt">&quot;reporter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stsds1cw8qhgsxddak8hh8gs7veqmy5ku8f8za6qlq64&quot;</span>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-rewardsbyepoch">- RewardsByEpoch<a class="headerlink" href="#-rewardsbyepoch" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Query pot reward by epoch</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>grpcurl -plaintext -d &#39;{&quot;epoch&quot;: 1}&#39; 127.0.0.1:9090 stratos.pot.v1.Query.RewardsByEpoch
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="p">{</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">  </span><span class="nt">&quot;rewards&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">      </span><span class="nt">&quot;wallet_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;st1rwnmgk0x2n2wry876dkxq2hhcce8k7kzspppax&quot;</span><span class="p">,</span>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="w">      </span><span class="nt">&quot;reward_from_mining_pool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4000000000000000000&quot;</span>
+<a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="w">      </span><span class="p">],</span>
+<a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a><span class="w">      </span><span class="nt">&quot;reward_from_traffic_pool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;25740279520266&quot;</span>
+<a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-37-16" name="__codelineno-37-16" href="#__codelineno-37-16"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-37-17" name="__codelineno-37-17" href="#__codelineno-37-17"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-37-18" name="__codelineno-37-18" href="#__codelineno-37-18"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-37-19" name="__codelineno-37-19" href="#__codelineno-37-19"></a><span class="w">      </span><span class="nt">&quot;wallet_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;st1k9hfqps9s2tpnfxch2avvevyvtry0zth39gdzc&quot;</span><span class="p">,</span>
+<a id="__codelineno-37-20" name="__codelineno-37-20" href="#__codelineno-37-20"></a><span class="w">      </span><span class="nt">&quot;reward_from_mining_pool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-37-21" name="__codelineno-37-21" href="#__codelineno-37-21"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-37-22" name="__codelineno-37-22" href="#__codelineno-37-22"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-37-23" name="__codelineno-37-23" href="#__codelineno-37-23"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4000000000000000000&quot;</span>
+<a id="__codelineno-37-24" name="__codelineno-37-24" href="#__codelineno-37-24"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-37-25" name="__codelineno-37-25" href="#__codelineno-37-25"></a><span class="w">      </span><span class="p">],</span>
+<a id="__codelineno-37-26" name="__codelineno-37-26" href="#__codelineno-37-26"></a><span class="w">      </span><span class="nt">&quot;reward_from_traffic_pool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-37-27" name="__codelineno-37-27" href="#__codelineno-37-27"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-37-28" name="__codelineno-37-28" href="#__codelineno-37-28"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-37-29" name="__codelineno-37-29" href="#__codelineno-37-29"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;25740279520266&quot;</span>
+<a id="__codelineno-37-30" name="__codelineno-37-30" href="#__codelineno-37-30"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-37-31" name="__codelineno-37-31" href="#__codelineno-37-31"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-37-32" name="__codelineno-37-32" href="#__codelineno-37-32"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-37-33" name="__codelineno-37-33" href="#__codelineno-37-33"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-37-34" name="__codelineno-37-34" href="#__codelineno-37-34"></a><span class="w">  </span><span class="nt">&quot;pagination&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-37-35" name="__codelineno-37-35" href="#__codelineno-37-35"></a><span class="w">    </span><span class="nt">&quot;next_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;y0JUWCEwpMwgs3XzfSwlHBHU9Xg=&quot;</span><span class="p">,</span>
+<a id="__codelineno-37-36" name="__codelineno-37-36" href="#__codelineno-37-36"></a><span class="w">    </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-37-37" name="__codelineno-37-37" href="#__codelineno-37-37"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-37-38" name="__codelineno-37-38" href="#__codelineno-37-38"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-rewardsbywallet">- RewardsByWallet<a class="headerlink" href="#-rewardsbywallet" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get pot reward by beneficiary address</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>grpcurl -plaintext -d &#39;{&quot;wallet_address&quot;: &quot;st1rwnmgk0x2n2wry876dkxq2hhcce8k7kzspppax&quot;} &#39; 127.0.0.1:9090 stratos.pot.v1.Query.RewardsByWallet
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="p">{</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">  </span><span class="nt">&quot;rewards&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="w">    </span><span class="nt">&quot;wallet_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;st1rwnmgk0x2n2wry876dkxq2hhcce8k7kzspppax&quot;</span><span class="p">,</span>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="w">    </span><span class="nt">&quot;mature_total_reward&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="w">    </span><span class="nt">&quot;immature_total_reward&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a><span class="w">        </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a><span class="w">        </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;16000257399827064713&quot;</span>
+<a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-39-10" name="__codelineno-39-10" href="#__codelineno-39-10"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-39-11" name="__codelineno-39-11" href="#__codelineno-39-11"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-39-12" name="__codelineno-39-12" href="#__codelineno-39-12"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-rewardsbywalletandepoch">- RewardsByWalletAndEpoch<a class="headerlink" href="#-rewardsbywalletandepoch" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get pot reward by beneficiary address and epoch</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>grpcurl -plaintext -d &#39;{&quot;wallet_address&quot;: &quot;st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m&quot;, &quot;epoch&quot;: 2} &#39; 127.0.0.1:9090 stratos.pot.v1.Query.RewardsByWalletAndEpoch
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="p">{</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="w">  </span><span class="nt">&quot;rewards&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="w">      </span><span class="nt">&quot;wallet_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m&quot;</span><span class="p">,</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="w">      </span><span class="nt">&quot;reward_from_mining_pool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;52000000000000000000&quot;</span>
+<a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a><span class="w">      </span><span class="p">],</span>
+<a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a><span class="w">      </span><span class="nt">&quot;reward_from_traffic_pool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-41-13" name="__codelineno-41-13" href="#__codelineno-41-13"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-41-14" name="__codelineno-41-14" href="#__codelineno-41-14"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;669244695117639&quot;</span>
+<a id="__codelineno-41-15" name="__codelineno-41-15" href="#__codelineno-41-15"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-41-16" name="__codelineno-41-16" href="#__codelineno-41-16"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-41-17" name="__codelineno-41-17" href="#__codelineno-41-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-41-18" name="__codelineno-41-18" href="#__codelineno-41-18"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-41-19" name="__codelineno-41-19" href="#__codelineno-41-19"></a><span class="w">  </span><span class="nt">&quot;pagination&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-41-20" name="__codelineno-41-20" href="#__codelineno-41-20"></a><span class="w">    </span><span class="nt">&quot;next_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<a id="__codelineno-41-21" name="__codelineno-41-21" href="#__codelineno-41-21"></a><span class="w">    </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-41-22" name="__codelineno-41-22" href="#__codelineno-41-22"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-41-23" name="__codelineno-41-23" href="#__codelineno-41-23"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="-slashingbyowner">- SlashingByOwner<a class="headerlink" href="#-slashingbyowner" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get pot slashing by owner</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>grpcurl -plaintext -d &#39;{&quot;wallet_address&quot;: &quot;st16uzr20lx072gexwjuvg94hz3t8y73u4085s9sw&quot;} &#39; 127.0.0.1:9090 stratos.pot.v1.Query.SlashingByOwner
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="p">{</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w"> </span><span class="nt">&quot;slashing&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-params_2">- Params<a class="headerlink" href="#-params_2" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get params of POT Module</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a> grpcurl -plaintext 127.0.0.1:9090 stratos.pot.v1.Query.Params
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="p">{</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="w">    </span><span class="nt">&quot;bond_denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="w">    </span><span class="nt">&quot;reward_denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="w">    </span><span class="nt">&quot;mature_epoch&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2016&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="w">    </span><span class="nt">&quot;mining_reward_params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="w">        </span><span class="nt">&quot;total_mined_valve_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-12" name="__codelineno-45-12" href="#__codelineno-45-12"></a><span class="w">        </span><span class="nt">&quot;total_mined_valve_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-13" name="__codelineno-45-13" href="#__codelineno-45-13"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-14" name="__codelineno-45-14" href="#__codelineno-45-14"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;16819200000000000000000000&quot;</span>
+<a id="__codelineno-45-15" name="__codelineno-45-15" href="#__codelineno-45-15"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-16" name="__codelineno-45-16" href="#__codelineno-45-16"></a><span class="w">        </span><span class="nt">&quot;mining_reward&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-17" name="__codelineno-45-17" href="#__codelineno-45-17"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-18" name="__codelineno-45-18" href="#__codelineno-45-18"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;80000000000000000000&quot;</span>
+<a id="__codelineno-45-19" name="__codelineno-45-19" href="#__codelineno-45-19"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-20" name="__codelineno-45-20" href="#__codelineno-45-20"></a><span class="w">        </span><span class="nt">&quot;block_chain_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2000&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-21" name="__codelineno-45-21" href="#__codelineno-45-21"></a><span class="w">        </span><span class="nt">&quot;resource_node_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6000&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-22" name="__codelineno-45-22" href="#__codelineno-45-22"></a><span class="w">        </span><span class="nt">&quot;meta_node_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2000&quot;</span>
+<a id="__codelineno-45-23" name="__codelineno-45-23" href="#__codelineno-45-23"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-45-24" name="__codelineno-45-24" href="#__codelineno-45-24"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-45-25" name="__codelineno-45-25" href="#__codelineno-45-25"></a><span class="w">        </span><span class="nt">&quot;total_mined_valve_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-26" name="__codelineno-45-26" href="#__codelineno-45-26"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-27" name="__codelineno-45-27" href="#__codelineno-45-27"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;16819200000000000000000000&quot;</span>
+<a id="__codelineno-45-28" name="__codelineno-45-28" href="#__codelineno-45-28"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-29" name="__codelineno-45-29" href="#__codelineno-45-29"></a><span class="w">        </span><span class="nt">&quot;total_mined_valve_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-30" name="__codelineno-45-30" href="#__codelineno-45-30"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-31" name="__codelineno-45-31" href="#__codelineno-45-31"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;25228800000000000000000000&quot;</span>
+<a id="__codelineno-45-32" name="__codelineno-45-32" href="#__codelineno-45-32"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-33" name="__codelineno-45-33" href="#__codelineno-45-33"></a><span class="w">        </span><span class="nt">&quot;mining_reward&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-34" name="__codelineno-45-34" href="#__codelineno-45-34"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-35" name="__codelineno-45-35" href="#__codelineno-45-35"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;40000000000000000000&quot;</span>
+<a id="__codelineno-45-36" name="__codelineno-45-36" href="#__codelineno-45-36"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-37" name="__codelineno-45-37" href="#__codelineno-45-37"></a><span class="w">        </span><span class="nt">&quot;block_chain_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2000&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-38" name="__codelineno-45-38" href="#__codelineno-45-38"></a><span class="w">        </span><span class="nt">&quot;resource_node_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6200&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-39" name="__codelineno-45-39" href="#__codelineno-45-39"></a><span class="w">        </span><span class="nt">&quot;meta_node_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1800&quot;</span>
+<a id="__codelineno-45-40" name="__codelineno-45-40" href="#__codelineno-45-40"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-45-41" name="__codelineno-45-41" href="#__codelineno-45-41"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-45-42" name="__codelineno-45-42" href="#__codelineno-45-42"></a><span class="w">        </span><span class="nt">&quot;total_mined_valve_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-43" name="__codelineno-45-43" href="#__codelineno-45-43"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-44" name="__codelineno-45-44" href="#__codelineno-45-44"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;25228800000000000000000000&quot;</span>
+<a id="__codelineno-45-45" name="__codelineno-45-45" href="#__codelineno-45-45"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-46" name="__codelineno-45-46" href="#__codelineno-45-46"></a><span class="w">        </span><span class="nt">&quot;total_mined_valve_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-47" name="__codelineno-45-47" href="#__codelineno-45-47"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-48" name="__codelineno-45-48" href="#__codelineno-45-48"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;29433600000000000000000000&quot;</span>
+<a id="__codelineno-45-49" name="__codelineno-45-49" href="#__codelineno-45-49"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-50" name="__codelineno-45-50" href="#__codelineno-45-50"></a><span class="w">        </span><span class="nt">&quot;mining_reward&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-51" name="__codelineno-45-51" href="#__codelineno-45-51"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-52" name="__codelineno-45-52" href="#__codelineno-45-52"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;20000000000000000000&quot;</span>
+<a id="__codelineno-45-53" name="__codelineno-45-53" href="#__codelineno-45-53"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-54" name="__codelineno-45-54" href="#__codelineno-45-54"></a><span class="w">        </span><span class="nt">&quot;block_chain_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2000&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-55" name="__codelineno-45-55" href="#__codelineno-45-55"></a><span class="w">        </span><span class="nt">&quot;resource_node_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6400&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-56" name="__codelineno-45-56" href="#__codelineno-45-56"></a><span class="w">        </span><span class="nt">&quot;meta_node_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1600&quot;</span>
+<a id="__codelineno-45-57" name="__codelineno-45-57" href="#__codelineno-45-57"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-45-58" name="__codelineno-45-58" href="#__codelineno-45-58"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-45-59" name="__codelineno-45-59" href="#__codelineno-45-59"></a><span class="w">        </span><span class="nt">&quot;total_mined_valve_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-60" name="__codelineno-45-60" href="#__codelineno-45-60"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-61" name="__codelineno-45-61" href="#__codelineno-45-61"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;29433600000000000000000000&quot;</span>
+<a id="__codelineno-45-62" name="__codelineno-45-62" href="#__codelineno-45-62"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-63" name="__codelineno-45-63" href="#__codelineno-45-63"></a><span class="w">        </span><span class="nt">&quot;total_mined_valve_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-64" name="__codelineno-45-64" href="#__codelineno-45-64"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-65" name="__codelineno-45-65" href="#__codelineno-45-65"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;31536000000000000000000000&quot;</span>
+<a id="__codelineno-45-66" name="__codelineno-45-66" href="#__codelineno-45-66"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-67" name="__codelineno-45-67" href="#__codelineno-45-67"></a><span class="w">        </span><span class="nt">&quot;mining_reward&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-68" name="__codelineno-45-68" href="#__codelineno-45-68"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-69" name="__codelineno-45-69" href="#__codelineno-45-69"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10000000000000000000&quot;</span>
+<a id="__codelineno-45-70" name="__codelineno-45-70" href="#__codelineno-45-70"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-71" name="__codelineno-45-71" href="#__codelineno-45-71"></a><span class="w">        </span><span class="nt">&quot;block_chain_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2000&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-72" name="__codelineno-45-72" href="#__codelineno-45-72"></a><span class="w">        </span><span class="nt">&quot;resource_node_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6600&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-73" name="__codelineno-45-73" href="#__codelineno-45-73"></a><span class="w">        </span><span class="nt">&quot;meta_node_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1400&quot;</span>
+<a id="__codelineno-45-74" name="__codelineno-45-74" href="#__codelineno-45-74"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-45-75" name="__codelineno-45-75" href="#__codelineno-45-75"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-45-76" name="__codelineno-45-76" href="#__codelineno-45-76"></a><span class="w">        </span><span class="nt">&quot;total_mined_valve_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-77" name="__codelineno-45-77" href="#__codelineno-45-77"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-78" name="__codelineno-45-78" href="#__codelineno-45-78"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;31536000000000000000000000&quot;</span>
+<a id="__codelineno-45-79" name="__codelineno-45-79" href="#__codelineno-45-79"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-80" name="__codelineno-45-80" href="#__codelineno-45-80"></a><span class="w">        </span><span class="nt">&quot;total_mined_valve_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-81" name="__codelineno-45-81" href="#__codelineno-45-81"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-82" name="__codelineno-45-82" href="#__codelineno-45-82"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;32587200000000000000000000&quot;</span>
+<a id="__codelineno-45-83" name="__codelineno-45-83" href="#__codelineno-45-83"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-84" name="__codelineno-45-84" href="#__codelineno-45-84"></a><span class="w">        </span><span class="nt">&quot;mining_reward&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-85" name="__codelineno-45-85" href="#__codelineno-45-85"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-86" name="__codelineno-45-86" href="#__codelineno-45-86"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5000000000000000000&quot;</span>
+<a id="__codelineno-45-87" name="__codelineno-45-87" href="#__codelineno-45-87"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-88" name="__codelineno-45-88" href="#__codelineno-45-88"></a><span class="w">        </span><span class="nt">&quot;block_chain_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2000&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-89" name="__codelineno-45-89" href="#__codelineno-45-89"></a><span class="w">        </span><span class="nt">&quot;resource_node_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6800&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-90" name="__codelineno-45-90" href="#__codelineno-45-90"></a><span class="w">        </span><span class="nt">&quot;meta_node_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1200&quot;</span>
+<a id="__codelineno-45-91" name="__codelineno-45-91" href="#__codelineno-45-91"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-45-92" name="__codelineno-45-92" href="#__codelineno-45-92"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-45-93" name="__codelineno-45-93" href="#__codelineno-45-93"></a><span class="w">        </span><span class="nt">&quot;total_mined_valve_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-94" name="__codelineno-45-94" href="#__codelineno-45-94"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-95" name="__codelineno-45-95" href="#__codelineno-45-95"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;32587200000000000000000000&quot;</span>
+<a id="__codelineno-45-96" name="__codelineno-45-96" href="#__codelineno-45-96"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-97" name="__codelineno-45-97" href="#__codelineno-45-97"></a><span class="w">        </span><span class="nt">&quot;total_mined_valve_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-98" name="__codelineno-45-98" href="#__codelineno-45-98"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-99" name="__codelineno-45-99" href="#__codelineno-45-99"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;40000000000000000000000000&quot;</span>
+<a id="__codelineno-45-100" name="__codelineno-45-100" href="#__codelineno-45-100"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-101" name="__codelineno-45-101" href="#__codelineno-45-101"></a><span class="w">        </span><span class="nt">&quot;mining_reward&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-102" name="__codelineno-45-102" href="#__codelineno-45-102"></a><span class="w">          </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-103" name="__codelineno-45-103" href="#__codelineno-45-103"></a><span class="w">          </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2500000000000000000&quot;</span>
+<a id="__codelineno-45-104" name="__codelineno-45-104" href="#__codelineno-45-104"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-45-105" name="__codelineno-45-105" href="#__codelineno-45-105"></a><span class="w">        </span><span class="nt">&quot;block_chain_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2000&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-106" name="__codelineno-45-106" href="#__codelineno-45-106"></a><span class="w">        </span><span class="nt">&quot;resource_node_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7000&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-107" name="__codelineno-45-107" href="#__codelineno-45-107"></a><span class="w">        </span><span class="nt">&quot;meta_node_percentage_in_bp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000&quot;</span>
+<a id="__codelineno-45-108" name="__codelineno-45-108" href="#__codelineno-45-108"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-45-109" name="__codelineno-45-109" href="#__codelineno-45-109"></a><span class="w">    </span><span class="p">],</span>
+<a id="__codelineno-45-110" name="__codelineno-45-110" href="#__codelineno-45-110"></a><span class="w">    </span><span class="nt">&quot;community_tax&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.020000000000000000&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-111" name="__codelineno-45-111" href="#__codelineno-45-111"></a><span class="w">    </span><span class="nt">&quot;initial_total_supply&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-112" name="__codelineno-45-112" href="#__codelineno-45-112"></a><span class="w">      </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-45-113" name="__codelineno-45-113" href="#__codelineno-45-113"></a><span class="w">      </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100000000000000000000000000&quot;</span>
+<a id="__codelineno-45-114" name="__codelineno-45-114" href="#__codelineno-45-114"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-45-115" name="__codelineno-45-115" href="#__codelineno-45-115"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-45-116" name="__codelineno-45-116" href="#__codelineno-45-116"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-totalminedtoken">- TotalMinedToken<a class="headerlink" href="#-totalminedtoken" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get total mined token</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>grpcurl -plaintext 127.0.0.1:9090 stratos.pot.v1.Query.TotalMinedToken
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="p">{</span>
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">  </span><span class="nt">&quot;total_mined_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="w">    </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="w">    </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;959999999923&quot;</span>
+<a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a><span class="p">}</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="-circulationsupply">- CirculationSupply<a class="headerlink" href="#-circulationsupply" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>Get circulation supply</p>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>grpcurl -plaintext 127.0.0.1:9090 stratos.pot.v1.Query.CirculationSupply
+</code></pre></div>
+<p>Response:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="p">{</span>
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">  </span><span class="nt">&quot;circulation_supply&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a><span class="w">      </span><span class="nt">&quot;denom&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wei&quot;</span><span class="p">,</span>
+<a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a><span class="w">      </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;441331088285529367702468752&quot;</span>
+<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><br></p>
+<hr />
+<p><br></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <p> &copy; 2021-<script>document.write(new Date().getFullYear())</script> Stratos Network</p>
+    </div>
+  
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://thestratos.org" target="_blank" rel="noopener" title="thestratos.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 256c0-46.6 12.47-90.4 34.27-128.9L144.1 318.3C166 357.5 207.9 384 256 384c14.3 0 27.1-2.3 40.8-6.6l-76.3 132.2C95.9 492.3 0 385.3 0 256m365.1 65.6c12.3-19.2 18.9-42.5 18.9-65.6 0-38.2-16.8-72.5-43.3-96h152.7c12 29.6 18.6 62.1 18.6 96 0 141.4-114.6 255.1-256 256zM477.8 128H256c-62.9 0-113.7 44.1-125.5 102.7L54.19 98.47C101 38.53 174 0 256 0c94.8 0 177.5 51.48 221.8 128M168 256c0-48.6 39.4-88 88-88s88 39.4 88 88-39.4 88-88 88-88-39.4-88-88"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://t.me/StratosOfficial" target="_blank" rel="noopener" title="t.me" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M248 8C111.033 8 0 119.033 0 256s111.033 248 248 248 248-111.033 248-248S384.967 8 248 8m114.952 168.66c-3.732 39.215-19.881 134.378-28.1 178.3-3.476 18.584-10.322 24.816-16.948 25.425-14.4 1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25 5.342-39.5 3.652-3.793 67.107-61.51 68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608 69.142-14.845 10.194-26.894 9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7 18.45-13.7 108.446-47.248 144.628-62.3c68.872-28.647 83.183-33.623 92.511-33.789 2.052-.034 6.639.474 9.61 2.885a10.45 10.45 0 0 1 3.53 6.716 43.8 43.8 0 0 1 .417 9.769"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.com/invite/tpQGpC2nMh" target="_blank" rel="noopener" title="discord.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/Stratos_Network" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://stratos-network.medium.com/" target="_blank" rel="noopener" title="stratos-network.medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M180.5 74.262C80.813 74.262 0 155.633 0 256s80.819 181.738 180.5 181.738S361 356.373 361 256 280.191 74.262 180.5 74.262m288.25 10.646c-49.845 0-90.245 76.619-90.245 171.095s40.406 171.1 90.251 171.1 90.251-76.619 90.251-171.1H559c0-94.503-40.4-171.095-90.248-171.095Zm139.506 17.821c-17.526 0-31.735 68.628-31.735 153.274s14.2 153.274 31.735 153.274S640 340.631 640 256c0-84.649-14.215-153.271-31.742-153.271Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/stratosnet" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "search.suggest", "search.share", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

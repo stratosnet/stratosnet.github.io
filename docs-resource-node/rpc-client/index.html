@@ -1,0 +1,2674 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="List and descriptions of SDS RPC Client commands.">
+      
+      
+      
+        <link rel="canonical" href="https://docs.thestratos.org/docs-resource-node/rpc-client/">
+      
+      
+        <link rel="prev" href="../node-monitor-websocket-api/">
+      
+      
+      
+      <link rel="icon" href="../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>SDS RPC client usage - Stratos Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="SDS RPC client usage - Stratos Documentation" >
+      
+        <meta  property="og:description"  content="List and descriptions of SDS RPC Client commands." >
+      
+        <meta  property="og:image"  content="https://docs.thestratos.org/assets/images/social/docs-resource-node/rpc-client.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="https://docs.thestratos.org/docs-resource-node/rpc-client/" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="SDS RPC client usage - Stratos Documentation" >
+      
+        <meta  name="twitter:description"  content="List and descriptions of SDS RPC Client commands." >
+      
+        <meta  name="twitter:image"  content="https://docs.thestratos.org/assets/images/social/docs-resource-node/rpc-client.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#-help" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Stratos Documentation" class="md-header__button md-logo" aria-label="Stratos Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Stratos Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SDS RPC client usage
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../docs-about/about-stratos/" class="md-tabs__link">
+          
+  
+  
+  Introduction
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../docs-stratos-chain/setup-and-run-a-stratos-chain-full-node/" class="md-tabs__link">
+          
+  
+  
+  Stratos Chain
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../setup-and-run-a-sds-resource-node/" class="md-tabs__link">
+          
+  
+  
+  Decentralized Storage
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Stratos Documentation" class="md-nav__button md-logo" aria-label="Stratos Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Stratos Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-about/about-stratos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About Stratos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-about/stratos-token-economy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    STOS Token Economy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-about/changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Updates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Stratos Chain
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Stratos Chain
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    HOWTOs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            HOWTOs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-stratos-chain/setup-and-run-a-stratos-chain-full-node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Full-Chain Node
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-stratos-chain/how-to-become-a-validator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Become a Validator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-stratos-chain/how-to-start-with-state-sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use of State Sync
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-stratos-chain/how-to-setup-rest-grpc-full-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Full-Chain as REST/gRPC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-stratos-chain/mainnet-bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mainnet Bridge
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-stratos-chain/mainnet-staking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mainnet Staking
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Operating
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Operating
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-stratos-chain/stchaind-commands-part-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    stchaind Commands Part 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-stratos-chain/stchaind-commands-part-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    stchaind Commands Part 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-stratos-chain/stratos-chain-grpc-queries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    gRPC Queries
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-stratos-chain/stratos-chain-rest-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    REST APIs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-stratos-chain/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Network
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    EVM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            EVM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/node-config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Node config
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Deploying on Stratos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Deploying on Stratos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/deploy-smart-contracts/hardhat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using Hardhat
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/deploy-smart-contracts/truffle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using Truffle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Wallets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Wallets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/hello/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hello MetaMask
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/configure-on-metamask/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configure Stratos on MetaMask
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/multiple-accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multiple Accounts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/wallets/metamask/gas-token/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    STOS Gas token
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs-evm/available-dapps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Available dapps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Decentralized Storage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Decentralized Storage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    HOWTOs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            HOWTOs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup-and-run-a-sds-resource-node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDS Resource Node
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sds-update-v12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SDS Update to v0.12.10
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sds-ipfs-handbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migrate IPFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sds-video-streaming-handbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Video Streaming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Operating
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Operating
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spfs-quick-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SPFS Quick Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ppd-terminal-subcommands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ppd Commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sds-rpc-for-file-operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    File Operations RPC API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../node-monitor-websocket-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Node Monitor WebSocket API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    RPC Client
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    RPC Client
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      - help
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      - completion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="- completion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      for bash
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-fish" class="md-nav__link">
+    <span class="md-ellipsis">
+      for fish
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      for powershell
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-zsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      for zsh
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      - get
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-getozone" class="md-nav__link">
+    <span class="md-ellipsis">
+      - getozone
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-getshared" class="md-nav__link">
+    <span class="md-ellipsis">
+      - getshared
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      - list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-listshared" class="md-nav__link">
+    <span class="md-ellipsis">
+      - listshared
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      - put
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-putstream" class="md-nav__link">
+    <span class="md-ellipsis">
+      - putstream
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-share" class="md-nav__link">
+    <span class="md-ellipsis">
+      - share
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-stopshare" class="md-nav__link">
+    <span class="md-ellipsis">
+      - stopshare
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-withdraw" class="md-nav__link">
+    <span class="md-ellipsis">
+      - withdraw
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-send" class="md-nav__link">
+    <span class="md-ellipsis">
+      - send
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      - help
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      - completion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="- completion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      for bash
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-fish" class="md-nav__link">
+    <span class="md-ellipsis">
+      for fish
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      for powershell
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-zsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      for zsh
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      - get
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-getozone" class="md-nav__link">
+    <span class="md-ellipsis">
+      - getozone
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-getshared" class="md-nav__link">
+    <span class="md-ellipsis">
+      - getshared
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      - list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-listshared" class="md-nav__link">
+    <span class="md-ellipsis">
+      - listshared
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-put" class="md-nav__link">
+    <span class="md-ellipsis">
+      - put
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-putstream" class="md-nav__link">
+    <span class="md-ellipsis">
+      - putstream
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-share" class="md-nav__link">
+    <span class="md-ellipsis">
+      - share
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-stopshare" class="md-nav__link">
+    <span class="md-ellipsis">
+      - stopshare
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-withdraw" class="md-nav__link">
+    <span class="md-ellipsis">
+      - withdraw
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-send" class="md-nav__link">
+    <span class="md-ellipsis">
+      - send
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>RPC Client</h1>
+
+<h2 id="-help">- <code>help</code><a class="headerlink" href="#-help" title="Permanent link">🔗&#xFE0E;</a></h2>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client [command]</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nt">Available Commands</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">completion  Generate the autocompletion script for the specified shell</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">get         download a file</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">getozone    get the ozone of the wallet</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">getshared   download a shared file</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">help        Help about any command</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">list        list files</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">listshared  list shared files</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">put         upload a file</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">putstream   upload a file</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">share       share a file from uploaded files</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">stopshare   stop sharing a file</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">withdraw    withdraw matured reward</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">send        sending coins to another account</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help            help for rpc_client</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="l l-Scalar l-Scalar-Plain">Use &quot;rpc_client [command] --help&quot; for more information about a command.</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="-completion">- completion<a class="headerlink" href="#-completion" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Generates the autocompletion script for rpc_client for the specified shell.</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client completion [command]</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nt">Available Commands</span><span class="p">:</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">bash        Generate the autocompletion script for bash</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">fish        Generate the autocompletion script for fish</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">powershell  Generate the autocompletion script for powershell</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">zsh         Generate the autocompletion script for zsh</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help   help for completion</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="nt">Global Flags</span><span class="p">:</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="l l-Scalar l-Scalar-Plain">Use &quot;rpc_client completion [command] --help&quot; for more information about a command.</span>
+</code></pre></div>
+<p><br></p>
+<h3 id="for-bash">for bash<a class="headerlink" href="#for-bash" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>To load completions in your current shell session:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">source</span><span class="w"> </span>&lt;<span class="o">(</span>rpc_client<span class="w"> </span>completion<span class="w"> </span>bash<span class="o">)</span>
+</code></pre></div>
+<p>To load completions for every new session, execute once:</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This script depends on the <code>bash-completion</code> package.</p>
+<p>If it is not installed already, you can install it via your OS's package manager.</p>
+</div>
+<ul>
+<li>For Linux:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rpc_client<span class="w"> </span>completion<span class="w"> </span>bash<span class="w"> </span>&gt;<span class="w"> </span>/etc/bash_completion.d/rpc_client
+</code></pre></div>
+<ul>
+<li>For MacOS:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>rpc_client<span class="w"> </span>completion<span class="w"> </span>bash<span class="w"> </span>&gt;<span class="w"> </span><span class="k">$(</span>brew<span class="w"> </span>--prefix<span class="k">)</span>/etc/bash_completion.d/rpc_client
+</code></pre></div>
+<blockquote>
+<p>You will need to start a new shell for this setup to take effect.</p>
+</blockquote>
+<p><br></p>
+<h3 id="for-fish">for fish<a class="headerlink" href="#for-fish" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>To load completions in your current shell session:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>rpc_client<span class="w"> </span>completion<span class="w"> </span>fish<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nb">source</span>
+</code></pre></div>
+<p>To load completions for every new session, execute once:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>rpc_client<span class="w"> </span>completion<span class="w"> </span>fish<span class="w"> </span>&gt;<span class="w"> </span>~/.config/fish/completions/rpc_client.fish
+</code></pre></div>
+<blockquote>
+<p>You will need to start a new shell for this setup to take effect.</p>
+</blockquote>
+<p><br></p>
+<h3 id="for-powershell">for powershell<a class="headerlink" href="#for-powershell" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>To load completions in your current shell session:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>rpc_client<span class="w"> </span>completion<span class="w"> </span>powershell<span class="w"> </span><span class="p">|</span><span class="w"> </span>Out-String<span class="w"> </span><span class="p">|</span><span class="w"> </span>Invoke-Expression
+</code></pre></div>
+<p>To load completions for every new session, add the output of the above command to your powershell profile.</p>
+<p><br></p>
+<h3 id="for-zsh">for zsh<a class="headerlink" href="#for-zsh" title="Permanent link">🔗&#xFE0E;</a></h3>
+<p>If shell completion is not already enabled in your environment you will need to enable it.  You can execute the following once:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;autoload -U compinit; compinit&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
+</code></pre></div>
+<p>To load completions in your current shell session:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">source</span><span class="w"> </span>&lt;<span class="o">(</span>rpc_client<span class="w"> </span>completion<span class="w"> </span>zsh<span class="o">)</span><span class="p">;</span><span class="w"> </span>compdef<span class="w"> </span>_rpc_client<span class="w"> </span>rpc_client
+</code></pre></div>
+<p>To load completions for every new session, execute once:</p>
+<ul>
+<li>For Linux:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>rpc_client<span class="w"> </span>completion<span class="w"> </span>zsh<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">fpath</span><span class="p">[1]</span><span class="si">}</span><span class="s2">/_rpc_client&quot;</span>
+</code></pre></div>
+<ul>
+<li>For MacOS:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>rpc_client<span class="w"> </span>completion<span class="w"> </span>zsh<span class="w"> </span>&gt;<span class="w"> </span><span class="k">$(</span>brew<span class="w"> </span>--prefix<span class="k">)</span>/share/zsh/site-functions/_rpc_client
+</code></pre></div>
+<blockquote>
+<p>You will need to start a new shell for this setup to take effect.</p>
+</blockquote>
+<p><br></p>
+<hr />
+<h2 id="-get">- get<a class="headerlink" href="#-get" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Downloads a file.</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client get &lt;sdm://account/filehash&gt; [flags]</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help   help for get</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="nt">Global Flags</span><span class="p">:</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>rpc_client<span class="w"> </span>get<span class="w"> </span>sdm://st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72/v05ahm500bfpivst07iti9krii5llj608mduoo82<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>--url<span class="w"> </span>http://127.0.0.1:4444<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>--wallet<span class="w"> </span>st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72
+</code></pre></div>
+<p>Response:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 11:56:15 main.go:463: - start downloading the file</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">sdm://st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72/v05ahm500bfpivst07iti9krii5llj608mduoo82</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 11:56:15 main.go:475: - request downloading the file (method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user_requestDownload)</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 11:56:25 main.go:576</span><span class="p">:</span><span class="w"> </span><span class="err">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">downloading is done</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="-getozone">- getozone<a class="headerlink" href="#-getozone" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Queries ozone amount from a wallet address.</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client getozone [flags]</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help   help for getozone</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="nt">Global Flags</span><span class="p">:</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>rpc_client<span class="w"> </span>getozone<span class="w"> </span>--url<span class="w"> </span>http://127.0.0.1:4444<span class="w"> </span>--wallet<span class="w"> </span>st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72
+</code></pre></div>
+<p>Response:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:01:20 main.go:697: - request ozone balance (method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user_requestGetOzone)</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:01:20 main.go:719: - received response (return</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SUCCESS)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:01:20 main.go:721: OZONE balance</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">45511.741533115</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="-getshared">- getshared<a class="headerlink" href="#-getshared" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Downloads a shared file.</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client getshared &lt;filehash&gt; [flags]</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help   help for getshared</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="nt">Global Flags</span><span class="p">:</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>rpc_client<span class="w"> </span>getshared<span class="w"> </span>v05ahm500bfpivst07iti9krii5llj608mduoo82<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>--url<span class="w"> </span>http://127.0.0.1:4444<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>--wallet<span class="w"> </span>st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72
+</code></pre></div>
+<p>Response:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:04:59 main.go:1015: - start downloading the file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v05ahm500bfpivst07iti9krii5llj608mduoo82</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:04:59 main.go:1022: - request shared file information (method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user_requestGetShared)</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="-list">- list<a class="headerlink" href="#-list" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Lists all files uploaded by account (wallet).</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client list [flags]</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help   help for list</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="nt">Global Flags</span><span class="p">:</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>rpc_client<span class="w"> </span>list<span class="w"> </span>--url<span class="w"> </span>http://127.0.0.1:4444<span class="w"> </span>--wallet<span class="w"> </span>st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72
+</code></pre></div>
+<p>Response:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:38:17 main.go:635: - request listing files (method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user_requestList)</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:38:17 main.go:656: - received response (return</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SUCCESS)</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="l l-Scalar l-Scalar-Plain">File Name            File Hash                                 File Size Create Time</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="l l-Scalar l-Scalar-Plain">_____________________________________________________________________________________</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202303142214 v05ahm5000qs4viph3u4biqt67tnels4qpguvjl8   31457280 1678824883</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301221144 v05ahm5000u52005ij1osr15t0e7v8df2voh74mo   31457280 1674380707</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202302240758 v05ahm50010b993c3gdc28nk90bhf4aabdhaujg8   31457280 1677218311</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301240119 v05ahm5001j1g84vpu28upa06n8jca40vtqbc6v8   31457280 1674516005</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202302092312 v05ahm500289uhi4obev6gi3vmmv5s48289vorbg   31457280 1675977162</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301240902 v05ahm5002bitsbccaqv5i568vvtsnr1d2avtaa8   31457280 1674543742</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301242002 v05ahm5003v4fei49lpj6rb0p1rqpjp52johdkmo   31457280 1674583378</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301262228 v05ahm50040vne6f3tuk618h3me8mq4tqor3j6a0   31457280 1674764909</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202302181817 v05ahm5004b9epvd49uhddmmhs6g5lpfpo0h0eho   31457280 1676737093</span>
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202303171340 v05ahm5004ogv5a1aa5np1m0u0q98djg0p679ih0   31457280 1679053247</span>
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301232120 v05ahm5004pvblrcqgvbu2gtmsl108dlfnsgrg80   31457280 1674501610</span>
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202303041845 v05ahm5005304r88pucigun0ta3u9uirjkkroiug   31457280 1677948336</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202302202236 v05ahm5005bgrltqtp6eq57q8n8phsa9krtrvpsg   31457280 1676925407</span>
+<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202302282052 v05ahm5005dpvr5p5en3hj62hqpvcjinjhqdavo0   31457280 1677610366</span>
+<a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301211702 v05ahm5006gncteg3o7ubfl5u3g20er3jme5gkvg   31457280 1674313350</span>
+<a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301251935 v05ahm5006is8d937529te36mpl7so1kh3des3go   31457280 1674668116</span>
+<a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301311242 v05ahm5006tgr22ac68leu5gqitaurmqler3vt78   31457280 1675161765</span>
+<a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301250041 v05ahm5007mtri1o1tdc9m50d2ruqspir70kejd0   31457280 1674600151</span>
+<a id="__codelineno-23-24" name="__codelineno-23-24" href="#__codelineno-23-24"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301221100 v05ahm5007n1tgrhmqbb6h9inktvqb6q7vn3in70   31457280 1674378057</span>
+<a id="__codelineno-23-25" name="__codelineno-23-25" href="#__codelineno-23-25"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301261717 v05ahm5007rcft4obagneqdv1gdnj1266bno8nco   31457280 1674746284</span>
+<a id="__codelineno-23-26" name="__codelineno-23-26" href="#__codelineno-23-26"></a><span class="l l-Scalar l-Scalar-Plain">_____________________________________________________________________________________</span>
+<a id="__codelineno-23-27" name="__codelineno-23-27" href="#__codelineno-23-27"></a><span class="nt">Total: 20    Page</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="-listshared">- listshared<a class="headerlink" href="#-listshared" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Lists all files uploaded and shared by account (wallet).</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client listshared [flags]</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help   help for listshared</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="nt">Global Flags</span><span class="p">:</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>rpc_client<span class="w"> </span>listshared<span class="w"> </span>--url<span class="w"> </span>http://127.0.0.1:4444<span class="w"> </span>--wallet<span class="w"> </span>st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72
+</code></pre></div>
+<p>Response:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 11:50:08 main.go:786: - request listing files (method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user_requestListShare)</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 11:50:08 main.go:805: - received response (return</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SUCCESS)</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="l l-Scalar l-Scalar-Plain">File Name            File Hash                                 File Size Link Time  Link Exp   Share ID         Share Link</span><span class="w">     </span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="l l-Scalar l-Scalar-Plain">________________________________________________________________________________________________________________________________________</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301201653 v05ahm500bfpivst07iti9krii5llj608mduoo88   31457280 1674242684 1689794684 2addd621913e02e8 Xpg6U6_2addd621913e02e8</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301201451 v05ahm504onf44326v8fupkl96gogma8vs85toro   31457280 1674242858 1689794858 476a8ecddbdd29a6 TS7eFc_476a8ecddbdd29a6</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301201553 v05ahm503qb6igipcbmd9q1l1gbqpkiju37c59fo   31457280 1674242786 1689794786 59cf272db46dbbdb UkDPm3_59cf272db46dbbdb</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301201853 v05ahm504aftmgtqerm5npdd34bb0u1lcflpgbb8   31457280 1674242825 1689794825 6615100040081212 OQ9ndm_6615100040081212</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301200915 v05ahm5041mu88dr71ndp1cag0s8kgqvlr85lce0   31457280 1674242813 1689794813 6789246235828987 qAw0PV_6789246235828987</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301200808 v05ahm500l93v2ghdju34h10ehpuj05c6hnqdst8   31457280 1674242748 1689794748 858408741b47a972 LwyBT8_858408741b47a972</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301201816 v05ahm501ajcimbjcvrijuuts1n7d939b180o2rg   31457280 1674242769 1689794769 9cbc8114ebf949ae SGF8Uf_9cbc8114ebf949ae</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301201730 v05ahm500dpnbihbch8s1qtq29ggfebft18keah8   31457280 1674242726 1689794726 a01893d8931c4639 mAvWSE_a01893d8931c4639</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301200944 v05ahm5008ps226hc4etihet1gs2el8g7gvsqqd8   31457280 1674242572 1689794572 b1649c6ddf63a93a ouX59c_b1649c6ddf63a93a</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301201822 v05ahm504b5g4nn3ovi5njgu1v1odbhef10p7k68   31457280 1674242841 1689794841 d8a81f46294532d5 ZpCKeK_d8a81f46294532d5</span>
+<a id="__codelineno-26-16" name="__codelineno-26-16" href="#__codelineno-26-16"></a><span class="l l-Scalar l-Scalar-Plain">testsds1-202301200705 v05ahm5008hlp1k2278ojgpc1i4t30d21pb9555g   31457280 1674242538 1689794538 ecc6169ec9a95258 5Y4amn_ecc6169ec9a95258</span>
+<a id="__codelineno-26-17" name="__codelineno-26-17" href="#__codelineno-26-17"></a><span class="l l-Scalar l-Scalar-Plain">________________________________________________________________________________________________________________________________________</span>
+<a id="__codelineno-26-18" name="__codelineno-26-18" href="#__codelineno-26-18"></a><span class="nt">Total: 11       Page</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="-put">- put<a class="headerlink" href="#-put" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Uploads a file.</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client put &lt;filepath&gt; [flags]</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help   help for put</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="nt">Global Flags</span><span class="p">:</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>rpc_client<span class="w"> </span>put<span class="w"> </span>/home/user/tmp/100MB.zip<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>--url<span class="w"> </span>http://127.0.0.1:4444<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>--wallet<span class="w"> </span>st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72
+</code></pre></div>
+<p>Response:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:14:17 main.go:179: - start uploading the file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/user/tmp/100MB.zip</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:14:17 main.go:187: - request uploading file (method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user_requestUpload)</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:14:33 main.go:212: - received response (return</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UPLOAD_DATA)</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:14:33 main.go:225: - request upload date (method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user_uploadData)</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:14:32 main.go:244</span><span class="p">:</span><span class="w"> </span><span class="err">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uploading is done</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="-putstream">- putstream<a class="headerlink" href="#-putstream" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Uploads a media file for streaming</p>
+<p>Streaming is the continuous transmission of audio or video files(media files) from a server to a client. </p>
+<p>In order to upload a streaming file, first you need to install a tool ffmpeg for transcoding multimedia files.</p>
+<ul>
+<li>In Linux Terminal:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ffmpeg
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="c1"># use ffmpeg -version to check its version</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>ffmpeg<span class="w"> </span>-version
+</code></pre></div>
+<ul>
+<li>In MacOS Terminal:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>brew<span class="w"> </span>update
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>brew<span class="w"> </span>install<span class="w"> </span>ffmpeg
+</code></pre></div>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client putstream &lt;filepath&gt; [flags]</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help   help for putstream</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="nt">Global Flags</span><span class="p">:</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>rpc_client<span class="w"> </span>putstream<span class="w"> </span>/home/user/tmp/file_example_MP4_640_3MG.mp4<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>--url<span class="w"> </span>http://127.0.0.1:4444<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>--wallet<span class="w"> </span>st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72
+</code></pre></div>
+<p>Response:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nn">...</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="-share">- share<a class="headerlink" href="#-share" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Shares a previously uploaded file.</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client share &lt;filehash&gt; &lt;duration&gt; &lt;is_private&gt; [flags]</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help   help for share</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="nt">Global Flags</span><span class="p">:</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>duration</code> is time period(in seconds) when the file share expires. Put 0 for unlimited time.</p>
+<p><code>is_private</code> is whether the file share should be protected by a password. Put 0 for public file without password, and 1 for private file with a password.</p>
+<p>If <code>is_private</code> has been set to '1', SDS will provide a password to this shared file, like <code>m216</code>.</p>
+</div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>rpc_client<span class="w"> </span>share<span class="w"> </span>v05ahm500bfpivst07iti9krii5llj608mduoo82<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>--url<span class="w"> </span>http://127.0.0.1:4444<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>--wallet<span class="w"> </span>st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72
+</code></pre></div>
+<p>Response:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/24 13:00:01 main.go:957: - request sharing file (method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user_requestShare)</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/24 13:00:03 main.go:976: - received response (return</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SUCCESS)</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="nt">ShareId</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">78912f5d9bbe939r</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="nt">ShareLink</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">VzW5KW_78912f5d9bbe939r</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="-stopshare">- stopshare<a class="headerlink" href="#-stopshare" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Stops sharing a previously uploaded file.</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client stopshare &lt;ShareID&gt; [flags]</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help   help for stopshare</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a>
+<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="nt">Global Flags</span><span class="p">:</span>
+<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can get the <code>ShareID</code> from the <a href="#-listshared">listshared</a> command.</p>
+</div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>rpc_client<span class="w"> </span>stopshare<span class="w"> </span><span class="m">6789246235828987</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>--url<span class="w"> </span>http://127.0.0.1:4444<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>--wallet<span class="w"> </span>st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72
+</code></pre></div>
+<p>Result:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:34:53 main.go:913: - request stop sharing (method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user_requestStopShare)</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/03/20 12:34:54 main.go:932: - received response (return</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SUCCESS)</span>
+</code></pre></div>
+<p><br></p>
+<hr />
+<h2 id="-withdraw">- withdraw<a class="headerlink" href="#-withdraw" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Withdraw matured reward.</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client withdraw &lt;amount&gt; &lt;targetAddress&gt; &lt;fee&gt; &lt;gas&gt; [flags]</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help   help for withdraw</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="nt">Global Flags</span><span class="p">:</span>
+<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>rpc_client<span class="w"> </span>withdraw<span class="w"> </span>100wei<span class="w"> </span>st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l<span class="w"> </span><span class="m">0</span>.01stos<span class="w"> </span><span class="m">60000</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>--url<span class="w"> </span>http://127.0.0.1:4444<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>--wallet<span class="w"> </span>st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72
+</code></pre></div>
+<p>Result:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/07/11 14:10:31 rpc_client.go:1390: - request withdraw (method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owner_requestWithdraw)</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/07/11 14:10:31 rpc_client.go:1411: - received response (return</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SUCCESS)</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can use 'stchaind' binary to withdraw instead.</p>
+<p>1: Prepare the stchaind binary.</p>
+<p>2: Convert the sds wallet key file into stchaind format using bip39 mnemonic.
+    ./stchaind keys add testuser --home node/stchaind --keyring-backend test --hd-path "m/44'/606'/0'/0/0"</p>
+<p>3: Send the 'withdraw' tx to the node through the rpc interface of the stratos-chain 
+    ./stchaind tx pot withdraw --amount=100ustos --from=st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l \
+                               --target-address=st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l --chain-id=testchain \
+                               --keyring-backend=test --home=./node/stchaind --gas=auto --gas-prices=1gwei \
+                               --node "tcp://localhost:26657"</p>
+</div>
+<p><br></p>
+<hr />
+<h2 id="-send">- send<a class="headerlink" href="#-send" title="Permanent link">🔗&#xFE0E;</a></h2>
+<p>Sending coins to another account.</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="nt">Usage</span><span class="p">:</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">rpc_client send &lt;toAddress&gt; &lt;amount&gt; &lt;fee&gt; &lt;gas&gt; [flags]</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="nt">Flags</span><span class="p">:</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-h, --help   help for send</span>
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a>
+<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a><span class="nt">Global Flags</span><span class="p">:</span>
+<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default &quot;http://127.0.0.1:4444&quot;)</span>
+<a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">-w, --wallet string   wallet address to be used (default</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the first wallet in folder ./account/)</span>
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>rpc_client<span class="w"> </span>send<span class="w"> </span>st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l<span class="w"> </span>100wei<span class="w"> </span><span class="m">0</span>.01stos<span class="w"> </span><span class="m">60000</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>--url<span class="w"> </span>http://127.0.0.1:4444<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>--wallet<span class="w"> </span>st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72
+</code></pre></div>
+<p>Result:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/07/11 14:20:40 rpc_client.go:1437: - request send (method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owner_requestSend)</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="p p-Indicator">[</span><span class="nv">INFO</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="nt">2023/07/11 14:20:40 rpc_client.go:1458: - received response (return</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SUCCESS)</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can use 'stchaind' binary to send instead.</p>
+<p>1: Prepare the stchaind binary.</p>
+<p>2: Convert the sds wallet key file into stchaind format using bip39 mnemonic.
+    ./stchaind keys add testuser --home node/stchaind --keyring-backend test --hd-path "m/44'/606'/0'/0/0"</p>
+<p>3: Send the 'send' tx to the node through the rpc interface of the stratos-chain 
+    ./stchaind tx bank send st19tgvkz4d4uqv68ahn90vc4mhuh63g2l7u4ad6l st1edp9gkppxzjvcg9nwheh6tp9rsgafatckfdl6m 10000wei \
+                        --chain-id=testchain  --keyring-backend=test --home=./node/stchaind --gas=auto --gas-prices=1gwei \
+                        --node "tcp://localhost:26657"</p>
+</div>
+<p><br></p>
+<hr />
+<p><br></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <p> &copy; 2021-<script>document.write(new Date().getFullYear())</script> Stratos Network</p>
+    </div>
+  
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://thestratos.org" target="_blank" rel="noopener" title="thestratos.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 256c0-46.6 12.47-90.4 34.27-128.9L144.1 318.3C166 357.5 207.9 384 256 384c14.3 0 27.1-2.3 40.8-6.6l-76.3 132.2C95.9 492.3 0 385.3 0 256m365.1 65.6c12.3-19.2 18.9-42.5 18.9-65.6 0-38.2-16.8-72.5-43.3-96h152.7c12 29.6 18.6 62.1 18.6 96 0 141.4-114.6 255.1-256 256zM477.8 128H256c-62.9 0-113.7 44.1-125.5 102.7L54.19 98.47C101 38.53 174 0 256 0c94.8 0 177.5 51.48 221.8 128M168 256c0-48.6 39.4-88 88-88s88 39.4 88 88-39.4 88-88 88-88-39.4-88-88"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://t.me/StratosOfficial" target="_blank" rel="noopener" title="t.me" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M248 8C111.033 8 0 119.033 0 256s111.033 248 248 248 248-111.033 248-248S384.967 8 248 8m114.952 168.66c-3.732 39.215-19.881 134.378-28.1 178.3-3.476 18.584-10.322 24.816-16.948 25.425-14.4 1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25 5.342-39.5 3.652-3.793 67.107-61.51 68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608 69.142-14.845 10.194-26.894 9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7 18.45-13.7 108.446-47.248 144.628-62.3c68.872-28.647 83.183-33.623 92.511-33.789 2.052-.034 6.639.474 9.61 2.885a10.45 10.45 0 0 1 3.53 6.716 43.8 43.8 0 0 1 .417 9.769"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.com/invite/tpQGpC2nMh" target="_blank" rel="noopener" title="discord.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/Stratos_Network" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://stratos-network.medium.com/" target="_blank" rel="noopener" title="stratos-network.medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M180.5 74.262C80.813 74.262 0 155.633 0 256s80.819 181.738 180.5 181.738S361 356.373 361 256 280.191 74.262 180.5 74.262m288.25 10.646c-49.845 0-90.245 76.619-90.245 171.095s40.406 171.1 90.251 171.1 90.251-76.619 90.251-171.1H559c0-94.503-40.4-171.095-90.248-171.095Zm139.506 17.821c-17.526 0-31.735 68.628-31.735 153.274s14.2 153.274 31.735 153.274S640 340.631 640 256c0-84.649-14.215-153.271-31.742-153.271Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/stratosnet" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "search.suggest", "search.share", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="../../js/extra.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
