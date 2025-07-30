@@ -67,6 +67,7 @@ nav:
       - ppd Commands: docs-resource-node/ppd-terminal-subcommands.md
       - File Operations RPC API: docs-resource-node/sds-rpc-for-file-operation.md
       - Node Monitor WebSocket API: docs-resource-node/node-monitor-websocket-api.md
+      - Service Gateway: docs-resource-node/service-gateway.md
     - Examples:
       - RPC Client: docs-resource-node/rpc-client.md
 
