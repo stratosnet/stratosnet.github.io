@@ -21,6 +21,16 @@ hide:
   .md-typeset h2 {
     display: none;
   }
+
+  /* Table 100% width */
+
+.md-typeset__table {
+   min-width: 100%;
+}
+
+.md-typeset table:not([class]) {
+    display: table;
+}
 </style>
 
 <br><br>
@@ -30,16 +40,17 @@ hide:
 <div class="center-table" markdown>
 
 
-| <small>Quick Links</small> | <small>URL</small> |
-| ----------- | :-- |
-| About Stratos and Whitepaper | [Link](../docs-about/about-stratos) |
-| Updates | [Link](../docs-about/changes/)|
+| <small>Quick Links</small> | <small>URL</small>                                                    |
+| ----------- |:----------------------------------------------------------------------|
+| About Stratos and Whitepaper | [Link](../docs-about/about-stratos)                                   |
+| Updates | [Link](../docs-about/changes/)                                        |
 | HOWTO: Setup a Full-Chain node | [Link](../docs-stratos-chain/setup-and-run-a-stratos-chain-full-node) |
-| HOWTO: Become a Validator | [Link](../docs-stratos-chain/how-to-become-a-validator) |
-| HOWTO: Setup a SDS Resource node | [Link](../docs-resource-node/setup-and-run-a-sds-resource-node) |
-| Full-Chain (Validator) node commands part 1 | [Link](../docs-stratos-chain/stchaind-commands-part-1) |
-| Full-Chain (Validator) node commands part 2 | [Link](../docs-stratos-chain/stchaind-commands-part-2) |
-| SDS Resource node commands | [Link](../docs-resource-node/ppd-terminal-subcommands)
+| HOWTO: Become a Validator | [Link](../docs-stratos-chain/how-to-become-a-validator)               |
+| HOWTO: Setup a SDS Resource node | [Link](../docs-resource-node/setup-and-run-a-sds-resource-node)       |
+| Full-Chain (Validator) node commands part 1 | [Link](../docs-stratos-chain/stchaind-commands-part-1)                |
+| Full-Chain (Validator) node commands part 2 | [Link](../docs-stratos-chain/stchaind-commands-part-2)                |
+| SDS Resource node commands | [Link](../docs-resource-node/ppd-terminal-subcommands)                |
+| Address Convert Tool | [Link](../address-convertor-ui)                                       |
 
 </div>
 

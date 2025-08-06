@@ -3,6 +3,30 @@ title: Stratos Network Changes
 description: Stratos project updates.
 ---
 
+## Sep 1, 2023 [Updates](https://stratos-network.medium.com/stratos-bi-weekly-progress-report-august-16-august-29-2023-93024913e0fd)
+
+	+ SDS Resource Node IP Update Issues
+	+ SDS Video Stream File Over Limit Issue
+	+ SDS Resource Node Multi-Terminal Log Issue
+	+ SDS RPC Request Time Issue
+	+ SDS Memory Allocation Enhancement
+
+	! This will be the final technical bi-weekly report
+	! Next monthly updates will focus on business development and building the Stratos Ecosystem
+
+---
+
+## Aug 18, 2023 [Updates](https://stratos-network.medium.com/stratos-bi-weekly-progress-report-august-02-august-15-2023-466e6cd6fb09)
+
+	+ Stratos Chain Desktop Wallet Update
+	+ Stratos Chain Explorer Voting Power Fix
+	+ Stratos Chain EVM Explorer Transaction History Fix
+	+ SDS Documents Update
+	+ SDS Stream File Hash Mismatch Issue Fix
+	+ SDS Terminal Config Command Issue Fix
+	+ New Website Design
+
+---
 
 ## Aug 4, 2023 [Updates](https://stratos-network.medium.com/stratos-bi-weekly-progress-report-july-19-august-01-2023-3763270ee72d)
 

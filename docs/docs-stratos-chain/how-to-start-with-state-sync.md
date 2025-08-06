@@ -1,6 +1,8 @@
 ---
 title: How to use state sync to start stratos-chain
 description: This document describes how to start the stratos-chain using state sync.
+hide:
+  - toc
 ---
 
 ## Introduction
@@ -17,41 +19,37 @@ Since the application state is generally much smaller than the blocks, and resto
 
 ## Start a node using stateSync:
 
-### 1. Get the last block height
 
-```shell
-curl -s http://rpc-mesos.thestratos.org/block | jq -r '.result.block.header.height'
+### 1. Get the latest trusted block and hash
+
+Since snapshots are generated every 1,000 blocks, you'll need to obtain the hash for the block number at 1,000-interval heights.
+
+```fan
+curl -s http://rpc.thestratos.org/block | \
+jq -r '.result.block.header.height' | \
+xargs -I {} bash -c \
+'BLOCK_NUM=$(({} / 1000 * 1000)); \
+BLOCK_HASH=$(curl -s http://rpc.thestratos.org/block?height=$BLOCK_NUM | \
+jq -r .result.block_id.hash); \
+echo ""; \
+echo "trust-height: $BLOCK_NUM"; \
+echo "trust-hash: $BLOCK_HASH"'
 ```
 
 ```
-Example response:
-326121
+Example result:
+
+trust-height: 4744000
+trust-hash: CD4B6AA71435AF1FCA3B2A4FCAE0753F222EA0DDA660F0F2C417201964880C80
 ```
 
-### 2. Get the hash for the block
+---
 
-Since snapshots are generated every 1,000 blocks, you'll need to obtain the hash for the block number at 1,000-interval heights. 
-
-For example, in the above response we got `326121` so we will need to request the hash for height `326000`.
-
-If latest block would have been `374521`, we will request the hash for `374000` and so on.
-
-Always use the most recent block height, rounded down to the nearest lower multiple of 1,000.
-
-```shell
-curl -s http://rpc-mesos.thestratos.org/block?height=326000 | jq -r '.result.block_id.hash'
-```
-
-```
-Example response:
-C524665A353CB6C5E03D4B73B3151FA00862704A0966E01C5E97F1DE1B08B1B4
-```
-
-### 3. Setup config.toml
+### 2. Setup config.toml
 
 Edit the state sync section of `.stchaind/config/config.toml` as follows:
 
-Remember to use the latest height rounded down to last 1,000 round number and its hash.
+Remember to use the trust height and hash from the above command, not from the example.
 
 ```toml
 #######################################################
@@ -71,9 +69,9 @@ enable = true
 #
 # For Cosmos SDK-based chains, trust_period should usually be about 2/3 of the unbonding time (~2
 # weeks) during which they can be financially punished (slashed) for misbehavior.
-rpc_servers = "35.160.97.156:26657,rpc-mesos.thestratos.org:80"
-trust_height = 326000
-trust_hash = "C524665A353CB6C5E03D4B73B3151FA00862704A0966E01C5E97F1DE1B08B1B4"
+rpc_servers = "35.203.182.250:26657,35.230.38.120:26657"
+trust_height = 4744000
+trust_hash = "CD4B6AA71435AF1FCA3B2A4FCAE0753F222EA0DDA660F0F2C417201964880C80"
 trust_period = "168h0m0s"
 
 # Time to spend discovering snapshots before initiating a restore.
@@ -91,19 +89,9 @@ chunk_request_timeout = "10s"
 chunk_fetchers = "4"
 ```
 
-### 4. Disable JSON-RPC
+---
 
-The EVM RPC will prevent your node from starting using state sync, so you can temporarily disable it by editing `.stchaind/config/app.toml`:
-
-You can re-enable it once node's sync is up to date (node restart required).
-
-```
-[json-rpc]
-# Enable defines if the gRPC server should be enabled.
-enable = false
-```
-
-### 5. Start the node
+### 3. Start the node
 
 Node can now be started with the usual command:
 

@@ -108,15 +108,7 @@
   }
 }
 
-/* Table 100% width */
 
-.md-typeset__table {
-   min-width: 100%;
-}
-
-.md-typeset table:not([class]) {
-    display: table;
-}
 
 /* Table centered */
 
@@ -130,3 +122,4 @@
 }
 
 green { color: #00ccb8 }
+red { color: #f74557 } 

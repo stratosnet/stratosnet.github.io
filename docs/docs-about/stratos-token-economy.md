@@ -66,40 +66,40 @@ After launching the Stratos Data Mesh V1 (Storage), V2 (database), and V3 (compu
 
 ### - Purchased Ozone
  
-If any user wants to use the Stratos Resource Network, he needs to prepay on the Stratos blockchain by sending a PREPAY transaction. The PREPAY transaction will let this user buy the traffic(Ozone) at a marginal price at the time $\mathbf{t}$ computed by dividing the sum of the initial genesis deposit and the current unissued prepay volume pool by the remaining total Ozone limit.
+If any user wants to use the Stratos Resource Network, he needs to prepay on the Stratos blockchain by sending a PREPAY transaction. The PREPAY transaction will let this user buy the traffic(Ozone) at a marginal price at the time $\mathbf{t}$ computed by dividing the sum of the effective genesis deposit and the current unissued prepay volume pool by the remaining total Ozone limit.
 
 $$
-\operatorname{price}_{t}^{o z}=\frac{s+p_{t}}{l_{t}}
+\operatorname{price}_{t}^{o z}=\frac{s_{t}+p_{t}}{l_{t}}
 $$
 
 The remaining total Ozone limit $l_{t}$ is the upper bound of the total Ozone that users can purchase from the Stratos blockchain.
 
-$S$ is the initial genesis deposit by all Resource Nodes and Meta Nodes at $\mathrm{t}=0, l_{0}$ is set to an amount based on the initial genesis deposit to reflect the STOS market price and the total SDS resources at the mainnet launch time.
+$S_{t}$ is the effective total deposit by all Resource Nodes and Meta Nodes at time $\mathrm{t}, l_{0}$ is set to an amount based on the effective total deposit to reflect the STOS market price and the total SDS resources at the mainnet launch time.
 
 The current unissued prepay Volume Pool $p_{t}$ is the total remaining prepay STOS kept by the Stratos Network but not yet issued to Resource Nodes as rewards. At time $\mathrm{t}=0, p_{t}=0$
 
 If one user PREPAYS a total amount of $x$ STOS token at time $t$, then he will get the following Ozone amount if there is no slippage:
 
 $$
-d l_{t}=\frac{d x}{\text { price }_{t}^{o z}}=\frac{l_{t}}{s+p_{t}} \times d x
+d l_{t}=\frac{d x}{\text { price }_{t}^{o z}}=\frac{l_{t}}{s_{t}+p_{t}} \times d x
 $$
 
 Where $d x$ is the derived $x$ that is small enough to not make the price change. Because the constant product formula guarantees that the product of available STOS and Ozone is constant.
 
 $$
-\text { constant }=\left(s+p_{t}\right) \times\left(l_{t}\right)=\left(s+p_{t+d t}\right) \times\left(l_{t+d t}\right)
+\text { constant }=\left(s_{t}+p_{t}\right) \times\left(l_{t}\right)=\left(s_{t+d t}+p_{t+d t}\right) \times\left(l_{t+d t}\right)
 $$
 
 Where $p_{t+d t}=p_{t}+X$, so we can calculate the total amount of Ozone the user gets as:
 
 $$
-\Delta l=l_{t}-l_{t+d t}=\frac{l_{t} \times X}{s+p_{t}+X}
+\Delta l=l_{t}-l_{t+d t}=\frac{l_{t} \times X}{s_{t}+p_{t}+X}
 $$
 
 And the new price of Ozone will become:
 
 $$
-\operatorname{price}_{t+d t}^{o z}=\frac{s+p_{t}+X}{l_{t}-\Delta l}
+\operatorname{price}_{t+d t}^{o z}=\frac{s_{t}+p_{t}+X}{l_{t}-\Delta l}
 $$
 
 ---
@@ -109,31 +109,31 @@ $$
 Users can utilize all services provided by the Resource Network by consuming Ozone. At the end of each epoch the total amount of consumed Ozone will be sold back to the Volume Pool to generate the traffic rewards to issue to all Resource Nodes:
 
 $$
-\operatorname{price}_{t}^{o z}=\frac{s+p_{t}}{l_{t}}
+\operatorname{price}_{t}^{o z}=\frac{s_{t}+p_{t}}{l_{t}}
 $$
 
 If the total consumed Ozone in an epoch is $Y$, it will generate traffic rewards as: 
 
 $$
-d R=d y \times \frac{s+p_{t}}{l_{t}}
+d R=d y \times \frac{s_{t}+p_{t}}{l_{t}}
 $$
 
 Where $d y$ is the derived $Y$ that is small enough to not make the price change. Since the constant product formula guarantees:
 
 $$
-\text { constant }=\left(s+p_{t}\right) \times\left(l_{t}\right)=\left(s+p_{t+d t}\right) \times\left(l_{t+d t}\right)
+\text { constant }=\left(s_{t}+p_{t}\right) \times\left(l_{t}\right)=\left(s_{t+d t}+p_{t+d t}\right) \times\left(l_{t+d t}\right)
 $$
 
 We can calculate the total generated traffic rewards based on the total consumed Ozone $Y$ as:
 
 $$
-R=p_{t}-p_{t+d t}=\frac{\left(s+p_{t}\right) \times Y}{l_{t}+Y}
+R=p_{t}-p_{t+d t}=\frac{\left(s_{t}+p_{t}\right) \times Y}{l_{t}+Y}
 $$
 
 Thus at the end of epoch timet $+d t$, the Ozone price will become:
 
 $$
-\operatorname{price}_{t+d t}^{o z}=\frac{s+p_{t}-R}{l_{t}+Y}
+\operatorname{price}_{t+d t}^{o z}=\frac{s_{t}+p_{t}-R}{l_{t}+Y}
 $$
 
 As people keep buying Ozone without consuming it, the price of Ozone will keep increasing compared to STOS.
@@ -218,10 +218,10 @@ At the end of every 10 minutes epoch, Meta Nodes settle the traffic with Resourc
 Let's take SDS as an example during the first 4 years. Suppose that during one epoch, there are 5 Resource Node miners in the SDS network, respectively providing 500GB, 300GB, 200GB, 80GB, 20GB of traffic contribution. That's equivalent to 1100oz, but only the top 3 nodes will be eligible to get settled because $80 \% * 1100=880$. Thus 1000 oz is settled in the epoch. The total traffic and mining rewards of this epoch is:
 
 $$
-R=1000 \times \frac{s+p_{t}}{l_{t}+1000}+80
+R=1000 \times \frac{s_{t}+p_{t}}{l_{t}+1000}+80
 $$
 
-It's safe to assume that $\frac{s+p_{t}}{l_{t}+1000}=1 / 50$ which makes the total rewards 100STOS. 60%(60 STOS) will be issued to the Resource Nodes that have been settled. The top 3 nodes will get 30STOS, 18STOS and 12STOS respectively.
+It's safe to assume that $\frac{s_{t}+p_{t}}{l_{t}+1000}=1 / 50$ which makes the total rewards 100STOS. 60%(60 STOS) will be issued to the Resource Nodes that have been settled. The top 3 nodes will get 30STOS, 18STOS and 12STOS respectively.
 
 <br>
 
@@ -246,13 +246,13 @@ Anyone can launch a Resource Node, however it will not receive any tasks from Me
 Once a new Meta Node or Resource Node deposits Z STOS for registration/activation, the remaining total Ozone limit will be increased by an amount calculated by:
 
 $$
-\Delta l_{t}=\frac{l_{t}}{s} \times Z
+\Delta l_{t}=\frac{Z}{r_{0}}
 $$
 
-The new Ozone price will become:
+Where $r_{0}$ refers to the fixed deposit/ozone ratio. Then the new Ozone price will become:
 
 $$
-\operatorname{price}_{t+d t}^{o z}=\frac{s+p_{t}}{l_{t}+\Delta l_{t}}
+\operatorname{price}_{t+d t}^{o z}=\frac{s_{t}+p_{t}}{l_{t}+\Delta l_{t}}
 $$
 
 As more Resource Nodes are added to the network, the Ozone price will decrease compared to the STOS price.
@@ -266,7 +266,7 @@ The increased Ozone limit $\Delta l_{t}$ for a Resource Node deposit will be eva
 If a Resource Node follows the process of deactivation by sending a unregister transaction to stratos blockchain, the remaining total Ozone limit will be decreased by an amount calculated by:
 
 $$
-\Delta l_{t}=\frac{l_{t}}{s} \times Z
+\Delta l_{t}=\frac{Z}{r_{0}}
 $$
 
 Where $Z$ is the initial deposit of this Resource Node before any slashing/fee is applied. Once a Resource Node has deactivated, the Ozone price will increase.
@@ -291,13 +291,8 @@ Meta Nodes will participate in all data indexing, task distribution and settleme
 
 Stratos extended the Delegated Proof-of-Stake into Hybrid Delegated Proof-of-Stake. 20% of the total traffic and mining rewards will be allocated as stake rewards to the Proof-of-Stake beneficiaries, which include:
 
-1) Validators self-delegate and Delegators delegate
-
-2) Resource Nodes and Meta Nodes deposits
-
-The whole stake rewards will be split between 1) and 2) based on the total amount of delegation and deposit.
-
-The share of stake rewards for Resource Node and Meta Node will be distributed purely based on their deposit.
+1. Validators self-delegate
+2. Delegators delegate
 
 The share of stake rewards for Validators and Delegators will be distributed based on their delegation with a configured commission for validators. The transaction gas fees mentioned in section 2 will also follow the same distribution mechanism.
 

@@ -21,14 +21,17 @@ Usage:
   ppd ipfs [command]
 
 Available Commands:
+  config      create config file for ipfs api server
   migrate     migrate ipfs file to sds
 
 Flags:
-  -h, --help                 help for ipfs
-      --httpRpcUrl string    http rpc url (default "http://127.0.0.1:9301")
-      --ipcEndpoint string   ipc endpoint path
-  -p, --port string          port (default "6798")
-  -m, --rpcMode string       use httpRpc or ipc (default "ipc")
+  -h, --help                   help for ipfs
+      --httpRpcUrl string      http rpc url (default "http://127.0.0.1:9301")
+      --ipcEndpoint string     ipc endpoint path
+      --password string        wallet password
+  -p, --port string            port (default "6798")
+  -m, --rpcMode string         use http rpc or ipc (default "ipc")
+      --walletAddress string   wallet address
 
 Global Flags:
   -c, --config string   configuration file path  (default "./config/config.toml")
@@ -53,6 +56,34 @@ resource node
     ppd ipfs --rpcMode ipc --ipcEndpoint <path to the ipc endpoint>
     ```
 <br>
+
+---
+
+## Config File
+All the parameters could be pre-defined in the config file `ipfs_config.toml` placed in the folder `config` under the home path
+(defined by -r or --home flag).
+### Template
+```toml
+[connectivity]
+ipfs_port="port for the ipfs api server"
+rpc_mode='httpRpc or ipc'
+http_rpc_url='http://<node url>:<node rpc port>'
+ipc_endpoint='path to the ipc endpoint'
+
+[keys]
+wallet_address = 'wallet address stxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+wallet_password = 'wallet password'
+```
+
+---
+
+## Folder Structure
+Folder structure under the home path
+
+| Folder   | Content                                                           |
+|----------|-------------------------------------------------------------------|
+| accounts | wallet files Eg: "stxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.json" |
+| config   | config file "ipfs_config.toml"                                    |
 
 ---
 
@@ -96,8 +127,7 @@ curl -X POST  "localhost:6798/api/v0/get?arg=sdm://st172v4u8ysfgaphjs8uyy0svvc6d
 
 <br>
 
-### /api/v0/list
-
+### /api/v0/ls
 Lists all files uploaded by account (wallet).  
 Arguments
 - page [string]: page number. Each page contains 20 elements. Required: no.
@@ -105,7 +135,7 @@ Arguments
 cURL Example
 
 ```shell
-curl -X POST  "localhost:6798/api/v0/list?page=0"
+curl -X POST  "localhost:6798/api/v0/ls?page=0"
 ```
 
 <br>

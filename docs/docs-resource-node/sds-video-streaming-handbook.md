@@ -1,131 +1,204 @@
 ---
 title: SDS Video Stream Handbook
-description: List of RPC for file operations with Stratos SDS nodes.
+description: Stratos network SDS video streaming testing and implementation.
 ---
 
-# SDS Video Stream Handbook
+# SDS Video Streaming Handbook
 
-## Video file upload in HLS format
+This document is intended for individuals who wish to test the Stratos web streaming feature or those planning to incorporate this functionality into their web applications. 
 
-Streaming is the continuous transmission of audio or video files(media files) from a server to a client. 
+It provides detailed technical guidance and specifications necessary for implementation and testing. 
 
-SDS supports uploading `mp4` video file in Apple’s HLS (Http live streaming) format and can be later streamed back to the 
-video player.
+Please note that this document is not meant for everyday users, as it assumes a certain level of technical expertise and familiarity with web development concepts.
+
+To start streaming video files using your own SDS node, just follow the following steps:
+
+!!! notice ""
+      Requirements:
+
+      - a running SDS node (registered but not activated).
 
 ---
 
-## Upload streaming file
+## Prerequisites:
 
-There are two ways of uploading file, via command line tool or remote RPC api call. Please note that once a video file is uploaded via this command in streaming format, it is not allowed to be downloaded via regular `get` command in the current version. Instead, it has to be played through the APIs that are designed for playing streaming videos.
+- Clone the sds folder:
 
-#### Requirements
+```shell
+cd ~
+git clone https://github.com/stratosnet/sds.git
+```
 
-1. To upload video in streaming format, a SDS resource node needs to be set up and has to join the SDS. For detailed guideline on
-   how to set up a resource node, please refer to [Setup and run a SDS Resource Node](../setup-and-run-a-sds-resource-node/).
-2. It is also required to install a tool `ffmpeg` for transcoding multimedia files.  
-   
-In Linux Terminal:
-   
+- Install nodejs and npm:
+
+```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+source ~/.bashrc
+nvm install 22
+npm install dotenv
+```
+
+- Test it with:
+
+```shell
+node -v # should print v22.4.0
+npm -v # should print 10.8.1
+```
+
+- Install ffmpeg:
+
 ```shell
 sudo apt update
 sudo apt install ffmpeg
-   
-# use ffmpeg -version to check its version
-ffmpeg -version
 ```
 
-In MacOS Terminal:
+- Upload a video and upload it to sds:
+(for example, if your video is stored in ~/example.mp4)
 
 ```shell
-brew update
-brew install ffmpeg
-```
-
----
-
-
-## Upload via command line tool `ppd terminal`
-
-In order to upload video stream by command line tool, you need to open A NEW COMMAND-LINE TERMINAL, and enter the root directory of the same resource node.
-
-Then, use `ppd terminal` commands to start the interaction with resource node.
-
-```shell
-# Open a new command-line terminal
-# Make sure we are inside the root directory of the same resource node
 cd rsnode
-
-# Interact with resource node through a set of "ppd terminal" subcommands
 ppd terminal
+(inside ppd terminal):
+putstream /home/your-username/example.mp4
 ```
 
-Now, we can use the subcommand `putstream` to upload a media file
+- You will see a notice such as:
 
 ```shell
-putstream <filepath>
+[INFO] upload_file.go:217: * File  v05p1m52pg6u1l4kgmu0topkauejbr0uqm72oub8
+[INFO] upload_file.go:218: * has been sent to destinations
 ```
-> `filepath` is the absolute path of the file to be uploaded, or a relative path starting from the root directory of the resource node.
 
-Example:
+- Optionally, you can generate a sharelink for that file:
+(inside ppd terminal):
+
 ```shell
-putstream example_01.mp4
+sharefile v05p1m52pg6u1l4kgmu0topkauejbr0uqm72oub8 0 0
+```
+
+- You will see a notice such as:
+
+```shell
+[INFO] share.go:153: ShareId e3a2a25a9fec4490
+[INFO] share.go:154: ShareLink Nr6r1J_e3a2a25a9fec4490
 ```
 
 ---
 
-## Upload Via SDS RPC client
 
-Media file can be uploaded in streaming format also via remote rpc call. For details regarding launching RPC client, please refer to the [RPC client doc](../sds-rpc-for-file-operation/).   
+## Setup the streaming site:
 
-`putstream` is the command to be used for uploading media file in streaming format.
-``` { .yaml .no-copy }
-Usage:
-  rpc_client putstream <filepath> [flags]
+!!! notice ""
+    Streaming app requires access to the SDS's node wallet in order to consume ozone for streaming, thus, it requires the wallet's mmnemonic phrase.
 
-Flags:
-  -h, --help   help for putstream
+    The purpose of the Server application is to provide the mmnemonic phrase to the Client, without exposing it to the web browsers viewing the stream.
 
-Global Flags:
-  -u, --url string      url to the RPC server, e.g. http://3.24.59.6:8235 (default "http://127.0.0.1:4444")
-  -w, --wallet string   wallet address to be used (default: the first wallet in folder ./account/)
-```
+### Server:
 
-Example:
+- Go to sds folder which you cloned from github earlier and edit the .env file:
 
 ```shell
-rpc_client putstream /home/user/tmp/file_example_MP4_640_3MG.mp4 \
---url http://127.0.0.1:4444 \
---wallet st14rhrt576gvj6cl46tjn4pctghllmn63tm69e72
+cd ~/sds/example/streaming/server
+mv .env.example .env
+nano .env
+```
+
+* Choose a port for the sign server
+* Enter the wallet address of the sds node you are using for streaming
+* Enter the seed phrase for the wallet above
+* Enter the wallet password from the sds node config file
+
+Example file:
+
+```shell
+PORT=18888
+WALLET_ADDRESS=st1xxxxxxxxxxxxxxxxxxxxx
+WALLET_MNEMONIC=guitar erupt toddler cream.....
+WALLET_PASSWORD=123456
+```
+
+Save the file.
+
+- Edit the video.json file with the file(s) you uploaded earlier:
+Example of video.json file with the example file uploaded above:
+
+```shell
+[
+  {
+    "linkType": "filehash",
+    "fileHash": "v05p1m52pg6u1l4kgmu0topkauejbr0uqm72oub8",
+    "fileName": "video1-FH"
+  },
+  {
+    "linkType": "sharelink",
+    "shareLink": "Nr6r1J_e3a2a25a9fec4490",
+    "sharePassword": "",
+    "fileName": "video1-SL"
+  }
+]
+```
+
+- Save the file
+
+- Start the react app and leave it running in the background (run it in a tmux or screen):
+
+```shell
+node server.js
 ```
 
 ---
 
-## Play and cache the video streaming file
+### Client:
 
-### Requirements
-To play and cache the video steaming file, the resource node has to be a non-active resource node.
+- Edit the client .env file:
 
-### Play the cache the video streaming file
+```shell
+cd ~/sds/example/streaming/client
+mv .env.example .env
+nano .env
+```
 
-To stream the video, we use the videojs as the player in the front-end [template html file](https://github.com/stratosnet/sds/blob/main/pp/api/frontend/video_stream_template.html)
-, however, any player that can play the HLS format file could be used. The way how the hls video streaming works with videojs, 
-is to put the api url that gets the `.m3u8` file as the source and put `application/x-mpegURL` as the type. Then the player
-will call the same url automatically with different url parameter to fetch video segment according to the metadata stored 
-in `.m3u8` file. Once the client initiates a request to play the video file, the full fee is charged and the resource node also 
-starts caching the whole streaming file on the local disk. Once the whole file is cached, the next play of the video will not 
-download the file again from the SDS and no fee will be charged.
+* Enter the wallet address of the sds node you are using for streaming
+* Enter your sds node external ip and REST port
+(you can find the REST port in node config at rest_port = )
+* Enter your react sign url, this is the port defined in streaming/server/.env file
+* Leave the rest of variables empty
 
-Steps:
+Example file:
 
-1. Launch the non-active resource node and connects it to the SDS system
-2. Open the [template html file](https://github.com/stratosnet/sds/blob/main/pp/api/frontend/video_stream_template.html) in
-a text editor and replace the following variables in the template file
-   - url - the url to the resource node server
-   - internalPort - corresponds to the `internal_port` in the config of pp node
-   - fileHash - file hash of the video file to be played
-   - ownerWalletAddress - wallet address which owns the video file
-3. Open the template html file again in chrome, and it will start playing the video. 
+```shell
 
+REACT_APP_WALLET_ADDRESS=st1xxxxxxxxxxx
+REACT_APP_WALLET_MNEMONIC=
+REACT_APP_WALLET_PASSWORD=
+REACT_APP_SERVICE_URL=http://sds-node-external-ip:18581
+REACT_APP_NODE_SIGN_URL=http://current-server-external-ip:18888
+```
+
+- Edit the videos.json file:
+
+The streaming site will parse the videos.json file from the server so you should disable the client one:
+
+```shell
+echo -e '[\n {\n }\n]\n' > videos.json
+```
+
+- Save the file.
+
+- Start the client and leave it running in the background:
+
+```shell
+npm i
+npm start
+```
+
+You will now see the links to access the streaming site and view the files uploaded.
+
+!!! notice ""
+
+    You can customize the landing page html code in
+
+    `~/sds/example/streaming/client/LandingPage.js`
 <br>
 
 ---
