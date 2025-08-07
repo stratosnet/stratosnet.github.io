@@ -1,4 +1,4 @@
-qq---
+---
 title: SDS RPC for file operations
 description: List of RPC for file operations with Stratos SDS nodes.
 ---
@@ -63,6 +63,64 @@ When "return" object in "result" is a string encoded negative number, it carries
 
 ---
 
+## Encoding
+
+### filehash
+Filehash is the hash of a file. It could be used as the identifier of that file. It is calculated as following steps:
+1. calculate KECCAK_256 sum of the bytes from the file. The hash length is 20 bytes;
+2. calculate KECCAK_256 sum again on the result of step 1. The hash length is 20 bytes;
+3. use IPFS V1 encoder to encode the filehash. The codec is SDS_CODEC (0x66) and Base32hex encoder is used.
+
+As an example, here is a text file with this text in it:<br>
+`Let's have a test.`
+<br>The md5 sum is `f52a06d1e81f5f87cff75e957936c0ee`.
+
+To calculate the filehash, the result of the 1st step is <br>
+`[27 20 170 208 49 216 159 203 102 246 34 147 70 52 13 227 27 2 216 10 162 49]` <br>
+result of 2nd step is: <br>
+`[27 20 143 242 176 51 96 81 159 237 184 221 163 3 144 216 60 142 172 174 200 108]` <br>
+filehash is a string: <br>
+`v05j1m54fuao36o2hjvmrhnd30e8dgf4elincgr0`
+
+### walletaddr
+The walletaddr is in Bech32 format. For example: <br>
+`st144ykkar9fhl8khs7lwz0s7py9vj4w9adp37kt9` <br>
+
+### pubkey
+The pubkey is in Bech32 format. For example: <br>
+`stpub1q0ska45w724dy0n0jujuqcvn2c80fa9c69dth0v9flacxrxp7w2rsncclps` <br>
+
+### data
+In the request of user_uploadData and response of user_downloadData, there is data field to carry the file data.
+The data is encoded using standard Base64 as defined in RFC 4648.
+
+### signature
+Using the private key to sign a predefined message, and carry this signature in the message. The signature could be verified by the receiver and confirm it is from the owner of the wallet.
+The message to be signed is a string concatenated by filehash, walletaddr, sequencenumber and req_time.
+* filehash is a string in Bech32 format;
+* walletaddr is a string in Bech32 format;
+* sequencenumber is a string gotten from user_requestGetOzone;
+* req_time is a number. It needs to convert to a string in the base of 10.<br>
+
+Example:
+* filehash: `v05ahm52po4iteumn1v58o3marnruc7l75km9rv8`
+* walletaddr: `st1r2gh2h8kjtz4slek6aua95ukyd8zmey2y9uatt`
+* sequencenumber: `SN:0000000000000000028`
+* req_time: `1701267007`
+* the message to be signed: `v05ahm52po4iteumn1v58o3marnruc7l75km9rv8st1r2gh2h8kjtz4slek6aua95ukyd8zmey2y9uattSN:00000000000000000281701267007`
+
+The signature just signed is a byte slice (or byte array). It needs to be encoded to hex string before being put into the message. 
+After hex encoding, it looks like this:
+`3aa42287e676e481eb7b89ed5e5c3758ba7c26036ac77a45c45cd8903f30715c3881937314638a2dcfceee8fc64da49ba3d191ca839ca831f210c1a656390d3e01`
+
+### sdm
+The format of sdm protocol is:
+`smd://[owner wallet address]/[file hash]`
+<br>Example:<br>
+`sdm://st1sqzsk8mplv5248gx6dddzzxweqvew8rtst96fx/v05j1m57sa6msg5al7ac0a0cvfa4iiha0bdmv3rg`
+<br>
+---
+
 ## Upload a File
 
 Three methods are used to accomplish uploading a file.
@@ -124,7 +182,7 @@ To request to upload a file. The result could carry the offsets of a piece of th
 |-------------------|---------|------------------------------------------------------------|
 | filename          | string  | name of the file                                           |
 | filesize          | number  | size of the file, in byte                                  |
-| filehash          | string  | file hash to identify a file [^1]                          |
+| filehash          | string  | file hash to identify a file                               |
 | signature         | object  | signature on this message                                  |
 | desired_tier      | number  | the desired tier to store the file                         |
 | allow_higher_tier | boolean | if higher tier allowed when no desired tier can't be found |
@@ -133,11 +191,11 @@ To request to upload a file. The result could carry the offsets of a piece of th
 
 Object _signature_
 
-| name      | type   | comment                                                                                                                                                                   |
-|-----------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| address   | string | wallet address of the user account                                                                                                                                        |
-| pubkey    | string | public key of wallet address                                                                                                                                              |
-| signature | string | signed on the message \[file_hash\] + \[walletaddr\] + \[sequencynumber\] + \[req_time\] <br/>after getting signed, the signature bytes are encoded into hex string. [^4] |
+| name      | type   | comment                            |
+|-----------|--------|------------------------------------|
+| address   | string | wallet address of the user account |
+| pubkey    | string | public key of wallet address       |
+| signature | string | [signature](#signature)            |
 
 #### Returns
 
@@ -194,12 +252,12 @@ Send a piece of file data to server according to the offset previously provided 
 
 #### Parameters
 
-| name      | type    | comment                                                                                                                                                                    |
-|-----------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| filehash  | string  | file hash to identify a file                                                                                                                                               |
-| data      | string  | data of the piece of the file [^2]                                                                                                                                         |
-| signature | string  | signed on the string \[file_hash\] + \[walletaddr\] + \[sequencynumber\] + \[req_time\] <br/>after getting signed, the signature bytes are encoded into hex string.  [^4] |
-| req_time  | number  | the epoch time when this request is made                                                                                                                                   |
+| name      | type    | comment                                  |
+|-----------|---------|------------------------------------------|
+| filehash  | string  | file hash to identify a file             |
+| data      | string  | [data](#data) of the piece of the file.  |
+| signature | string  | [signature](#signature)                  |
+| req_time  | number  | the epoch time when this request is made |
 
 #### Returns
 
@@ -269,11 +327,11 @@ Request listing files owned by the account with the wallet address.
 
 Object _signature_
 
-| name      | type   | comment                                                                                                                                                                   |
-|-----------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| address   | string | wallet address of the user account                                                                                                                                        |
-| pubkey    | string | public key of wallet address                                                                                                                                              |
-| signature | string | signed on the string \[file_hash\] + \[walletaddr\] + \[sequencynumber\] + \[req_time\] <br/>after getting signed, the signature bytes are encoded into hex string. [^4] |
+| name      | type   | comment                            |
+|-----------|--------|------------------------------------|
+| address   | string | wallet address of the user account |
+| pubkey    | string | public key of wallet address       |
+| signature | string | [signature](#signature)            |
 
 #### Returns
 
@@ -285,12 +343,12 @@ Object _signature_
 
 In fileinof, these objects are included
 
-| name       | type    | comment                                   |
-|------------|---------|-------------------------------------------|
-| filehash   | string  | file hash to identify the file [^1]       |
-| filesize   | number  | size of the file, in byte                 |
-| filename   | string  | name of the file                          |
-| createtime | number  | unix epoch time when the file was created |
+| name       | type    | comment                                      |
+|------------|---------|----------------------------------------------|
+| filehash   | string  | [file hash](#filehash) to identify the file  |
+| filesize   | number  | size of the file, in byte                    |
+| filename   | string  | name of the file                             |
+| createtime | number  | unix epoch time when the file was created    |
 
 #### Examples
 
@@ -430,16 +488,16 @@ To start downloading a file. A piece of fire data is carried in the response whi
 
 | name       | type   | comment                                  |
 |------------|--------|------------------------------------------|
-| filehandle | string | url of the file in sdm:// format [^3]   |
+| filehandle | string | url of the file in [sdm](#sdm) format    |
 | signature  | object  | signature on this message                |
 | req_time   | number  | the epoch time when this request is made |
 Object _signature_
 
-| name      | type   | comment                                                                                    |
-|-----------|--------|--------------------------------------------------------------------------------------------|
-| address   | string | wallet address of the user account                                                         |
-| pubkey    | string | public key of wallet address                                                               |
-| signature | string | signed on the string \[file_hash\] + \[walletaddr\] + \[sequencynumber\] + \[req_time\] <br/>after getting signed, the signature bytes are encoded into hex string.  |
+| name      | type   | comment                            |
+|-----------|--------|------------------------------------|
+| address   | string | wallet address of the user account |
+| pubkey    | string | public key of wallet address       |
+| signature | string | [signature](#signature)            |
 
 #### Returns
 
@@ -450,7 +508,7 @@ Object _signature_
 | offsetstart | number | the offset of beginning of the piece of file data, inclusive              |
 | offsetend   | number | the offset of end of the piece of file data, exclusive                    |
 | filename    | string | the name of the file                                                      |
-| filedata    | string | data of the piece of the file [^2]                                       |
+| filedata    | string | [data](#data) of the piece of the file.                                   |
 
 #### Example
 
@@ -500,7 +558,7 @@ After the user handles previous piece of file data, this method is called to get
 
 | name     | type   | comment                                                  |
 |----------|--------|----------------------------------------------------------|
-| filehash | string | file hash to identify a file [^1]                        |
+| filehash | string | [file hash](#filehash) to identify a file                |
 | reqid    | string | the same reqid get from response of user_requestDownload |
 
 #### Returns
@@ -512,7 +570,7 @@ After the user handles previous piece of file data, this method is called to get
 | offsetstart | number | the offset of beginning of the piece of file data, inclusive                                        |
 | offsetend   | number | the offset of end of the piece of file data, exclusive                                              |
 | filename    | string | the name of the file                                                                                |
-| filedata    | string | data of the piece of the file [^2]                                                                 |
+| filedata    | string | [data](#data) of the piece of the file.                                                         |
 
 #### Example
 
@@ -567,11 +625,11 @@ After the user received all pieces of the file and a response of user_downloadDa
 
 #### Parameters
 
-| name     | type    | comment                                                  |
-|----------|---------|----------------------------------------------------------|
-| filehash | string  | recalculated file hash upon the received file [^1]       |
-| filesize | number  | size of the file, in byte                                |
-| reqid    | string  | the same reqid get from response of user_requestDownload |
+| name     | type    | comment                                                      |
+|----------|---------|--------------------------------------------------------------|
+| filehash | string  | recalculated [file hash](#filehash) upon the received file.  |
+| filesize | number  | size of the file, in byte                                    |
+| reqid    | string  | the same reqid get from response of user_requestDownload     |
 
 #### Returns
 
@@ -620,21 +678,21 @@ Response
 
 #### Parameters
 
-| name        | type   | comment                                  |
-|-------------|--------|------------------------------------------|
-| filehash    | string | file hash to identify a file [^1]        |
-| signature   | object | signature on this message                |
-| duration    | number | duration in second sharing the file      |
-| privateflag | bool   | if the file is private                   |
-| req_time    | number | the epoch time when this request is made |
+| name        | type   | comment                                      |
+|-------------|--------|----------------------------------------------|
+| filehash    | string | [file hash](#filehash) to identify a file.   |
+| signature   | object | signature on this message                    |
+| duration    | number | duration in second sharing the file          |
+| privateflag | bool   | if the file is private                       |
+| req_time    | number | the epoch time when this request is made     |
 
 Object _signature_
 
-| name      | type   | comment                                                                                   |
-|-----------|--------|-------------------------------------------------------------------------------------------|
-| address   | string | wallet address of the user account                                                        |
-| pubkey    | string | public key of wallet address                                                              |
-| signature | string | signed on the string \[file_hash\] + \[walletaddr\] + \[sequencynumber\] + \[req_time\]  <br/>after getting signed, the signature bytes are encoded into hex string.  |
+| name      | type   | comment                            |
+|-----------|--------|------------------------------------|
+| address   | string | wallet address of the user account |
+| pubkey    | string | public key of wallet address       |
+| signature | string | [signature](#signature)            |
 
 #### Returns
 
@@ -701,11 +759,11 @@ Response
 
 Object _signature_
 
-| name      | type   | comment                                                                                   |
-|-----------|--------|-------------------------------------------------------------------------------------------|
-| address   | string | wallet address of the user account                                                        |
-| pubkey    | string | public key of wallet address                                                              |
-| signature | string | signed on the string \[file_hash\] + \[walletaddr\] + \[sequencynumber\] + \[req_time\]  <br/>after getting signed, the signature bytes are encoded into hex string. |
+| name      | type   | comment                            |
+|-----------|--------|------------------------------------|
+| address   | string | wallet address of the user account |
+| pubkey    | string | public key of wallet address       |
+| signature | string | [signature](#signature)            |
 
 #### Returns
 
@@ -766,11 +824,11 @@ Response
 
 Object _signature_
 
-| name      | type   | comment                                                                                   |
-|-----------|--------|-------------------------------------------------------------------------------------------|
-| address   | string | wallet address of the user account                                                        |
-| pubkey    | string | public key of wallet address                                                              |
-| signature | string | signed on the string \[file_hash\] + \[walletaddr\] + \[sequencynumber\] + \[req_time\]  <br/>after getting signed, the signature bytes are encoded into hex string.  |
+| name      | type   | comment                            |
+|-----------|--------|------------------------------------|
+| address   | string | wallet address of the user account |
+| pubkey    | string | public key of wallet address       |
+| signature | string | [signature](#signature)            |
 
 #### Returns
 
@@ -784,7 +842,7 @@ In fileinof, these objects are included
 | name        | type   | comment                                            |
 |-------------|--------|----------------------------------------------------|
 | filesize    | number | size of the file, in byte                          |
-| filehash    | string | file hash to identify the file [^1]                |
+| filehash    | string | [file hash](#filehash) to identify the file.       |
 | filename    | string | name of the file                                   |
 | linktime    | number | unix epoch time when the file started being shared |
 | linktimeexp | number | unix epoch time when file share is expired         |
@@ -909,11 +967,11 @@ Response
 
 Object _signature_
 
-| name      | type   | comment                                                                                   |
-|-----------|--------|-------------------------------------------------------------------------------------------|
-| address   | string | wallet address of the user account                                                        |
-| pubkey    | string | public key of wallet address                                                              |
-| signature | string | signed on the string \[file_hash\] + \[walletaddr\] + \[sequencynumber\] + \[req_time\]  <br/>after getting signed, the signature bytes are encoded into hex string.  |
+| name      | type   | comment                            |
+|-----------|--------|------------------------------------|
+| address   | string | wallet address of the user account |
+| pubkey    | string | public key of wallet address       |
+| signature | string | [signature](#signature)            |
 
 #### Returns
 
@@ -971,18 +1029,18 @@ Response
 
 | name      | type   | comment                                                   |
 |-----------|--------|-----------------------------------------------------------|
-| filehash  | string | file hash to identify a file [^1]                         |
+| filehash  | string | [file hash](#filehash) to identify a file.                |
 | reqid     | string | the same reqid get from response of user_requestGetShared |
 | req_time  | number | the epoch time when this request is made                  |
 | signature | object | signature on this message                                 |
 
 Object _signature_
 
-| name      | type   | comment                                                                                   |
-|-----------|--------|-------------------------------------------------------------------------------------------|
-| address   | string | wallet address of the user account                                                        |
-| pubkey    | string | public key of wallet address                                                              |
-| signature | string | signed on the string \[file_hash\] + \[walletaddr\] + \[sequencynumber\] + \[req_time\]  <br/>after getting signed, the signature bytes are encoded into hex string.  |
+| name      | type   | comment                            |
+|-----------|--------|------------------------------------|
+| address   | string | wallet address of the user account |
+| pubkey    | string | public key of wallet address       |
+| signature | string | [signature](#signature)            |
 
 #### Returns
 
@@ -993,7 +1051,7 @@ Object _signature_
 | offsetstart | number | the offset of beginning of the piece of file data, inclusive              |
 | offsetend   | number | the offset of end of the piece of file data, exclusive                    |
 | filename    | string | the name of the file                                                      |
-| filedata    | string | data of the piece of the file [^2]                                       |
+| filedata    | string | [data](#data) of the piece of the file.                                   |
 
 #### Example
 
@@ -1096,10 +1154,4 @@ Response
  }
 }
 ```
-
-[^1]: filehash uses Keccak-256
-[^2]: data is encoded using standard Base64 as defined in RFC 4648.
-[^3]: smd://\[owner wallet address\]/\[file hash\]
-[^4]: the string is "v05ahm52po4iteumn1v58o3marnruc7l75km9rv8st1r2gh2h8kjtz4slek6aua95ukyd8zmey2y9uattSN:00000000000000000281701267007" when file hash is "v05ahm52po4iteumn1v58o3marnruc7l75km9rv8", wallet address is "st1r2gh2h8kjtz4slek6aua95ukyd8zmey2y9uatt", sequencenumber is "SN:0000000000000000028" and req_time is 1701267007
-
 <br>
