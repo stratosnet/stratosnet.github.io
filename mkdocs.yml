@@ -35,9 +35,10 @@ nav:
     - HOWTOs:
       - Full-Chain Node: docs-stratos-chain/setup-and-run-a-stratos-chain-full-node.md
       - Become a Validator: docs-stratos-chain/how-to-become-a-validator.md
-      - Use of State Sync: docs-stratos-chain/how-to-start-with-state-sync.md       
+      - Use of State Sync: docs-stratos-chain/how-to-start-with-state-sync.md
       - Full-Chain as REST/gRPC: docs-stratos-chain/how-to-setup-rest-grpc-full-chain.md
-      - Use the Bridge on Testnet: docs-stratos-chain/how-to-use-bridge-testnet.md
+      - Mainnet Bridge: docs-stratos-chain/mainnet-bridge.md
+      - Mainnet Staking: docs-stratos-chain/mainnet-staking.md      
     - Operating:
       - stchaind Commands Part 1: docs-stratos-chain/stchaind-commands-part-1.md
       - stchaind Commands Part 2: docs-stratos-chain/stchaind-commands-part-2.md
@@ -45,10 +46,7 @@ nav:
       - REST APIs: docs-stratos-chain/stratos-chain-rest-apis.md
       - Network: docs-stratos-chain/network.md
     - EVM:
-      - Node config: docs-evm/node-config.md
-      - Network details:
-        - Network: docs-evm/network-details/network.md
-        - STOS Gas token: docs-evm/network-details/gas-token.md
+      - Node config: docs-evm/node-config.md  
       - Deploying on Stratos:
         - Using Hardhat: docs-evm/deploy-smart-contracts/hardhat.md
         - Using Truffle: docs-evm/deploy-smart-contracts/truffle.md
@@ -56,15 +54,20 @@ nav:
         - Hello MetaMask: docs-evm/wallets/metamask/hello.md
         - Configure Stratos on MetaMask: docs-evm/wallets/metamask/configure-on-metamask.md
         - Multiple Accounts: docs-evm/wallets/metamask/multiple-accounts.md
+        - STOS Gas token: docs-evm/wallets/metamask/gas-token.md
       - Available dapps: docs-evm/available-dapps.md
-  - Resource Node:
+  - Decentralized Storage:
     - HOWTOs:
       - SDS Resource Node: docs-resource-node/setup-and-run-a-sds-resource-node.md
+      - SDS Update to v0.12.10: docs-resource-node/sds-update-v12.md
       - Migrate IPFS: docs-resource-node/sds-ipfs-handbook.md
       - Video Streaming: docs-resource-node/sds-video-streaming-handbook.md
     - Operating:
+      - SPFS Quick Guide: docs-resource-node/spfs-quick-guide.md
       - ppd Commands: docs-resource-node/ppd-terminal-subcommands.md
-      - SDS RPC: docs-resource-node/sds-rpc-for-file-operation.md
+      - File Operations RPC API: docs-resource-node/sds-rpc-for-file-operation.md
+      - Node Monitor WebSocket API: docs-resource-node/node-monitor-websocket-api.md
+      - Service Gateway: docs-resource-node/service-gateway.md
     - Examples:
       - RPC Client: docs-resource-node/rpc-client.md
 
@@ -77,7 +80,7 @@ extra:
     - icon: fontawesome/brands/chrome
       link: https://thestratos.org
     - icon: fontawesome/brands/telegram
-      link: https://t.me/StratosCommunity
+      link: https://t.me/StratosOfficial
     - icon: fontawesome/brands/discord
       link: https://discord.com/invite/tpQGpC2nMh
     - icon: fontawesome/brands/twitter
@@ -122,6 +125,8 @@ extra_javascript:
   - js/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-    
+
+validation:
+  unrecognized_links: ignore    
 
 copyright: <p> &copy; 2021-<script>document.write(new Date().getFullYear())</script> Stratos Network</p>

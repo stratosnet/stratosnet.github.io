@@ -18,7 +18,7 @@ Note that provides their resource(disk/bandwidth/computation power) for SDS is c
 
 - <b>Minimum Hardware Requirements</b>
 
-| Type | CPU | RAM | Storage | Bandwidth | Stake |
+| Type | CPU | RAM | Storage | Bandwidth | Deposit |
 | ---- | --- | --- | ------- | --------- | ----- |
 | TIER 1 | 8 Cores[¹](#Requirements), 2.5GHz[²](#Requirements) | 16 GB | 4 TB | Up: 50Mbps Down: 100Mbps | 800 STOS |
 | TIER 2 | 16 Cores[¹](#Requirements), 2.5GHz[²](#Requirements) | 32 GB | 8 TB | Up: 100Mbps Down: 100Mbps | 1600 STOS |
@@ -32,7 +32,7 @@ Note that provides their resource(disk/bandwidth/computation power) for SDS is c
 - <b>Software(tested version)</b>
 
     * Ubuntu 18.04+
-    * Go 1.19 linux/amd64
+    * Go 1.19 - 1.22 linux/amd64
 
 ---
 
@@ -64,7 +64,7 @@ There are some keywords that are widely used in SDS. We describe them as
 
 !!! tip
 
-    In order to run an SDS resource node, you need to build SDS source code which requires `Go 1.19`, `git`, `curl` and `make` installed.
+    In order to run an SDS resource node, you need to build SDS source code which requires `Go 1.19+`, `git`, `curl` and `make` installed.
     
     If you have installed them previously, just skip this section. Otherwise, please install them as the following
 
@@ -84,7 +84,7 @@ sudo apt update
 sudo apt upgrade
     
 # Install git, snap and make(you can also install them separately as your needs)
-sudo apt install git build-essential curl --yes
+sudo apt install git build-essential curl tmux --yes
 
 # Prepare binary PATH:
 mkdir ~/bin
@@ -92,31 +92,28 @@ echo 'export PATH="$HOME/bin:$PATH"' >> ~/.profile
 source ~/.profile
 ```
 
-!!! warning
-    Due to a conflict with one of our 3rd party dependencies, for the moment only Go version 1.19 can be used.
-
-To install Go 1.19, please follow these steps:
+To install Go 1.22, please follow these steps:
 
 ```shell
-# If you already have Go installed, check if it's version 1.19.xx:
+# If you already have Go installed, check with
 go version
 
-# If you have 1.18.xx or 1.20.xx, remove it using the same method you installed with. For example:
+# If you have 1.18 or older, remove it using the same method you installed with. For example:
 sudo snap remove go
 sudo apt remove golang-go
 ```
 
-Install Go 1.19:
+Install Go 1.22:
 
 ```shell
 # Do a clean-up:
 sudo rm -rf /usr/local/go
 
 # Download the Go Binary Package:
-wget https://go.dev/dl/go1.19.12.linux-amd64.tar.gz
+wget https://go.dev/dl/go1.22.3.linux-amd64.tar.gz
 
 # Unzip it to /usr/local directory:
-sudo tar -C /usr/local -xzf go1.19.12.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.22.3.linux-amd64.tar.gz
 
 # Add the Go PATH:
 echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
@@ -126,7 +123,7 @@ source ~/.profile
 go version
 
 # You should see:
-# go version go1.19.12 linux/amd64
+# go version go1.22.3 linux/amd64
 
 ```
 
@@ -152,7 +149,7 @@ An alternative option is to install a separate virtual Linux system using [Virtu
 ```shell
 git clone https://github.com/stratosnet/sds.git
 cd sds
-git checkout tags/v0.10.0
+git checkout tags/v0.12.10
 make build
 ```
 
@@ -174,7 +171,7 @@ cp target/* ~/bin
 ppd version
 ```
 
-You should get `v0.10.0`.
+You should get `v0.12.10`.
 
 ---
 
@@ -200,13 +197,13 @@ cd rsnode
 
 <br>
 
-### Configure SDS resource node
+## Configure SDS resource node
 
 Next, you need to generate the configuration file and its accounts of this resource node. The command `ppd config` will help you to generate necessary configurations.
 
 <br>
 
-#### Generate/Recover wallet
+### Generate/Recover wallet
 
 
 The `ppd config` command consists of several flags or subcommand. Let take a look at its general definition using `ppd config -h`.
@@ -222,6 +219,7 @@ Usage:
 
 Available Commands:
   accounts    create accounts for the node
+  update      update the config file to the latest version
 
 Flags:
   -p, --create-p2p-key   create p2p key with config file, need interactive input
@@ -229,10 +227,11 @@ Flags:
   -h, --help             help for config
 
 Global Flags:
-  -c, --config string   configuration file path  (default "./configs/config.toml")
-  -r, --home string     path for the node (default "<root directory of your resource node>")
+  -c, --config string   configuration file path  (default "./config/config.toml")
+  -r, --home string     path for the node (default "/root/sds10")
 
 Use "ppd config [command] --help" for more information about a command.
+
 ```
 
 <br>
@@ -269,32 +268,35 @@ ppd config -w -p
 
 You will get a new wallet account
 
-```shell
+```jq
 # Make sure we are inside the root directory of the resource node
-cd ~/rsnode
-          
+cd ~/rsnode        
 ppd config -w -p
-[INFO]2022/02/14 10:19:09 setting.go:122: The config at location ./configs/config.toml does not exist
-generating default config file
-[INFO]2022/02/14 10:19:09 node.go:67: No P2P key specified in config. Attempting to create one...
-Enter password:                           # enter your P2P key password
-Enter password again:
-[INFO]2022/02/14 10:19:29 setting.go:245: finished changing configuration file  P2PAddress:  stsdsp2p1k70qsfx70s2vkyn737hu3yj50ghrn5yz53dzwx
-No wallet key specified in config. Attempting to create one...
-Enter wallet nickname: wallet2            # enter your wallet nickname
-Enter password:                           # enter your wallet key password
-Enter password again:
-       
-# Leaving the following blank will generate a new wallet account automatically.
 
-input bip39 mnemonic (leave blank to generate a new one)                # Press enter to generate a new wallet
-input hd-path for the account, default: "m/44'/606'/0'/0/0" :           # Press enter
-[INFO]2022/02/14 10:19:48 setting.go:245: finished changing configuration file  WalletAddress:  st1cmu0e9qlypg6j2ck8v5gfty6sxj2jszz84h8gf
-save wallet password to config file: Y(es)/N(o): Y                      # Press Y
-save the mnemonic phase properly for future recover:
-=======================================================================  
-interest liberty thrive maple trip fringe nurse deal fresh sport cool hip gate indoor brown mansion what table three wise design master warm apple
+[INFO] setting.go:159: The config at location /home/rawl/tmp/config/config.toml does not exist
+[INFO] config.go:29: generating default config file
+[INFO] config.go:66: No wallet key specified in config. Attempting to create one...
+Enter wallet nickname: main1
+Enter password:         # choose a password
+Enter password again:   # retype the password
+input bip39 mnemonic (leave blank to generate a new one)        # press enter
+input hd-path for the account, default: "m/44'/606'/0'/0/0" :   # press enter
+save the mnemonic phase properly for future recovery:
 =======================================================================
+junior quantum now kit gadget usage audit glide rocket tissue crawl surprise 
+point verify put virus prepare monitor electric spice tourist horror achieve poem
+=======================================================================
+
+[INFO] setup_wallet.go:62: Wallet st1na2yyucggvmjv5kmgc2jeaacpmjr6u9g7vqv32 has been generated successfully
+Do you want to use this wallet as your node wallet: Y(es)/N(o): y
+
+[INFO] common.go:162: No p2p key specified in config. Attempting to create one...
+Enter password for p2p key:         # choose a password
+Enter password for p2p key again:   # retype the password
+
+How should the p2p key be generated?  1) From the wallet  2) From a hex-encoded private key  3) Randomly: 1
+Use the HD path (m/44'/606'/0/0) to generate the p2p key (stsds1qvsypctsdm30keudfwcmtal63dxhnfhjunxms8)? [y/N] y
+
 ```
 </details>
 
@@ -305,37 +307,51 @@ You will get the same wallet account if you already have one.
 
 ```shell
 # Make sure we are inside the root directory of the resource node
-cd ~/rsnode
+cd ~/rsnode        
 ppd config -w -p
 
-[INFO]2022/02/22 11:25:19 setting.go:125: The config at location ./configs/config.toml does not exist
-generating default config file
-[INFO]2022/02/22 11:25:19 node.go:67: No P2P key specified in config. Attempting to create one...
-Enter password:               # enter your P2P key password
-Enter password again:
-[INFO]2022/02/22 11:25:21 setting.go:251: finished changing configuration file  P2PAddress:  stsdsp2p1arpvg0wthng0yty06ay0uup3vw7k3upm586few
-No wallet key specified in config. Attempting to create one...
-Enter wallet nickname: wallet1            # enter your wallet nickname
-Enter password:                           # enter your wallet key password
-Enter password again:
-        
-# Inputting the mnemonic phrase here will recovering an existing wallet account(mnemonic will not show on the screen). 
-
-input bip39 mnemonic (leave blank to generate a new one)         # Insert your mnemonic (seed phrase) 
-input hd-path for the account, default: "m/44'/606'/0'/0/0" :    # Press enter
-[INFO] 2022/02/22 11:25:34 setting.go:251: finished changing configuration file  WalletAddress:  st10t5chdnhx6myggwwhfq7q39hnjhzapau9yy6tv
-save wallet password to config file: Y(es)/N(o): Y               # Press Y
-save the mnemonic phase properly for future recover:
-=======================================================================  
-climb work able lock find blind fire cement exotic outdoor eyebrow panther repeat veteran prosper speak identify wolf mind decorate genre arctic bean gauge
+[INFO] setting.go:159: The config at location /home/rawl/tmp/config/config.toml does not exist
+[INFO] config.go:29: generating default config file
+[INFO] config.go:66: No wallet key specified in config. Attempting to create one...
+Enter wallet nickname: main1
+Enter password:         # choose a password
+Enter password again:   # retype the password
+input bip39 mnemonic (leave blank to generate a new one)        # enter your 24-words seed phrase
+input hd-path for the account, default: "m/44'/606'/0'/0/0" :   # press enter
+save the mnemonic phase properly for future recovery:
 =======================================================================
+junior quantum now kit gadget usage audit glide rocket tissue crawl surprise 
+point verify put virus prepare monitor electric spice tourist horror achieve poem
+=======================================================================
+
+[INFO] setup_wallet.go:62: Wallet st1na2yyucggvmjv5kmgc2jeaacpmjr6u9g7vqv32 has been generated successfully
+Do you want to use this wallet as your node wallet: Y(es)/N(o): y
+
+[INFO] common.go:162: No p2p key specified in config. Attempting to create one...
+Enter password for p2p key:         # choose a password
+Enter password for p2p key again:   # retype the password
+
+How should the p2p key be generated?  1) From the wallet  2) From a hex-encoded private key  3) Randomly: 1
+Use the HD path (m/44'/606'/0/0) to generate the p2p key (stsds1qvsypctsdm30keudfwcmtal63dxhnfhjunxms8)? [y/N] y
 ```
 
 </details>
 
+!!! note
+
+    When you enter your seed phrase, it will not be shown as a security measure.
+    
+    When generating the p2p key, option 1) will generate the same p2p address for the existing wallet, every time.
+    
+    If you want to run multiple nodes on the same wallet address, choose option 3).
+    
+    Alternatively, you can use unique wallets and unique p2p addresses, but a single `beneficiary_address` where all the rewards will be gathered to. 
+
+    It's just a matter of personal preference.
+
 <br>
 
-#### Directory structure
+### Directory structure
 
 After the above command executed successfully, Your `rsnode` folder should include directories and files similar to the following.
 
@@ -344,6 +360,7 @@ After the above command executed successfully, Your `rsnode` folder should inclu
 ├── accounts
 │   ├── st10t5chdnhx6myggwwhfq7q39hnjhzapau9yy6tv.json
 │   └── stsds1hez7aewx6srjtrw3064w3qy4dk22uv0cx7jxww.json
+│── config
 │   └── config.toml
 └── tmp
   └── logs
@@ -358,7 +375,7 @@ After the above command executed successfully, Your `rsnode` folder should inclu
 
 <br>
 
-#### Edit configuration file
+### Edit configuration file
 
 You will need to edit a few lines in the file `configs/config.toml` to setup your node.
 
@@ -370,20 +387,11 @@ nano config/config.toml
 
 <br>
 
-- <b>Edit the blockchain node address:</b>
-
-```toml
-# Network address of the chain Eg: "127.0.0.1:9090"
-grpc_server = '52.196.88.238:9090'
-```
-
-<br>
-
-- <b>Edit your external ip address:</b>
+✏️ - <b>Edit your external ip address:</b>
 
 Replace `99.99.99.99` with your external ip address.
 
-This ip address and port must be accessible from the Internet. If you are behind a router, the following port must be forwarded.
+This ip address and port must be accessible from the Internet. If you are behind a router, the `network_port` must be forwarded, please refer to <a href="https://portforward.com/" target="_blank">https://portforward.com/</a>.
 
 ```shell
 [node.connectivity]
@@ -406,88 +414,122 @@ network_port = '18081'
 
 <br>
 
-- <b>Edit the first meta node to connect on first run:</b>
+✏️ - <b>Edit the first meta node to connect on first run: <br>(you can skip this if you start with v0.12.10)
+</b>
 
 ```toml
 # The first meta node to connect to when starting the node
 [node.connectivity.seed_meta_node]
-p2p_address = 'stsds15dchn80r73russ7pqjddvqdny0g9vyur8ckq7j'
-p2p_public_key = 'stsdspub1wg99sp4rq4vz5w8ae8uaj9mw9de4x4q8d7mg57ukwwztme7g7jjqzffkw0'
-network_address = '34.74.207.194:8888'
+p2p_address = ''
+p2p_public_key = ''
+network_address = ''
+
+```
+metanode you can start with
+```toml
+# europe
+p2p_address = 'stsds1ypxg8sj5vn4s4v0w965g4r9g3pt3vlz6wyzx0f'
+p2p_public_key = 'stsdspub1y6exsr8snwz65ev3pzq6k3yfy2ku3kexqdd0en35dnr8mxc9w6sq5jg6lf'
+network_address = '34.34.149.18:8888'
+
+# asia
+p2p_address = 'stsds10kmygjv7e2t39f6jka6445q20e9lv4a7u3qex3'
+p2p_public_key = 'stsdspub1srn3qetarx3x6f2x9wqfv3nh2aufxv03ncl5v6jkmyg666scvz6s4xgprq'
+network_address = '34.85.35.57:8888'
+
+# NA
+p2p_address = 'stsds1z96pm5ls0ff2y7y8adpy6r3l8jqeaud7envnqv'
+p2p_public_key = 'stsdspub1lf769k20k36e4gvnewcwdtfudzj95qk45d5f0p300jmr7e6y73zsdyh25y'
+network_address = '34.82.40.37:8888'
+
 ```
 
 <br>
+
+✏️ - <b>Edit the beneficiary_address:</b>
+
+```toml
+# Address for receiving reward. Eg: "stxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+beneficiary_address = ''
+```
+
+Enter your wallet address where you want to receive your node mining rewards.
+
+This is useful when you run multiple nodes, each with its unique operating wallet and you want to receive all the rewards in one place.
+
+If you only have one node, you can enter here the same address as defined under `wallet_address`.
+
 
 <details>
   <summary><b>Example of a full config file</b></summary>
 
 ```shell
 [version]
-# App version number. Eg: 9
-app_ver = 10
-# Network connections from nodes below this version number will be rejected. Eg: 9
-min_app_ver = 10
-# Formatted version number. Eg: "v0.9.0"
-show = 'v0.10.0'
+# App version number. Eg: 11
+app_ver = 12
+# Network connections from nodes below this version number will be rejected. Eg: 11
+min_app_ver = 12
+# Formatted version number. Eg: "v0.11.0"
+show = 'v0.12.10'
 
 # Configuration of the connection to the Stratos blockchain
 [blockchain]
-# ID of the chain Eg: "tropos-5"
-chain_id = 'mesos-1'
+# ID of the chain Eg: "stratos-1"
+chain_id = 'stratos-1'
 # Multiplier for the simulated tx gas cost Eg: 1.5
-gas_adjustment = 1.3
+gas_adjustment = 1.5
 # Connect to the chain using an insecure connection (no TLS) Eg: true
-insecure = true
-# Network address of the chain Eg: "127.0.0.1:9090"
-grpc_server = '52.196.88.238:9090'
+insecure = false
+# Network address of the chain grpc Eg: "127.0.0.1:9090"
+grpc_server = 'grpc.thestratos.org:443'
 
 # Structure of the home folder. Default paths (eg: "./storage" become relative to the node home. Other paths are relative to the working directory
 [home]
 # Key files (wallet and P2P key). Eg: "./accounts"
-accounts_path = './accounts'
+accounts_path = '/home/user/sds1/accounts'
 # Where downloaded files will go. Eg: "./download"
-download_path = './download'
+download_path = '/home/user/sds1/download'
 # The list of peers (other sds nodes). Eg: "./peers"
-peers_path = './peers'
+peers_path = '/home/user/sds1/peers'
 # Where files are stored. Eg: "./storage"
-storage_path = './storage'
+storage_path = '/home/user/sds1/storage'
 
 [keys]
 # Address of the P2P key. Eg: "stsdsxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-p2p_address = 'stsds1hfm5p3e3qmyc32rdayc02teqsgd608xnah8ytf'
-p2p_password = ''
+p2p_address = 'stsds1exampleexampleexampleexample'
+p2p_password = '1'
 # Address of the stratos wallet. Eg: "stxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-wallet_address = 'st19waa7al5kwlnvrxgr8099ldgfa9s499h2hza2a'
-wallet_password = ''
+wallet_address = 'st1exampleexampleexampleexample'
+wallet_password = '1'
+# Address for receiving reward. Eg: "stxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+beneficiary_address = 'st1exampleexampleexampleexample'
 
 # Configuration of this node
 [node]
-# Should the node start mining automatically? Eg: true
-auto_start = true
 # Should debug info be printed out in logs? Eg: false
 debug = true
-# When not 0, limit disk usage to this amount (in megabytes) Eg: 1048576 (1 TB)
-max_disk_usage = 1048576
+# When not 0, limit disk usage to this amount (in megabytes) Eg: 7629394 = 8 * 1000 * 1000 * 1000 * 1000 / 1024 / 1024  (8TB)
+max_disk_usage = 7629394
 
 [node.connectivity]
 # Is the node running on an internal network? Eg: false
 internal = false
 # IP address of the node. Eg: "127.0.0.1"
-network_address = '3.21.117.104'
+network_address = '12.13.14.15'
 # Main port for communication on the network. Must be open to the internet. Eg: "18081"
 network_port = '18081'
 # Port for prometheus metrics
-metrics_port = '8765'
+metrics_port = '18152'
 # Port for the JSON-RPC api. See https://docs.thestratos.org/docs-resource-node/sds-rpc-for-file-operation/
-rpc_port = '8135'
-# Enable the node owner RPC API. This API can manipulate the node status and sign txs with the local wallet. Do not open this to the internet  Eg: false
-allow_owner_rpc = false
+rpc_port = '18252'
+# Namespaces enabled in the RPC API. Eg: "user,owner"
+rpc_namespaces = 'user'
 
 # The first meta node to connect to when starting the node
 [node.connectivity.seed_meta_node]
-p2p_address = 'stsds15dchn80r73russ7pqjddvqdny0g9vyur8ckq7j'
-p2p_public_key = 'stsdspub1wg99sp4rq4vz5w8ae8uaj9mw9de4x4q8d7mg57ukwwztme7g7jjqzffkw0'
-network_address = '34.74.207.194:8888'
+p2p_address = 'stsds1twy3wslrwmpkshx5fps6ysmqx5lc09p0ukurgf'
+p2p_public_key = 'stsdspub1xtewcceylwekj78qwyvvpp3ms8ku44ksxkcxhhw9c4vz9xtfu2yq2l4am7'
+network_address = '34.82.187.241:8888'
 
 # Configuration for the monitor server
 [monitor]
@@ -497,14 +539,17 @@ tls = false
 cert_file_path = ''
 # Path to the TLS private key file
 key_file_path = ''
-port = '5433'
+# Port used for the monitor websocket connection. It's the monitor UI that uses this port, not the person accessing the UI in a browser
+port = '18352'
+# List of IPs that are allowed to connect to the monitor websocket port. This is used to decide which IP can connect their monitor to the node, NOT to decide who can view the monitor UI page.
+allowed_origins = ['localhost']
 
 # Configuration for video streaming
 [streaming]
 # Port for the internal HTTP server
-internal_port = '9708'
+internal_port = '18452'
 # Port for the REST server
-rest_port = '9608'
+rest_port = '18552'
 
 [traffic]
 # Interval at which traffic is logged (in seconds) Eg: 10
@@ -519,8 +564,12 @@ max_upload_rate = 0
 # Configuration for the web server (when running sdsweb)
 [web_server]
 # Location of the web server files Eg: "./web"
-path = './web'
-port = '18181'
+path = '/home/user/sds1/web'
+# Port where the web server is hosted with sdsweb. If the port is opened and token_on_startup is true, anybody who loads the monitor UI will have full access to the monitor
+port = '18652'
+# Automatically enter monitor token when opening the monitor UI. This should be false if the web_server port is opened to internet and you don't want public access to your node monitor'
+token_on_startup = false
+
 ```
 
 </details>
@@ -533,36 +582,14 @@ You can save and close the config file with Ctrl + X.
 
 ## Run SDS resource node
 
-<br>
-
-- Acquire test STOS tokens from (`faucet`)
-
-Before manipulating your resource node, you need to acquire some STOS tokens.
-
-You can get test tokens through the faucet API
+After setting up configuration properly, filled your wallet with STOS, you can now start your resource node.
 
 ```shell
-curl --header "Content-Type: application/json" --request POST --data '{"denom":"stos","address":"your-wallet-address"} ' https://faucet-mesos.thestratos.org/credit
-```
+# Node executable must be running in background at all times 
+# so it's recommended to start a tmux window first:
+tmux new -s rsnode
 
-> Replace _your-wallet-address_ with the wallet address generated earlier.
-
-<br>
-
-- Start the SDS resource node
-
-After setting up configuration properly, filled your wallet with some tokens, you can now start your resource node.
-
-!!! tip
-
-    `ppd start` must be running in the background at all times so it's recommended to start it in a tmux window by running this command first:
-
-    ```shell
-    tmux new -s rsnode
-    ```
-
-```shell
-# Make sure we are inside the root directory of the resource node
+# Make sure you are inside the root directory of the resource node
 cd ~/rsnode
 
 # start the resource node
@@ -572,29 +599,26 @@ ppd start
 
 ---
 
-## Interact with SDS resource node
+## Registration and Activation
 
-<br>
+!!! tip ""
 
-- Interactive operation via `ppd terminal`
+    In order to interact with the resource node, you need to open A NEW COMMAND-LINE TERMINAL, and enter the root directory of the same resource node.
 
-In order to interact with the resource node, you need to open A NEW COMMAND-LINE TERMINAL, and enter the root directory of the same resource node.
+    Then, use `ppd terminal` commands to start the interaction with resource node.
 
-Then, use `ppd terminal` commands to start the interaction with resource node.
+    All `ppd` [sub-commands](../ppd-terminal-subcommands) should be executed in this `ppd terminal`.
 
 ```shell
 # Open a new command-line terminal
 # Make sure we are inside the root directory of the same resource node
 cd ~/rsnode
 
-# Interact with resource node through a set of "ppd terminal" subcommands
+# Interact with resource node through a set of "ppd terminal" sub-commands
 ppd terminal
 ```
 
-> `ppd terminal` needs to be executed in A NEW COMMAND-LINE TERMINAL (called as `ppd terminal` terminal).
->
-> All `ppd terminal` [subcommands](../ppd-terminal-subcommands) should be executed in this `ppd terminal` terminal.
-
+---
 
 <br>
 
@@ -602,7 +626,7 @@ ppd terminal
 
 The resource node(PP) should be registered to a meta node(SP) before doing anything else.
 
-In `ppd terminal`, input one of the two following identical subcommands
+In `ppd terminal`, input one of the two following identical sub-commands:
 
 ```shell
 rp
@@ -612,42 +636,23 @@ rp
 registerpeer
 ```
 
-<br>
-  
-- <b>Uploading/Downloading files without registration</b>
-
-You do not need to activate the node if you just want to upload/download files. 
-
-After registering your resource node(`rp` subcommand), purchase enough `ozone` using the `prepay` subcommand. 
-
-Then, use `put` or `get` subcommands to upload/download files.
-
-```shell
-prepay <amount> <fee> [gas]
-
-# example: prepay 1stos 6000000gwei 6000000 
-```
-  
-```shell
-put <filepath>
-
-# example: put /home/user/files/movie.mp4
-    
-get <sdm://account/filehash> [saveAs]  
-
-# example: get sdm://st172v4u8ysfgaphjs8uyy0svvc6d6tzl6gp07kn4/v05ahm51l6v6tm2vqc682b9sicom61fgkoqdl0pg
-```
-
-This is a quick way for users to upload/download their files. Resource node can go offline at any time without being punished.
-On the other hand, since the resource node is not activated, users will not receive mining rewards.
+---
 
 <br>
+  
+- <b>Activating the resource node with deposit</b>
 
-- Activating the resource node with deposit
+You can activate your resource node for a specific TIER.
 
-You can activate your resource node by deposit an amount of tokens. 
+Choose the amount based on the tier you want to run on.
 
-After it is activated successfully,your resource node starts to receive tasks from meta nodes and thus gaining mining rewards automatically.
+| Tier   | Amount    |
+| ------ | ------    |
+| Tier 1 | 800 STOS  |
+| Tier 2 | 1600 STOS |
+| Tier 3 | 3200 STOS |
+
+After it is activated successfully, your resource node starts to receive tasks from meta nodes and thus gaining mining rewards accordingly.
 
 ```shell
 activate <amount> <fee> [gas] 
@@ -662,222 +667,39 @@ activate <amount> <fee> [gas]
 Example:
 
 ```shell
-activate 2stos 0.01stos
-```
-
-
----
-
-## Other <code>ppd terminal</code> commands
-
-Here we introduce a set of these `ppd terminal` subcommands in brief that you can try in the `ppd terminal` terminal.
-
-Please refer to [ppd terminal subcommands](../ppd-terminal-subcommands) for more details.
-
-<br>
-
-- Check the current status of a resource node
-
-```shell
-status
-```
-
-<br>
-
-- Update deposit of an active resource node, only increase deposit is allowed
-
-```shell
-updateDeposit <depositDelta> <fee> [gas]
-```
-
-> `depositDelta` is the absolute amount of difference between the original and the updated deposit. It should be a positive valid token, in the unit of `stos`/`gwei`/`wei`.
->
-> When a resource node is suspended, use this command to update its state and re-start mining by increasing its deposit.
-
-Example:
-
-```shell
-updateDeposit 1stos 1000000gwei 1000000
-```
-
-The above command will increase 1stos to deposit, use 1000000gwei for tx fee and 1000000 for tx gas.
-
-<br>
-
-- Purchase `ozone`
-
-Ozone is the unit of traffic used by SDS. Operations involving network traffic require `ozone` to be executed.
-
-You can purchase ozone with the following command:
-
-```shell
-prepay <amount> <fee> [gas]
-```
-
-> `amount` is the amount of stos tokens you want to spend to purchase ozone.
-
-<br>
-
-- Query ozone balance of a node's wallet
-
-```shell
-getoz <walletAddress>
-```
-
-<br>
-
-- Create a new wallet, input password after prompt
-
-```shell
-newwallet <walletName> 
-```
-
-<br>
-
-- Upload a file
-
-```shell
-put <filepath>
-```
-
-> `filepath` is the location of the file to upload, starting from your resource node folder. It is better to be an absolute path.
-
-<br>
-
-- Upload a media file for streaming
-
-Streaming is the continuous transmission of audio or video files(media files) from a server to a client.
-
-In order to upload a streaming file, first you need to install a tool `ffmpeg` for transcoding multimedia files.
-
-<br>
-
-In Linux Terminal:
-
-```shell
-sudo apt update
-sudo apt install ffmpeg
-    
-# use ffmpeg -version to check its version
-ffmpeg -version
-```
-
-<br>
-
-In MacOS Terminal:
-
-```shell
-brew update
-brew install ffmpeg
-```
-
-Then, back to the `ppd terminal` terminal, use `putstream` command to upload a media file
-
-```shell
-putstream <filepath>
-```
-
-> `filepath` is the absolute path of the file to be uploaded, or a relative path starting from the root directory of the resource node.
-
-<br>
-
-- List all uploaded files
-
-  `list` or `ls`
-
-```shell
-ls
-```
-
-<br>
-
-- Download an uploaded file
-
-```shell
-get <sdm://account/filehash> [saveAs]
-```
-
-!!! tip
-
-      Every file uploaded to SDS is attributed with a unique file hash.
- 
-     You can view the file hash for each of your files when you `list` your uploaded files.
-  
-     Use the optional parameter `saveAs` to rename the file
-
-     The downloaded file will be saved into `download` folder by default under the root directory of the SDS resource node.
-
-
-<br>
-
-- Delete an uploaded file
-
-
-```shell
-delete <filehash>
-```
-
-<br>
-
-- Share(public) an uploaded file
-
-```shell
-  sharefile <filehash> <duration> <is_private>
-```
-
-> `duration` is time period(in seconds) when the file share expires. Put `0` for unlimited time.
->
-> `is_private` is whether the file share should be protected by a password. Put `0` for public file without password, and `1` for private file with a password.
->
-> After this command has been executed successfully, SDS will provide a password to this shared file, like `m216`. Please keep this password for future use.
-
-<br>
-
-- List All Shared Files
-
-```shell
-allshare
-```
-
-<br>
-
-- Download a shared file
-
-
-```shell
-getsharefile <sharelink> [password]
-```
-
-> Leave the `password` blank if it's a public shared file.
->
-> `sharelink` could be found when your use `allshare` to list all available shared files.
->
-> The downloaded files will be saved into the folder `download` by default under the root directory of your resource node.
-
-<br>
-
-- Cancel file share
-
-```shell
-cancelshare <shareID> 
-```
-
-> `shareID` could be found when your use `allshare` to list all available shared files
-
-<br>
-
-- View resource utilization
-
-
-```shell
-# show the resource utilization monitor
-monitor
-    
-# hide the resource utilization monitor
-stopmonitor
+activate 1600stos 0.01stos
 ```
 
 ---
+
+- <b>Start Mining</b>
+
+You should run this command:
+
+1. After new node is activated
+
+2. After node is unsuspended
+
+Run the following command in `ppd terminal`:
+
+ ```shell
+ startmining
+ ```
+
+---
+
+ - <b>Verify Activation Status</b>
+
+ Run the following command in `ppd terminal`:
+
+ ```shell
+ status
+ ```
+
+---
+
+
+<br>
 
 ## Check resource node status
 
@@ -895,7 +717,7 @@ Check node registration status(`register` module)
 - Query total deposit state of all registered resource nodes and meta nodes
 
 ```shell
-https://rest-mesos.thestratos.org/register/deposit
+https://rest.thestratos.org/stratos/register/v1/deposit_total
 ```    
 
 <br>
@@ -903,7 +725,7 @@ https://rest-mesos.thestratos.org/register/deposit
 - Query params of `register` module
 
 ```shell
-https://rest-mesos.thestratos.org/register/params
+https://rest.thestratos.org/stratos/register/v1/params
 ```    
 
 <br>
@@ -911,7 +733,7 @@ https://rest-mesos.thestratos.org/register/params
 - Get all deposit info of a specific owner
 
 ```shell
-https://rest-mesos.thestratos.org/register/deposit/owner/{owner wallet address}
+https://rest.thestratos.org/stratos/register/v1/deposit_by_owner/{owner wallet address}
 ```    
 
 <br>
@@ -919,7 +741,7 @@ https://rest-mesos.thestratos.org/register/deposit/owner/{owner wallet address}
 - Get info of a registered resource node
 
 ```shell
-https://rest-mesos.thestratos.org/register/resource-node/{resource node network address}
+https://rest.thestratos.org/stratos/register/v1/resource_node/{resource node network address}
 ```    
 
 <br>
@@ -927,7 +749,7 @@ https://rest-mesos.thestratos.org/register/resource-node/{resource node network 
 - Get info of a registered meta node
 
 ```shell
-https://rest-mesos.thestratos.org/register/meta-node/{meta node network address}
+https://rest.thestratos.org/stratos/register/v1/meta_node/{meta node network address}
 ```    
 
 <br>
@@ -935,7 +757,7 @@ https://rest-mesos.thestratos.org/register/meta-node/{meta node network address}
 - Get total number of registered resource nodes
 
 ```shell
-https://rest-mesos.thestratos.org/register/resource-count
+https://rest.thestratos.org/stratos/register/v1/resource_node_count
 ```    
 
 <br>
@@ -943,7 +765,7 @@ https://rest-mesos.thestratos.org/register/resource-count
 - Get total number of registered meta nodes
 
 ```shell
-https://rest-mesos.thestratos.org/register/meta-count
+https://rest.thestratos.org/stratos/register/v1/meta_node_count
 ```    
 
 <br>
@@ -953,7 +775,7 @@ https://rest-mesos.thestratos.org/register/meta-count
   - Query PoT rewards of a wallet_address at a specific epoch
 
 ```shell
-https://rest-mesos.thestratos.org/pot/rewards/wallet/{wallet_address}?epoch={epoch}
+https://rest.thestratos.org/stratos/pot/v1/rewards/wallet/{wallet_address}/epoch/{epoch}
 ```    
 
 <br>
@@ -961,7 +783,7 @@ https://rest-mesos.thestratos.org/pot/rewards/wallet/{wallet_address}?epoch={epo
 - Query current Pot rewards of a wallet_address
 
 ```shell
-https://rest-mesos.thestratos.org/pot/rewards/wallet/{wallet_address}
+https://rest.thestratos.org/stratos/pot/v1/rewards/wallet/{wallet_address}
 ```  
 
 <br>
@@ -969,7 +791,7 @@ https://rest-mesos.thestratos.org/pot/rewards/wallet/{wallet_address}
 - Query owner's Pot slashing info at a specific height
 
 ```shell
-https://rest-mesos.thestratos.org/pot/slashing/{wallet_adress}?height={height}
+https://rest.thestratos.org/stratos/pot/v1/slashing/{wallet_address}
 ```  
 
 <br>
@@ -979,22 +801,32 @@ https://rest-mesos.thestratos.org/pot/slashing/{wallet_adress}?height={height}
 - Get a simulated prepay result
 
 ```shell
-https://rest-mesos.thestratos.org/sds/simulatePrepay/<amount of `wei` to prepay>
+https://rest.thestratos.org/stratos/sds/v1/sim_prepay/<amount of `wei` to prepay>
 ```    
 <br>
 
 - Get current nozPrice
 
 ```shell
-https://rest-mesos.thestratos.org/sds/nozPrice
+https://rest.thestratos.org/stratos/sds/v1/noz_price
 ```    
 <br>
 
 - Get current nozSupply
 
 ```shell
-https://rest-mesos.thestratos.org/sds/nozSupply
+https://rest.thestratos.org/stratos/sds/v1/noz_supply
 ```    
+
+---
+
+<br>
+
+---
+
+## Other <code>ppd terminal</code> commands
+
+Please refer to [ppd terminal subcommands](../ppd-terminal-subcommands) for more details.
 
 <br>
 

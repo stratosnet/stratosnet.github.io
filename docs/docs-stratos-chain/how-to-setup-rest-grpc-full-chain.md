@@ -42,7 +42,7 @@ address = "tcp://0.0.0.0:1317"
 Usage example:
 
 ```json
-curl http://localhost:1317/bank/balances/st1pgzvq9p5gyxu7gpe8l33g8nzq0xsfyeaeww3ru
+curl http://localhost:1317/cosmos/bank/v1beta1/balances/st1pgzvq9p5gyxu7gpe8l33g8nzq0xsfyeaeww3ru
 
 
 {"height":"46397","result":[
@@ -104,12 +104,13 @@ grpcurl -plaintext 127.0.0.1:9090 list stratos.register.v1.Query
 
 stratos.register.v1.Query.BondedMetaNodeCount
 stratos.register.v1.Query.BondedResourceNodeCount
+stratos.register.v1.Query.DepositByNode
+stratos.register.v1.Query.DepositByOwner
+stratos.register.v1.Query.DepositTotal
 stratos.register.v1.Query.MetaNode
 stratos.register.v1.Query.Params
+stratos.register.v1.Query.RemainingOzoneLimit
 stratos.register.v1.Query.ResourceNode
-stratos.register.v1.Query.StakeByNode
-stratos.register.v1.Query.StakeByOwner
-stratos.register.v1.Query.StakeTotal
 ```
 
 You can see all the gRPC queries [here](../stratos-chain-grpc-queries).

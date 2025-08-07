@@ -34,7 +34,7 @@ If the active validators double sign, are frequently offline or do not participa
 ---
 
 ## Becoming a validator
-In order to become a validator, First you have installed and run a Stratos-chain full-node. You can [setup your full-node](../setup-and-run-a-stratos-chain-full-node/) if you haven't yet.
+In order to become a validator, First you have installed and run a Stratos-chain full-node. You can [setup your full-node](./setup-and-run-a-stratos-chain-full-node.md) if you haven't yet.
 
 The following instructions assume you have successfully run a Stratos-chain full-node and followed our instructions by default.
 
@@ -44,7 +44,7 @@ The following instructions assume you have successfully run a Stratos-chain full
 
 ## Connect to Stratos-chain Testnet
 
-Please refer to [full-node setup guide](../setup-and-run-a-stratos-chain-full-node/) to:
+Please refer to [full-node setup guide](./setup-and-run-a-stratos-chain-full-node.md) to:
 
 :material-check: download related files
 
@@ -52,7 +52,7 @@ Please refer to [full-node setup guide](../setup-and-run-a-stratos-chain-full-no
 
 :material-check: create your Stratos-chain Wallet
 
-:material-check: `Faucet` or `send` an amount of tokens to this wallet
+:material-check: send an amount of tokens to this wallet
 
 <br>
 
@@ -80,13 +80,13 @@ After the node has finished sync, your Stratos-chain wallet has been created and
 │   ├── snapshots
 │   ├── state.db
 │   └── tx_index.db
-└── keyring-test
+└── keyring-file
     ├── 6894f6eef2b730a5f071eed1f3aeb471dfeeeaaf.address
     ├── d6052b289b78468612a8f97cf59eac184ba852dd.address
     ├── d704353fe67f948c99d2e3105adc5159c9e8f2af.address
     ├── f07ab66406c02aa1a398f4fa41a91192fae08997.address
     ├── fdb03146cb5a83e08785e8d1f083132d4386b4bd.address
-    ├── user0.info
+    ├── wallet1.info
     ├── user10.info
     ├── user1.info
     ├── user2.info
@@ -95,7 +95,7 @@ After the node has finished sync, your Stratos-chain wallet has been created and
 
 !!! tip
 
-    By default, the `.stchaind` have been saved or created under the `$HOME` folder. If you are not sure what is your `$HOME` folder, in terminal, use `echo $HOME` to check. In the following instruction, we suppose you have entered the `$HOME` folder(use `cd $HOME`)
+    By default, the `.stchaind` have been saved or created under the `$HOME` folder. If you are not sure what is your `$HOME` folder, in terminal, use `echo $HOME` to check.
 
     In `config` folder:
 
@@ -111,20 +111,6 @@ After the node has finished sync, your Stratos-chain wallet has been created and
     * All `*.db` folders are `Tendermint` databases
     * `Tendermint` uses a `write ahead log` (WAL) for consensus
     * `priv_validator_state.json`holds the validator's state
-
-In Linux:
-
-``` { .yaml .no-copy }
-echo $HOME
-/home/<your login name>
-```
-
-In Mac:
-
-``` { .yaml .no-copy }
-echo $HOME
-/Users/<your login name>
-```
 
 <br>
 
@@ -170,10 +156,10 @@ The protocol requires a fixed known set of validators, where each validator is i
 To get the node public key, run the following command under your node folder.
 
 ```shell
-# Make sure we are inside the home directory
-cd $HOME
 stchaind tendermint show-validator
+```
 
+``` { .properties .no-copy }
 # expected output
 {"@type":"/cosmos.crypto.ed25519.PubKey","key":"69gothWTE9FJBZ5gBjjSNhg8y/5SsI1hBaD81Dum7lo="}
 ```
@@ -184,9 +170,9 @@ stchaind tendermint show-validator
 
 ## Create a new validator
 
-A validator can be crested by sending a `create-validator` transaction command
+A validator can be created by sending a `create-validator` transaction command
 
-> DON'T USE MORE STAKING TOKEN THAN YOU HAVE
+> DON'T USE MORE STAKING TOKENS THAN YOU HAVE
 
 !!! tip "Where:"
 
@@ -198,23 +184,24 @@ A validator can be crested by sending a `create-validator` transaction command
     * `commission-max-rate`: The maximum commission rate which this validator can charge. The `commission-max-change-rate` is used to measure % point change over the commission-rate, e.g., 1% to 2% is a 100% rate increase. This flags cannot be changed after create-validator is processed
     * `commission-max-change-rate`: The maximum daily increase of the validator commission. This flags cannot be changed after create-validator is processed
     * `min-self-delegation`: Minimum amount of tokens the validator needs to have bonded at all time. It is a strictly positive integer that represents the minimum amount of self-delegated staking token your validator must always have. A validator with a self delegation lower than this number will automatically be unbonded.
-    * the minimum amount of tokens that must be delegated to be a bonded validator is "1".
-    * the current `chain-id` can be found on the [`Stratos Explorer`](https://explorer-mesos.thestratos.org/) right next to the search bar at the top of the page. Currently, it is 'mesos-1'.
-    * in the testing phase, `--keyring-backend=test`
+    * `amount`: the amount to delegate, the minimum amount of tokens that must be delegated to be a bonded validator is "1".
+    * `from`: the wallet address that the delegation amount come from.
+    * the current `chain-id` is `stratos-1` for Mainnet 
+    * on Mainnet, `--keyring-backend=file`.
 
 Example:
 ```shell
 stchaind tx staking create-validator \
 --amount=100stos \
---pubkey='{"@type":"/cosmos.crypto.ed25519.PubKey","key":"JwtmYzaX0b+zjuDypUI2+qy8wa/LFtUUUg0+vr11tpg="}' \
+--pubkey='{"@type":"/cosmos.crypto.ed25519.PubKey","key":"69gothWTE9FJBZ5gBjjSNhg8y/5SsI1hBaD81Dum7lo="}' \
 --moniker="myValidator" \
 --commission-rate=0.10 \
 --commission-max-rate=0.20 \
 --commission-max-change-rate=0.01 \
 --min-self-delegation=1 \
 --from=st1dz20dmhjkuc2tur3amgl8t45w807a640leh8p0 \
---chain-id=mesos-1 \
---keyring-backend=test \
+--chain-id=stratos-1 \
+--keyring-backend=file \
 --gas=auto \
 --gas-adjustment=1.5 \
 --gas-prices=1000000000wei -y
@@ -342,8 +329,8 @@ We listed some examples of commonly used commands for validators
 !!! tip
 
     - You may need to replace the values in these examples with your own data
-    - The current `chain-id` can be found on the [`Stratos Explorer`](https://explorer-mesos.thestratos.org/) right next to the search bar at the top of the page.
-    - In the testing phase, `--keyring-backend=test`
+    - The current `chain-id` is `stratos-` for mainnet.
+    - For mainnet, `--keyring-backend=file`
 
 <br>
 
@@ -367,8 +354,8 @@ stchaind tx staking create-validator \
 --commission-max-change-rate=0.01 \
 --min-self-delegation=1 \
 --from=st1dz20dmhjkuc2tur3amgl8t45w807a640leh8p0 \
---chain-id=mesos-1 \
---keyring-backend=test \
+--chain-id=stratos-1 \
+--keyring-backend=file \
 --gas=auto \
 --gas-adjustment=1.5 \
 --gas-prices=1000000000wei -y
@@ -382,12 +369,12 @@ Example:
 
 ```shell
 stchaind tx staking edit-validator \
---from=user0 \
---keyring-backend=test \
+--from=st1dz20dmhjkuc2tur3amgl8t45w807a640leh8p0 \
 --min-self-delegation=100  \
 --memo="Change 'min-self-delegation' from 1 to 100" \
---chain-id=mesos-1 \
---keyring-backend=test \
+--website="https://my.web.site" \
+--chain-id=stratos-1 \
+--keyring-backend=file \
 --gas=auto \
 --gas-adjustment=1.5 \
 --gas-prices=1000000000wei -y
@@ -402,8 +389,8 @@ Example:
 ```shell
 stchaind tx staking delegate stvaloper1fmdh9vf262qxe5ehmp9jvgkqzaeye4qmxjrr3k 100stos \
 --from=st1fmdh9vf262qxe5ehmp9jvgkqzaeye4qm372rda \
---chain-id=mesos-1 \
---keyring-backend=test \
+--chain-id=stratos-1 \
+--keyring-backend=file \
 --gas=auto \
 --gas-adjustment=1.5 \
 --gas-prices=1000000000wei
@@ -418,8 +405,8 @@ Example:
 ```shell
 stchaind tx staking unbond stvaloper12adksjsd7gcsn23h5jmvdygzx2lfw5q4pyf57u 100stos \
 --from=st12adksjsd7gcsn23h5jmvdygzx2lfw5q4kgq5zh \
---chain-id=mesos-1 \
---keyring-backend=test \
+--chain-id=stratos-1 \
+--keyring-backend=file \
 --gas=auto \
 --gas-adjustment=1.5 \
 --gas-prices=1000000000wei -y
@@ -463,15 +450,36 @@ Responsible for distributing staking rewards between validators, delegators, and
 
 <br>
 
+* Withdraw rewards and commission that your own validator has earned.
+
+Example:
+
+```shell
+stchaind tx distribution withdraw-rewards stvaloper1fmdh9vf262qxe5ehmp9jvgkqzaeye4qmxjrr3k \
+--commission \
+--from=st1fmdh9vf262qxe5ehmp9jvgkqzaeye4qm372rda \
+--chain-id=stratos-1 \
+--keyring-backend=file \
+--gas=auto \
+--gas-prices=1000000000wei \
+--gas-adjustment=1.5
+```
+
+<br>
+
 * Withdraw rewards from a given delegation address and optionally withdraw validator's commission if the delegation address given is a validator operator.
+
+Purpose: This command is used to withdraw staking rewards from a specific validator.
+
+Usage: You need to specify the validator's address from which you want to withdraw rewards.
 
 Example:
 
 ```shell
 stchaind tx distribution withdraw-rewards stvaloper1fmdh9vf262qxe5ehmp9jvgkqzaeye4qmxjrr3k \
 --from=st1fmdh9vf262qxe5ehmp9jvgkqzaeye4qm372rda \
---chain-id=mesos-1 \
---keyring-backend=test \
+--chain-id=stratos-1 \
+--keyring-backend=file \
 --gas=auto \
 --gas-adjustment=1.5 \
 --gas-prices=1000000000wei -y
@@ -480,6 +488,10 @@ stchaind tx distribution withdraw-rewards stvaloper1fmdh9vf262qxe5ehmp9jvgkqzaey
 <br>
 
 * Withdraw all delegation rewards for a delegator.
+
+Purpose: This command is used to withdraw staking rewards from all validators to which you have delegated tokens.
+
+Usage: This command does not require you to specify individual validators; it withdraws all accumulated rewards from all validators.
 
 Example:
 
@@ -547,8 +559,8 @@ Example:
 
 ```shell
 stchaind tx slashing unjail --from=st1fmdh9vf262qxe5ehmp9jvgkqzaeye4qm372rda \
---chain-id=mesos-1 \
---keyring-backend=test \
+--chain-id=stratos-1 \
+--keyring-backend=file \
 --gas=auto \
 --gas-adjustment=1.5 \
 --gas-prices=1000000000wei -y
@@ -561,7 +573,7 @@ stchaind tx slashing unjail --from=st1fmdh9vf262qxe5ehmp9jvgkqzaeye4qm372rda \
 Example:
 
 ```shell
-stchaind query slashing signing-info stvalconspub1zcjduepqsnwlx7rv0ghyvh9tm99zle39df99jt8hccwt8jdrvjs26zqrzh9shdmgyc
+stchaind query slashing signing-info '{"@type":"/cosmos.crypto.ed25519.PubKey","key":"gkpFejHRUaNjvaKpYXvsaUGJsIC5zrXu0ZlqOSF2Wms="}'
 ``` 
 
 You can find all detailed explanations at
@@ -673,11 +685,11 @@ If the problem still persists, please make sure you have enough tokens delegated
 
 There are three ways to check it:
 
-* [Stratos Explorer](https://explorer-mesos.thestratos.org/validators)
+* [Stratos Explorer](https://explorer.thestratos.org/validators)
 * `status` command:
 
 ```shell
-stchaind status
+stchaind status | jq
 ```
 
 Response:
@@ -693,7 +705,7 @@ Response:
         "id": "16a0758d175cbf5c08d41dffa73eb5c0190869ed",
         "listen_addr": "tcp://0.0.0.0:26656",
         "network": "mesos-1",
-        "version": "0.34.21",
+        "version": "0.37.4",
         "channels": "40202122233038606100",
         "moniker": "node",
         "other": {
@@ -745,7 +757,7 @@ Response:
       "id": "16a0758d175cbf5c08d41dffa73eb5c0190869ed",
       "listen_addr": "tcp://0.0.0.0:26656",
       "network": "mesos-1",
-      "version": "0.34.21",
+      "version": "0.37.4",
       "channels": "40202122233038606100",
       "moniker": "node",
       "other": {

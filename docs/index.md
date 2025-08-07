@@ -24,7 +24,8 @@ template: home.html
 | HOWTO: Setup a SDS Resource node | [Link](docs-resource-node/setup-and-run-a-sds-resource-node) |
 | Full-Chain (Validator) node commands part 1 | [Link](docs-validator-node/stchaind-commands-part-1) |
 | Full-Chain (Validator) node commands part 2 | [Link](docs-validator-node/stchaind-commands-part-2) |
-| SDS Resource node commands | [Link](docs-resource-node/ppd-terminal-subcommands)
+| SDS Resource node commands | [Link](docs-resource-node/ppd-terminal-subcommands) |
+| Address Convert Tool | [Link](address-convertor-ui) |
 
 <br><br>
 
