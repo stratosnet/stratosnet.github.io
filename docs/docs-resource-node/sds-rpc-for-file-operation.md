@@ -100,7 +100,7 @@ The message to be signed is a string concatenated by filehash, walletaddr, seque
 * filehash is a string in Bech32 format;
 * walletaddr is a string in Bech32 format;
 * sequencenumber is a string gotten from user_requestGetOzone;
-* req_time is a number. It needs to convert to a string in the base of 10.<br>
+* req_time is a number which presents epoch time when the request is sent. It needs to convert to a string in the base of 10.<br>
 
 Example:
 * filehash: `v05ahm52po4iteumn1v58o3marnruc7l75km9rv8`
