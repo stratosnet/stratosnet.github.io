@@ -430,17 +430,12 @@ metanode you can start with
 # europe
 p2p_address = 'stsds1ypxg8sj5vn4s4v0w965g4r9g3pt3vlz6wyzx0f'
 p2p_public_key = 'stsdspub1y6exsr8snwz65ev3pzq6k3yfy2ku3kexqdd0en35dnr8mxc9w6sq5jg6lf'
-network_address = '34.34.149.18:8888'
+network_address = '162.19.58.218:8888'
 
-# asia
-p2p_address = 'stsds10kmygjv7e2t39f6jka6445q20e9lv4a7u3qex3'
-p2p_public_key = 'stsdspub1srn3qetarx3x6f2x9wqfv3nh2aufxv03ncl5v6jkmyg666scvz6s4xgprq'
-network_address = '34.85.35.57:8888'
-
-# NA
-p2p_address = 'stsds1z96pm5ls0ff2y7y8adpy6r3l8jqeaud7envnqv'
-p2p_public_key = 'stsdspub1lf769k20k36e4gvnewcwdtfudzj95qk45d5f0p300jmr7e6y73zsdyh25y'
-network_address = '34.82.40.37:8888'
+# north-america
+p2p_address = 'stsds1793jm44fj9tw0c9c8gxwymc6dtnefw0u9p22wk'
+p2p_public_key = 'stsdspub1w7qh3wyfxdwy3e4mtyf466v999mm4chwppx675t85uz0ea5n6p8sa27sld'
+network_address = '51.222.42.18:8888'
 
 ```
 
@@ -833,3 +828,4 @@ Please refer to [ppd terminal subcommands](../ppd-terminal-subcommands) for more
 ---
 
 </br>
+
